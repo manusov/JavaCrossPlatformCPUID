@@ -1,5 +1,9 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// List entry for tree GUI element, extended with add identifier.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+List entry for tree GUI element, extended with add identifier.
+This entry used by SystemTreeBuilder for sub-applications list,
+one entry per sub-application: 
+cpuid, cpuclk, cpucontext, jvminfo, jvmenvironment.
+*/
 
 package cpuid.applications.guimodels;
 

@@ -1,8 +1,12 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// MVC "Model" module for ApplicationCpuid,
-// Note MVC is Model, View, Controller paradigm.
-// Application: CPUID info.
-// Model provide data model, use PAL and local builder.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+MVC "Model" module for ApplicationCpuid,
+note MVC is Model, View, Controller paradigm.
+Application: CPUID info.
+Model provide data model, use PAL and local builder.
+Note, variables, initialized in constructor:
+pal (platform abstraction layer), cmb (component model builder)
+located at parent class.
+*/
 
 package cpuid.applications.applicationcpuid;
 

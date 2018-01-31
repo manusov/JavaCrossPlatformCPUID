@@ -1,8 +1,10 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// MVC "View" module for ApplicationCpuclk,
-// Note MVC is Model, View, Controller paradigm.
-// OPTIMIZATION REQUIRED: MAKE PARENT CLASS FOR BuiltView?
-// OR METHODS SUBROUTINES BECAUSE DIFFERENT MODES?
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+MVC "View" module for ApplicationCpuclk,
+note MVC is Model, View, Controller paradigm.
+Note, variable, initialized in constructor p(panel) located at parent class.
+OPTIMIZATION REQUIRED: MAKE PARENT CLASS FOR BuiltView?
+OR METHODS SUBROUTINES BECAUSE DIFFERENT MODES?
+*/
 
 package cpuid.applications.applicationcpuclk;
 

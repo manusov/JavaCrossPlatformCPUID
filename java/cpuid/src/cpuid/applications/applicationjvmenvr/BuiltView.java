@@ -1,10 +1,12 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// MVC "View" module for ApplicationJVMinfo,
-// Note MVC is Model, View, Controller paradigm.
-// OPTIMIZATION REQUIRED: MAKE PARENT CLASS FOR BuiltView?
-// OR METHODS SUBROUTINES BECAUSE DIFFERENT MODES?
-// Application: Java Virtual Machine (JVM) \ Operating System info.
-// View module contain GUI panel.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+MVC "View" module for ApplicationJVMinfo,
+note MVC is Model, View, Controller paradigm.
+Note, variable, initialized in constructor p(panel) located at parent class.
+OPTIMIZATION REQUIRED: MAKE PARENT CLASS FOR BuiltView?
+OR METHODS SUBROUTINES BECAUSE DIFFERENT MODES?
+Application: Java Virtual Machine (JVM) \ Operating System info.
+View module contain GUI panel.
+*/
 
 package cpuid.applications.applicationjvmenvr;
 

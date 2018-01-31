@@ -1,8 +1,9 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID extended function 80000007h declared as CPR.COMMAND.
-// TODO: add EAX monitors, EBX = RAS capabilities, 
-// ECX = Processor power monitoring.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID extended function 80000007h declared as CPR.COMMAND.
+TODO: add EAX monitors, EBX = RAS capabilities, 
+ECX = Processor power monitoring.
+*/
 
 package cpuid.drivers.cpuid;
 

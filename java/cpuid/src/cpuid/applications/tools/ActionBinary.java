@@ -1,6 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// User interface dialogue window and target operation execution
-// for SAVE BINARY, LOAD BINARY operations.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+User interface dialogue window and target operation execution
+for SAVE BINARY, LOAD BINARY operations.
+*/
 
 package cpuid.applications.tools;
 
@@ -9,7 +10,8 @@ import java.io.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ActionBinary {
+public class ActionBinary 
+{
 private static final JFileChooser FC = new JFileChooser();
 private static final String FILE_NAME = "cpuid.bin";  // MAKE THIS AS PARM.
 private static FileNameExtensionFilter filter;

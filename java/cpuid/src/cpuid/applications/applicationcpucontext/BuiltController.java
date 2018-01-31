@@ -1,8 +1,10 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// MVC "Controller" module for ApplicationCPUcontext,
-// Note MVC is Model, View, Controller paradigm.
-// Application: CPU Context Management info.
-// Controller interconnects model and view.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+MVC "Controller" module for ApplicationCPUcontext,
+Note MVC is Model, View, Controller paradigm.
+Application: CPU Context Management info.
+Controller interconnects model and view.
+Note, variables bm (BuildModel), bv (BuiltView) located at parent class.
+*/
 
 package cpuid.applications.applicationcpucontext;
 

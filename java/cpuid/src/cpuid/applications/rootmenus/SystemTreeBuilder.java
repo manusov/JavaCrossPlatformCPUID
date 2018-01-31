@@ -1,5 +1,8 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// System Tree Builder for Left Panel.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+System Tree Builder for Left Panel.
+Create tree of sub-applications:
+cpuid, cpuclk, cpucontext, jvminfo, jvmenvironment.
+*/
 
 package cpuid.applications.rootmenus;
 
@@ -28,6 +31,7 @@ private static final String[] APPS =
     };
 private static final int APPS_COUNT = APPS.length;
 
+// define entry per sub-application format: class with class constructor
 class X
     {
     protected String name;
@@ -47,6 +51,8 @@ class X
         node = null;
         }
     }
+
+// data for create tree: nodes and leafs = sub-applications
 private final X[] treeData =
     {
     new X ( "Platform"    , false , -1 , -1 ) ,
@@ -69,6 +75,7 @@ protected SystemTreeBuilder()
     pApps = new JPanel[APPS_COUNT];
     LinkedHashSet<ChangeableTableModel> reports = new LinkedHashSet();
     
+    // cycle for create sub-applications by Model, View, Controller set
     for ( int i=0; i<APPS_COUNT; i++ )
         {
         String s = APPS[i];
@@ -124,12 +131,15 @@ protected SystemTreeBuilder()
             { pApps[i] = null; }
         }
 
+    // cycle for create array of report data
     Iterator it = reports.iterator();
     int ns = reports.size();
     rApps = new ChangeableTableModel[ns];
     for ( int i=0; i<ns; i++ )
         { rApps[i] = (ChangeableTableModel) it.next(); }
     
+    // cycle for create sub-applications entries, tree node,
+    // connects parents and childs (nodes and leafs) at tree
     for( int i=0; i<treeCount; i++ )
         {
         treeData[i].value = new ListEntryApplications
@@ -141,6 +151,7 @@ protected SystemTreeBuilder()
             { ( treeData[j].node ).add( treeData[i].node );  }
         }
 
+    // assign tree model
     mRoot = new DefaultTreeModel( treeData[0].node , true );
     }
 

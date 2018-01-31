@@ -1,5 +1,13 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Driver: get and interpreting CPU context management data.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Driver: get and interpreting CPU context management data.
+Note.
+1) CPU support bitmaps for declaration program context objects,
+required save-restore in the multitasking OS environment,
+CPUID function 0Dh results is "CPU validated" column.
+2) OS build bitmap in the CPU system register XCR0 for declaration
+context objects, currently enabled for save-restore.
+XCR0 register bits used for is "OS validated" column.
+*/
 
 package cpuid.drivers.cpucontext;
 
@@ -82,18 +90,18 @@ private static final String[] CONTEXT_NAMES =
         "XCR0 vector expansion"
     };
 
-private long[] contextArray;
+private long[] contextArray;  // binary data, received from native library
 
-@Override public void setBinary(long[] x) 
+@Override public void setBinary(long[] x)     // set binary data  
     { contextArray = x; }
 
-@Override public int getCommandsCount()
+@Override public int getCommandsCount()       // get supported commands count
     { return 1; }
 
-@Override public String[] getSummaryUp()
+@Override public String[] getSummaryUp()      // get constant up string
     { return CONTEXT_UP; }
 
-@Override public String[][] getSummaryText()
+@Override public String[][] getSummaryText()  // get decoded result as text
     {
     long cpuMap = contextArray[0];
     long osMap = contextArray[1];

@@ -1,5 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component: helper library.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component: helper library.
+Binary dump scan and bitmaps analysing.
+*/
 
 package cpuid.drivers.cpuid;
 

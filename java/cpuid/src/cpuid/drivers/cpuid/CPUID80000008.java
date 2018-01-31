@@ -1,6 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID extended function 80000008h declared as CPR.COMMAND.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID extended function 80000008h declared as CPR.COMMAND.
+*/
 
 package cpuid.drivers.cpuid;
 
@@ -40,10 +41,10 @@ private final static String[][] DECODER_EBX =
         { "x"        , "Reserved"                    } ,
         { "x"        , "Reserved"                    } ,
         { "x"        , "Reserved"                    } ,
-        { "WBNOINVD" , " "                           } ,
+        { "WBNOINVD" , "Reserved"                    } ,
         { "x"        , "Reserved"                    } ,
         { "x"        , "Reserved"                    } ,
-        { "IBPB"     , " "                           }
+        { "IBPB"     , "Reserved"                    }
     };
 
 private final static Object[][] DECODER_ECX =

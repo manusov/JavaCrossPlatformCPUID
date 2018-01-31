@@ -1,14 +1,13 @@
-// THIS MODULE IS EXPERIMENTAL, NOT VERIFIED, NOT CONNECTED YET.
-// BETTER MAKE TABLE AS FUNCTION 4 ?
-// make visual maximum sub-leaf functions, see other functions with
-// same subleaf declare mechanism.
-// See function 0000000Fh for correct trim.
-// TODO: add subfunctions.
-
-
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID standard function 00000016h declared as CPR.COMMAND.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID standard function 00000016h declared as CPR.COMMAND.
+THIS MODULE IS EXPERIMENTAL, NOT VERIFIED, NOT CONNECTED YET.
+BETTER MAKE TABLE AS FUNCTION 4 ?
+make visual maximum sub-leaf functions, see other functions with
+same subleaf declare mechanism.
+See function 0000000Fh for correct trim.
+TODO: add subfunctions.
+*/
 
 package cpuid.drivers.cpuid;
 

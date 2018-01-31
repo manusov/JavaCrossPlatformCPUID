@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Driver: Get Java Virtual Machine (JVM) environment strings.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Driver: Get Java Virtual Machine (JVM) environment strings.
+*/
 
 package cpuid.drivers.jvmenvironment;
 
@@ -13,12 +14,12 @@ import java.util.Set;
 public class DeviceJVMenvironment extends DeviceAdapter
 {
 
-@Override public int getCommandsCount()
+@Override public int getCommandsCount()  // get number of supported commands
     {
     return 1;
     }
 
-@Override public String[][] getSummaryText()
+@Override public String[][] getSummaryText()  // get result as text
     {
     Registry r = CpuId.getRegistry();
     Map < String, String > map = r.getJvmEnvironment();  // System.getenv();

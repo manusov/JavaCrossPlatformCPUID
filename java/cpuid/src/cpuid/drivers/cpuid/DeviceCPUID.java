@@ -1,6 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID data source declared as CPR.DEVICE, main module of complex driver.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID data source declared as CPR.DEVICE, main module of complex driver.
+*/
 
 package cpuid.drivers.cpuid;
 
@@ -240,9 +241,13 @@ private final static Object[] CPUID_FUNCTIONS =     // List of recognized
     {
     int k=1;
     int r=2;
+    // s1[][] = template with limited(!) columns count
     String[][] s1 = super.getCommandText1(x);
+    // s2[][] = main content of table
     String[][] s2 = ((Command)(CPUID_FUNCTIONS[x])).getCommandText1(cpuidArray);
+    // s3[][] = up string of table
     String[]   s3 = ((Command)(CPUID_FUNCTIONS[x])).getCommandUp1(cpuidArray);
+    
     // Note exception generated if Up1 exist but Text1 not exist,
     // child class can implement Text1 only or both Text1+Up1.
     // Note limit 100 strings.
@@ -265,15 +270,18 @@ private final static Object[] CPUID_FUNCTIONS =     // List of recognized
     // Copy used strings from s2(actual data) to s1(template)
      if (s2!=null)
         {
-        int n = s1[0].length;
-        int m = s2.length;
+        int n = s1[0].length;      // columns count = by template (=2)
+        int m = s2.length;         // rows count = by actual data
         for ( int i=0; i<m; i++ )  // Cycle for rows
             { 
             System.arraycopy(s2[i], 0, s1[i], 0, n);  // Cycle for columns
-            k++; 
+            k++;  // increment number of rows by cpuid driver return
             }
         }
-    //--- Trim ---
+     
+    // Trim by rows count
+    // r = number of columns
+    // k = just incremented number of rows
     String[][] s4 = new String[k][r];
     for (int i=0; i<k; i++)  // Cycle for rows 
         {

@@ -1,5 +1,8 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Return window for "About" user interface object.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Return window for "About" user interface object.
+This class methods imports some parameters from title class About.java.
+This class contains web site access method.
+*/
 
 package cpuid.applications.tools;
 
@@ -11,8 +14,8 @@ import javax.swing.*;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import java.net.URI;
 
-public class ActionAbout {
-
+public class ActionAbout 
+{
 private final static Color LOGO_COLOR = new Color(143,49,40);
 private final static Dimension SIZE_BUTTON_HTTP   = new Dimension (180, 25);
 private final static Dimension SIZE_BUTTON_CANCEL = new Dimension (89, 25);
@@ -67,7 +70,7 @@ public JDialog createDialog
     b1.addActionListener(new ActionListener() {
     @Override public void actionPerformed(ActionEvent ae1) {
     if(Desktop.isDesktopSupported())
-        { try { Desktop.getDesktop().browse(new URI(sHttp)); }
+        { try { Desktop.getDesktop().browse(new URI(sHttp)); }  // web access
           catch (Exception ex1) { } }; }});
     // Action listener for cancel button
     b2.addActionListener(new ActionListener() {
@@ -78,6 +81,5 @@ public JDialog createDialog
     dialog.setSize(300,150);
     dialog.setResizable(false);
     return dialog;  }
-
 }
 

@@ -1,5 +1,8 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Interface for BuiltController module.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Interface for BuiltController module.
+Declares public methods:
+get GUI object(s) data model(s) and get GUI object(s) view components.
+*/
 
 package cpuid.applications.mvc;
 

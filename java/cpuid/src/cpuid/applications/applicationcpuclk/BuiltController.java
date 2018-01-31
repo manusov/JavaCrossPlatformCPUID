@@ -1,8 +1,10 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// MVC "Controller" module for ApplicationCPUclk,
-// Note MVC is Model, View, Controller paradigm.
-// Application: CPU Clock info.
-// Controller interconnects model and view.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+MVC "Controller" module for ApplicationCPUclk,
+note MVC is Model, View, Controller paradigm.
+Application: CPU Clock info.
+Controller interconnects model and view.
+Note, variables bm (BuildModel), bv (BuiltView) located at parent class.
+*/
 
 package cpuid.applications.applicationcpuclk;
 

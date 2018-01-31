@@ -1,5 +1,9 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Interface for BuiltView module.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Interface for BuiltView module.
+Declares public methods:
+get GUI sub-application panel with GUI components,
+get x-size, get y-size of GUI object
+*/
 
 package cpuid.applications.mvc;
 

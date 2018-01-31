@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Driver: Get Java Virtual Machine (JVM) properties strings.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Driver: Get Java Virtual Machine (JVM) properties strings.
+*/
 
 package cpuid.drivers.jvmcontrol;
 
@@ -12,12 +13,12 @@ import java.util.Properties;
 public class DeviceJVMcontrol extends DeviceAdapter 
 {
     
-@Override public int getCommandsCount()
+@Override public int getCommandsCount()  // get number of supported commands
     {
     return 1;
     }
 
-@Override public String[][] getSummaryText()
+@Override public String[][] getSummaryText()  // get result as text
     {
     Registry r = CpuId.getRegistry();      // get system registry
     Properties p = r.getJvmProperties();   // access target info by registry

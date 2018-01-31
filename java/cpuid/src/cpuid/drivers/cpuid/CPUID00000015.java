@@ -1,7 +1,8 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID standard function 00000015h declared as CPR.COMMAND.
-// TODO: add support ECX = nominal frequency of core crystal.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID standard function 00000015h declared as CPR.COMMAND.
+TODO: add support ECX = nominal frequency of core crystal.
+*/
 
 package cpuid.drivers.cpuid;
 

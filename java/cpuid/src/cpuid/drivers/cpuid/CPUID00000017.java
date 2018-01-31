@@ -1,11 +1,11 @@
-// THIS MODULE IS EXPERIMENTAL, NOT VERIFIED, NOT CONNECTED YET.
-// make visual maximum sub-leaf functions, see other functions with
-// same subleaf declare mechanism.
-// TODO: add sub-functions 1-3.
-
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID standard function 00000016h declared as CPR.COMMAND.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID standard function 00000016h declared as CPR.COMMAND.
+THIS MODULE IS EXPERIMENTAL, NOT VERIFIED, NOT CONNECTED YET.
+make visual maximum sub-leaf functions, see other functions with
+same subleaf declare mechanism.
+TODO: add sub-functions 1-3.
+*/
 
 package cpuid.drivers.cpuid;
 

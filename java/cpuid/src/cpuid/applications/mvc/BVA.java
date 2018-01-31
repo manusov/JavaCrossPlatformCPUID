@@ -1,5 +1,10 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Built View Adapter. Include unified listeners.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Built View Adapter. Include unified listeners.
+Implements public methods:
+get GUI sub-application panel with GUI components,
+get x-size, get y-size of GUI object
+Note, constructor implemented at child class, for flexibility.
+*/
 
 package cpuid.applications.mvc;
 
@@ -57,7 +62,7 @@ protected void builtGUI() { }
 @Override public int getXsize() { return xsize; }
 @Override public int getYsize() { return ysize; }
 
-// Buttons listeners
+// Buttons listeners, handlers for press buttons events
 
 public class BRedetect implements ActionListener            // REDETECT
     {

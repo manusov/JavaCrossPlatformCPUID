@@ -1,10 +1,10 @@
-// TODO: REMOVE CYCLE AND MAKE DELETE DLL AFTER APPLICATION EXIT ?
-// TODO: IMPROVE ERROR REPORTING, EXCEPTION E.
-// TODO: DELETE UNPACKED LIBRARY WHEN APPLICATION EXIT, "UNLOAD" REQUIRED.
-
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Kernel part: 
-// Platform Abstraction Layer for communications with native objects.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Kernel part: 
+Platform Abstraction Layer for communications with native objects.
+TODO: REMOVE CYCLE AND MAKE DELETE DLL AFTER APPLICATION EXIT ?
+TODO: IMPROVE ERROR REPORTING, EXCEPTION E.
+TODO: DELETE UNPACKED LIBRARY WHEN APPLICATION EXIT, "UNLOAD" REQUIRED.
+*/
 
 package cpuid.kernel;
 

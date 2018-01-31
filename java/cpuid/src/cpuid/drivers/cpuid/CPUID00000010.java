@@ -1,7 +1,8 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID standard function 00000010h declared as CPR.COMMAND.
-// TODO: required add sub-leafs 2 and 3 for L2 and DRAM.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID standard function 00000010h declared as CPR.COMMAND.
+TODO: required add sub-leafs 2 and 3 for L2 and DRAM.
+*/
 
 package cpuid.drivers.cpuid;
 

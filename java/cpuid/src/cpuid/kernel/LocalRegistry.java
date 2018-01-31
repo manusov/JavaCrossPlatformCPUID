@@ -1,13 +1,14 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Kernel part: Registry of drivers.
-// This component can be replaced at REMOTE/FILE alternate target systems.
-
-// For REMOTE and FILE modes as alternative of LOCAL mode:
-// this module still used, but PAL access changed to replacer PAL (Line 50),
-// drivers also changed, probably with internal divergentions to:
-// binary getter and texter.
-
-// This class constructor called from main class.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Kernel part: Registry of drivers.
+This component can be replaced at REMOTE/FILE alternate target systems.
+Note 1.
+For REMOTE and FILE modes as alternative of LOCAL mode:
+this module still used, but PAL access changed to replacer PAL (Line 50),
+drivers also changed, probably with internal divergentions to:
+binary getter and texter.
+Note 2.
+This class constructor called from main class.
+*/
 
 package cpuid.kernel;
 

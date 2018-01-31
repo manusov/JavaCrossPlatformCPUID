@@ -1,9 +1,10 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Kernel part: Detector for native operating system,
-// supported Windows ia32, Windows x64, Linux ia32, Linux x64.
-
-// For REMOTE and FILE modes as alternative of LOCAL mode:
-// this module not used (disconnected) during REMOTE/FILE modes.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Kernel part: Detector for native operating system,
+supported Windows ia32, Windows x64, Linux ia32, Linux x64.
+Note.
+For REMOTE and FILE modes as alternative of LOCAL mode:
+this module not used (disconnected) during REMOTE/FILE modes.
+*/
 
 package cpuid.kernel;
 

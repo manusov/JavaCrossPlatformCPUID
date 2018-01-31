@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Abstract class: template for Root Menu variants.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Abstract class: template for Root Menu variants.
+*/
 
 package cpuid.applications.rootmenus;
 

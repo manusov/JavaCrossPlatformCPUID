@@ -1,5 +1,8 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// List entry for tree GUI element.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+List entry for tree GUI element.
+This entry used by BuildModel in sub-application cpuid, 
+for cpuid functions tree.
+*/
 
 package cpuid.applications.guimodels;
 
@@ -38,7 +41,7 @@ public class ListEntry
     
     @Override public String toString()
         { 
-        if (leaf==false) 
+        if (leaf==false)       // select variants for nodes=brief, leafs=detail 
             { return name1; }
         else if (failed==false) 
             { return "<html>" + name1 + " = <b><font color=blue>" + name2; }

@@ -1,6 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// User interface dialogue window and target operation execution
-// for SAVE FULL REPORT, SAVE THIS WINDOW REPORT operations.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+User interface dialogue window and target operation execution
+for SAVE FULL REPORT, SAVE THIS WINDOW REPORT operations.
+*/
 
 package cpuid.applications.tools;
 
@@ -9,7 +10,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.*;
 import java.io.*;
 
-public class ActionReport {
+public class ActionReport 
+{
 private static final JFileChooser FC = new JFileChooser();
 private static final String FILE_NAME = "report.txt";
 private static FileNameExtensionFilter filter;

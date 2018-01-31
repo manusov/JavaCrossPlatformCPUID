@@ -1,6 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID driver component:
-// CPUID standard function 00000007h declared as CPR.COMMAND.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID driver component:
+CPUID standard function 00000007h declared as CPR.COMMAND.
+*/
 
 package cpuid.drivers.cpuid;
 
@@ -130,8 +131,8 @@ private final static String[][] DECODER_EDX =
         { "STIBP"      , "Reserved" } ,
         { "x"          , "Reserved" } ,
         { "ACP MSR"    , "ARCH_CAPABILITIES MSR" } ,
-        //{ "x"          , "Reserved" } ,  // note limit 100 strings, TODO: fix this bug
-        //{ "x"          , "Reserved" } ,  // note limit 100 strings, TODO: fix this bug
+        { "x"          , "Reserved" } ,  // note limit 100 strings, TODO: fix this bug
+        { "x"          , "Reserved" } ,  // note limit 100 strings, TODO: fix this bug
     };
 
 // Calculate control data total size for output formatting

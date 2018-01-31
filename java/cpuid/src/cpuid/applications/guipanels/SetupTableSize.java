@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Static library: optimize tables columns widths.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Static helper library: optimize tables columns widths.
+*/
 
 package cpuid.applications.guipanels;
 
@@ -16,7 +17,9 @@ public static void optimizeColumnsWidths( JTable table, int x )
     int m = tm.getRowCount();
     int k = 0;
     double[] max = new double[n];
+    // cycle for find maximum column string length in the table up
     for ( int i=0; i<n; i++ ) { max[i] = tm.getColumnName(i).length(); }
+    // cycle for find maximum column string length in the table content part
     for ( int i=0; i<m; i++ )
         {
         for ( int j=0; j<n; j++ )
@@ -28,12 +31,12 @@ public static void optimizeColumnsWidths( JTable table, int x )
     double scale = 0.0;
     for ( int i=0; i<n; i++ ) { scale = scale + max[i]; }
     scale = x / scale;
-    
-        for ( int i=0; i<n; i++ ) 
-            { 
-            TableColumn tc = table.getColumnModel().getColumn(i);
-            tc.setPreferredWidth( (int)( max[i] * scale ) );
-            }
+    // table for set required preferred width of column
+    for ( int i=0; i<n; i++ ) 
+        { 
+        TableColumn tc = table.getColumnModel().getColumn(i);
+        tc.setPreferredWidth( (int)( max[i] * scale ) );
+        }
     }
     
 }

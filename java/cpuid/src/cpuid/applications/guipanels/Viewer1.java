@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Viewer model 1, one tree and one table.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Viewer model 1, one tree and one table.
+*/
 
 package cpuid.applications.guipanels;
 

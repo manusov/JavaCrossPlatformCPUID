@@ -1,12 +1,24 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// CPUID java application main module.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+CPUID java application main module.
+This class contains application entry point.
+1) Creates registry for communications with platform resources.
+2) Creates and show GUI application root menu.
+3) Provides public static methods for create and get registry, note
+   re-create registry required for platform re-detect, include remote platform
+   access by file or network socket.
+*/
 
 /*
 TODO #1
 
 First, 
-version v0.54 with base functionality verify and Intel, AMD verify,
-make screen shots, binaries, reports.
++ version v0.54 with base functionality verify and Intel, AMD verify,
++ make screen shots, binaries, reports.
+
+version 0.56
++ class = DeviceAdapter.java
++ method = simplestText()
++ bug with limit = 100 strings per function, otherwise exception.
 
 TODO #2
 
@@ -58,7 +70,7 @@ GFNI
 VAES
 VPCL
 TME
-CR4.VA57, 5-level pafing
+CR4.VA57, 5-level paging
 PCONFIG for MK TME
 IBRS_IBPB
 STIBP
@@ -118,7 +130,7 @@ public static void main(String[] args)
     int status = createRegistry();
     
     if ( status <= 0 )
-        {
+        {                                   // message when error detected
         JOptionPane.showMessageDialog       // accepts parent (null) and string
             ( null, String.format
             ( "PAL initialization failed\n Run status = %d", status ),

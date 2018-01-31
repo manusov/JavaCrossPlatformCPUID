@@ -1,5 +1,7 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Driver: get and interpreting CPU Clock data.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Driver: get and interpreting CPU Clock data.
+Note, Time Clock Counter (TSC) frequency measured by native libraries.
+*/
 
 package cpuid.drivers.cpuclk;
 
@@ -7,15 +9,15 @@ import cpuid.drivers.cpr.DeviceAdapter;
 
 public class DeviceCPUCLK extends DeviceAdapter
 {
-private long[] cpuclkArray;
+private long[] cpuclkArray;  // binary data, received from native library
 
-@Override public void setBinary(long[] x) 
+@Override public void setBinary(long[] x)  // set binary data 
     { cpuclkArray = x; }
 
-@Override public int getCommandsCount()
+@Override public int getCommandsCount()    // get supported commands count
     { return 1; }
 
-@Override public String[][] getSummaryText()
+@Override public String[][] getSummaryText()  // get decoded result as text
     {
     double frequency = cpuclkArray[0];
     frequency /= 1000000.0;

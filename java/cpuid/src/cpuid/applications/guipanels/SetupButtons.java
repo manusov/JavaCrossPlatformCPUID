@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Static library: built horizontal array of down buttons.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Static helper library: built horizontal array of down buttons.
+*/
 
 package cpuid.applications.guipanels;
 
@@ -14,14 +15,12 @@ public class SetupButtons
 {
 
 public static void downButtons  // overloaded: with tooltips and mnemonics
-        ( 
-        JPanel p,        
-        JButton[] buttons,
-        String[] BUTTONS_NAMES, String[] BUTTONS_TIPS, int[] BUTTONS_KEYS, 
-        int NB,
-        ActionListener[] actionsListeners, SpringLayout sl1,
-        int B_DOWN, int B_RIGHT, int B_INTERVAL, Dimension DB
-        )
+     ( JPanel p,        
+       JButton[] buttons,
+       String[] BUTTONS_NAMES, String[] BUTTONS_TIPS, int[] BUTTONS_KEYS, 
+       int NB,
+       ActionListener[] actionsListeners, SpringLayout sl1,
+       int B_DOWN, int B_RIGHT, int B_INTERVAL, Dimension DB )
     {
     downButtons( p, buttons, BUTTONS_NAMES, NB, actionsListeners, sl1,
                  B_DOWN, B_RIGHT, B_INTERVAL, DB );
@@ -43,14 +42,12 @@ public static void downButtons  // overloaded: with tooltips and mnemonics
     }
             
 public static void downButtons  // overloaded: without tooltips
-        ( 
-        JPanel p,        
-        JButton[] buttons,
-        String[] BUTTONS_NAMES, 
-        int NB,
-        ActionListener[] actionsListeners, SpringLayout sl1,
-        int B_DOWN, int B_RIGHT, int B_INTERVAL, Dimension DB
-        )
+    ( JPanel p,        
+      JButton[] buttons,
+      String[] BUTTONS_NAMES, 
+      int NB,
+      ActionListener[] actionsListeners, SpringLayout sl1,
+      int B_DOWN, int B_RIGHT, int B_INTERVAL, Dimension DB )
     {
     Font font = new Font("Verdana", Font.PLAIN, 10);
     for ( int i=NB-1; i>=0; i-- )

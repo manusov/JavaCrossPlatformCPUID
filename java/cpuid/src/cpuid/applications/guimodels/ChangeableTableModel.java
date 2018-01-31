@@ -1,5 +1,6 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Model for tables visualization as GUI and tables save as REPORT.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Model for tables visualization as GUI and tables save as REPORT.
+*/
 
 package cpuid.applications.guimodels;
 
@@ -14,6 +15,7 @@ private static final String DEFAULT_VALUE = "No data";
 private static final int DEFAULT_ROWS = 15;
 private String[][] dataValues = null;
 
+// constructor without parameters creates default model
 public ChangeableTableModel()
     {
     int n = DEFAULT_ROWS;
@@ -23,6 +25,7 @@ public ChangeableTableModel()
     dataValues[1][0] = DEFAULT_VALUE;
     }
 
+// constructor with up-string (sa1) and content text array (sa2)
 public ChangeableTableModel( String[] sa1, String[][] sa2 )
     {
     this();
@@ -40,18 +43,23 @@ public ChangeableTableModel( String[] sa1, String[][] sa2 )
         }
     }
 
+// get number of rows
 @Override public int getRowCount() 
     { return dataValues.length - 1; }
 
+// get number of columns
 @Override public int getColumnCount() 
     { return dataValues[0].length; }
 
+// get name string for selected column
 @Override public String getColumnName(int column) 
     { return " " + dataValues[0][column];  }
 
+// get model objects class = String
 @Override public Class getColumnClass(int column) 
     { return String.class; }
 
+// get text string from selected table position: row, column
 @Override public Object getValueAt(int row, int column)
     {
     String s1 = EMPTY_VALUE;
@@ -64,9 +72,11 @@ public ChangeableTableModel( String[] sa1, String[][] sa2 )
     if ( s2 == null ) return s1;
     return " " + s2;
     }
-        
+
+// return editable possibility = set NO EDITABLE
 @Override public boolean isCellEditable(int row, int column) { return false; }
 
+// set text string at selected table position: row, column
 @Override public void setValueAt(Object value, int row, int column) 
     {
     if ( row >= dataValues.length ) return;
@@ -76,6 +86,7 @@ public ChangeableTableModel( String[] sa1, String[][] sa2 )
     dataValues[row][column] = (String)value;
     }
 
+// specific method: update text array (pointer)
 public void setDataValues( String[][] s )
     { dataValues = s; }
 

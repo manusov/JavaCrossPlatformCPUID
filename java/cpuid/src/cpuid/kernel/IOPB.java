@@ -1,10 +1,11 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Kernel part:
-// Input-Output Parameters Blocks (IOPB) support, data conversion methods
-// between QWORD array and BYTE array, between QWORD array and STRING.
-
-// For REMOTE and FILE modes as alternative of LOCAL mode:
-// this static library module still used during REMOTE/FILE modes.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Kernel part:
+Input-Output Parameters Blocks (IOPB) support, data conversion methods
+between QWORD array and BYTE array, between QWORD array and STRING.
+Note.
+For REMOTE and FILE modes as alternative of LOCAL mode:
+this static library module still used during REMOTE/FILE modes.
+*/
 
 package cpuid.kernel;
 

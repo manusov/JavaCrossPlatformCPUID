@@ -1,11 +1,12 @@
-//---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
-// Root menu, variant #3, full-functional with left tree menu and root menu,
-// Add new functions as root menu items:
-// File:   Report entire system, Exit.
-// Target: Redetect, Deserialize from LAN, Deserialize from file,
-//         Serialize to LAN, Serialize to file.
-// Info:   About.
-// This class constructor called from main class.
+/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+Root menu, variant #3, full-functional with left tree menu and root menu,
+Add new functions as root menu items:
+File:   Report entire system, Exit.
+Target: Redetect, Deserialize from LAN, Deserialize from file,
+        Serialize to LAN, Serialize to file.
+Info:   About.
+This class constructor called from main class.
+*/
 
 package cpuid.applications.rootmenus;
 
@@ -33,16 +34,19 @@ import javax.swing.tree.TreePath;
 
 public class RootMenu3 extends RootMenu   // Note RootMenu extends JFrame 
 {
-private JFrame thisFrame;
+private JFrame thisFrame;         // application root frame
     
-private final JMenuBar jmenu;
-private final JMenu[] m1;
-private final JMenuItem[][] m2;
-    
+private final JMenuBar jmenu;     // root menu bar
+private final JMenu[] m1;         // array of sub-menus
+private final JMenuItem[][] m2;   // array of sub-menus end items
+
+// root menu sub-menus names strings
 private final static String[] NAMES_M1 = { "File" , "Target" , "Info" };
 
+// mnemonics keys for root menu sub-menus
 private final static char[] MNEMONICS_M1 =  { 'F' , 'T' , 'I' };
 
+// root menu items names strings
 private final static String[][] NAMES_M2 = 
     {   
         { "System report" , "Exit" } ,
@@ -52,6 +56,7 @@ private final static String[][] NAMES_M2 =
         { "About" }                                                 
     };
 
+// mnemonics keys for root menu items
 private final static char[][] MNEMONICS_M2 =
     {
         { 'S' , 'X' } , 
@@ -59,6 +64,7 @@ private final static char[][] MNEMONICS_M2 =
         { 'A' }
     };
 
+// accelerator keys for root menu sub-menus
 private final static KeyStroke[][] ACCELERATORS_M2 =
     {
         { KeyStroke.getKeyStroke( 'S' , KeyEvent.ALT_MASK )  , 
@@ -67,6 +73,7 @@ private final static KeyStroke[][] ACCELERATORS_M2 =
         { null }
     };
 
+// root menu separators
 private final static boolean[][] SEPARATORS_M2 =
     {
         { false , false } , 
@@ -74,6 +81,7 @@ private final static boolean[][] SEPARATORS_M2 =
         { false }
     };
 
+// root menu items status: true = supported, false = not supported (gray)
 private final static boolean[][] ITEM_ACTIVE =
     {
         { true  , true } , 
@@ -81,6 +89,7 @@ private final static boolean[][] ITEM_ACTIVE =
         { true }
     };
 
+// listeners (handlers) for service buttons press
 protected final AbstractAction[] listeners = 
     {
     new HandlerSystemReport() ,
