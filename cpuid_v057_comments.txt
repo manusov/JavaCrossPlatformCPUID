@@ -1,0 +1,24 @@
+CPUID v0.57
+
+Add 6 new AVX512 features detection:
+
+1) CPUID function=7, subfunction=0, register=ecx, bit=6  = AVX512VBMI2
+2) CPUID function=7, subfunction=0, register=ecx, bit=11 = AVX512_4VNNI
+3) CPUID function=7, subfunction=0, register=ecx, bit=12 = AVX512BITALG
+4) CPUID function=7, subfunction=0, register=ecx, bit=14 = AVX512VPOPCNTDQ
+5) CPUID function=7, subfunction=0, register=edx, bit=2  = AVX512_4VNNIW
+6) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
+
+AVX512VBMI2     = Vector Byte Manipulation 2
+AVX512_4VNNI    = 4-iteration Vector Neural Network Instructions
+AVX512BITALG    = Bit Algorithms
+AVX512VPOPCNTDQ = Count number of bits set, additional instructions
+AVX512_4VNNIW   = 4-iteration Vector Neural Network Instructions, word precision
+AVX512_4FMAPS   = 4-iteration Fused Multiply-Add, single precision
+
+Data source PDF document:
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-030
+OCTOBER 2017.
