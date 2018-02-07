@@ -65,74 +65,74 @@ private final static String[][] DECODER_EBX =
     };
 private final static String[][] DECODER_ECX =
     {
-        { "PWT1"       , "Instruction PREFETCHWT1" } ,
-        { "AVX512VBMI" , "AVX512 vector byte manipulation" } ,
-        { "UMIP"       , "User mode instruction prevention" } ,
-        { "PKU"        , "Protection keys for user-mode pages" } ,
-        { "OSPKE" , "OS has set CR4.PKE to enable prot. keys, RDPKRU/WRPKRU" } ,
-        { "x"          , "Reserved" } ,  // bit 5 reserved
-        { "AV512VBMI2" , "AVX512 vector byte manipulation v2" } ,
-        { "CET SS"     , "Control Flow Enforcement: Shadow Stacks" } ,
-        { "GFNI"       , "Reserved" } ,
-        { "VAES"       , "Reserved" } ,
-        { "VPCL"       , "Reserved" } ,
+        { "PWT1"         , "Instruction PREFETCHWT1" } ,
+        { "AVX512VBMI"   , "AVX512 vector byte manipulation" } ,
+        { "UMIP"         , "User mode instruction prevention" } ,
+        { "PKU"          , "Protection keys for user-mode pages" } ,
+        { "OSPKE"        , "OS has set CR4.PKE to enable prot. keys, RDPKRU/WRPKRU" } ,
+        { "x"            , "Reserved" } ,  // bit 5 reserved
+        { "AV512VBMI2"   , "AVX512 vector byte manipulation v2" } ,
+        { "CET SS"       , "Control Flow Enforcement: Shadow Stacks" } ,
+        { "GFNI"         , "Galois field numeric instructions" } ,
+        { "VAES"         , "Vector advanced encryption standard" } ,
+        { "VPCLMULQDQ"   , "Carry-less multiplication quadword instruction" } ,
         { "AVXV512VNNI"  , "AVX512 4-iteration vector neural network instructions" } ,
         { "AVX512BITALG" , "AVX512 bit algorithms" } ,
-        { "TME"        , "Reserved" } ,
-        { "AVX512PDQ"  , "AVX512 VPOPCNTDQ instruction, count number of set bits" } ,
-        { "x"          , "Reserved" } , // bit 15 reserved
-        { "5LP"        , "5-level paging" } ,
-        { "MAWAU[0]"   , "MPX address width adjust" } ,
-        { "MAWAU[1]"   , "MPX address width adjust" } ,
-        { "MAWAU[2]"   , "MPX address width adjust" } ,
-        { "MAWAU[3]"   , "MPX address width adjust" } ,
-        { "MAWAU[4]"   , "MPX address width adjust" } ,
-        { "RDPID"      , "Read processor ID" } ,
-        { "x"          , "Reserved" } ,  // bit 23 reserved
-        { "x"          , "Reserved" } ,  // ...
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,  // ...
-        { "x"          , "Reserved" } ,  // bit 29 reserved
-        { "SGX LC"     , "SGX launch configuration" } ,
-        { "x"          , "Reserved" } 
+        { "TME"          , "Total Memory Encryption" } ,
+        { "AVX512PDQ"    , "AVX512 VPOPCNTDQ instruction, count number of set bits" } ,
+        { "x"            , "Reserved" } , // bit 15 reserved
+        { "5LP"          , "5-level paging" } ,
+        { "MAWAU[0]"     , "MPX address width adjust" } ,
+        { "MAWAU[1]"     , "MPX address width adjust" } ,
+        { "MAWAU[2]"     , "MPX address width adjust" } ,
+        { "MAWAU[3]"     , "MPX address width adjust" } ,
+        { "MAWAU[4]"     , "MPX address width adjust" } ,
+        { "RDPID"        , "Read processor ID" } ,
+        { "x"            , "Reserved" } ,  // bit 23 reserved
+        { "x"            , "Reserved" } ,  // ...
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,  // ...
+        { "x"            , "Reserved" } ,  // bit 29 reserved
+        { "SGX LC"       , "SGX launch configuration" } ,
+        { "x"            , "Reserved" } 
     };
 
 private final static String[][] DECODER_EDX =
     {
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "AVX512VNNIW"   , "AVX512 4-iteration vector neural network instruction, word mode" } ,
-        { "AVX512FMAPS"   , "AVX512 4-iteration fused multiply-add, single precision" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "PCONFIG"    , "PCONFIG for MK-TME" } ,
-        { "x"          , "Reserved" } ,
-        { "CET IBT"    , "Control Flow Enforcement: Indirect Branch Tracking" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "IBRS_IBPB"  , "Reserved" } ,
-        { "STIBP"      , "Reserved" } ,
-        { "x"          , "Reserved" } ,
-        { "ACP MSR"    , "ARCH_CAPABILITIES MSR" } ,
-        { "x"          , "Reserved" } ,  // note limit 100 strings, TODO: fix this bug
-        { "x"          , "Reserved" } ,  // note limit 100 strings, TODO: fix this bug
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "AVX512VNNIW"  , "AVX512 4-iteration vector neural network instruction, word mode" } ,
+        { "AVX512FMAPS"  , "AVX512 4-iteration fused multiply-add, single precision" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "PCONFIG"      , "PCONFIG for MK-TME" } ,
+        { "x"            , "Reserved" } ,
+        { "CET IBT"      , "Control Flow Enforcement: Indirect Branch Tracking" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "IBRS_IBPB"    , "Reserved" } ,
+        { "STIBP"        , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "ACP MSR"      , "ARCH_CAPABILITIES MSR" } ,
+        { "x"            , "Reserved" } ,  // note limit 100/100+ strings, TODO: fix this bug
+        { "x"            , "Reserved" } ,  // note limit 100/100+ strings, TODO: fix this bug
     };
 
 // Calculate control data total size for output formatting

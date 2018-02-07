@@ -1,0 +1,28 @@
+CPUID v0.58
+
+Edit per-bit comments for 4 new features detection:
+
+1) CPUID function=7, subfunction=0, register=ecx, bit=8  = GFNI
+2) CPUID function=7, subfunction=0, register=ecx, bit=9  = VAES
+3) CPUID function=7, subfunction=0, register=ecx, bit=10 = VPCLMULQDQ
+4) CPUID function=7, subfunction=0, register=ecx, bit=13 = TME
+
+GFNI       = Galois Field Numeric Instructions
+VAES       = Vector Advanced Encryption Standard
+VPCLMULQDQ = Carry-Less Multiplication Quadword instruction
+TME        = Total Memory Encryption
+
+Data source PDF document (about GFNI, VAES, VPCLMULQDQ):
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-030
+OCTOBER 2017.
+
+Data source PDF document (about TME):
+Intel Architecture
+Memory Encryption Technologies
+Specification
+Ref# 336907-001US
+Rev 1.1
+DECEMBER 2017.
