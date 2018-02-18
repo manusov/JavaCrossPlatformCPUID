@@ -61,6 +61,8 @@ private final static int NY3 = DECODER_ECX.length + 1;
 private final static int NY4 = DECODER_EDX.length + 0;
 private final static int NY  = NY1+NY2+NY3+NY4;
 
+private final static int L3_SCALE = 512;
+
 // Return CPUID this function full name
 // INPUT:   Reserved array
 // OUTPUT:  String, CPUID function full name
@@ -119,7 +121,7 @@ private final static int NY  = NY1+NY2+NY3+NY4;
     p=NY1+NY2+NY3;
     y = (int) ( array[x+3] >>> 32 );                                 // y = EDX
     z = CPUID.decodeBitfields ( "EDX" , DECODER_EDX , y , result , p );
-    result[p][4] = z[0] + " KB";
+    result[p][4] = ( z[0] * L3_SCALE ) + " KB";
     writeAssociativity( z[1] , p+1 , result );
     result[p+2][4] = "" + z[2];
     result[p+3][4] = z[3] + " Bytes";
