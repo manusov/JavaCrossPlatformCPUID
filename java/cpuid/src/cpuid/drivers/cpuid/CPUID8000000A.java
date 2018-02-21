@@ -50,8 +50,8 @@ private final static String[][] DECODER_EDX =
         { "PAUSE FT" , "Pause intercept filter threshold" } ,
         { "AVIC"     , "AMD advanced virtual interrupt controller" } ,
         { "x"        , "Reserved" } ,  // bit 14 reserved
-        { "VLS"      , "Reserved" } ,
-        { "VGIF"     , "Reserved" } ,
+        { "VVMLS"    , "Virtualized VMLOAD and VMSAVE" } ,
+        { "VGIF"     , "Virtualized global interrupt flag" } ,
     };
 
 // Calculate control data total size for output formatting
