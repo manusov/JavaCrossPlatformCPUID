@@ -32,19 +32,38 @@ private final static Object[][] DECODER_EAX =
     };
 private final static String[][] DECODER_EBX =
     {
-        { "CLZERO"   , "CLZERO instruction"          } ,
-        { "IRC"      , "Instruction Retired Counter" } ,
-        { "EPZR"     , "Error Pointer Zero-Restore"  } ,
-        { "x"        , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "WBNOINVD" , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "x"        , "Reserved"                    } ,
-        { "IBPB"     , "Reserved"                    }
+        { "CLZERO"    , "CLZERO instruction"          } ,
+        { "IRC"       , "Instruction Retired Counter" } ,
+        { "EPZR"      , "Error Pointer Zero-Restore"  } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "WBNOINVD"  , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "IBPB"      , "Indirect branch prediction barrier" } ,       // bit 12
+        { "x"         , "Reserved"                    } ,
+        { "IBRS"      , "Indirect branch restricted speculation"   } , // bit 14
+        { "STIBP"     , "Single thread indirect branch predictor"  } , // bit 15
+        { "IBRS AON"  , "Indirect branch restricted speculation always on"  } ,
+        { "STIBP AON" , "Single thread indirect branch predictor always on" } ,
+        { "IBRS PREF" , "Indirect branch restricted speculation is preferred" } ,
+        { "x"         , "Reserved"                    } ,  // bit 19
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    }    // bit 31
     };
 
 private final static Object[][] DECODER_ECX =
