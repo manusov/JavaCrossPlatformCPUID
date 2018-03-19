@@ -1,0 +1,103 @@
+CPUID v0.62.
+Improve comments for Intel-specific bits:
+CPUID function=00000007h, register=edx, bit 26 = IBRS IBPB
+Indirect branch restricted speculation and prediction barrier
+CPUID function=00000007h, register=edx, bit 27 = STIBP
+Single thread indirect branch predictor
+CPUID function=00000007h, register=edx, bit 29 = ACAP MSR
+IA32_ARCH_CAPABILITIES MSR
+
+
+CPUID v0.61.
+Improve comments for AMD-specific bits:
+CPUID function=80000008h, register=ebx, bit 12 = IBPB
+Indirect branch prediction barrier
+CPUID function=80000008h, register=ebx, bit 14 = IBRS
+Indirect branch restricted speculation
+CPUID function=80000008h, register=ebx, bit 15 = STIBP
+Single thread indirect branch predictor
+CPUID function=80000008h, register=ebx, bit 16 = IBRS AON
+Indirect branch restricted speculation always on
+CPUID function=80000008h, register=ebx, bit 17 = STIBP AON
+Single thread indirect branch predictor always on
+CPUID function=80000008h, register=ebx, bit 18 = IBRS PREF
+Indirect branch restricted speculation is preferred method
+Source:
+AMD64 TECHNOLOGY
+Indirect branch control extension
+Revision 2.7.18
+
+
+CPUID v0.60.
+Improve comments for bits:
+CPUID function=8000000Ah, register=edx, bit 15 = VVMLS
+Virtualized VMLOAD and VMSAVE instructions
+CPUID function=8000000Ah, register=edx, bit 16 = VGIF
+Virtualized global interrupt flag
+Source:
+Processor Programming
+Reference (PPR)
+for AMD Family 17h,
+Model 01h, Revision B1
+Processors.
+
+
+CPUID v0.59
+Fix L3 cache detection for AMD:
+Function 80000006h, EDX.[31-18],
+size units = 512 KB.
+Source:
+Processor Programming
+Reference (PPR)
+for AMD Family 17h,
+Model 01h, Revision B1
+Processors.
+
+
+CPUID v0.58
+Edit per-bit comments for 4 new features detection:
+1) CPUID function=7, subfunction=0, register=ecx, bit=8  = GFNI
+2) CPUID function=7, subfunction=0, register=ecx, bit=9  = VAES
+3) CPUID function=7, subfunction=0, register=ecx, bit=10 = VPCLMULQDQ
+4) CPUID function=7, subfunction=0, register=ecx, bit=13 = TME
+GFNI       = Galois Field Numeric Instructions
+VAES       = Vector Advanced Encryption Standard
+VPCLMULQDQ = Carry-Less Multiplication Quadword instruction
+TME        = Total Memory Encryption
+Data source PDF document (about GFNI, VAES, VPCLMULQDQ):
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-030
+OCTOBER 2017.
+Data source PDF document (about TME):
+Intel Architecture
+Memory Encryption Technologies
+Specification
+Ref# 336907-001US
+Rev 1.1
+DECEMBER 2017.
+
+
+CPUID v0.57
+Add 6 new AVX512 features detection:
+1) CPUID function=7, subfunction=0, register=ecx, bit=6  = AVX512VBMI2
+2) CPUID function=7, subfunction=0, register=ecx, bit=11 = AVX512_4VNNI
+3) CPUID function=7, subfunction=0, register=ecx, bit=12 = AVX512BITALG
+4) CPUID function=7, subfunction=0, register=ecx, bit=14 = AVX512VPOPCNTDQ
+5) CPUID function=7, subfunction=0, register=edx, bit=2  = AVX512_4VNNIW
+6) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
+AVX512VBMI2     = Vector Byte Manipulation 2
+AVX512_4VNNI    = 4-iteration Vector Neural Network Instructions
+AVX512BITALG    = Bit Algorithms
+AVX512VPOPCNTDQ = Count number of bits set, additional instructions
+AVX512_4VNNIW   = 4-iteration Vector Neural Network Instructions, word precision
+AVX512_4FMAPS   = 4-iteration Fused Multiply-Add, single precision
+Data source PDF document:
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-030
+OCTOBER 2017.
+
+

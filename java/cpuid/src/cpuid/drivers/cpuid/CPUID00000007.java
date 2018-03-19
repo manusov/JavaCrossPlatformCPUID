@@ -127,10 +127,10 @@ private final static String[][] DECODER_EDX =
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
-        { "IBRS_IBPB"    , "Reserved" } ,
-        { "STIBP"        , "Reserved" } ,
+        { "IBRS IBPB"    , "Indirect branch restricted speculation and predictor barrier" } ,  // bit 26
+        { "STIBP"        , "Single thread indirect branch predictor" } ,  // bit 27
         { "x"            , "Reserved" } ,
-        { "ACP MSR"      , "ARCH_CAPABILITIES MSR" } ,
+        { "ACAP MSR"     , "IA32_ARCH_CAPABILITIES MSR" } ,               // bit 29
         { "x"            , "Reserved" } ,  // note limit 100/100+ strings, TODO: fix this bug
         { "x"            , "Reserved" } ,  // note limit 100/100+ strings, TODO: fix this bug
     };
