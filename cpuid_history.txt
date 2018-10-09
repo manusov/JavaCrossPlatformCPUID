@@ -122,9 +122,19 @@ https://www.kernel.org/doc/html/latest/admin-guide/l1tf.html
 Data source (for items 8-10)
 124441_AMD64_SpeculativeStoreBypassDisable_Whitepaper_final.PDF REVISION 5.21.18
 
+
 CPUID v0.65 (October, 9, 2018)
 fix bug: EDX instead EBX.
 1) CPUID function=80000007h, no subfunction, register=edx, bit=13 = Connected standby
 2) CPUID function=80000007h, no subfunction, register=edx, bit=14 = Running average power limit (RAPL)
+
+
+CPUID v0.66 (October, 9, 2018)
+Add INTEL variant of Speculative Store Bypass Disable (SSBD) feature.
+CPUID function=00000007h, subfunction=0, register=edx, bit=31 = SSBD
+Data sources:
+336996-Speculative-Execution-Side-Channel-Mitigations.PDF
+https://github.com/tycho/cpuid/blob/master/feature.c
+https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00115.html
 
 
