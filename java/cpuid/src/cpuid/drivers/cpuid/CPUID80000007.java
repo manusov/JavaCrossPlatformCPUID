@@ -38,7 +38,18 @@ private final static String[][] DECODER_EBX =
         { "SUCCOR"   , "Software uncorrecteble error containment and recovery" } ,
         { "HWA"      , "Hardware assert MSR C001_10[DF...C0]h" } ,
         { "SCMCA"    , "Scalable MCA" } ,
-        { "RESERVED" , " " }
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "Conn SB"  , "Connected standby" } ,  // 13
+        { "RAPL"     , "Running Average Power Limit" } ,  // 14
+        { "x"        , "Reserved" }   // bit 15
     };
 private final static Object[][] DECODER_ECX =
     {

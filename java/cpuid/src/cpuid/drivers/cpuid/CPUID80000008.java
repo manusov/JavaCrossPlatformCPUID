@@ -41,7 +41,7 @@ private final static String[][] DECODER_EBX =
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
-        { "WBNOINVD"  , "Reserved"                    } ,
+        { "WBNOINVD"  , "Writeback with no invalidation" } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
         { "IBPB"      , "Indirect branch prediction barrier" } ,       // bit 12
@@ -56,9 +56,9 @@ private final static String[][] DECODER_EBX =
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
+        { "SSBD"      , "Speculative Store Bypass Disable" } ,  // 24
+        { "SSBD KL"   , "Speculative Store Bypass Disable, keep loads" } ,  // 25
+        { "SSBD NO"   , "SSBD no longer need" } ,  // 26
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,

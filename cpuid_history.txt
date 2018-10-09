@@ -101,3 +101,25 @@ Programming Reference
 OCTOBER 2017.
 
 
+CPUID v0.64 (October, 9, 2018)
+1)  CPUID function=00000007h, subfunction=0,  register=edx, bit=4  = Fast Short REP MOV
+2)  CPUID function=80000008h, no subfunction, register=ebx, bit=9  = WBNOINVD
+3)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=5  = WaitPKG instructions
+4)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=25 = CLDEMOTE instruction
+5)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=27 = MOVDIRI instruction
+6)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=28 = MOVDIR64B instruction
+7)  CPUID function=00000007h, subfunction=0,  register=edx, bit=28 = L1 Data Cache (L1D) Flush
+8)  CPUID function=80000008h, no subfunction, register=ebx, bit=24 = SSBD
+9)  CPUID function=80000008h, no subfunction, register=ebx, bit=25 = SSBD Keep Loads
+10) CPUID function=80000008h, no subfunction, register=ebx, bit=26 = SSBD no longer need
+11) CPUID function=80000007h, no subfunction, register=ebx, bit=13 = Connected standby
+12) CPUID function=80000007h, no subfunction, register=ebx, bit=14 = Running average power limit (RAPL)
+Data source PDF documents (for items 1-6):
+architecture-instruction-set-extensions-programming-reference.PDF ( 319433-034, MAY 2018 ).
+Data sources (for items 7, 11, 12):
+https://github.com/tycho/cpuid/blob/master/feature.c
+https://www.kernel.org/doc/html/latest/admin-guide/l1tf.html
+Data source (for items 8-10)
+124441_AMD64_SpeculativeStoreBypassDisable_Whitepaper_final.PDF REVISION 5.21.18
+
+

@@ -70,7 +70,7 @@ private final static String[][] DECODER_ECX =
         { "UMIP"         , "User mode instruction prevention" } ,
         { "PKU"          , "Protection keys for user-mode pages" } ,
         { "OSPKE"        , "OS has set CR4.PKE to enable prot. keys, RDPKRU/WRPKRU" } ,
-        { "x"            , "Reserved" } ,  // bit 5 reserved
+        { "WaitPKG"      , "Wait and pause enhancements" } ,
         { "AV512VBMI2"   , "AVX512 vector byte manipulation v2" } ,
         { "CET SS"       , "Control Flow Enforcement: Shadow Stacks" } ,
         { "GFNI"         , "Galois field numeric instructions" } ,
@@ -90,10 +90,10 @@ private final static String[][] DECODER_ECX =
         { "RDPID"        , "Read processor ID" } ,
         { "x"            , "Reserved" } ,  // bit 23 reserved
         { "x"            , "Reserved" } ,  // ...
+        { "CLDEMOTE"     , "Cache line demote instruction" } ,
         { "x"            , "Reserved" } ,
-        { "x"            , "Reserved" } ,
-        { "x"            , "Reserved" } ,
-        { "x"            , "Reserved" } ,  // ...
+        { "MOVDIRI"      , "Direct stores by MOVDIRI instruction" } ,    // 27
+        { "MOVDIR64B"    , "Direct stores by MOVDIR64B instruction" } ,  // 28
         { "x"            , "Reserved" } ,  // bit 29 reserved
         { "SGX LC"       , "SGX launch configuration" } ,
         { "x"            , "Reserved" } 
@@ -105,7 +105,7 @@ private final static String[][] DECODER_EDX =
         { "x"            , "Reserved" } ,
         { "AVX512VNNIW"  , "AVX512 4-iteration vector neural network instruction, word mode" } ,
         { "AVX512FMAPS"  , "AVX512 4-iteration fused multiply-add, single precision" } ,
-        { "x"            , "Reserved" } ,
+        { "FS REP MOV"   , "Fast short REP MOV" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
@@ -129,7 +129,7 @@ private final static String[][] DECODER_EDX =
         { "x"            , "Reserved" } ,
         { "IBRS IBPB"    , "Indirect branch restricted speculation and predictor barrier" } ,  // bit 26
         { "STIBP"        , "Single thread indirect branch predictor" } ,  // bit 27
-        { "x"            , "Reserved" } ,
+        { "L1D flush"    , "L1 Data Cache (L1D) flush" } ,
         { "ACAP MSR"     , "IA32_ARCH_CAPABILITIES MSR" } ,               // bit 29
         { "x"            , "Reserved" } ,  // note limit 100/100+ strings, TODO: fix this bug
         { "x"            , "Reserved" } ,  // note limit 100/100+ strings, TODO: fix this bug
