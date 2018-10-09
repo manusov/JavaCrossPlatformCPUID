@@ -122,4 +122,9 @@ https://www.kernel.org/doc/html/latest/admin-guide/l1tf.html
 Data source (for items 8-10)
 124441_AMD64_SpeculativeStoreBypassDisable_Whitepaper_final.PDF REVISION 5.21.18
 
+CPUID v0.65 (October, 9, 2018)
+fix bug: EDX instead EBX.
+1) CPUID function=80000007h, no subfunction, register=edx, bit=13 = Connected standby
+2) CPUID function=80000007h, no subfunction, register=edx, bit=14 = Running average power limit (RAPL)
+
 
