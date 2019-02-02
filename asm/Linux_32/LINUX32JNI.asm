@@ -273,6 +273,8 @@ je Function14
 ;- End of locked for debug -
 cmp eax,8000001Dh
 je Function04
+cmp eax,80000020h
+je Function10
 ;--- Default handling for functions without subfunctions ---
 xor esi,esi               ; ESI = sub-function number for CPUID
 xor ecx,ecx               ; ECX = sub-function number for save entry 

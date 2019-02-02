@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 CPUID java application main module.
 This class contains application entry point.
 1) Creates registry for communications with platform resources.

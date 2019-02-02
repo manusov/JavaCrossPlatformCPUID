@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Vendor, Product, Release Date, Icon information class with data getters.
 This information located at same package with main class CpuId.java,
 for fast accessible, include update when version changes.
@@ -8,8 +8,8 @@ package cpuid;
 
 public class About 
 {
-private final static String VERSION_NAME = "v0.66";
-private final static String VENDOR_NAME  = "(C)2018 IC Book Labs";
+private final static String VERSION_NAME = "v0.67";
+private final static String VENDOR_NAME  = "(C)2019 IC Book Labs";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;
 private final static String WEB_SITE     = "http://icbook.com.ua";

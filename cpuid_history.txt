@@ -138,3 +138,18 @@ https://github.com/tycho/cpuid/blob/master/feature.c
 https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00115.html
 
 
+CPUID v0.67 (February, 2, 2019)
+Add new bits for QoS (Quality of Service Extensions).
+1) CPUID function=80000008h, no subfunction, register=ebx, bit=6 = BE, 
+AMD Bandwidth Enforcement.
+2) CPUID function=80000020h, subfunction=0, register=ebx, bit=1 = L3BE, 
+L3 external read bandwidth enforcement.
+3) CPUID function=80000020h, subfunction=1, register=eax, bits=[31-0], 
+L3 external read bandwidth enforcement bit range length.
+4) CPUID function=80000020h, subfunction=1, register=edx, bits=[31-0], 
+L3 external read bandwidth enforcement maximum COS (Class of Service)
+number.
+Data sources:
+AMD64 Technology Platform Quality of Service Extensions.
+Publication # 56375 Revision 1.01. Issue date August 2018.
+

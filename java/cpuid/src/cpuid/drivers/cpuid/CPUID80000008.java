@@ -38,7 +38,7 @@ private final static String[][] DECODER_EBX =
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
+        { "BE"        , "AMD Bandwidth Enforcement"   } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
         { "WBNOINVD"  , "Writeback with no invalidation" } ,

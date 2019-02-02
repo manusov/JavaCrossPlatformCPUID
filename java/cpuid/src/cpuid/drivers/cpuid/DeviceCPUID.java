@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 CPUID driver component:
 CPUID data source declared as CPR.DEVICE, main module of complex driver.
 */
@@ -26,7 +26,7 @@ private String[] functionsShortNames;     // Short names for tabs
 private int[] functionsCodes;             // CPUID function codes (EAX)
 
 // Number of Standard, Virtual, Extended recognized functions
-private final static int NS=0x17, NV=0x1, NE=0x20;  // For different types
+private final static int NS=0x17, NV=0x1, NE=0x21;  // For different types
 private final static int NSUM = NS+NV+NE;           // Total recognized
 
 private final static Object[] CPUID_FUNCTIONS =     // List of recognized
@@ -87,6 +87,7 @@ private final static Object[] CPUID_FUNCTIONS =     // List of recognized
     new CPUID8000001D() ,
     new CPUID8000001E() ,
     new CPUID8000001F() ,
+    new CPUID80000020() ,
     };
 
 // Binary communications, can be routed to current platform or saved file
