@@ -153,3 +153,11 @@ Data sources:
 AMD64 Technology Platform Quality of Service Extensions.
 Publication # 56375 Revision 1.01. Issue date August 2018.
 
+
+CPUID v0.68 (February, 9, 2019)
+Edit names strings for CPU feature bits:
+1) CPUID function=7, subfunction=0, register=ecx, bit=11 = AVX512_VNNI
+2) CPUID function=7, subfunction=0, register=edx, bit=2  = AVX512_4VNNIW
+3) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
+
+

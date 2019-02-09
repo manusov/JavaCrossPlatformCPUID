@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 CPUID driver component:
 CPUID standard function 00000007h declared as CPR.COMMAND.
 */
@@ -76,7 +76,7 @@ private final static String[][] DECODER_ECX =
         { "GFNI"         , "Galois field numeric instructions" } ,
         { "VAES"         , "Vector advanced encryption standard" } ,
         { "VPCLMULQDQ"   , "Carry-less multiplication quadword instruction" } ,
-        { "AVXV512VNNI"  , "AVX512 4-iteration vector neural network instructions" } ,
+        { "AVXV512VNNI"  , "AVX512 vector neural network instructions" } ,
         { "AVX512BITALG" , "AVX512 bit algorithms" } ,
         { "TME"          , "Total Memory Encryption" } ,
         { "AVX512PDQ"    , "AVX512 VPOPCNTDQ instruction, count number of set bits" } ,
@@ -103,8 +103,8 @@ private final static String[][] DECODER_EDX =
     {
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
-        { "AVX512VNNIW"  , "AVX512 4-iteration vector neural network instruction, word mode" } ,
-        { "AVX512FMAPS"  , "AVX512 4-iteration fused multiply-add, single precision" } ,
+        { "4VNNIW"       , "AVX512_4VNNIW 4-iteration VNNI, word mode" } ,
+        { "4FMAPS"       , "AVX512_4FMAPS 4-iteration FMA, single precision" } ,
         { "FS REP MOV"   , "Fast short REP MOV" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
