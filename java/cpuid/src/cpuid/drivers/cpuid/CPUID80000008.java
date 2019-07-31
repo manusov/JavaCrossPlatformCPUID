@@ -30,14 +30,15 @@ private final static Object[][] DECODER_EAX =
         { "Linear address size"         , 15 , 8 } ,
         { "Guest physical address size" , 23 , 16 }
     };
+
 private final static String[][] DECODER_EBX =
     {
         { "CLZERO"    , "CLZERO instruction"          } ,
         { "IRC"       , "Instruction Retired Counter" } ,
         { "EPZR"      , "Error Pointer Zero-Restore"  } ,
-        { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
+        { "x"         , "Reserved"                    } ,              // bit 3
+        { "RDPRU"     , "Read processor privileged registers at user mode" } ,
+        { "x"         , "Reserved"                    } ,              // bit 5
         { "BE"        , "AMD Bandwidth Enforcement"   } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,
@@ -73,16 +74,25 @@ private final static Object[][] DECODER_ECX =
         { "Performance TSC size"         , 17 , 16 }
     };
 
+private final static Object[][] DECODER_EDX =
+    {
+        { "RDPRU maximum register number" ,  31 ,  16 } ,
+    };
+
 // Additional decoders
 private final static String[] DECODER_PERF_TSC =
     { "40 bits" , "48 bits" , "56 bits" , "64 bits" , "Unknown" };
+
+private final static String[] DECODER_RDPRU =
+    { "MPERF" , "APERF" , "Unknown" };
 
 // Calculate control data total size for output formatting
 private final static int NX  = COMMAND_UP_1.length;
 private final static int NY1 = DECODER_EAX.length + 1;
 private final static int NY2 = DECODER_EBX.length + 1;
-private final static int NY3 = DECODER_ECX.length + 0;
-private final static int NY  = NY1+NY2+NY3;
+private final static int NY3 = DECODER_ECX.length + 1;
+private final static int NY4 = DECODER_EDX.length + 0;
+private final static int NY  = NY1+NY2+NY3+NY4;
 
 // Return CPUID this function full name
 // INPUT:   Reserved array
@@ -124,6 +134,7 @@ private final static int NY  = NY1+NY2+NY3;
     // Parameters from CPUID dump, EBX register
     p=NY1;
     y = (int) ( array[x+2] >>> 32 );                                 // y = EBX
+    boolean rdpruFlag = ( y & 0x10 ) > 0;
     CPUID.decodeBitmap ( "EBX" , DECODER_EBX , y , result , p );
     // Parameters from CPUID dump, ECX register
     p=NY1+NY2;
@@ -136,6 +147,14 @@ private final static int NY  = NY1+NY2+NY3;
     y = z[2];
     if (y>3) { y=4; }
     result[p+2][4] = DECODER_PERF_TSC[y];
+    // Parameters from CPUID dump, EDX register
+    p=NY1+NY2+NY3;
+    y = (int) ( array[x+3] >>> 32 );                                 // y = EDX
+    z = CPUID.decodeBitfields ( "EDX" , DECODER_EDX , y , result , p );
+    y = z[0];
+    if (y>2) { y=3; }
+    if   (rdpruFlag) { result[p][4] = DECODER_RDPRU[y]; }
+    else             { result[p][4] = "n/a"; }
     // Result is ready, all strings filled
     return result;
     }

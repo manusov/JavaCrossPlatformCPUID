@@ -161,3 +161,12 @@ Edit names strings for CPU feature bits:
 3) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
 
 
+CPUID v0.69 (July, 31, 2019)
+Add new bits for AMD EPYC, EPYC2:
+1) CPUID function=80000008h, no subfunction, register=ebx, bit=4 = RDPRU
+2) CPUID function=80000008h, no subfunction, register=edx, bits=[31-16] = RDPRU register limit
+Data source:
+AMD64 Architecture Programmer's Manual.
+Volume 3: General-Purpose and System Instructions.
+Publication No. 24594, Revision 3.27,  Date July 2019.
+
