@@ -152,7 +152,7 @@ private final static int NY  = NY1+NY2+NY3+NY4;
     y = (int) ( array[x+3] >>> 32 );                                 // y = EDX
     z = CPUID.decodeBitfields ( "EDX" , DECODER_EDX , y , result , p );
     y = z[0];
-    if (y>2) { y=3; }
+    if (y>1) { y=2; }
     if   (rdpruFlag) { result[p][4] = DECODER_RDPRU[y]; }
     else             { result[p][4] = "n/a"; }
     // Result is ready, all strings filled

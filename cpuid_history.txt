@@ -1,3 +1,82 @@
+
+CPUID v0.70 (July, 31, 2019)
+Fix array size limit for decode RDPRU maximum read register value.
+
+
+CPUID v0.69 (July, 31, 2019)
+Add new bits for AMD EPYC, EPYC2:
+1) CPUID function=80000008h, no subfunction, register=ebx, bit=4 = RDPRU
+2) CPUID function=80000008h, no subfunction, register=edx, bits=[31-16] = RDPRU register limit
+Data source:
+AMD64 Architecture Programmer's Manual.
+Volume 3: General-Purpose and System Instructions.
+Publication No. 24594, Revision 3.27,  Date July 2019.
+
+
+CPUID v0.68 (February, 9, 2019)
+Edit names strings for CPU feature bits:
+1) CPUID function=7, subfunction=0, register=ecx, bit=11 = AVX512_VNNI
+2) CPUID function=7, subfunction=0, register=edx, bit=2  = AVX512_4VNNIW
+3) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
+
+
+CPUID v0.67 (February, 2, 2019)
+Add new bits for QoS (Quality of Service Extensions).
+1) CPUID function=80000008h, no subfunction, register=ebx, bit=6 = BE, 
+AMD Bandwidth Enforcement.
+2) CPUID function=80000020h, subfunction=0, register=ebx, bit=1 = L3BE, 
+L3 external read bandwidth enforcement.
+3) CPUID function=80000020h, subfunction=1, register=eax, bits=[31-0], 
+L3 external read bandwidth enforcement bit range length.
+4) CPUID function=80000020h, subfunction=1, register=edx, bits=[31-0], 
+L3 external read bandwidth enforcement maximum COS (Class of Service)
+number.
+Data sources:
+AMD64 Technology Platform Quality of Service Extensions.
+Publication # 56375 Revision 1.01. Issue date August 2018.
+
+
+CPUID v0.66 (October, 9, 2018)
+Add INTEL variant of Speculative Store Bypass Disable (SSBD) feature.
+CPUID function=00000007h, subfunction=0, register=edx, bit=31 = SSBD
+Data sources:
+336996-Speculative-Execution-Side-Channel-Mitigations.PDF
+https://github.com/tycho/cpuid/blob/master/feature.c
+https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00115.html
+
+
+CPUID v0.65 (October, 9, 2018)
+fix bug: EDX instead EBX.
+1) CPUID function=80000007h, no subfunction, register=edx, bit=13 = Connected standby
+2) CPUID function=80000007h, no subfunction, register=edx, bit=14 = Running average power limit (RAPL)
+
+
+CPUID v0.64 (October, 9, 2018)
+1)  CPUID function=00000007h, subfunction=0,  register=edx, bit=4  = Fast Short REP MOV
+2)  CPUID function=80000008h, no subfunction, register=ebx, bit=9  = WBNOINVD
+3)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=5  = WaitPKG instructions
+4)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=25 = CLDEMOTE instruction
+5)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=27 = MOVDIRI instruction
+6)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=28 = MOVDIR64B instruction
+7)  CPUID function=00000007h, subfunction=0,  register=edx, bit=28 = L1 Data Cache (L1D) Flush
+8)  CPUID function=80000008h, no subfunction, register=ebx, bit=24 = SSBD
+9)  CPUID function=80000008h, no subfunction, register=ebx, bit=25 = SSBD Keep Loads
+10) CPUID function=80000008h, no subfunction, register=ebx, bit=26 = SSBD no longer need
+11) CPUID function=80000007h, no subfunction, register=ebx, bit=13 = Connected standby
+12) CPUID function=80000007h, no subfunction, register=ebx, bit=14 = Running average power limit (RAPL)
+Data source PDF documents (for items 1-6):
+architecture-instruction-set-extensions-programming-reference.PDF ( 319433-034, MAY 2018 ).
+Data sources (for items 7, 11, 12):
+https://github.com/tycho/cpuid/blob/master/feature.c
+https://www.kernel.org/doc/html/latest/admin-guide/l1tf.html
+Data source (for items 8-10)
+124441_AMD64_SpeculativeStoreBypassDisable_Whitepaper_final.PDF REVISION 5.21.18
+
+
+v0.62 build at JDK7 mode (legacy)
+v0.63 build at JDK8 mode (advanced)
+
+
 CPUID v0.62.
 Improve comments for Intel-specific bits:
 CPUID function=00000007h, register=edx, bit 26 = IBRS IBPB
@@ -99,74 +178,4 @@ Instruction Set Extensions and Future Features
 Programming Reference
 319433-030
 OCTOBER 2017.
-
-
-CPUID v0.64 (October, 9, 2018)
-1)  CPUID function=00000007h, subfunction=0,  register=edx, bit=4  = Fast Short REP MOV
-2)  CPUID function=80000008h, no subfunction, register=ebx, bit=9  = WBNOINVD
-3)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=5  = WaitPKG instructions
-4)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=25 = CLDEMOTE instruction
-5)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=27 = MOVDIRI instruction
-6)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=28 = MOVDIR64B instruction
-7)  CPUID function=00000007h, subfunction=0,  register=edx, bit=28 = L1 Data Cache (L1D) Flush
-8)  CPUID function=80000008h, no subfunction, register=ebx, bit=24 = SSBD
-9)  CPUID function=80000008h, no subfunction, register=ebx, bit=25 = SSBD Keep Loads
-10) CPUID function=80000008h, no subfunction, register=ebx, bit=26 = SSBD no longer need
-11) CPUID function=80000007h, no subfunction, register=ebx, bit=13 = Connected standby
-12) CPUID function=80000007h, no subfunction, register=ebx, bit=14 = Running average power limit (RAPL)
-Data source PDF documents (for items 1-6):
-architecture-instruction-set-extensions-programming-reference.PDF ( 319433-034, MAY 2018 ).
-Data sources (for items 7, 11, 12):
-https://github.com/tycho/cpuid/blob/master/feature.c
-https://www.kernel.org/doc/html/latest/admin-guide/l1tf.html
-Data source (for items 8-10)
-124441_AMD64_SpeculativeStoreBypassDisable_Whitepaper_final.PDF REVISION 5.21.18
-
-
-CPUID v0.65 (October, 9, 2018)
-fix bug: EDX instead EBX.
-1) CPUID function=80000007h, no subfunction, register=edx, bit=13 = Connected standby
-2) CPUID function=80000007h, no subfunction, register=edx, bit=14 = Running average power limit (RAPL)
-
-
-CPUID v0.66 (October, 9, 2018)
-Add INTEL variant of Speculative Store Bypass Disable (SSBD) feature.
-CPUID function=00000007h, subfunction=0, register=edx, bit=31 = SSBD
-Data sources:
-336996-Speculative-Execution-Side-Channel-Mitigations.PDF
-https://github.com/tycho/cpuid/blob/master/feature.c
-https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00115.html
-
-
-CPUID v0.67 (February, 2, 2019)
-Add new bits for QoS (Quality of Service Extensions).
-1) CPUID function=80000008h, no subfunction, register=ebx, bit=6 = BE, 
-AMD Bandwidth Enforcement.
-2) CPUID function=80000020h, subfunction=0, register=ebx, bit=1 = L3BE, 
-L3 external read bandwidth enforcement.
-3) CPUID function=80000020h, subfunction=1, register=eax, bits=[31-0], 
-L3 external read bandwidth enforcement bit range length.
-4) CPUID function=80000020h, subfunction=1, register=edx, bits=[31-0], 
-L3 external read bandwidth enforcement maximum COS (Class of Service)
-number.
-Data sources:
-AMD64 Technology Platform Quality of Service Extensions.
-Publication # 56375 Revision 1.01. Issue date August 2018.
-
-
-CPUID v0.68 (February, 9, 2019)
-Edit names strings for CPU feature bits:
-1) CPUID function=7, subfunction=0, register=ecx, bit=11 = AVX512_VNNI
-2) CPUID function=7, subfunction=0, register=edx, bit=2  = AVX512_4VNNIW
-3) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
-
-
-CPUID v0.69 (July, 31, 2019)
-Add new bits for AMD EPYC, EPYC2:
-1) CPUID function=80000008h, no subfunction, register=ebx, bit=4 = RDPRU
-2) CPUID function=80000008h, no subfunction, register=edx, bits=[31-16] = RDPRU register limit
-Data source:
-AMD64 Architecture Programmer's Manual.
-Volume 3: General-Purpose and System Instructions.
-Publication No. 24594, Revision 3.27,  Date July 2019.
 
