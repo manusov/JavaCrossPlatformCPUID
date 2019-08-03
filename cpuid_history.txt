@@ -1,3 +1,10 @@
+CPUID v0.71 (August, 3, 2019)
+Add new bit for Intel security feature.
+CPUID function=7, subfunction=0, register=edx, bit=10 = MD_CLEAR.
+This bit means the processor is not affected by microarchitectural data sampling (MDS).
+Data source:
+https://software.intel.com/security-software-guidance/insights/deep-dive-cpuid-enumeration-and-architectural-msrs
+
 
 CPUID v0.70 (July, 31, 2019)
 Fix array size limit for decode RDPRU maximum read register value.

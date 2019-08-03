@@ -111,7 +111,7 @@ private final static String[][] DECODER_EDX =
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
-        { "x"            , "Reserved" } ,
+        { "MD CLEAR"     , "CPU is not affected by microarch. data sampling (MDS)" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
