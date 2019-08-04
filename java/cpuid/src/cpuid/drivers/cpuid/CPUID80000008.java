@@ -69,9 +69,10 @@ private final static String[][] DECODER_EBX =
 
 private final static Object[][] DECODER_ECX =
     {
-        { "Number of physical cores - 1" ,  7 ,  0 } ,
-        { "APIC ID size"                 , 15 , 12 } ,
-        { "Performance TSC size"         , 17 , 16 }
+//      { "Number of physical cores - 1"        ,  7 ,  0 } ,
+        { "Number of threads per processor - 1" ,  7 ,  0 } ,
+        { "APIC ID size"                        , 15 , 12 } ,
+        { "Performance TSC size"                , 17 , 16 }
     };
 
 private final static Object[][] DECODER_EDX =
@@ -140,7 +141,8 @@ private final static int NY  = NY1+NY2+NY3+NY4;
     p=NY1+NY2;
     y = (int) ( array[x+3] & (((long)((long)(-1)>>>32))) );          // y = ECX
     z = CPUID.decodeBitfields ( "ECX" , DECODER_ECX , y , result , p );
-    if ( z[0]>0 ) { result[p][4] = (z[0]+1) + " cores"; }
+//  if ( z[0]>0 ) { result[p][4] = (z[0]+1) + " cores"; }
+    if ( z[0]>0 ) { result[p][4] = (z[0]+1) + " threads"; }
     else          { result[p][4] = "n/a"; }
     if ( z[1]>0 ) { result[p+1][4] = z[1] + "-bit"; }
     else          { result[p+1][4] = "n/a"; }

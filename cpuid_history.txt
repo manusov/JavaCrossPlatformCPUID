@@ -1,3 +1,9 @@
+CPUID v0.72 (August, 4, 2019)
+CPUID function=80000008h, no subfunction, register=ecx, bits[7-0]:
+interpreted as: number of threads in the package - 1.
+Old interpreting: number of cores - 1.
+
+
 CPUID v0.71 (August, 3, 2019)
 Add new bit for Intel security feature.
 CPUID function=7, subfunction=0, register=edx, bit=10 = MD_CLEAR.
