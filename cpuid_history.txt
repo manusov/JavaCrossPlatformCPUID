@@ -1,3 +1,14 @@
+
+CPUID v0.73 (August, 15, 2019)
+Add new bit for AMD EPYC, EPYC2:
+CPUID function=80000001h, no subfunction, register=ecx, bit=30 = AdMskExtn
+Data source:
+Processor Programming Reference (PPR) for 
+AMD Family 17h Model 71h, Revision B0 Processors
+56176 Rev 3.06 - Jul 17, 2019
+https://www.amd.com/en/support/tech-docs
+
+
 CPUID v0.72 (August, 4, 2019)
 CPUID function=80000008h, no subfunction, register=ecx, bits[7-0]:
 interpreted as: number of threads in the package - 1.

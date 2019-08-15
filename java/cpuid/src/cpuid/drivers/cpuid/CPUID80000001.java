@@ -61,7 +61,7 @@ private final static String[][] DECODER_ECX =
         { "PERFTSC"  , "Performance TSC (MSR C001_0280h)" } ,
         { "PCX_L2I"  , "L2I perf counter extensions (MSRs C001_023[0...7]h)" } ,
         { "MONX"     , "MONITORX/MWAITX" } , 
-        { "x"        , "Reserved" } ,  // bit 30 reserved 
+        { "ADMSKEXT" , "Address mask extension for instruction breakpoint" } ,
         { "x"        , "Reserved" }    // bit 31 reserved
     };
 private final static String[][] DECODER_EDX =

@@ -8,7 +8,7 @@ package cpuid;
 
 public class About 
 {
-private final static String VERSION_NAME = "v0.72";
+private final static String VERSION_NAME = "v0.73";
 private final static String VENDOR_NAME  = "(C)2019 IC Book Labs";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;
