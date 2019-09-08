@@ -41,7 +41,7 @@ private final static String[][] DECODER_EBX =
         { "x"         , "Reserved"                    } ,              // bit 5
         { "BE"        , "AMD Bandwidth Enforcement"   } ,
         { "x"         , "Reserved"                    } ,
-        { "x"         , "Reserved"                    } ,
+        { "MCOMMIT"   , "MCOMMIT instruction"         } ,              // bit 8
         { "WBNOINVD"  , "Writeback with no invalidation" } ,
         { "x"         , "Reserved"                    } ,
         { "x"         , "Reserved"                    } ,

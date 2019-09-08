@@ -141,13 +141,13 @@ private void writeAssociativity ( int a , int p , String[][] s )
         case 0:  { s[p][4] = "Disabled"; break; }
         case 1:  { s[p][4] = "1 way, direct mapped"; break; }
         case 2:  { s[p][4] = "2 ways"; break; }
-        case 3:  { s[p][4] = "Reserved"; break; }
+        case 3:  { s[p][4] = "3 ways"; break; }
         case 4:  { s[p][4] = "4 ways"; break; }
-        case 5:  { s[p][4] = "Reserved"; break; }
+        case 5:  { s[p][4] = "6 ways"; break; }
         case 6:  { s[p][4] = "8 ways"; break; }
         case 7:  { s[p][4] = "Reserved"; break; }
         case 8:  { s[p][4] = "16 ways"; break; }
-        case 9:  { s[p][4] = "Reserved"; break; }
+        case 9:  { s[p][4] = "Use f=8000001Dh"; break; }
         case 10: { s[p][4] = "32 ways"; break; }
         case 11: { s[p][4] = "48 ways"; break; }
         case 12: { s[p][4] = "64 ways"; break; }
