@@ -24,11 +24,11 @@ private final static String[][] NO_RESULT =
     };
 
 // Control tables for results decoding
-private final static Object[][] DECODER_EAX =
+private final static Object[][] DECODER_EAX0 =
     {
         { "Maximum sub-leaf number" , 31 , 0 }
     }; 
-private final static String[][] DECODER_EBX =
+private final static String[][] DECODER_EBX0 =
     { 
         { "FSGSBASE"   , "FS,GS base addressing modes" } ,
         { "TSCADJ"     , "IA32_TSC_ADJUST MSR" } ,
@@ -63,7 +63,7 @@ private final static String[][] DECODER_EBX =
         { "AVX512BW"   , "AVX512 bytes and words operations" } ,
         { "AVX512VL"   , "AVX512 vector length control" } ,
     };
-private final static String[][] DECODER_ECX =
+private final static String[][] DECODER_ECX0 =
     {
         { "PWT1"         , "Instruction PREFETCHWT1" } ,
         { "AVX512VBMI"   , "AVX512 vector byte manipulation" } ,
@@ -94,12 +94,12 @@ private final static String[][] DECODER_ECX =
         { "x"            , "Reserved" } ,
         { "MOVDIRI"      , "Direct stores by MOVDIRI instruction" } ,    // 27
         { "MOVDIR64B"    , "Direct stores by MOVDIR64B instruction" } ,  // 28
-        { "x"            , "Reserved" } ,  // bit 29 reserved
+        { "ENQCMD"       , "Enqueue stores by ENQCMD and ENQCMDS instructions" } ,
         { "SGX LC"       , "SGX launch configuration" } ,
-        { "x"            , "Reserved" } 
+        { "x"            , "Reserved" }   // bit 31 reserved
     };
 
-private final static String[][] DECODER_EDX =
+private final static String[][] DECODER_EDX0 =
     {
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
@@ -109,7 +109,7 @@ private final static String[][] DECODER_EDX =
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
-        { "x"            , "Reserved" } ,
+        { "AVX512VP2IS"  , "AVX512 compute intersection instructions" } ,
         { "x"            , "Reserved" } ,
         { "MD CLEAR"     , "CPU is not affected by microarch. data sampling (MDS)" } ,
         { "x"            , "Reserved" } ,
@@ -135,13 +135,50 @@ private final static String[][] DECODER_EDX =
         { "SSBD"         , "Speculative Store Bypass Disable" } ,  // note limit 100/100+ strings, TODO: fix this bug
     };
 
+private final static String[][] DECODER_EAX1 =
+    {
+        { "x"            , "Reserved" } ,  // bit 0
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "AVX512BF16"   , "VNNI instructions supports BFLOAT16 format" } ,
+        { "x"            , "Reserved" } ,  // bit 6
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,  // bit 16
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,  // bit 24
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,
+        { "x"            , "Reserved" } ,  // bit 31
+    };
+
 // Calculate control data total size for output formatting
 private final static int NX  = COMMAND_UP_1.length;
-private final static int NY1 = DECODER_EAX.length + 1;
-private final static int NY2 = DECODER_EBX.length + 1;
-private final static int NY3 = DECODER_ECX.length + 1;
-private final static int NY4 = DECODER_EDX.length + 0;
-private final static int NY  = NY1+NY2+NY3+NY4;
+private final static int NY1 = DECODER_EAX0.length + 1;
+private final static int NY2 = DECODER_EBX0.length + 1;
+private final static int NY3 = DECODER_ECX0.length + 1;
+private final static int NY4 = DECODER_EDX0.length + 1;
+private final static int NY5 = DECODER_EAX1.length + 0;
+private final static int NY  = NY1+NY2+NY3+NY4+NY5;
 
 // Return CPUID this function full name
 // INPUT:   Reserved array
@@ -175,21 +212,58 @@ private final static int NY  = NY1+NY2+NY3+NY4;
         }
     // Parameters from CPUID dump, EAX register
     int p=0;  // pointer for sequentally store strings in the table
-    int y = (int) ( array[x+2] & (((long)((long)(-1)>>>32))) );      // y = EAX
-    int[] z = CPUID.decodeBitfields ( "EAX" , DECODER_EAX , y , result , p );
+    
+    // subfunction 0
+    int y = (int) ( array[x+2] & (((long)((long)(-1)>>>32))) );    // y = EAX
+    int maxSubFunction = y;
+    int[] z = CPUID.decodeBitfields ( "EAX" , DECODER_EAX0 , y , result , p );
     result[p][4] = String.format( "%d", z[0] );
     // Parameters from CPUID dump, EBX register
     p = NY1;
-    y = (int) ( array[x+2] >>> 32 );                                 // y = EBX
-    CPUID.decodeBitmap ( "EBX" , DECODER_EBX , y , result , p );
+    y = (int) ( array[x+2] >>> 32 );                               // y = EBX
+    CPUID.decodeBitmap ( "EBX" , DECODER_EBX0 , y , result , p );
     // Parameters from CPUID dump, ECX register
     p = NY1+NY2;
-    y = (int) ( array[x+3] & (((long)((long)(-1)>>>32))) );          // y = ECX
-    CPUID.decodeBitmap ( "ECX" , DECODER_ECX , y , result , p );
+    y = (int) ( array[x+3] & (((long)((long)(-1)>>>32))) );        // y = ECX
+    CPUID.decodeBitmap ( "ECX" , DECODER_ECX0 , y , result , p );
     // Parameters from CPUID dump, ECX register
     p = NY1+NY2+NY3;
-    y = (int) ( array[x+3] >>> 32 );                                 // y = EDX
-    CPUID.decodeBitmap ( "EDX" , DECODER_EDX , y , result , p );
+    y = (int) ( array[x+3] >>> 32 );                               // y = EDX
+    CPUID.decodeBitmap ( "EDX" , DECODER_EDX0 , y , result , p );
+    
+    // subfunction 1
+    p = NY1+NY2+NY3+NY4;
+    if ( maxSubFunction == 0 )  // check EAX of subfunction 0
+        {
+        y = 0;
+        }
+    else
+        {
+        // Get number of entries per CPUID dump, field from dump header
+        int maxEntries = (int) ( array[0] & (((long)((long)(-1)>>>32))) );
+        maxEntries = (maxEntries+1)*4;  // Calculate x2 = limit at units = long
+        x = x + 4;                      // set pointer to subfunction 1
+        if ( x >= maxEntries )  // check array size limit before get subfunction entry 
+            { 
+            y = 0;
+            }        // Return 0 if dump size limit
+        else
+            {
+            int function = (int) ( array[x] >>> 32 );
+            int subFunction = (int) ( array[x+1] & (((long)((long)(-1)>>>32))) );
+            if ( ( function == 0x00000007 ) & ( subFunction == 0x00000001 ) )
+                {  // this for success detected function=7, subfunction=1
+                y = (int) ( array[x+2] & (((long)((long)(-1)>>>32))) );   // y = EAX
+                }
+            else
+                {  // this for function or/and subfunction mismatch
+                y = 0;
+                }
+            }
+        }
+    // EAX for subfunction 1
+    CPUID.decodeBitmap ( "EAX" , DECODER_EAX1 , y , result , p );
+    
     // Result is ready, all strings filled
     return result;
     }

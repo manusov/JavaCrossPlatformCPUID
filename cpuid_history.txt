@@ -1,4 +1,16 @@
 
+CPUID v0.75 (September, 14, 2019)
+CPUID function=7, subfunction=0, register=edx, bit=8 = AVX512_VP2INTERSECT.
+CPUID function=7, subfunction=0, register=ecx, bit=29 = ENQCMD.
+CPUID function=7, subfunction=1, register=eax, bit=5 = AVX512_BF16.
+Data source:
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-037.pdf
+MAY 2019.
+
+
 CPUID v0.74 (September, 08, 2019)
 1) Add new bit CPUID function=80000008h, no subfunction, register=ebx,
 bit=8 = MCOMMIT instruction
