@@ -119,7 +119,7 @@ private final static String[][] DECODER_EDX0 =
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
         { "x"            , "Reserved" } ,
-        { "PCONFIG"      , "PCONFIG for MK-TME" } ,
+        { "PCONFIG"      , "PCONFIG for MK-TME" } ,  // bit 18
         { "x"            , "Reserved" } ,
         { "CET IBT"      , "Control Flow Enforcement: Indirect Branch Tracking" } ,
         { "x"            , "Reserved" } ,
@@ -131,7 +131,7 @@ private final static String[][] DECODER_EDX0 =
         { "STIBP"        , "Single thread indirect branch predictor" } ,  // bit 27
         { "L1D flush"    , "L1 Data Cache (L1D) flush" } ,
         { "ACAP MSR"     , "IA32_ARCH_CAPABILITIES MSR" } ,        // bit 29
-        { "x"            , "Reserved" } ,                          // note limit 100/100+ strings, TODO: fix this bug
+        { "CCAP MSR"     , "IA32_CORE_CAPABILITIES MSR" } ,        // note limit 100/100+ strings, TODO: fix this bug
         { "SSBD"         , "Speculative Store Bypass Disable" } ,  // note limit 100/100+ strings, TODO: fix this bug
     };
 

@@ -33,12 +33,17 @@ private final static Object[][] DECODER_EBX =
     {
         { "Numerator of the TSC/core crystal clock ratio" , 31 , 0 }
     };
+private final static Object[][] DECODER_ECX =
+    {
+        { "Nominal frequency of the core crystal" , 31 , 0 }
+    };
 
 // Calculate control data total size for output formatting
 private final static int NX  = COMMAND_UP_1.length;
 private final static int NY1 = DECODER_EAX.length + 0;
 private final static int NY2 = DECODER_EBX.length + 0;
-private final static int NY  = NY1 + NY2;
+private final static int NY3 = DECODER_ECX.length + 0;
+private final static int NY  = NY1 + NY2 + NY3;
 
 // Return CPUID this function full name
 // INPUT:   Reserved array
@@ -70,16 +75,34 @@ private final static int NY  = NY1 + NY2;
             result[i][j]=""; 
             } 
         }
+    
     // Parameters from CPUID dump, EAX register
     int p=0;  // pointer for sequentally store strings in the table
     int y = (int) (array[x1+2] & (((long)((long)(-1)>>>32))) );      // y = EAX
     CPUID.decodeBitfields ( "EAX" , DECODER_EAX , y , result , p );
     result[p][NX-1] = String.format("%d",y);
+    
     // Parameters from CPUID dump, EBX register
     p = NY1;
     y = (int) ( array[x1+2] >>> 32 );                                // y = EBX
     CPUID.decodeBitfields ( "EBX" , DECODER_EBX , y , result , p );
     result[p][NX-1] = String.format("%d",y);
+    
+    // Parameters from CPUID dump, EBX register
+    p = NY1+NY2;
+    y = (int) ( array[x1+3] & (((long)((long)(-1)>>>32))) );         // y = ECX
+    CPUID.decodeBitfields ( "ECX" , DECODER_ECX , y , result , p );
+    if ( y != 0 )
+        {
+        long hz = ( (long) y ) & ( ((long)((long)(-1)>>>32)) );
+        double mHz = hz / 1000000.0; 
+        result[p][NX-1] = String.format( "%.3f MHz", mHz );
+        }
+    else
+        {
+        result[p][NX-1] = "n/a";
+        }
+    
     // Result is ready, all strings filled
     return result;
     }

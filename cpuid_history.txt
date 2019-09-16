@@ -1,4 +1,15 @@
 
+CPUID v0.77 (September, 16, 2019)
+Add new bits and bitfields for CPUID functions:
+00000006h, 00000007h, 00000015h.
+Data source:
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-037.pdf
+MAY 2019.
+
+
 CPUID v0.76 (September, 16, 2019)
 Add and modify java classes for CPUID functions:
 1) Function=00000010h , Intel Resource Director Technology (RDT).
