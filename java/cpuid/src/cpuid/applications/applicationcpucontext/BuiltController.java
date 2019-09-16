@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 MVC "Controller" module for ApplicationCPUcontext,
 Note MVC is Model, View, Controller paradigm.
 Application: CPU Context Management info.

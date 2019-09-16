@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Kernel part: Registry of drivers.
 This component can be replaced at REMOTE/FILE alternate target systems.
 Note.

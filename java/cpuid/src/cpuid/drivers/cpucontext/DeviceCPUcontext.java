@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Driver: get and interpreting CPU context management data.
 Note.
 1) CPU support bitmaps for declaration program context objects,

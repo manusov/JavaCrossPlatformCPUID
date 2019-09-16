@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 User interface dialogue window and target operation execution
 for SAVE FULL REPORT, SAVE THIS WINDOW REPORT operations.
 */

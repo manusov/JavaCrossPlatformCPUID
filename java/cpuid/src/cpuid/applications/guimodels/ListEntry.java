@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 List entry for tree GUI element.
 This entry used by BuildModel in sub-application cpuid, 
 for cpuid functions tree.

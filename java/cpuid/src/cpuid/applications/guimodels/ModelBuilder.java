@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 GUI panel model builder unified interface.
 Declare component model capabilities:
 get models count, get selected model, 

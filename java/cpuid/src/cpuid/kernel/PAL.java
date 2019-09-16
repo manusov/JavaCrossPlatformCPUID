@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Kernel part: 
 Platform Abstraction Layer for communications with native objects.
 TODO: REMOVE CYCLE AND MAKE DELETE DLL AFTER APPLICATION EXIT ?

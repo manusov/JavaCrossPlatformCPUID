@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 System Tree Builder for Left Panel.
 Create tree of sub-applications:
 cpuid, cpuclk, cpucontext, jvminfo, jvmenvironment.

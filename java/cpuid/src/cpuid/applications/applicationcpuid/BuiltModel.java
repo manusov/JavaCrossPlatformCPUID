@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 MVC "Model" module for ApplicationCpuid,
 note MVC is Model, View, Controller paradigm.
 Application: CPUID info.

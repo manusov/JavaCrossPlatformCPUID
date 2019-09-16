@@ -1,4 +1,18 @@
 
+CPUID v0.76 (September, 16, 2019)
+Add and modify java classes for CPUID functions:
+1) Function=00000010h , Intel Resource Director Technology (RDT).
+2) Function=0000001Bh , PCONFIG instruction.
+3) Function=0000001Fh , Advanced topology enumeration.
+Technological update, this functions yet locked, under debug.
+Data source:
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-037.pdf
+MAY 2019.
+
+
 CPUID v0.75 (September, 14, 2019)
 CPUID function=7, subfunction=0, register=edx, bit=8 = AVX512_VP2INTERSECT.
 CPUID function=7, subfunction=0, register=ecx, bit=29 = ENQCMD.

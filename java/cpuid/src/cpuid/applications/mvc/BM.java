@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Interface for BuiltModel module.
 Declares public methods:
 get platform abstraction layer and get data model(s) for GUI component(s).

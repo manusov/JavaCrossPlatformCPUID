@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Driver: get and interpreting CPU Clock data.
 Note, Time Clock Counter (TSC) frequency measured by native libraries.
 */

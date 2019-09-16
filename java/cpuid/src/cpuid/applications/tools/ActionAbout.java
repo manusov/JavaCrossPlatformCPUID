@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Return window for "About" user interface object.
 This class methods imports some parameters from title class About.java.
 This class contains web site access method.

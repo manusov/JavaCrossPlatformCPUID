@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Kernel part:
 Input-Output Parameters Blocks (IOPB) support, data conversion methods
 between QWORD array and BYTE array, between QWORD array and STRING.

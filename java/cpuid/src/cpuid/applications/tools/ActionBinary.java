@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 User interface dialogue window and target operation execution
 for SAVE BINARY, LOAD BINARY operations.
 */
@@ -127,9 +127,9 @@ private static int loadBinary
           reader.read ( fileData, 0, availableBytes );
         } catch(IOException ex) { status=1; } 
     if (status==0) {  // this executed if loaded OK
-                   int opbPart = availableBytes / 8;
+                   int opbPart = availableBytes / 8;  // div by 8 means LONG
                    IOPB.transmitBytes(fileData, opbData, 4, opbPart );
-                   opbData[0] = opbPart / 4;
+                   opbData[0] = opbPart / 4;  // div by 4, units 32 bytes entry
                    opbData[1] = 0;
                    opbData[2] = 0;
                    opbData[3] = 0;

@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Root menu, variant #2, full-functional with left tree menu.
 This root menu variant unused at CPUID v0.52. Debug purpose.
 */

@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Root menu, variant #3, full-functional with left tree menu and root menu,
 Add new functions as root menu items:
 File:   Report entire system, Exit.

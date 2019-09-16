@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Interface adapter for CPR model "Command" submodel.
 Implements stubs for CPR.Command interface,
 all methods can accept device state binary array.

@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Built View Adapter. Include unified listeners.
 Implements public methods:
 get GUI sub-application panel with GUI components,

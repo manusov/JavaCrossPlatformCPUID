@@ -26,8 +26,13 @@ private String[] functionsShortNames;     // Short names for tabs
 private int[] functionsCodes;             // CPUID function codes (EAX)
 
 // Number of Standard, Virtual, Extended recognized functions
-private final static int NS=0x17, NV=0x1, NE=0x21;  // For different types
-private final static int NSUM = NS+NV+NE;           // Total recognized
+/*
+// debug value, patch 1 of 2:
+private final static int NS = 0x20, NV = 0x1, NE = 0x21;  // For different types
+// old value:            NS = 0x17
+*/
+private final static int NS = 0x17, NV = 0x1, NE = 0x21;  // For different types
+private final static int NSUM = NS + NV + NE;             // Total recognized
 
 private final static Object[] CPUID_FUNCTIONS =     // List of recognized
     {
@@ -54,6 +59,17 @@ private final static Object[] CPUID_FUNCTIONS =     // List of recognized
     new CPUID00000014() ,
     new CPUID00000015() ,
     new CPUID00000016() ,
+/*    
+    new CPUID00000017() ,  // connect experimental debug, patch 2 of 2
+    new CPUID00000018() ,
+    new CPUID00000019() ,
+    new CPUID0000001A() ,
+    new CPUID0000001B() ,
+    new CPUID0000001C() ,
+    new CPUID0000001D() ,
+    new CPUID0000001E() ,
+    new CPUID0000001F() ,  // connect experimental debug
+*/    
     new CPUID40000000() ,  // first virtual function = 40000000h
     new CPUID80000000() ,  // first extended function = 80000000h
     new CPUID80000001() ,

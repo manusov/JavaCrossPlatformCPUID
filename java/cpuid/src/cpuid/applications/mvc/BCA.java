@@ -1,4 +1,4 @@
-/*---------- CPUID Utility. (C)2018 IC Book Labs -------------------------------
+/*---------- CPUID Utility. (C)2019 IC Book Labs -------------------------------
 Built Controller Adapter.
 Implements public methods: 
 get GUI object(s) data model(s) and get GUI object(s) view components.
