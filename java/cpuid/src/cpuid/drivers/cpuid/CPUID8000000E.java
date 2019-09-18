@@ -5,28 +5,4 @@ CPUID extended function 8000000Eh declared as CPR.COMMAND.
 
 package cpuid.drivers.cpuid;
 
-import cpuid.drivers.cpr.CommandAdapter;
-
-public class CPUID8000000E extends CommandAdapter
-{
-// CPUID function full name
-private static final String F_NAME =
-    "Reserved";
-
-// Return CPUID this function full name
-// INPUT:   Reserved array
-// OUTPUT:  String, CPUID function full name
-@Override public String getCommandLongName(long[] dummy ) 
-    { return F_NAME; }
-    
-// Build and return CPUID this function detail information table
-// INPUT:   Binary array = CPUID dump data
-// OUTPUT:  Array of strings = CPUID this function detail information table
-@Override public String[][] getCommandText1( long[] array )
-    {
-    String[][] result = new String[1][2];
-    result[0][0] = "This function reserved";
-    result[0][1] = "n/a";
-    return result;
-    }
-}
+public class CPUID8000000E extends CPUIDreserved { }

@@ -29,7 +29,7 @@ private static final String[] CONTEXT_NAMES =
         "AVX 512-bit predicates, K[0-7] registers" ,
         "AVX 512-bit, ZMM[0-15] registers" ,
         "AVX 512-bit, ZMM[16-31] registers" ,
-        "Reserved" ,
+        "Reserved" ,  // bit 8
         "PKRU, protection key state" ,
         "Reserved" ,
         "Reserved" ,

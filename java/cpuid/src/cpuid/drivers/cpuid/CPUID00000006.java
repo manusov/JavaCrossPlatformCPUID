@@ -135,7 +135,8 @@ private final static int NY  = NY1+NY2+NY3+NY4;
     y = (int) ( array[x+3] & (((long)((long)(-1)>>>32))) );          // y = ECX
     z = CPUID.decodeBitfields ( "ECX" , DECODER_ECX , y , result , p );
     for ( int i=0; i<z.length; i++ ) 
-        { result[p+i][4] = String.format("%d", z[i]); }
+    //  { result[p+i][4] = String.format("%d", z[i]); }
+        { result[p+i][4] = ( z[i] != 0 ) ? "supported" : "not supported"; }
     
     // Parameters from CPUID dump, EDX register
     p = NY1+NY2+NY3;

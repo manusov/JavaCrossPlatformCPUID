@@ -1,4 +1,11 @@
 
+CPUID v0.78 (September, 18, 2019)
+1) Internal changes, support reserved CPUID functions
+as child classes of parent class.
+2) Update function 00000006h.
+3) Update function 0000000Dh.
+
+
 CPUID v0.77 (September, 16, 2019)
 Add new bits and bitfields for CPUID functions:
 00000006h, 00000007h, 00000015h.

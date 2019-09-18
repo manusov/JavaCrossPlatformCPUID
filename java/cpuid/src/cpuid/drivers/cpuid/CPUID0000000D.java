@@ -32,6 +32,10 @@ private final static String[] CONTEXT_PARMS =
     "AVX512 ZMM16..31[511:0] state" ,
     "IA32_XSS control" ,
     "PKRU control" ,
+    "Reserved" ,
+    "Reserved" ,
+    "Reserved" ,
+    "IA32_XSS"
     };
 private final static String[] ENABLED_BYTES =
     { "Maximum size for XSAVE/XRSTOR area, enabled features" };
@@ -57,7 +61,7 @@ private final static String[] BASE_SIZE =
 
 // Calculate control data total size for output formatting
 private final static int NX  = 2;
-private final static int NY1 = CONTEXT_PARMS.length;
+private final static int NY1 = CONTEXT_PARMS.length + 1;
 private final static int NY2 = ENABLED_BYTES.length;
 private final static int NY3 = SUPPORTED_BYTES.length;
 private final static int NY4 = XCR_BITS.length + 1;
@@ -67,6 +71,8 @@ private final static int NY7 = XSS_LOW.length;
 private final static int NY8 = XSS_HIGH.length + 1;
 private final static int NY9 = 3; // max. 64;
 private final static int NY  = NY1+NY2+NY3+NY4+NY5+NY6+NY7+NY8+NY9;
+
+private final static int NC1 = CONTEXT_PARMS.length;
 
 // Return CPUID this function full name
 // INPUT:   Reserved array
@@ -99,7 +105,7 @@ private final static int NY  = NY1+NY2+NY3+NY4+NY5+NY6+NY7+NY8+NY9;
     String s;
     int p=0, mask=1;  // p = strings store pointer, mask = bitmask for test
     int x = (int) ( array[ pointer+2 ] & (((long)((long)(-1)>>>32))) );  // EAX
-    for( int i=0; i<NY1; i++ )
+    for( int i=0; i<NC1; i++ )
         {
         if ( (x&mask)!=0 ) { s="1"; } else { s="0"; }
         result[p][0] = CONTEXT_PARMS[i];
