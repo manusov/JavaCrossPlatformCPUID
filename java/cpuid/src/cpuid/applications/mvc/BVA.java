@@ -6,6 +6,10 @@ get x-size, get y-size of GUI object
 Note, constructor implemented at child class, for flexibility.
 */
 
+/*
+This class required optimization, can remove dataBackup secondary array usage.
+*/
+
 package cpuid.applications.mvc;
 
 import cpuid.About;
@@ -87,10 +91,23 @@ public class BLoadBinary implements ActionListener       // LOAD BINARY
         // load data
         ActionBinary fileBinary = new ActionBinary();
         long[] data = bm.getModel().getBinary();
+        
         int size = data.length;
-        for( int i=0; i<size; i++ ) { data[i] = 0; }
+        long[] dataBackup = new long[size];
+        for( int i=0; i<size; i++ ) 
+            {
+            dataBackup[i] = data[i];
+            data[i] = 0; 
+            }
+        
         boolean loaded = fileBinary.createDialogLB( null, data );
-        if ( loaded==false ) { return; }
+        
+        if ( loaded==false ) 
+            { 
+            System.arraycopy( dataBackup, 0, data, 0, size );
+            return; 
+            }
+        
         bm.getModel().setBinary(data);
         // revisual data
         if (t!=null)

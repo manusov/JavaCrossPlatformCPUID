@@ -42,7 +42,7 @@ private final static Object[][] DECODER_EBX0 =
 private final static Object[][] DECODER_EDX0 =
     {
         { "Enclave non-64 bit mode size length bits" ,  7 , 0 } , 
-        { "Enclave 64-bit mode size length bits"     , 15 , 0 } 
+        { "Enclave 64-bit mode size length bits"     , 15 , 8 } 
     };
 
 private final static Object[][] DECODER_EAX1 =
