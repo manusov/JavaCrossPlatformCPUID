@@ -1,5 +1,9 @@
 
-CPUID v0.79 (September, 20, 2019)
+CPUID v0.81 (September, 20, 2019)
+Update method for write Region size = F ( Address width ).
+
+
+CPUID v0.80 (September, 20, 2019)
 Update CPUID function 00000012h.
 
 
