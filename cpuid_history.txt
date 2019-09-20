@@ -1,4 +1,8 @@
 
+CPUID v0.79 (September, 20, 2019)
+Update CPUID function 00000012h.
+
+
 CPUID v0.79 (September, 19, 2019)
 1) Bug fix: 
 if LOAD BINARY function used but cancelled without load file, 

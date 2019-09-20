@@ -129,9 +129,9 @@ private final static int NY  = NY1+NY2+NY3+NY4;
     int p=0;  // pointer for sequentally store strings in the table
     int y = (int) ( array[x+2] & (((long)((long)(-1)>>>32))) );      // y = EAX
     int[] z = CPUID.decodeBitfields ( "EAX" , DECODER_EAX , y , result , p );
-    writeSize( z, 0, result, p );
-    writeSize( z, 1, result, p+1 );
-    writeSize( z, 2, result, p+2 );
+    CPUID.writeSize( z, 0, result, p );
+    CPUID.writeSize( z, 1, result, p+1 );
+    CPUID.writeSize( z, 2, result, p+2 );
     // Parameters from CPUID dump, EBX register
     p=NY1;
     y = (int) ( array[x+2] >>> 32 );                                 // y = EBX
@@ -160,24 +160,4 @@ private final static int NY  = NY1+NY2+NY3+NY4;
     // Result is ready, all strings filled
     return result;
     }
-
-// Helper method,write address width and space size, string=F(number)
-// INPUT:   z = source array of widths
-//          i = index in the source array of widths
-//          result = destination strings array
-//          p = index in the destination array of strings
-// OUTPUT:  none (void)
-private static void writeSize( int[] z , int i, String[][] result, int p )
-    {
-    String s="";            // s = scratch string
-    int z1 = z[i];          // z1 = address width in bits
-    int z2 = 1 << (z1-30);  // z2 = space size in gigabytes
-    int z3 = 1 << (z1-40);  // z3 = space size in terabytes
-    if (z1==0) s = "n/a";                      // width=0 means not supported
-    if ((z1>0)&&(z1<30)) { s = "Invalid"; }    // width<30 means invalid
-    if ((z1>=30)&&(z1<40)) { s = z1 + "-bit, " + z2 + " GB space"; }
-    if (z1>=40) { s = z1 + "-bit, " + z3 + " TB space"; }
-    result[p][4] = s;  // write generated string into destination array
-    }
-
 }

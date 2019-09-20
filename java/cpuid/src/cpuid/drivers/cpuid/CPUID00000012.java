@@ -29,11 +29,11 @@ private final static String[][] DECODER_EAX0 =
     {
         { "SGX1" , "SGX1 instruction set" } , 
         { "SGX2" , "SGX2 instruction set" } ,
+        { "x"      , "Reserved" } ,   // bit 2
         { "x"      , "Reserved" } , 
-        { "x"      , "Reserved" } , 
-        { "x"      , "Reserved" } , 
-        { "ENCLV"  , " " } , 
-        { "ETRACK" , " " }
+        { "x"      , "Reserved" } ,   // bit 4
+        { "ENCLV"  , "ENCLV instruction leaves" } , 
+        { "ENCLS"  , "ENCLS instruction leaves" }
     };
 private final static Object[][] DECODER_EBX0 =
     {
@@ -41,8 +41,8 @@ private final static Object[][] DECODER_EBX0 =
     };
 private final static Object[][] DECODER_EDX0 =
     {
-        { "Enclave non-64 bit mode size length bits" ,  7 , 0 } , 
-        { "Enclave 64-bit mode size length bits"     , 15 , 8 } 
+        { "Enclave size bits count in non-64 bit mode" ,  7 , 0 } , 
+        { "Enclave size bits count in 64-bit mode"     , 15 , 8 } 
     };
 
 private final static Object[][] DECODER_EAX1 =
@@ -83,8 +83,8 @@ private final static Object[][] DECODER_EDX2 =
 
 // Calculate control data total size for output formatting
 private final static int NX   = COMMAND_UP_1.length;
-private final static int NY1  = DECODER_EAX0.length + 0;
-private final static int NY2  = DECODER_EBX0.length + 0;
+private final static int NY1  = DECODER_EAX0.length + 1;
+private final static int NY2  = DECODER_EBX0.length + 1;
 private final static int NY3  = DECODER_EDX0.length + 1;
 private final static int NY4  = DECODER_EAX1.length + 0;
 private final static int NY5  = DECODER_EBX1.length + 0;
@@ -142,7 +142,11 @@ private final static int NY  = NY1+NY2+NY3+NY4+NY5+NY6+NY7+NY8+NY9+NY10+NY11;
     // Parameters from CPUID dump, EDX register
     p = NY1+NY2;
     y = (int) ( array[x1+3] >>> 32 );                                // y = EDX
-    CPUID.decodeBitfields ( "EDX" , DECODER_EDX0 , y , result , p );
+    int[] z = CPUID.decodeBitfields ( "EDX" , DECODER_EDX0 , y , result , p );
+    
+    // decode ranges sizes by address fields lengths
+    CPUID.writeSize( z, 0, result, p );
+    CPUID.writeSize( z, 1, result, p+1 );
     
     // Results of subfunction = 1
     // Parameters from CPUID dump, EAX register    

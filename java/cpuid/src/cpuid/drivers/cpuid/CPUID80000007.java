@@ -35,7 +35,7 @@ private final static Object[][] DECODER_EAX =
 private final static String[][] DECODER_EBX =
     {
         { "MCAOVR"   , "MCA overflow recovery" } ,
-        { "SUCCOR"   , "Software uncorrecteble error containment and recovery" } ,
+        { "SUCCOR"   , "Software uncorrectable error containment and recovery" } ,
         { "HWA"      , "Hardware assert MSR C001_10[DF...C0]h" } ,
         { "SCMCA"    , "Scalable MCA" } ,
         { "x"        , "Reserved" } 

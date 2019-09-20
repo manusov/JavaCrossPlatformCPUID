@@ -91,5 +91,24 @@ public static void decodeBitmap
         destination[i+offset][4] = s3;            // bit comment: not sup./sup.
         }
     }
+
+// Helper method,write address width and space size, string=F(number)
+// INPUT:   z = source array of widths
+//          i = index in the source array of widths
+//          result = destination strings array
+//          p = index in the destination array of strings
+// OUTPUT:  none (void)
+public static void writeSize( int[] z , int i, String[][] result, int p )
+    {
+    String s="";            // s = scratch string
+    int z1 = z[i];          // z1 = address width in bits
+    int z2 = 1 << (z1-30);  // z2 = space size in gigabytes
+    int z3 = 1 << (z1-40);  // z3 = space size in terabytes
+    if (z1==0) s = "n/a";                      // width=0 means not supported
+    if ((z1>0)&&(z1<30)) { s = "Invalid"; }    // width<30 means invalid
+    if ((z1>=30)&&(z1<40)) { s = z1 + "-bit, " + z2 + " GB space"; }
+    if (z1>=40) { s = z1 + "-bit, " + z3 + " TB space"; }
+    result[p][4] = s;  // write generated string into destination array
+    }
     
 }
