@@ -105,8 +105,8 @@ public static void writeSize( int[] z , int i, String[][] result, int p )
     int z2 = 1 << (z1-20);  // z2 = space size in megabytes
     int z3 = 1 << (z1-30);  // z3 = space size in gigabytes
     int z4 = 1 << (z1-40);  // z4 = space size in terabytes
-    if (z1==0) s = "n/a";                      // width=0 means not supported
-    if ((z1>0)&&(z1<20)) { s = "Invalid"; }    // width<30 means invalid
+    if (z1==0) s = "n/a";                      // width = 0 means not supported
+    if ((z1>0)&&(z1<20)) { s = "Invalid"; }    // width < 20 means invalid
     if ((z1>=20)&&(z1<30)) { s = z1 + "-bit, " + z2 + " MB space"; }
     if ((z1>=30)&&(z1<40)) { s = z1 + "-bit, " + z3 + " GB space"; }
     if (z1>=40) { s = z1 + "-bit, " + z4 + " TB space"; }

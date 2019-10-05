@@ -139,6 +139,7 @@ private final static int NC1 = CONTEXT_PARMS.length;
     // Parameters from CPUID dump, EAX register
     p = NY1+NY2+NY3+NY4;
     x = (int) ( array[ pointer+2 ] & (((long)((long)(-1)>>>32))) );  // x = EAX
+    mask=1;
     for( int i=0; i<NY5; i++ )
         {
         if ( (x&mask)!=0 ) { s="1"; } else { s="0"; }

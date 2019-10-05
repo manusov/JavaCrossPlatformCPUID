@@ -1,4 +1,13 @@
 
+CPUID v0.82 (October, 5, 2019)
+Bug fix for CPUID function 0000000Dh (context management),
+correct detect features:
+XSAVEOPT support,
+XSAVEC and compact XRSTOR form support,
+XGETBV function 1 support, 
+XSAVES/XRSTORS and IA32_XSS.
+
+
 CPUID v0.81 (September, 20, 2019)
 Update method for write Region size = F ( Address width ).
 
