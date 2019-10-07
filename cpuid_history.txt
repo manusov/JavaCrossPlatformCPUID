@@ -1,4 +1,14 @@
 
+CPUID v0.83 (October, 7, 2019)
+Add new AMD virtualization options feature bits:
+1) Function=8000000Ah, register=EDX, bit=17.  GMET = Guest mode execute trap extension.
+2) Function=8000001Fh, register=EAX, bit=16.  VTE = Virtual transparent encryption.
+Data source:
+AMD64 Architecture Programmer's Manual
+Volume 2: System Programming.
+Publication 24593. Rev 3.32. October 2019.
+
+
 CPUID v0.82 (October, 5, 2019)
 Bug fix for CPUID function 0000000Dh (context management),
 correct detect features:

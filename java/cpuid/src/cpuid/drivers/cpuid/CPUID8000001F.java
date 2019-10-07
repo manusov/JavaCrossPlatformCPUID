@@ -41,6 +41,8 @@ private final static String[][] DECODER_EAX =
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
+        { "x"      , "Reserved" } ,  // bit 15
+        { "VTE"    , "Virtual transparent encryption" } ,
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
@@ -48,9 +50,7 @@ private final static String[][] DECODER_EAX =
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
-        { "x"      , "Reserved" } ,
-        { "x"      , "Reserved" } ,
-        { "x"      , "Reserved" } ,
+        { "x"      , "Reserved" } ,  // bit 24
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,
         { "x"      , "Reserved" } ,

@@ -52,6 +52,21 @@ private final static String[][] DECODER_EDX =
         { "x"        , "Reserved" } ,  // bit 14 reserved
         { "VVMLS"    , "Virtualized VMLOAD and VMSAVE" } ,
         { "VGIF"     , "Virtualized global interrupt flag" } ,
+        { "GMET"     , "Guest mode execute trap extension" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,  // bit 24
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" } ,
+        { "x"        , "Reserved" }    // bit 31
     };
 
 // Calculate control data total size for output formatting
