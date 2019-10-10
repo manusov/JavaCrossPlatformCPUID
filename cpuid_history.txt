@@ -1,4 +1,8 @@
 
+October, 10, 2019.
+Add refactoring branch.
+
+
 CPUID v0.83 (October, 7, 2019)
 Add new AMD virtualization options feature bits:
 1) Function=8000000Ah, register=EDX, bit=17.  GMET = Guest mode execute trap extension.
