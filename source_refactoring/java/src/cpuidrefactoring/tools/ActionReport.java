@@ -22,7 +22,8 @@ public final class ActionReport
 private static final String FILE_NAME = "report.txt";
 private static final int MAXCOL_DEFAULT = 13;
 private static final int MAXCOL_LIMIT = 120;
-private final JFileChooser chooser = new JFileChooser();
+// chooser must be static to remember user-selected path
+private static final JFileChooser CHOOSER = new JFileChooser();
 private FileNameExtensionFilter filter;
     
 // Handler for "Report full" dialogue method, setup GUI
@@ -31,20 +32,20 @@ public void reportThisDialogue
       AbstractTableModel model1, AbstractTableModel model2,
       String longName , String vendorVersion )
     {
-    chooser.setDialogTitle( "Report this - select directory" );
+    CHOOSER.setDialogTitle( "Report this - select directory" );
     filter = new FileNameExtensionFilter ( "Text files" , "txt" );
-    chooser.setFileFilter(filter);
-    chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-    chooser.setSelectedFile( new File( FILE_NAME ) );
+    CHOOSER.setFileFilter( filter );
+    CHOOSER.setFileSelectionMode( JFileChooser.FILES_ONLY );
+    CHOOSER.setSelectedFile( new File( FILE_NAME ) );
     // (re)start dialogue
     boolean inDialogue = true;
     while( inDialogue )
         {
-        int select = chooser.showSaveDialog( parentWin );
+        int select = CHOOSER.showSaveDialog( parentWin );
         // save file
         if( select == JFileChooser.APPROVE_OPTION )
             {
-            String s1 = chooser.getSelectedFile().getPath();
+            String s1 = CHOOSER.getSelectedFile().getPath();
             int x0 = JOptionPane.YES_OPTION;
             // check file exist and warning message
             File file = new File( s1 );
@@ -88,20 +89,20 @@ public void reportFullDialogue
       AbstractTableModel[] models1, AbstractTableModel[] models2,
       String longName , String vendorVersion ) 
     {
-    chooser.setDialogTitle("Report full - select directory");
+    CHOOSER.setDialogTitle("Report full - select directory");
     filter = new FileNameExtensionFilter ( "Text files" , "txt" );
-    chooser.setFileFilter( filter );
-    chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-    chooser.setSelectedFile( new File( FILE_NAME ));
+    CHOOSER.setFileFilter( filter );
+    CHOOSER.setFileSelectionMode( JFileChooser.FILES_ONLY );
+    CHOOSER.setSelectedFile( new File( FILE_NAME ));
     // (re)start dialogue
     boolean inDialogue = true;
     while( inDialogue )
         {
-        int select = chooser.showSaveDialog( parentWin );
+        int select = CHOOSER.showSaveDialog( parentWin );
         // save file
         if( select == JFileChooser.APPROVE_OPTION )
             {
-            String s1 = chooser.getSelectedFile().getPath();
+            String s1 = CHOOSER.getSelectedFile().getPath();
             int x0 = JOptionPane.YES_OPTION;
             // check file exist and warning message
             File file = new File(s1);
@@ -264,5 +265,4 @@ private void saveReport( JFrame parentWin, String filePath, String fileData )
               JOptionPane.ERROR_MESSAGE);
         }
     }
-    
 }

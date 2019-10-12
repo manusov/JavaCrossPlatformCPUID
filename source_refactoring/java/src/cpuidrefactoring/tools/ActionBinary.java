@@ -21,21 +21,22 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public final class ActionBinary 
 {
 private static final String FILE_NAME = "cpuid.bin";
-private final JFileChooser chooser = new JFileChooser();
+// chooser must be static to remember user-selected path
+private static final JFileChooser CHOOSER = new JFileChooser();
 private FileNameExtensionFilter filter;
 
 public boolean loadBinaryDialogue( JFrame parentWin, long[] opb ) 
     {
     boolean loaded = false;
-    chooser.setDialogTitle( "Load binary - select file" );
+    CHOOSER.setDialogTitle( "Load binary - select file" );
     filter = new FileNameExtensionFilter( "Binary dump file", "bin" );
-    chooser.setFileFilter( filter );
-    chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-    chooser.setSelectedFile( new File(FILE_NAME) );
-    int select = chooser.showOpenDialog( parentWin );
+    CHOOSER.setFileFilter( filter );
+    CHOOSER.setFileSelectionMode( JFileChooser.FILES_ONLY );
+    CHOOSER.setSelectedFile( new File(FILE_NAME) );
+    int select = CHOOSER.showOpenDialog( parentWin );
     if(select==JFileChooser.APPROVE_OPTION)
         {
-        String s1 = chooser.getSelectedFile().getPath();
+        String s1 = CHOOSER.getSelectedFile().getPath();
         int status = loadBinary( parentWin, s1, opb );
         if ( status == 0 ) { loaded = true; }
         }
@@ -44,20 +45,20 @@ public boolean loadBinaryDialogue( JFrame parentWin, long[] opb )
 
 public void saveBinaryDialogue( JFrame parentWin, long[] opb )
     {
-    chooser.setDialogTitle( "Save binary - select directory" );
+    CHOOSER.setDialogTitle( "Save binary - select directory" );
     filter = new FileNameExtensionFilter ( "Binary files" , "bin" );
-    chooser.setFileFilter( filter );
-    chooser.setFileSelectionMode( JFileChooser.FILES_ONLY );
-    chooser.setSelectedFile( new File(FILE_NAME) );
+    CHOOSER.setFileFilter( filter );
+    CHOOSER.setFileSelectionMode( JFileChooser.FILES_ONLY );
+    CHOOSER.setSelectedFile( new File(FILE_NAME) );
     // (re)start dialogue
     boolean inDialogue = true;
     while(inDialogue)
         {
-        int select = chooser.showSaveDialog(parentWin);
+        int select = CHOOSER.showSaveDialog(parentWin);
         // save file
         if( select == JFileChooser.APPROVE_OPTION )
             {
-            String s1 = chooser.getSelectedFile().getPath();
+            String s1 = CHOOSER.getSelectedFile().getPath();
             int x0 = JOptionPane.YES_OPTION;
             // check file exist and warning message
             File file = new File(s1);
@@ -171,5 +172,4 @@ private int loadBinary( JFrame parentWin, String filePath, long[] opbData )
         }
     return status;
     }
-
 }
