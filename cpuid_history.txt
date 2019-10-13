@@ -1,4 +1,8 @@
 
+CPUID v1.00.01 (October, 13, 2019)
+Java code refactoring and optimization, internal changes.
+
+
 October, 10, 2019.
 Add refactoring branch.
 
