@@ -1,4 +1,9 @@
 
+CPUID v1.00.02 (October, 27, 2019)
+Java code refactoring and optimization, internal changes.
+Report generation optimized by StringBuilder class.
+
+
 CPUID v1.00.01 (October, 13, 2019)
 Java code refactoring and optimization, internal changes.
 

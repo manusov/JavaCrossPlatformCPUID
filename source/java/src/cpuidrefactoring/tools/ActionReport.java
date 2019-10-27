@@ -74,7 +74,11 @@ public void reportThisDialogue
             // make and save report
             if ( model1 != null ) { s3 = tableReport( model1 ); }
             if ( model2 != null ) { s4 = tableReport( model2 ); }
-            saveReport( parentWin, s1, s2 + s3 + "\r\n" + s4 );
+            StringBuilder sb = new StringBuilder( s2 );
+            sb.append( s3 );
+            sb.append( "\r\n" );
+            sb.append( s4 );
+            saveReport( parentWin, s1, sb.toString() );
             inDialogue = false;
             }  
         else
@@ -89,7 +93,7 @@ public void reportFullDialogue
       AbstractTableModel[] models1, AbstractTableModel[] models2,
       String longName , String vendorVersion ) 
     {
-    CHOOSER.setDialogTitle("Report full - select directory");
+    CHOOSER.setDialogTitle( "Report full - select directory" );
     filter = new FileNameExtensionFilter ( "Text files" , "txt" );
     CHOOSER.setFileFilter( filter );
     CHOOSER.setFileSelectionMode( JFileChooser.FILES_ONLY );
@@ -127,24 +131,26 @@ public void reportFullDialogue
             // continue prepare for save file
             String s2 = "Report file.\r\n" +
                          longName + "\r\n" + vendorVersion + "\r\n\r\n";
-            String s3 = "";
+            StringBuilder sb3 = new StringBuilder ( "" );
             // make and save report
             if ( models1 != null )
                 {
                 int n = models1.length;
-                for (int i=0; i<n; i++)
+                for ( int i=0; i<n; i++ )
                     {
                     if ( models1[i] != null )
                         { 
-                        s3 = s3 + tableReport( models1[i]) + "\r\n"; 
+                        sb3.append( tableReport( models1[i] ) ); 
+                        sb3.append( "\r\n" );
                         }
                     if ( ( models2 != null ) && ( models2[i] != null ) )
                         {
-                        s3 = s3 + tableReport( models2[i]) + "\r\n"; 
+                        sb3.append( tableReport( models2[i] ) );
+                        sb3.append( "\r\n" );
                         }
                     }
                 }
-            saveReport( parentWin, s1, s2 + s3 );
+            saveReport( parentWin, s1, s2 + sb3.toString() );
             inDialogue = false;
             }
         else
@@ -161,8 +167,8 @@ public void reportFullDialogue
 // OUTPUT:  string
 private String tableReport ( AbstractTableModel atm ) 
     {
-    String report="";
-    if ( atm == null ) { return report; }
+    StringBuilder report = new StringBuilder( "" );
+    if ( atm == null ) { return report.toString(); }
     // Continue if table exist,get geometry
     int m = atm.getColumnCount();
     int n = atm.getRowCount();
@@ -188,30 +194,31 @@ private String tableReport ( AbstractTableModel atm )
     for (int i=0; i<m; i++)
         {
         s = atm.getColumnName(i);
-        report = report + " " + s;
+        report.append( " " );
+        report.append( s );
         a = maxcols[i] - s.length() + 1;
-        for ( int k=0; k<a; k++ ) { report = report + " "; }
+        for ( int k=0; k<a; k++ ) { report.append( " " ); }
         }
     // Write horizontal line        
-    report = report + "\r\n";
-    for ( int i=0; i<maxcol; i++ ) { report = report + "-"; }
-    report = report + "\r\n";
+    report.append( "\r\n" );
+    for ( int i=0; i<maxcol; i++ ) { report.append( "-" ); }
+    report.append( "\r\n" );
     // Write table content    
     for (int j=0; j<n; j++)       // this cycle for rows , n = rows count
         {
         for (int i=0; i<m; i++)   // this cycle for columns , m = columns count
             {
             s = getShortString( atm, j, i );
-            report = report + s;
+            report.append( s );
             a = maxcols[i] - s.length() + 2;
-            for (int k=0; k<a; k++) { report = report + " "; }
+            for ( int k=0; k<a; k++ ) { report.append( " " ); }
             }
-            report = report + "\r\n";    
+            report.append( "\r\n" );    
         }
     // Write horizontal line and return
-    for (int i=0; i<maxcol; i++) { report = report + "-"; }
-    report = report + "\r\n";
-    return report; 
+    for ( int i=0; i<maxcol; i++ ) { report.append( "-" ); }
+    report.append( "\r\n" );
+    return report.toString(); 
     }
 
 /*
@@ -223,14 +230,16 @@ OUTPUT:  string, size limited
 */
 private String getShortString ( AbstractTableModel model, int j, int i )
     {
-    String s1 = " " + (String)model.getValueAt( j, i );
-    String s2 = s1;
+    StringBuilder sb1 = new StringBuilder( " " );
+    sb1.append( (String)model.getValueAt( j, i ) );
+    StringBuilder sb2 = sb1;
     int n = MAXCOL_LIMIT;
-    if ( s1.length() > n ) 
+    if ( sb1.length() > n ) 
         {
-        s2 = s1.substring( 0, n-2 ) + "...";
+        sb2.append( sb1.substring( 0, n-2 ) );
+        sb2.append( "..." );
         }
-    return s2;
+    return sb2.toString();
     }
 
 /*
