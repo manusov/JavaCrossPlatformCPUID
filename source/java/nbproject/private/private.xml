@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/3-java/project_cpuid/ACTIVE/java/src/cpuidrefactoring/About.java</file>
             <file>file:/C:/3-java/project_cpuid/ACTIVE/java/src/cpuidrefactoring/tools/ActionReport.java</file>
+            <file>file:/C:/3-java/project_cpuid/ACTIVE/java/src/cpuidrefactoring/devicecpuid/Cpuid8000000A.java</file>
             <file>file:/C:/3-java/project_cpuid/ACTIVE/java/src/cpuidrefactoring/CpuidRefactoring.java</file>
         </group>
     </open-files>

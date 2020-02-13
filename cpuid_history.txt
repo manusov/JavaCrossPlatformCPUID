@@ -1,4 +1,16 @@
 
+CPUID v1.00.03 (February, 13, 2020)
+Add new bit:
+Function=8000000Ah, register=EDX, bit=20. Guest Spec_ctl.
+Data sources:
+1) Preliminary Processor Programming Reference (PPR)
+for AMD Family 17h Model 31h Revision B0 Processors
+55803 Rev 0.54 - Sep 12, 2019.
+2) White Paper. 
+AMD64 Technology Indirect Branch Control Extension.
+Revision 7.10.18.
+
+
 CPUID v1.00.02 (October, 27, 2019)
 Java code refactoring and optimization, internal changes.
 Report generation optimized by StringBuilder class.

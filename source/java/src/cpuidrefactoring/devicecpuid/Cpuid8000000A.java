@@ -44,7 +44,7 @@ private final static String[][] DECODER_EDX =
       { "GMET"     , "Guest mode execute trap extension" } ,  // bit 17
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
+      { "SPEC CTL" , "Guest Spec Ctl, hardware handled MSR update" } , // bit 20
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
