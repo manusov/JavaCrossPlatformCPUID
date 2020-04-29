@@ -19,41 +19,42 @@ Cpuid8000001F()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "SME"    , "Secure Memory Encryption" } ,
-      { "SEV"    , "Secure Encrypted Virtualization" } ,
-      { "PGFMSR" , "Page Flush MSR" } ,
-      { "SEV-ES" , "Encrypted State" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,  // bit 15
-      { "VTE"    , "Virtual Transparent Encryption" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,  // bit 24
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } ,
-      { "x"      , "Reserved" } };  // bit 31
+    { { "SME"     , "Secure Memory Encryption" } ,
+      { "SEV"     , "Secure Encrypted Virtualization" } ,
+      { "PGFMSR"  , "Page Flush MSR" } ,
+      { "SEV-ES"  , "Encrypted State" } ,
+      { "SEV-SNP" , "Secure Nested Paging" } ,
+      { "VMPL"    , "Virtual Machine Permission (Privilege) levels" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "HWCC ED" , "Hardware cache coherency across encryption domains" } ,
+      { "HOST 64" , "SEV guest execution only for 64-bit hosts" } ,
+      { "RES INJ" , "Restricted Injection" } ,
+      { "ALT INJ" , "Alternate Injection" } ,
+      { "DBG SW"  , "Debug state swap for SEV-ES guests" } ,
+      { "PHIBS"   , "Prevent Host Instruction Based Sampling" } ,  // bit 15
+      { "VTE"     , "Virtual Transparent Encryption" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,  // bit 24
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } ,
+      { "x"       , "Reserved" } };  // bit 31
 private final static Object[][] DECODER_EBX =
-    { { "Page table bit used to enable protection" ,   5 ,  0 } ,
-      { "Reduction of physical address space"      ,  11 ,  6 } };
+    { { "Page table bit used to enable protection"    ,   5 ,  0 } ,
+      { "Reduction of physical address space"         ,  11 ,  6 } ,
+      { "Number of Virtual Machine Permission Levels" ,  15 , 12 } };
 private final static Object[][] DECODER_ECX =
     { { "Number of encrypted guests supported simultaneously" ,  31 ,  0 } };
 private final static Object[][] DECODER_EDX =

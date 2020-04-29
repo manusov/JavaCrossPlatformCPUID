@@ -1,4 +1,104 @@
 
+CPUID v1.00.04 (April, 29, 2020)
+This version associated with big update of AMD public documents:
+update secure communication methods between Hypervisors and Guests,
+support SNP (Secure Nested Paging), plus AMD Secure Processor (AMD-SP) functionality.
+See below [1]-[6] documents reference.
+
+Add new 10 bits.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+8000000Ah   -        EDX    24       TLBICTL, TLB instructions control: INVLPGB, TLBSYNC instructions
+8000001Fh   -        EAX    15       PHIBS, PreventHostIbs, Disallowing IBS use by the host supported
+8000001Fh   -        EAX    14       DBG SW, DebugSwap, Full debug state swap supported for SEV-ES guests
+8000001Fh   -        EAX    13       ALT INJ, AlternateInjection, Alternate Injection supported
+8000001Fh   -        EAX    12       RES INJ, RestrictedInjection, restricted injection supported
+8000001Fh   -        EAX    11       HOST 64, 64BitHost, SEV guest execution only allowed from 64-bit host
+8000001Fh   -        EAX    10       HWCC ED, HwEnfCacheCoh, Hardware cache coherency across encryption domains enforced
+8000001Fh   -        EAX    5        VMPL, Virtual Machine Permission (Privilege, Priority) Levels
+8000001Fh   -        EAX    4        SEV-SNP,  Secure Nested Paging
+8000001Fh   -        EBX    15-12    NumVMPL, Number of VM Permission Levels supported
+---------------------------------------------------------------------------------------------------------------
+Some detalization, 
+[x] means data source, see below, enumerated [x].
+
+CPUID.8000000Ah.EDX.24 = TLBICTL, TLB instructions control: INVLPGB, TLBSYNC instructions
+This bit indicates support instructions:
+Bit position "TLBICTL" declared at [3].
+INVLPGB  (Invalidate TLB Entry(Entries) with Broadcast), instruction detail description at [3].
+TLBSYNC (Synchronize TLB Invalidations), instruction detail description at [3].
+
+CPUID.8000001Fh.EAX.15 = PreventHostIbs, Disallowing IBS use by the host supported
+Bit position "PreventHostIbs" declared at [3].
+Functional and used MSR description at [2].
+
+CPUID.8000001Fh.EAX.14 = DebugSwap, Full debug state swap supported for SEV-ES guests
+Bit position "DebugSwap" declared at [3].
+Functional and used MSR description at [2].
+
+CPUID.8000001Fh.EAX.13 = AlternateInjection, Alternate Injection supported
+Bit position "AlternateInjection" declared at [3].
+Small description at [2].
+
+CPUID.8000001Fh.EAX.12 = RestrictedInjection, restricted injection supported
+Bit position "RestrictedInjection" declared at [3].
+Small description at [2].
+
+CPUID.8000001Fh.EAX.11 = 64BitHost, SEV guest execution only allowed from 64-bit host
+Bit position "64BitHost" declared at [3].
+
+CPUID.8000001Fh.EAX.10 = HwEnfCacheCoh, Hardware cache coherency across encryption domains enforced
+Bit position "HwEnfCacheCoh" declared at [3].
+
+CPUID.8000001Fh.EAX.5 = VMPL, Virtual Machine Permission (Privilege) Levels
+Bit position "VMPL" declared at [3].
+Functional and used resources description at [2], [3].
+
+CPUID.8000001Fh.EAX.4 = SEV-SNP,  Secure Nested Paging
+Bit position "SEV-SNP" declared at [3].
+Functional, used resources and new SNP support instruction sub-set description at [2], [3].
+
+CPUID.8000001Fh.EBX.15-12 = NumVMPL, Number of VM Permission Levels supported
+Bit position "NumVMPL" declared at [3].
+Functional and used resources description of VMPL at [2], [3],
+this field associated with VMPL.
+
+---------------------------------------------------------------------------------------------------------------
+Data source and detail information at documents:
+
+[1] AMD64 Architecture Programmer's Manual 
+    Volume 1 Application Programming. 
+    Pub #24592 Rev 3.22 December 2017.
+
+[2] AMD64 Architecture Programmer's Manual 
+    Volume 2 System Programming. 
+    Pub #24593 Rev 3.33 April 2020.
+
+[3] AMD64 Architecture Programmer's Manual 
+    Volume 3. General Purpose and System Instuctions.
+    Pub #24594 Rev 3.30 April 2020.
+
+[4] AMD64 Architecture Programmer's Manual 
+    Volume 4. 128-Bit and 256-Bit Media Instructions.
+    Pub #26568 Rev 3.23 February 2019.
+
+[5] AMD64 Architecture Programmer's Manual 
+    Volume 5. 64-Bit Media and x87 Floating-Point
+    Instructions.
+    Pub #26569 Rev 3.15 May 2018.
+
+[6] AMD64 Architecture Programmer's Manual 
+    Volumes 1-5
+    (combined, all volumes 1-5 at one PDF)
+    Pub #40332 Rev 4.00 April 2020.
+
+https://developer.amd.com/resources/developer-guides-manuals/
+https://www.amd.com/en/support/tech-docs
+---------------------------------------------------------------------------------------------------------------
+
+
+
 CPUID v1.00.03 (February, 13, 2020)
 Add new bit:
 Function=8000000Ah, register=EDX, bit=20. Guest Spec_ctl.
