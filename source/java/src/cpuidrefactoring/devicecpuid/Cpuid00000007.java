@@ -100,10 +100,10 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "MD CLEAR"     , "CPU is not affected by microarch. data sampling (MDS)" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,               // bit 13
+      { "SERIALIZE"    , "SERIALIZE instruction" } ,  // bit 14
+      { "HYBRID"       , "Processor is identified as a hybrid part" } ,  // bit 15
+      { "TSXLDTRK"     , "XRESLDTRK and XSUSLDTRK instructions" } ,      // bit 16
       { "x"            , "Reserved" } ,
       { "PCONFIG"      , "PCONFIG for MK-TME" } ,  // bit 18
       { "x"            , "Reserved" } ,

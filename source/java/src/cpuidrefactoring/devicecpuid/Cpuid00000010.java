@@ -48,7 +48,7 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_3 =
     { { "[ DRAM QoS ]"
         + "  Maximum MBA throttling value for this ResID" , 11 , 0 } };
 private final static String[][] DECODER_ECX_SUBFUNCTION_3 =
-    { { "x"      , "Reserved" } , 
+    { { "PT MBA" , "Per thread Memory Bandwidth Allocation" } , 
       { "x"      , "Reserved" } , 
       { "UCOS"   , "Update of COS should be infrequent" } };
 private final static Object[][] 

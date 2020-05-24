@@ -1,3 +1,80 @@
+CPUID v1.00.05 (May, 24, 2020)
+This version associated with update of Intel public document:
+Architecture-instruction-set-extensions-programming-reference.PDF
+
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+Ref. #319433-038
+MARCH 2020.
+
+This PDF below referenced as [DOC].
+
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+
+Add new 7 bits and bitfields.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000007h    0       EDX    14       SERIALIZE instruction
+00000007h    0       EDX    15       HYBRID, the processor is identified as hybrid part
+00000007h    0       EDX    16       TSXLDTRK, the processor supports Intel TSX suspend load address tracking
+0000000Fh    1       EAX    [07-00]  RDT CNT: 00h=24bit counters, 01h=25bit counters, 25h=61bit counters
+0000000Fh    1       EAX    8        QM OVF: IA32_QM_CTR MSR bit 61 is overflow bit
+00000010h    3       ECX    0        PT MBA: Per-thread Memory Bandwidth Allocation controls supported
+0000001Ah    0       EAX    [31-24]  CORE TYPE: 10h=Reserved, 20h=Intel Atom, 30h=Reserved, 40h=Intel Core
+---------------------------------------------------------------------------------------------------------------
+
+Some details about each bit(bitfield):
+
+CPUID function=00000007h, subfunction=0, register=EDX, bit=14
+SERIALIZE instruction.
+This is alternative for legacy method (use CPUID for serialization),
+unlike CPUID, SERIALIZE not changes CPU registers.
+[DOC] page 2.14 (72).
+
+CPUID function=00000007h, subfunction=0, register=EDX, bit=15
+HYBRID, the processor is identified as hybrid part.
+Different cores can be mixed at CPU package?
+[DOC] page 1.33 (47).
+
+CPUID function=00000007h, subfunction=0, register=EDX, bit=16
+TSXLDTRK, the processor supports Intel TSX suspend load address tracking,
+instructions:
+XRESLDTRK - Resume Tracking Load Address.
+XSUSLDTRK - Suspend Tracking Load Address.
+[DOC] page 5.1 (93).
+
+CPUID function=0000000Fh, subfunction=1, register=EAX, bits=[07-00]
+RDT CNT: 00h=24bit counters, 01h=25bit counters, 25h=61bit counters.
+Width of bandwidth monitoring counters.
+[DOC] page 9.2 (130-131).
+
+CPUID function=0000000Fh, subfunction=1, register=EAX, bit=8
+QM OVF: IA32_QM_CTR MSR bit 61 is overflow bit.
+Width of bandwidth monitoring counters and bits interpretation.
+[DOC] page 9.2 (130-131).
+
+CPUID function=00000010h, subfunction=3, register=ECX, bit=0
+PT MBA: Per-thread MBA controls supported.
+Per-thread Memory Bandwidth Allocation control.
+[DOC] page 9.6 (134).
+
+CPUID function=0000001Ah, subfunction=0, register=EAX, bit=[31-24]
+CORE TYPE: 10h=Reserved, 20h=Intel Atom, 30h=Reserved, 40h=Intel Core
+Different cores can be mixed at CPU package?
+[DOC] page 1.33 (47).
+
+Plus, CPUID summary at [DOC] page 1.4-1.21 (18-35)
+
+See for more details:
+https://www.intel.com/content/www/us/en/design/resource-design-center.html
+https://software.intel.com/content/www/us/en/develop/download/intel-architecture-instruction-set-extensions-and-future-features-programming-reference.html?wapkw=instruction%20set%20extensions%20reference%20manual
+https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html?wapkw=instruction%20set%20extensions%20reference%20manual
+https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-optimization-reference-manual.html?wapkw=optimization%20reference%20manual
+---------------------------------------------------------------------------------------------------------------
+
 
 CPUID v1.00.04 (April, 29, 2020)
 This version associated with big update of AMD public documents:
@@ -39,11 +116,11 @@ Functional and used MSR description at [2].
 
 CPUID.8000001Fh.EAX.13 = AlternateInjection, Alternate Injection supported
 Bit position "AlternateInjection" declared at [3].
-Small description at [2].
+Description at [2].
 
 CPUID.8000001Fh.EAX.12 = RestrictedInjection, restricted injection supported
 Bit position "RestrictedInjection" declared at [3].
-Small description at [2].
+Description at [2].
 
 CPUID.8000001Fh.EAX.11 = 64BitHost, SEV guest execution only allowed from 64-bit host
 Bit position "64BitHost" declared at [3].

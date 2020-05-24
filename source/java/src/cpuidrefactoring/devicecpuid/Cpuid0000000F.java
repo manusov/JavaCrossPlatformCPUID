@@ -23,6 +23,9 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
 private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
     { { "x"      , "Reserved" } ,
       { "L3 QoS" , "L3 cache quality of service monitoring" } };
+private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
+    { { "Encode counter width in bits, offset from 24"    , 7 , 0 } ,
+      { "Bit 61 of IA32_QM_CTR MSR is overflow indicator" , 8 , 8 } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "Conversion factor from IA32_QM_CTR to metric" , 31 , 0 } };
 private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =
@@ -53,6 +56,25 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
             for( int i=1; i<entries.length; i++ )
                 {
                 a.add( interval );
+                // EAX, subfunction 1
+                dr = decodeBitfields
+                    ( "EAX", DECODER_EAX_SUBFUNCTION_1, entries[i].eax );
+                int n = dr.values[0] + 24;
+                if( ( entries[0].edx & 2 ) == 0 )
+                    {
+                    dr.strings.get(0)[4] = "n/a";
+                    }
+                else if( ( n == 24 )||( n == 25 )||( n == 61 ) )
+                    {
+                    dr.strings.get(0)[4] = String.format( "%d Bits", n );    
+                    }
+                else
+                    {
+                    dr.strings.get(0)[4] = "Unknown value";
+                    }
+                dr.strings.get(1)[4] = 
+                        ( dr.values[1] == 0 ) ? "not supported" : "supported";
+                a.addAll( dr.strings );
                 // EBX, subfunction 1
                 dr = decodeBitfields
                     ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[i].ebx );
