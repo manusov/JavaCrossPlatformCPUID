@@ -40,7 +40,10 @@ private final static Object[][] DECODER_EDX =
       { "Reserved"                                           , 31 , 26 } };
 // Additional data for parameters decode
 private final static String[] DECODER_TYPE =
-    { "Unknown" , "Data TLB" , "Instruction TLB" , "Unified TLB"  };
+    { "Unknown" , "Data TLB" , "Instruction TLB" , "Unified TLB" , 
+      "Load Only TLB" , "Store Only TLB"  };
+// Limit for detect invalid values
+private final static int NDT = DECODER_TYPE.length - 1;
 
 @Override String[][] getParametersList()
     {
@@ -61,7 +64,7 @@ private final static String[] DECODER_TYPE =
             dr = decodeBitfields( "EDX", DECODER_EDX, entries[i].edx );
             int j = dr.values[0];    // j = TLB type
             if ( j == 0 ) continue;  // skip if not valid entry
-            if ( j > 3 ) j = 0;
+            if ( j > NDT ) j = 0;
             dr.strings.get(0)[4] = DECODER_TYPE[j];
             dr.strings.get(1)[4] = "L" + dr.values[1];
             a.addAll( dr.strings );

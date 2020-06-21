@@ -85,7 +85,7 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
       { "MOVDIR64B"    , "Direct stores by MOVDIR64B instruction" } ,  // 28
       { "ENQCMD"       , "Enqueue stores by ENQCMD and ENQCMDS instructions" } ,
       { "SGX LC"       , "SGX launch configuration" } ,
-      { "x"            , "Reserved" } };   // bit 31 reserved
+      { "PKS"          , "Protection keys for supervisor-mode pages" } };   // bit 31
 private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
     { { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

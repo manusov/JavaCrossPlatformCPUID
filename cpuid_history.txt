@@ -1,5 +1,45 @@
+CPUID v1.00.06 (June, 21, 2020)
+This version associated with Intel public document update:
+252046-sdm-change-document.PDF
+below referenced as [DOC1].
+
+Intel 64 and IA-32 Architectures Software Developer's Manual
+Documentation Changes
+Ref# Document Number: #252046-064
+MAY 2020
+
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+
+Add new 2 bits and bitfields.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000007h    0       ECX    31       PKS. Supports protection keys for supervisor-mode pages if 1.
+00000018h    0       EDX    [4-0]    Translation cache type field, new values added:
+                                      00100b = Load Only TLB. Hit on loads, fills on both loads and stores
+                                      00101b = Store Only TLB. Hit on stores, fill on stores.
+---------------------------------------------------------------------------------------------------------------
+
+Some details about each bit(bitfield):
+
+CPUID function=00000007h, subfunction=0, register=ECX, bit=31
+PKS, Protection Keys for Supervisor-mode pages,
+[DOC1] pages 258, 527, 529, ... 1696.
+
+CPUID function=00000018h, subfunction=0, register=EDX, bits=[04-00]
+Add Load Only TLB and Store Only TLB types for 
+Deterministic Address Translation Parameters.
+00100b = Load Only TLB. Hit on loads, fills on both loads and stores
+00101b = Store Only TLB. Hit on stores, fill on stores.
+[DOC1] pages 268.
+
+See for more details:
+https://www.intel.com/content/www/us/en/design/resource-design-center.html
+
+
 CPUID v1.00.05 (May, 24, 2020)
-This version associated with update of Intel public document:
+This version associated with Intel public document update:
 Architecture-instruction-set-extensions-programming-reference.PDF
 
 Intel Architecture
