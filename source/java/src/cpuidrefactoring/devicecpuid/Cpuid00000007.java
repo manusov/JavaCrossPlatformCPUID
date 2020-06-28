@@ -108,11 +108,11 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "PCONFIG"      , "PCONFIG for MK-TME" } ,  // bit 18
       { "x"            , "Reserved" } ,
       { "CET IBT"      , "Control Flow Enforcement: Indirect Branch Tracking" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,            // bit 21
+      { "AMX BF16"     , "Advanced Matrix Extensions, operations on BFLOAT16 numbers" } ,
+      { "x"            , "Reserved" } ,            // bit 23
+      { "AMX TILE"     , "Advanced Matrix Extensions, supports Tile Architecture" } ,
+      { "AMX INT8"     , "Advanced Matrix Extensions, operations on INT8 numbers" } ,
       { "IBRS IBPB"    , "Indirect branch restricted speculation and predictor barrier" } ,  // bit 26
       { "STIBP"        , "Single thread indirect branch predictor" } ,  // bit 27
       { "L1D flush"    , "L1 Data Cache (L1D) flush" } ,

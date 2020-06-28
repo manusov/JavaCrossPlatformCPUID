@@ -1,3 +1,45 @@
+CPUID v1.00.07 (June, 28, 2020)
+This version associated with Intel public document update:
+architecture-instruction-set-extensions-programming-reference.PDF
+below referenced as [DOC2].
+
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+Ref# Document Number: #319433-040
+JUNE 2020
+
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+
+Add new 2 bits and bitfields.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000007h    0       EDX    22       AMX BF16. Tile computational operations on BFLOAT16 numbers.
+00000007h    0       EDX    23       Reserved.
+00000007h    0       EDX    24       AMX TILE. Advanced Matrix Extensions Tile architecture.
+00000007h    0       EDX    25       AMX INT8. Tile computational operations on 8-bit integer numbers.
+---------------------------------------------------------------------------------------------------------------
+
+Some details about each bit(bitfield):
+
+CPUID function=00000007h, subfunction=0, register=EDX, bit=22
+AMX BF16. Advanced Matrix Extensions. Tile computational operations on BFLOAT16 numbers.
+[DOC2] pages 24, 89, 105.
+
+CPUID function=00000007h, subfunction=0, register=EDX, bit=24
+AMX TILE. Advanced Matrix Extensions. Tile architecture.
+[DOC2] pages 24, 89, 100, 103, 109, 111, 113.
+
+CPUID function=00000007h, subfunction=0, register=EDX, bit=25
+AMX INT8. Advanced Matrix Extensions. Tile computational operations on 8-bit integer numbers.
+[DOC2] pages 24, 89, 107. 
+
+See for more details:
+https://software.intel.com/content/www/us/en/develop/download/intel-architecture-instruction-set-extensions-programming-reference.html
+
+
 CPUID v1.00.06 (June, 21, 2020)
 This version associated with Intel public document update:
 252046-sdm-change-document.PDF
