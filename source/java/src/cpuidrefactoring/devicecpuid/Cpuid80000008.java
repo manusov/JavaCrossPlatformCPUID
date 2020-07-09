@@ -36,17 +36,17 @@ private final static String[][] DECODER_EBX =
       { "x"         , "Reserved"                    } ,
       { "x"         , "Reserved"                    } ,
       { "IBPB"      , "Indirect branch prediction barrier" } ,       // bit 12
-      { "x"         , "Reserved"                    } ,
+      { "INT WBINV" , "Interruptible WBINVD, WBNOINVD instructions" } ,
       { "IBRS"      , "Indirect branch restricted speculation"   } , // bit 14
       { "STIBP"     , "Single thread indirect branch predictor"  } , // bit 15
       { "IBRS AON"  , "Indirect branch restricted speculation always on"  } ,
       { "STIBP AON" , "Single thread indirect branch predictor always on" } ,
       { "IBRS PREF" , "Indirect branch restricted speculation is preferred" } ,
-      { "x"         , "Reserved"                    } ,  // bit 19
+      { "IBRS SM"   , "IBRS provides same mode protection" } ,  // bit 19
       { "x"         , "Reserved"                    } ,
       { "x"         , "Reserved"                    } ,
       { "x"         , "Reserved"                    } ,
-      { "x"         , "Reserved"                    } ,
+      { "PPIN"      , "Protected processor inventory number" } ,
       { "SSBD"      , "Speculative Store Bypass Disable" } ,  // 24
       { "SSBD KL"   , "Speculative Store Bypass Disable, keep loads" } ,  // 25
       { "SSBD NO"   , "SSBD no longer need" } ,  // 26

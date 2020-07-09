@@ -1,3 +1,40 @@
+CPUID v1.00.08 (July, 09, 2020)
+This version associated with AMD public document update:
+
+Processor Programming Reference (PPR) for AMD
+Family 17h, Model 60h, Revision A1 Processors.
+#55922-A1 Rev 3.05 - Jul 7, 2020
+Document archive 55922-A1-PUB.zip
+
+Add new 3 bits.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+80000008h    -       EBX    13       INT WBINVD, interruptible WBINVD, WBNOINVD instructions operations.
+80000008h    -       EBX    19       IBRS SM, IBRS provides same mode protection.
+80000008h    -       EBX    23       PPIN, Protected Processor Inventory Number.
+---------------------------------------------------------------------------------------------------------------
+
+Some details about each bit, used pages for document in archive 55922-A1-PUB.zip:
+
+CPUID function=80000008h, no subfunctions, register=EBX, bit=13
+Interruptible WBINVD, WBNOINVD instructions operations,
+see pages 81, 145.
+
+CPUID function=80000008h, no subfunctions, register=EBX, bit=19
+IBRS provides same mode protection,
+see page 81, bit listed only without details.
+
+CPUID function=80000008h, no subfunctions, register=EBX, bit=23
+Protected Processor Inventory Number,
+see pages 81, 167.
+
+See for more details:
+https://www.amd.com/en/support/tech-docs
+https://developer.amd.com/resources/developer-guides-manuals/
+Document archive 55922-A1-PUB.zip
+
+
 CPUID v1.00.07 (June, 28, 2020)
 This version associated with Intel public document update:
 architecture-instruction-set-extensions-programming-reference.PDF
@@ -12,7 +49,7 @@ JUNE 2020
 CPUID function number = CPUID input EAX, 
 CPUID subfunction number = CPUID input ECX.
 
-Add new 2 bits and bitfields.
+Add new 4 bits and bitfields.
 ---------------------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------------------
