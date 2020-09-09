@@ -19,13 +19,14 @@ Cpuid00000012()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX_SUBFUNCTION_0 =
-    { { "SGX1" , "SGX1 instruction set" } , 
-      { "SGX2" , "SGX2 instruction set" } ,
-      { "x"      , "Reserved" } ,   // bit 2
-      { "x"      , "Reserved" } , 
-      { "x"      , "Reserved" } ,   // bit 4
-      { "ENCLV"  , "ENCLV instruction leaves" } , 
-      { "ENCLS"  , "ENCLS instruction leaves" } };
+    { { "SGX1"     , "SGX1 instruction set" } , 
+      { "SGX2"     , "SGX2 instruction set" } ,
+      { "x"        , "Reserved" } ,   // bit 2
+      { "x"        , "Reserved" } , 
+      { "x"        , "Reserved" } ,   // bit 4
+      { "ENCLV"    , "ENCLV instruction leaves" } , 
+      { "ENCLS"    , "ENCLS instruction leaves" } ,
+      { "ENCLU R2" , "EVERIFYREPORT2 leaf of ENCLU instruction" } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "MISCSELECT extended features bit vector" , 31 , 0 } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_0 =

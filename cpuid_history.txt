@@ -1,3 +1,18 @@
+CPUID v1.01.01 (September, 09, 2020)
+Support advanced features listed at document:
+intel-tdx-cpu-architectural-specification.PDF.
+
+Intel Trust Domain CPU Architectural Extensions
+#343754-001US
+SEPTEMBER 2020
+
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000012h    0       EAX     7       ENCLU R2, EVERIFYREPORT2 information leaf of ENCLU instruction.
+---------------------------------------------------------------------------------------------------------------
+
+
 CPUID v1.01.00 (September, 09, 2020)
 Support advanced features listed at document:
 architecture-instruction-set-extensions-programming-reference.PDF.
@@ -18,7 +33,7 @@ CPUID subfunction number = CPUID input ECX.
 ---------------------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------------------
-00000007h    0       EDX    19       ALBR, Architectural Last Branch Report registers.
+00000007h    0       EDX    19       ALBR, Architectural Last Branch Record registers.
 00000017h    0        *     *        System-On-Chip (SOC) Vendor Attribute Enumeration.
 00000017h    1-3      *     *        System-On-Chip (SOC) Vendor Brand String.
 00000017h    >3       *     *        Reserved.
