@@ -101,6 +101,6 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
             }
         }
     return a.isEmpty() ? 
-    super.getParametersList() : a.toArray( new String[a.size()][] );
+        super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 }

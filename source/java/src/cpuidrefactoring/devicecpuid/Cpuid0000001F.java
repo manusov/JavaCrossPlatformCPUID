@@ -45,7 +45,7 @@ private final static String[] SMT_PARMS =
             {
             int j = ( entries[i].ecx >> 8 ) & 0xFF;
             // Write fields with numeric parameters
-            if ( ( j >= 1 )|( j <= 5 ) )  // Detect known codes
+            if ( ( j >= 1 )&( j <= 5 ) )  // Detect known codes
                 {
                 s[0][j] = String.format( "%d" , entries[i].ebx & 0xFFFF );
                 s[1][j] = String.format( "%d" , entries[i].eax & 0x1F );

@@ -106,7 +106,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "TSXLDTRK"     , "XRESLDTRK and XSUSLDTRK instructions" } ,      // bit 16
       { "x"            , "Reserved" } ,
       { "PCONFIG"      , "PCONFIG for MK-TME" } ,  // bit 18
-      { "x"            , "Reserved" } ,
+      { "ARCH LBR"     , "Architectural Last Branch Records (LBRs)" } ,
       { "CET IBT"      , "Control Flow Enforcement: Indirect Branch Tracking" } ,
       { "x"            , "Reserved" } ,            // bit 21
       { "AMX BF16"     , "Advanced Matrix Extensions, operations on BFLOAT16 numbers" } ,

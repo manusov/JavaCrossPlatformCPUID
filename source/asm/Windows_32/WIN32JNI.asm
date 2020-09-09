@@ -3,7 +3,7 @@
 ;            JNI DLL (Java Native Interface Dynamical Load Library)            ;
 ; Note. Kernel Mode Support functions removed, see previous library versions.  ;
 ;                                                                              ;
-;                   Updated at CPUID v1.00.00 refactoring.                     ; 
+;                   Updated at CPUID v1.01.00 refactoring.                     ; 
 ;------------------------------------------------------------------------------;
 
 include 'win32a.inc'
@@ -159,9 +159,10 @@ mov [edi],eax
 ret
 
 ENTRIES_LIMIT = 511    ; Maximum number of output buffer 16352 bytes = 511*32
+
 ;---------- Target subroutine -------------------------------------------------;
 ; INPUT:  Parameter#1 = [esp+4] = Pointer to output buffer
-; OUTPUT: RAX = Number of output entries
+; OUTPUT: EAX = Number of output entries
 ;         Output buffer updated
 ;---
 ; Output buffer maximum size is 16352 bytes, 511 entries * 32 bytes
@@ -266,12 +267,14 @@ cmp eax,10h
 je Function10
 cmp eax,14h
 je Function14
-;- Locked for debug -
-; cmp eax,17h
-; je Function17
-; cmp eax,18h
-; je Function18
-;- End of locked for debug -
+cmp eax,17h
+je Function17
+cmp eax,18h
+je Function18
+cmp eax,1Dh
+je Function1D
+cmp eax,1Fh
+je Function1F
 cmp eax,8000001Dh
 je Function04
 cmp eax,80000020h
@@ -292,38 +295,6 @@ OverSubFunction:
 stc
 ret 
 
-;---------- Subroutine, one CPUID function execution --------------------------;
-; INPUT:  EAX = CPUID function number
-;         R9D = EAX (R8-R15 emulated in memory, because port from x64)
-;         ECX = CPUID subfunction number
-;         ESI = ECX
-;         RDI = Pointer to memory buffer
-; OUTPUT: RDI = Modified by store CPUID input parms + output parms entry
-;         Flags condition code: Above (A) = means entries count limit
-;------------------------------------------------------------------------------;
-StoreCpuId:
-cpuid
-StoreCpuId_Entry:     ; Entry point for CPUID results (EAX,EBX,ECX,EDX) ready 
-push eax
-xor eax,eax
-stosd                 ; Store tag dword[0] = Information type
-mov eax,temp_r9       ; r9d
-stosd                 ; Store argument dword [1] = CPUID function number 
-mov eax,esi
-stosd                 ; Store argument dword [2] = CPUID sub-function number
-xor eax,eax
-stosd                 ; Store argument dword [3] = CPUID pass number (see fn.2)
-pop eax
-stosd                 ; Store result dword [4] = output EAX 
-xchg eax,ebx
-stosd                 ; Store result dword [5] = output EBX
-xchg eax,ecx
-stosd                 ; Store result dword [6] = output ECX
-xchg eax,edx
-stosd                 ; Store result dword [7] = output EDX
-inc temp_ebp          ; ebp ; Global counter +1
-cmp temp_ebp,ENTRIES_LIMIT  ; ebp ; Limit for number of output entries
-ret
 ;---------- CPUID function 04h = Deterministic cache parameters ---------------;
 Function04:
 xor esi,esi           ; ESI = Storage for sub-function number
@@ -354,7 +325,9 @@ cmp esi,temp_r8       ; r8d
 jbe .L0               ; Go cycle if next sub-function exist
 jmp AfterSubFunction
 ;---------- CPUID function 0Bh = Extended topology enumeration ----------------;
+;---------- CPUID function 1Fh = V2 Extended topology enumeration -------------;
 Function0B:
+Function1F:
 xor esi,esi           ; ESI = Storage for sub-function number
 .L0:
 mov eax,temp_r9       ; r9d ; EAX = function number
@@ -388,8 +361,8 @@ cmp esi,63            ;
 jbe .L2               ; Go cycle if next sub-function exist
 jmp AfterSubFunction 
 ;---------- CPUID function 0Fh = Platform QoS monitoring enumeration ----------;
-Function0F:
 ;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
+Function0F:
 Function10:
 xor esi,esi           ; ESI = sub-function number for CPUID
 xor ecx,ecx           ; ECX = sub-function number for save entry 
@@ -404,8 +377,10 @@ ja OverSubFunction    ; Go if output buffer overflow
 jmp AfterSubFunction
 ;---------- CPUID function 14h = Intel Processor Trace Enumeration ------------;
 ;---------- CPUID function 17h = System-On-Chip Vendor Attribute Enumeration --;
+;---------- CPUID function 1Dh = Intel AMX Tile Information -------------------;
 Function14:
 Function17:
+Function1D:
 xor esi,esi           ; ESI = Storage for sub-function number
 mov ecx,esi
 mov eax,temp_r9       ; r9d ; EAX = function number (BUGGY DUPLICATED)
@@ -427,19 +402,54 @@ mov ecx,esi
 mov eax,temp_r9       ; r9d ; EAX = function number (BUGGY DUPLICATED)
 cpuid
 mov temp_r8,eax       ; r8d,eax ; R8D = Maximal sub-function number
+jmp .L2
 .L0:
 mov eax,temp_r9       ; r9d
 mov ecx,esi           ; ECX = Current sub-function number
 cpuid
 test dl,00011111b     ; Check TLB deterministic data validity
-jz @f                 ; Go skip if subfunction invalid, can be unordered
+jz .L1                ; Go skip if subfunction invalid, can be unordered
+.L2:
 call StoreCpuId_Entry
 ja OverSubFunction    ; Go if output buffer overflow
-@@:
+.L1:
 inc esi               ; Sunfunctions number +1
 cmp esi,temp_r8       ; r8d 
 jbe .L0               ; Go cycle if next sub-function exist
 jmp AfterSubFunction
+
+;---------- Subroutine, one CPUID function execution --------------------------;
+; INPUT:  EAX = CPUID function number
+;         R9D = EAX (R8-R15 emulated in memory, because port from x64)
+;         ECX = CPUID subfunction number
+;         ESI = ECX
+;         RDI = Pointer to memory buffer
+; OUTPUT: RDI = Modified by store CPUID input parms + output parms entry
+;         Flags condition code: Above (A) = means entries count limit
+;------------------------------------------------------------------------------;
+StoreCpuId:
+cpuid
+StoreCpuId_Entry:     ; Entry point for CPUID results (EAX,EBX,ECX,EDX) ready 
+push eax
+xor eax,eax
+stosd                 ; Store tag dword[0] = Information type
+mov eax,temp_r9       ; r9d
+stosd                 ; Store argument dword [1] = CPUID function number 
+mov eax,esi
+stosd                 ; Store argument dword [2] = CPUID sub-function number
+xor eax,eax
+stosd                 ; Store argument dword [3] = CPUID pass number (see fn.2)
+pop eax
+stosd                 ; Store result dword [4] = output EAX 
+xchg eax,ebx
+stosd                 ; Store result dword [5] = output EBX
+xchg eax,ecx
+stosd                 ; Store result dword [6] = output ECX
+xchg eax,edx
+stosd                 ; Store result dword [7] = output EDX
+inc temp_ebp          ; ebp ; Global counter +1
+cmp temp_ebp,ENTRIES_LIMIT  ; ebp ; Limit for number of output entries
+ret
 
 ;------------------------------------------------------------------------;
 ; Measure CPU Clock frequency by Time Stamp Counter (TSC)                ;

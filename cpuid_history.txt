@@ -1,3 +1,43 @@
+CPUID v1.01.00 (September, 09, 2020)
+Support advanced features listed at document:
+architecture-instruction-set-extensions-programming-reference.PDF.
+
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+
+#319433-040
+JUNE 2020
+
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+"*" means this function/subfunction support added
+"-" means subfunctions not used for this function
+
+1) Changes in Java Code: update CPUID functions classes, add some new classes.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000007h    0       EDX    19       ALBR, Architectural Last Branch Report registers.
+00000017h    0        *     *        System-On-Chip (SOC) Vendor Attribute Enumeration.
+00000017h    1-3      *     *        System-On-Chip (SOC) Vendor Brand String.
+00000017h    >3       *     *        Reserved.
+00000018h    0        *     *        Deterministic address translation parameters and TLBs list, main leaf.
+00000018h    > 0      *     *        Deterministic address translation parameters and TLBs list, sub-leafs.
+0000001Ch    -        *     *        Enumeration of Architectural LBR (Last Branch Record) capabilities.
+0000001Dh    0        *     *        Intel AMX (Advanced Matrix Extensions) Highest numbered palette sub-leaf.
+0000001Dh    > 1      *     *        Intel AMX Palette sub-leaf parameters.
+0000001Eh    0        *     *        Intel AMX TMUL (Tile Multiply) information.
+0000001Fh    *        *     *        V2 Extended Topology Enumeration.
+---------------------------------------------------------------------------------------------------------------
+
+2) Changes in Assembler Code: update Java Native Interface (JNI) libraries for Windows 32/64, Linux 32/64.
+---------------------------------------------------------------------------------------------------------------
+Unlock get subfunctions list procedure for function 00000017h, 00000018h.
+Add get subfunctions list procedure for function 0000001Dh, 0000001Fh.
+---------------------------------------------------------------------------------------------------------------
+
+
 CPUID v1.00.08 (July, 09, 2020)
 This version associated with AMD public document update:
 

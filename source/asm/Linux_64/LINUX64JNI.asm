@@ -2,7 +2,7 @@
 ;                    Native Binary Library for Linux x64                       ;
 ;       JNI ELF (Java Native Interface Executable Linkable Format 64           ;
 ;                                                                              ;
-;                   Updated at CPUID v1.00.00 refactoring.                     ;
+;                   Updated at CPUID v1.01.00 refactoring.                     ;
 ;------------------------------------------------------------------------------;
 
 format ELF64
@@ -241,12 +241,14 @@ cmp eax,10h
 je Function10
 cmp eax,14h
 je Function14
-;- Locked for debug -
-; cmp eax,17h
-; je Function17
-; cmp eax,18h
-; je Function18
-;- End of locked for debug -
+cmp eax,17h
+je Function17
+cmp eax,18h
+je Function18
+cmp eax,1Dh
+je Function1D
+cmp eax,1Fh
+je Function1F
 cmp eax,8000001Dh
 je Function04
 cmp eax,80000020h
@@ -264,6 +266,128 @@ ret
 OverSubFunction:
 stc
 ret 
+
+;---------- CPUID function 04h = Deterministic cache parameters ---------------;
+Function04:
+xor esi,esi           ; ESI = Storage for sub-function number
+.L0:
+mov eax,r9d           ; EAX = function number
+mov ecx,esi           ; ECX = subfunction number
+cpuid
+test al,00011111b     ; Check for subfunction list end
+jz AfterSubFunction   ; Go if reach first not valid subfunction
+call StoreCpuId_Entry
+ja OverSubFunction    ; Go if output buffer overflow
+inc esi               ; Sunfunctions number +1
+jmp .L0               ; Go repeat for next subfunction
+;---------- CPUID function 07h = Structured extended feature flags ------------;   
+Function07:
+xor esi,esi           ; ESI = Storage for sub-function number
+mov ecx,esi
+mov eax,r9d           ; EAX = function number (BUGGY DUPLICATED)
+cpuid
+mov r8d,eax           ; R8D = Maximal sub-function number
+.L0:
+mov eax,r9d
+mov ecx,esi           ; ECX = Current sub-function number
+call StoreCpuId
+ja OverSubFunction    ; Go if output buffer overflow
+inc esi               ; Sunfunctions number +1
+cmp esi,r8d           ; 
+jbe .L0               ; Go cycle if next sub-function exist
+jmp AfterSubFunction
+;---------- CPUID function 0Bh = Extended topology enumeration ----------------;
+;---------- CPUID function 1Fh = V2 Extended topology enumeration -------------;
+Function0B:
+Function1F:
+xor esi,esi           ; ESI = Storage for sub-function number
+.L0:
+mov eax,r9d           ; EAX = function number
+mov ecx,esi           ; ECX = subfunction number
+cpuid
+test eax,eax          ; Check for subfunction list end
+jz AfterSubFunction   ; Go if reach first not valid subfunction
+call StoreCpuId_Entry
+ja OverSubFunction    ; Go if output buffer overflow
+inc esi               ; Sunfunctions number +1
+jmp .L0               ; Go repeat for next subfunction
+;---------- CPUID function 0Dh = Processor extended state enumeration ---------;
+Function0D:
+mov eax,r9d           ; EAX = function number
+xor ecx,ecx           ; ECX = sub-function number
+cpuid
+shl rdx,32
+lea r8,[rdx+rax]
+xor esi,esi           ; ESI = Storage for sub-function number
+.L2:
+shr r8,1
+jnc .L3
+mov eax,r9d
+mov ecx,esi           ; ECX = Sub-function number
+call StoreCpuId
+ja OverSubFunction    ; Go if output buffer overflow
+.L3:
+inc esi               ; Sunfunctions number +1
+cmp esi,63            ; 
+jbe .L2               ; Go cycle if next sub-function exist
+jmp AfterSubFunction 
+;---------- CPUID function 0Fh = Platform QoS monitoring enumeration ----------;
+;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
+Function0F:
+Function10:
+xor esi,esi           ; ESI = sub-function number for CPUID
+xor ecx,ecx           ; ECX = sub-function number for save entry 
+push rax r9       
+call StoreCpuId       ; Subfunction 0 of fixed list [0,1]
+pop r9 rax
+ja OverSubFunction    ; Go if output buffer overflow
+mov esi,1
+mov ecx,esi
+call StoreCpuId       ; Subfunction 1 of fixed list [0,1]
+ja OverSubFunction    ; Go if output buffer overflow
+jmp AfterSubFunction
+;---------- CPUID function 14h = Intel Processor Trace Enumeration ------------;
+;---------- CPUID function 17h = System-On-Chip Vendor Attribute Enumeration --;
+;---------- CPUID function 1Dh = Intel AMX Tile Information -------------------;
+Function14:
+Function17:
+Function1D:
+xor esi,esi           ; ESI = Storage for sub-function number
+mov ecx,esi
+mov eax,r9d           ; EAX = function number (BUGGY DUPLICATED)
+cpuid
+mov r8d,eax           ; R8D = Maximal sub-function number
+.L0:
+mov eax,r9d
+mov ecx,esi           ; ECX = Current sub-function number
+call StoreCpuId
+ja OverSubFunction    ; Go if output buffer overflow
+inc esi               ; Sunfunctions number +1
+cmp esi,r8d           ; 
+jbe .L0               ; Go cycle if next sub-function exist
+jmp AfterSubFunction
+;---------- CPUID function 18h = Deterministic Address Translation Parms. -----;
+Function18:
+xor esi,esi           ; ESI = Storage for sub-function number
+mov ecx,esi
+mov eax,r9d           ; EAX = function number (BUGGY DUPLICATED)
+cpuid
+mov r8d,eax           ; R8D = Maximal sub-function number
+jmp .L2
+.L0:
+mov eax,r9d
+mov ecx,esi           ; ECX = Current sub-function number
+cpuid
+test dl,00011111b     ; Check TLB deterministic data validity
+jz .L1                ; Go skip if subfunction invalid, can be unordered
+.L2:
+call StoreCpuId_Entry
+ja OverSubFunction    ; Go if output buffer overflow
+.L1:
+inc esi               ; Sunfunctions number +1
+cmp esi,r8d           ; 
+jbe .L0               ; Go cycle if next sub-function exist
+jmp AfterSubFunction
 
 ;---------- Subroutine, one CPUID function execution --------------------------;
 ; INPUT:  EAX = CPUID function number
@@ -297,121 +421,6 @@ stosd                 ; Store result dword [7] = output EDX
 inc ebp               ; Global counter +1
 cmp ebp,ENTRIES_LIMIT ; Limit for number of output entries
 ret
-;---------- CPUID function 04h = Deterministic cache parameters ---------------;
-Function04:
-xor esi,esi           ; ESI = Storage for sub-function number
-.L0:
-mov eax,r9d           ; EAX = function number
-mov ecx,esi           ; ECX = subfunction number
-cpuid
-test al,00011111b     ; Check for subfunction list end
-jz AfterSubFunction   ; Go if reach first not valid subfunction
-call StoreCpuId_Entry
-ja OverSubFunction    ; Go if output buffer overflow
-inc esi               ; Sunfunctions number +1
-jmp .L0               ; Go repeat for next subfunction
-;---------- CPUID function 07h = Structured extended feature flags ------------;   
-Function07:
-xor esi,esi           ; ESI = Storage for sub-function number
-mov ecx,esi
-mov eax,r9d           ; EAX = function number (BUGGY DUPLICATED)
-cpuid
-mov r8d,eax           ; R8D = Maximal sub-function number
-.L0:
-mov eax,r9d
-mov ecx,esi           ; ECX = Current sub-function number
-call StoreCpuId
-ja OverSubFunction    ; Go if output buffer overflow
-inc esi               ; Sunfunctions number +1
-cmp esi,r8d           ; 
-jbe .L0               ; Go cycle if next sub-function exist
-jmp AfterSubFunction
-;---------- CPUID function 0Bh = Extended topology enumeration ----------------;
-Function0B:
-xor esi,esi           ; ESI = Storage for sub-function number
-.L0:
-mov eax,r9d           ; EAX = function number
-mov ecx,esi           ; ECX = subfunction number
-cpuid
-test eax,eax          ; Check for subfunction list end
-jz AfterSubFunction   ; Go if reach first not valid subfunction
-call StoreCpuId_Entry
-ja OverSubFunction    ; Go if output buffer overflow
-inc esi               ; Sunfunctions number +1
-jmp .L0               ; Go repeat for next subfunction
-;---------- CPUID function 0Dh = Processor extended state enumeration ---------;
-Function0D:
-mov eax,r9d           ; EAX = function number
-xor ecx,ecx           ; ECX = sub-function number
-cpuid
-shl rdx,32
-lea r8,[rdx+rax]
-xor esi,esi           ; ESI = Storage for sub-function number
-.L2:
-shr r8,1
-jnc .L3
-mov eax,r9d
-mov ecx,esi           ; ECX = Sub-function number
-call StoreCpuId
-ja OverSubFunction    ; Go if output buffer overflow
-.L3:
-inc esi               ; Sunfunctions number +1
-cmp esi,63            ; 
-jbe .L2               ; Go cycle if next sub-function exist
-jmp AfterSubFunction 
-;---------- CPUID function 0Fh = Platform QoS monitoring enumeration ----------;
-Function0F:
-;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
-Function10:
-xor esi,esi           ; ESI = sub-function number for CPUID
-xor ecx,ecx           ; ECX = sub-function number for save entry 
-push rax r9       
-call StoreCpuId       ; Subfunction 0 of fixed list [0,1]
-pop r9 rax
-ja OverSubFunction    ; Go if output buffer overflow
-mov esi,1
-mov ecx,esi
-call StoreCpuId       ; Subfunction 1 of fixed list [0,1]
-ja OverSubFunction    ; Go if output buffer overflow
-jmp AfterSubFunction
-;---------- CPUID function 14h = Intel Processor Trace Enumeration ------------;
-;---------- CPUID function 17h = System-On-Chip Vendor Attribute Enumeration --;
-Function14:
-Function17:
-xor esi,esi           ; ESI = Storage for sub-function number
-mov ecx,esi
-mov eax,r9d           ; EAX = function number (BUGGY DUPLICATED)
-cpuid
-mov r8d,eax           ; R8D = Maximal sub-function number
-.L0:
-mov eax,r9d
-mov ecx,esi           ; ECX = Current sub-function number
-call StoreCpuId
-ja OverSubFunction    ; Go if output buffer overflow
-inc esi               ; Sunfunctions number +1
-cmp esi,r8d           ; 
-jbe .L0               ; Go cycle if next sub-function exist
-jmp AfterSubFunction
-;---------- CPUID function 18h = Deterministic Address Translation Parms. -----;
-Function18:
-xor esi,esi           ; ESI = Storage for sub-function number
-mov ecx,esi
-mov eax,r9d           ; EAX = function number (BUGGY DUPLICATED)
-cpuid
-mov r8d,eax           ; R8D = Maximal sub-function number
-.L0:
-mov eax,r9d
-mov ecx,esi           ; ECX = Current sub-function number
-cpuid
-test dl,00011111b     ; Check TLB deterministic data validity
-jz @f                 ; Go skip if subfunction invalid, can be unordered
-call StoreCpuId_Entry
-ja OverSubFunction    ; Go if output buffer overflow
-@@:
-inc esi               ; Sunfunctions number +1
-cmp esi,r8d           ; 
-jbe .L0               ; Go cycle if next sub-function exist
-jmp AfterSubFunction
 
 ;------------------------------------------------------------------------------;
 ; Measure CPU Clock frequency by Time Stamp Counter (TSC)                      ;
