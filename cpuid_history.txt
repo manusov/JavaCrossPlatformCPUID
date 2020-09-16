@@ -1,3 +1,32 @@
+CPUID v1.01.02 (September, 16, 2020)
+Support advanced features listed at document:
+343965-intel-key-locker-specification.PDF
+
+Intel Key Locker Specification
+#343965-001US
+SEPTEMBER 2020
+
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+"*" means this function/subfunction support added
+"-" means subfunctions not used for this function
+Not listed registers and bits of CPUID function 00000019h reserved.
+
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000007h    0       ECX     23      AES KL, AES Key Locker
+00000019h    -       EAX     0       KL CPL0  , KL restriction of CPL0-only
+00000019h    -       EAX     1       KL NO ENC, KL restriction of no-encrypt
+00000019h    -       EAX     2       KL NO DEC, KL restriction of no-decrypt
+00000019h    -       EBX     0       AESKLE, AES Key Locker instructions are fully enabled by firmware or OS
+00000019h    -       EBX     2       WIDE KL, AES wide Key Locker instructions
+00000019h    -       EBX     4       IWK BACK, IWKeyBackup MSR, can backing up the internal wrapping key
+00000019h    -       ECX     0       NO BACK , Can use NoBackup parameter for LOADIWKEY
+00000019h    -       ECX     1       IWK RAND, Can use KeySource=1, randomization of the internal wrapping key
+---------------------------------------------------------------------------------------------------------------
+
+
 CPUID v1.01.01 (September, 09, 2020)
 Support advanced features listed at document:
 intel-tdx-cpu-architectural-specification.PDF.

@@ -77,8 +77,8 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
       { "MAWAU[3]"     , "MPX address width adjust" } ,
       { "MAWAU[4]"     , "MPX address width adjust" } ,
       { "RDPID"        , "Read processor ID" } ,
-      { "x"            , "Reserved" } ,  // bit 23 reserved
-      { "x"            , "Reserved" } ,  // ...
+      { "AES KL"       , "AES Key Locker instructions" } ,  // bit 23
+      { "x"            , "Reserved" } ,                     // bit 24 reserved
       { "CLDEMOTE"     , "Cache line demote instruction" } ,
       { "x"            , "Reserved" } ,
       { "MOVDIRI"      , "Direct stores by MOVDIRI instruction" } ,    // 27
