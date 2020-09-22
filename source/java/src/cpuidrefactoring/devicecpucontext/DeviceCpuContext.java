@@ -25,15 +25,18 @@ private static final String[] CONTEXT_NAMES =
         "AVX 512-bit predicates, K[0-7] registers" ,
         "AVX 512-bit, ZMM[0-15] registers" ,
         "AVX 512-bit, ZMM[16-31] registers" ,
-        "Reserved" ,  // bit 8
+        "Intel processor trace state (PT) managed by IA32_XSS" ,  // bit 8
         "PKRU, protection key state" ,
+        "Reserved" ,                                              // bit 10
+        "CET user state (CET_U) managed by IA32_XSS" ,
+        "CET supervisor state (CET_S) managed by IA32_XSS" ,
+        "Hardware duty cycling state (HDC) managed by IA32_XSS" ,
         "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
+        "Reserved" ,                                              // bit 15
         
+        "Hardware P-states (HWP) managed by IA32_XSS" ,           // bit 16
+        "Intel AMX tile configuration (XTILECFG)" ,
+        "Intel AMX tile data (XTILEDATA)" ,
         "Reserved" ,
         "Reserved" ,
         "Reserved" ,
@@ -46,10 +49,7 @@ private static final String[] CONTEXT_NAMES =
         "Reserved" ,
         "Reserved" ,
         "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
-        "Reserved" ,
+        "Reserved" ,                                                // bit 31
 
         "Reserved" ,
         "Reserved" ,
