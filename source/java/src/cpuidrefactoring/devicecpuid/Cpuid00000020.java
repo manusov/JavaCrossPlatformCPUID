@@ -2,7 +2,7 @@
 CPUID Utility. (C)2020 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
-00000014h = Processor history reset information.
+00000020h = Processor history reset information.
 */
 
 package cpuidrefactoring.devicecpuid;
