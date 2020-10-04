@@ -1,3 +1,55 @@
+CPUID v1.01.04 (October, 4, 2020)
+
+1) Support new Intel CPU features, declared at document:
+architecture-instruction-set-extensions-programming-reference.pdf
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-041
+OCTOBER 2020
+https://software.intel.com/content/www/us/en/develop/download/intel-architecture-instruction-set-extensions-programming-reference.html?wapkw=extension%20programming%20reference
+
+2) Additionally, CPUID function 0000000Dh, subfunction 0, EAX bits 31-0, Bitmap for saved-restored context components, declared at document:
+325462-sdm-vol-1-2abcd-3abcd.pdf
+Intel 64 and IA-32 Architectures
+Software Developer's Manual
+Combined Volumes:
+1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
+Order Number: 325462-072US
+May 2020.
+https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4.html
+
+3) CPUID new and updated names bits list:
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+---------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------------------
+00000006h    -       EAX     23      EHFI, Enhanced Hardware Feedback Interface
+00000006h    -       ECX     11-8    EHFI classes count
+00000007h    0       EBX     12      RDT-M, Resource Director Technology - monitoring
+00000007h    0       EBX     15      RDT-A, Resource Director Technology - allocation
+00000007h    0       EDX     5       UINTR, User Interrupts
+00000007h    0       EDX     23      FP16, Floating Point 16-bit format
+00000007h    1       EAX     4       AVX_VNNI, AVX versions of the Vector Neural Network instructions
+00000007h    1       EAX     10      F MOVSB, Fast zero-length MOVSB
+00000007h    1       EAX     11      F STOSB, Fast short STOSB
+00000007h    1       EAX     12      F CM SC, Fast short CMPSB, SCASB
+00000007h    1       EAX     22      HRESET, Processor History Reset Leaf
+0000000Ah    -       ECX     31-0    Fixed counters bitmap
+0000000Dh    0       EAX     31-0    Bitmap for saved-restored context components, additions
+00000020h    0       EAX     31-0    Processor History Reset maximum sub-leaf
+00000020h    0       EBX     31-0    Bitmap for IA32_HRESET_ENABLE MSR
+---------------------------------------------------------------------------------------------------------------
+
+4) XCR0 new bits list:
+ Bit   Comments
+-----------------------------------------------------------------------------
+ 14    UINTR        UINTR (User Interrupt) state
+-----------------------------------------------------------------------------
+
+
+
 CPUID v1.01.03 (September, 22, 2020)
 Support context components, added to
 lists at XCR0 and IA32_XSS registers.

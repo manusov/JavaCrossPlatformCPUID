@@ -31,6 +31,8 @@ private final static Object[][] DECODER_EBX =
       { "Last level cache misses event not available flag", 4, 4 } ,
       { "Branch instruction retired event not available flag", 5, 5 } ,
       { "Branch mispredict retired event not available flag", 6, 6 } };
+private final static Object[][] DECODER_ECX =
+    { { "Fixed counters bitmap" , 31, 0 } };
 private final static Object[][] DECODER_EDX =
     { { "Number of fixed-function performance counters" , 4, 0 } ,
       { "Bit width of fixed-function performance counters" , 12, 5 } ,
@@ -40,7 +42,6 @@ private final static Object[][] DECODER_EDX =
     {
     DecodeReturn dr;
     String[] interval = new String[] { "", "", "", "", "" };
-    ArrayList<String[]> strings;
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
         {
@@ -56,7 +57,11 @@ private final static Object[][] DECODER_EDX =
         dr = decodeBitfields( "EBX", DECODER_EBX, entries[0].ebx );
         a.addAll( dr.strings );
         a.add( interval );
-        // EDX ( skip ECX = reserved )
+        // ECX
+        dr = decodeBitfields( "ECX", DECODER_ECX, entries[0].ecx );
+        a.addAll( dr.strings );
+        a.add( interval );
+        // EDX
         dr = decodeBitfields( "EDX", DECODER_EDX, entries[0].edx );
         for( int i=0; i<dr.values.length; i++ )
             {

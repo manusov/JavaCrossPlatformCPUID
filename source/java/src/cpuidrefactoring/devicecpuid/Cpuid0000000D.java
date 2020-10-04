@@ -19,7 +19,7 @@ Cpuid0000000D()
 
 // Control tables for results decoding
 private final static String[] CONTEXT_PARMS = 
-    { "x87 ST0..7[79:0] state" ,
+    { "x87 ST0..7[79:0] state" ,                         // context component 0
       "SSE128 XMM0..15[127:0] state " ,
       "AVX256 YMM0..15[255:128] state" ,
       "MPX BNDREGS BND0..3[127:0] state" ,
@@ -27,12 +27,17 @@ private final static String[] CONTEXT_PARMS =
       "AVX512 OPMASK K0..7[63:0] state" ,
       "AVX512 ZMM0..15[511:256] state" ,
       "AVX512 ZMM16..31[511:0] state" ,
-      "IA32_XSS control" ,
+      "PT managed by IA32_XSS" ,
       "PKRU control" ,
-      "Reserved" ,
-      "Reserved" ,
-      "Reserved" ,
-      "IA32_XSS" };
+      "Reserved" ,                                      // context component 10
+      "CET_U state" ,                                   // 11
+      "CET_S state" ,                                   // 12
+      "HDC managed by IA32_XSS" ,                       // 13
+      "UINTR state" ,                                   // 14
+      "Reserved" ,                                      // 15
+      "HWP managed by IA32_XSS" ,                       // 16
+      "AMX XTILECFG state" ,                            // 17
+      "AMX XTILEDATA state" };                          // 18
 private final static String ENABLED_BYTES =
     "Maximum size for XSAVE/XRSTOR area, enabled features";
 private final static String SUPPORTED_BYTES =

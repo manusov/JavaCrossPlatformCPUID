@@ -25,18 +25,18 @@ private static final String[] CONTEXT_NAMES =
         "AVX 512-bit predicates, K[0-7] registers" ,
         "AVX 512-bit, ZMM[0-15] registers" ,
         "AVX 512-bit, ZMM[16-31] registers" ,
-        "Intel processor trace state (PT) managed by IA32_XSS" ,  // bit 8
-        "PKRU, protection key state" ,
-        "Reserved" ,                                              // bit 10
-        "CET user state (CET_U) managed by IA32_XSS" ,
-        "CET supervisor state (CET_S) managed by IA32_XSS" ,
-        "Hardware duty cycling state (HDC) managed by IA32_XSS" ,
-        "Reserved" ,
-        "Reserved" ,                                              // bit 15
+        "Intel processor trace state (PT) managed by IA32_XSS" ,   // bit 8
+        "PKRU, protection key state" ,                             // bit 9
+        "Reserved" ,                                               // bit 10
+        "CET user state (CET_U) managed by IA32_XSS" ,             // bit 11
+        "CET supervisor state (CET_S) managed by IA32_XSS" ,       // bit 12
+        "Hardware duty cycling state (HDC) managed by IA32_XSS" ,  // bit 13
+        "User interrupt (UINTR)" ,                                 // bit 14
+        "Reserved" ,                                               // bit 15
         
-        "Hardware P-states (HWP) managed by IA32_XSS" ,           // bit 16
-        "Intel AMX tile configuration (XTILECFG)" ,
-        "Intel AMX tile data (XTILEDATA)" ,
+        "Hardware P-states (HWP) managed by IA32_XSS" ,            // bit 16
+        "Intel AMX tile configuration (XTILECFG)" ,                // bit 17
+        "Intel AMX tile data (XTILEDATA)" ,                        // bit 18
         "Reserved" ,
         "Reserved" ,
         "Reserved" ,

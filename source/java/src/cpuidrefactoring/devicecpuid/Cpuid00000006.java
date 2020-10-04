@@ -41,22 +41,24 @@ private final static String[][] DECODER_EAX =
       { "HW FB"    , "HW Feedback with thermal status" } ,  // bit 18
       { "IGN HWP"  , "Ignoring idle logical processor HWP request" } ,
       { "x"        , "Reserved" } ,  // bit 21
+      { "x"        , "Reserved" } ,  // bit 22
+      { "EHFI"     , "Enhanced hardware feedback interface" } ,  // bit 23
+      { "x"        , "Reserved" } ,  // bit 24
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } };   // bit 31
+      { "x"        , "Reserved" } };  // bit 31
 private final static Object[][] DECODER_EBX =
     { { "Number of interrupt thresholds in digital thermal sensor" , 3 , 0 } }; 
+private final static int SUPPORT_COUNT_ECX = 3;
 private final static Object[][] DECODER_ECX =
     { { "Hardware coordination feedback capability, MPERF, APERF"  , 0 , 0 } ,
       { "ACNT2"                                                    , 1 , 1 } ,
-      { "Performance-energy bias preference, ENERGY_PERF_BIAS MSR" , 3 , 3 } };
+      { "Performance-energy bias preference, ENERGY_PERF_BIAS MSR" , 3 , 3 } ,
+      { "EHFI classes count"                                    , 11 , 8  } };
 private final static Object[][] DECODER_EDX =
     { { "Performance capability reporting"                       ,  0 , 0  } ,
       { "Energy efficiency capability reporting"                 ,  1 , 1  } ,
@@ -82,7 +84,7 @@ private final static Object[][] DECODER_EDX =
         a.add( interval );
         // ECX
         dr = decodeBitfields ( "ECX", DECODER_ECX, entries[0].ecx );
-        for( int i=0; i<dr.values.length; i++ )
+        for( int i=0; i<SUPPORT_COUNT_ECX; i++ )
             {
             dr.strings.get(i)[4] = 
                 ( dr.values[i] != 0 ) ? "supported" : "not supported";

@@ -33,10 +33,10 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "EMOVSSTOS"  , "Enhanced REP MOVSB/STOSB" } ,
       { "INVPCID"    , "Invalidate process context INVPCID instruction" } ,
       { "RTM"        , "Restricted transactional memory" } ,
-      { "PQM"        , "Platform quality of service monitoring" } ,
+      { "PQM"        , "Platform quality of service (RDT) monitoring" } ,  // bit 12
       { "DFPUCSDS"   , "Deprecates FPU CS and FPU DS if 1" } ,
       { "MPX"        , "Memory protection extensions" } ,
-      { "PQE"        , "Platform quality of service enforcement" } ,
+      { "PQE"        , "Platform quality of service (RDT) enforcement" } ,  // bit 15
       { "AVX512F"    , "AVX512 foundation" } ,
       { "AVX512DQ"   , "AVX512 doublewords and quadwords operations" } ,
       { "RDSEED"     , "Instruction RDSEED, alternative access to RND" } ,
@@ -92,7 +92,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "4VNNIW"       , "AVX512_4VNNIW 4-iteration VNNI, word mode" } ,
       { "4FMAPS"       , "AVX512_4FMAPS 4-iteration FMA, single precision" } ,
       { "FS REP MOV"   , "Fast short REP MOV" } ,
-      { "x"            , "Reserved" } ,
+      { "UINTR"        , "User interrupts" } ,      // bit 5
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "AVX512VP2IS"  , "AVX512 compute intersection instructions" } ,
@@ -110,7 +110,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "CET IBT"      , "Control Flow Enforcement: Indirect Branch Tracking" } ,
       { "x"            , "Reserved" } ,            // bit 21
       { "AMX BF16"     , "Advanced Matrix Extensions, operations on BFLOAT16 numbers" } ,
-      { "x"            , "Reserved" } ,            // bit 23
+      { "FP16"         , "Floating point 16-bit format" } ,  // bit 23
       { "AMX TILE"     , "Advanced Matrix Extensions, supports Tile Architecture" } ,
       { "AMX INT8"     , "Advanced Matrix Extensions, operations on INT8 numbers" } ,
       { "IBRS IBPB"    , "Indirect branch restricted speculation and predictor barrier" } ,  // bit 26
@@ -124,15 +124,15 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "AVX VNNI"     , "AVX versions of Vector Neural Network instructions" } ,  // bit 4
       { "AVX512BF16"   , "VNNI instructions supports BFLOAT16 format" } ,
       { "x"            , "Reserved" } ,  // bit 6
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "FAST M"       , "Fast zero-length MOVSB" } ,   // bit 10
+      { "FAST S"       , "Fast short STOSB" } ,         // bit 11
+      { "FAST C S"     , "Fast short CMPSB, SCASB" } ,  // bit 12
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
@@ -142,7 +142,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "HRESET"       , "Processor history reset CPUID leaf 20h" } ,  // bit 22
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,  // bit 24
       { "x"            , "Reserved" } ,
