@@ -62,10 +62,11 @@ private final static Object[][] DECODER_EDX =
         else
             {
             a.add( new String[] 
-                { "This function reserved: PCONFIG not supported" , "n/a" } );
+                { "-" , "-" , "-" , "-" , "PCONFIG not supported" } );
+                
             }
         }
     return a.isEmpty() ? 
-    super.getParametersList() : a.toArray( new String[a.size()][] );
+        super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 }

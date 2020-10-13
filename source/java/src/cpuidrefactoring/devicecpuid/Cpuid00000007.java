@@ -194,6 +194,6 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
             }
         }
     return a.isEmpty() ? 
-    super.getParametersList() : a.toArray( new String[a.size()][] );
+        super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 }

@@ -157,7 +157,8 @@ private final static Object[][] CACHE_DESCRIPTORS =
       { 0xEC, "code and data L3 cache, 24576-kb, 24 ways, 64 byte lines" } ,  
       { 0xF0, "64 byte prefetching" } ,  
       { 0xF1, "128 byte prefetching" } ,  
-      { 0xFF, "query standard level 0000_0004h instead" } };
+      { 0xFE, "TLB information: query standard level 0000_0018h instead" } ,
+      { 0xFF, "cache information: query standard level 0000_0004h instead" } };
 
 @Override String[][] getParametersList()
     {

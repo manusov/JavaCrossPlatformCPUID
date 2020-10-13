@@ -1,3 +1,14 @@
+CPUID v1.01.05 (October, 13, 2020)
+
+1) For CPUID function = 00000002h (TLB, Cache, Prefetch information), 
+   add descriptor byte value = 0FEh means:
+   "use CPUID leaf 18h to query TLB and other address translation parameters".
+
+2) For CPUID function = 0000001Bh (PCONFIG instruction information), fix bug:
+   13 empty lines when data missing.
+
+
+
 CPUID v1.01.04 (October, 4, 2020)
 
 1) Support new Intel CPU features, declared at document:

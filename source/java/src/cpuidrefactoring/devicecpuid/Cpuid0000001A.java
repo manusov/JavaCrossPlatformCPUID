@@ -52,6 +52,6 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
         a.addAll( dr.strings );
         }
     return a.isEmpty() ? 
-    super.getParametersList() : a.toArray( new String[a.size()][] );
+        super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 }

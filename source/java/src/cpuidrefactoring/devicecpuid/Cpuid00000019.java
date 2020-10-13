@@ -55,6 +55,6 @@ private final static String[][] DECODER_ECX =
         a.addAll( strings );
         }
     return a.isEmpty() ? 
-    super.getParametersList() : a.toArray( new String[a.size()][] );
+        super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 }

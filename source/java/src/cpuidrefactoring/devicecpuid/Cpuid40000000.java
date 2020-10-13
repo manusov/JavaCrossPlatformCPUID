@@ -26,5 +26,4 @@ Cpuid40000000()
         }
     return table;
     }
-
 }

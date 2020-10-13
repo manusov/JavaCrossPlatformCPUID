@@ -102,6 +102,6 @@ private final static Object[][] DECODER_EDX =
         a.addAll( dr.strings );
         }
         return a.isEmpty() ? 
-        super.getParametersList() : a.toArray( new String[a.size()][] );
+            super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 }
