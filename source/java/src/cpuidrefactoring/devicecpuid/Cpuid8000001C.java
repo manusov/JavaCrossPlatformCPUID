@@ -66,6 +66,9 @@ private final static String[][] DECODER_EDX =
       { "LWP Cont" , "Sampling in continuous mode" } , 
       { "LWP PTSC" , "LWP performance TSC in event record" } , 
       { "LWP INT"  , "LWP interrupt on threshold overflow available" } };
+// bits EAX and EDX has same usage, 
+// but can be different depend on features enable by MSR (?)
+private final static String[][] DECODER_EAX = DECODER_EDX;
 
 @Override String[][] getParametersList()
     {
@@ -75,6 +78,10 @@ private final static String[][] DECODER_EDX =
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
         {
+        // EAX
+        strings = decodeBitmap( "EAX", DECODER_EAX, entries[0].eax );
+        a.addAll( strings );
+        a.add( interval );
         // EBX
         dr = decodeBitfields( "EBX", DECODER_EBX, entries[0].ebx );
         a.addAll( dr.strings );

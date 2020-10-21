@@ -43,7 +43,7 @@ private final static String[][] DECODER_EDX =
       { "VGIF"     , "Virtualized global interrupt flag" } ,
       { "GMET"     , "Guest mode execute trap extension" } ,  // bit 17
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
+      { "SSS CHK"  , "Supervisor shadow stack restrictions check" } ,  // bit 19
       { "SPEC CTL" , "Guest Spec Ctl, hardware handled MSR update" } , // bit 20
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,

@@ -1,3 +1,107 @@
+CPUID v1.01.06 (October, 21, 2020)
+This version associated with AMD public documents update:
+https://www.amd.com/en/support/tech-docs
+
+AMD64 Technology
+AMD64 Architecture Programmer's Manual
+Volume 2: System Programming
+Publication No. 24593
+Revision 3.36
+Date October 2020
+Below referenced as [Updated Volume 2].
+Use page numbers BY DOCUMENT, NOT BY PDF VIEWER.
+
+AMD64 Technology
+AMD64 Architecture Programmer's Manual
+Volume 3: General-Purpose and System Instrutions
+Publication No. 24594
+Revision 3.31
+Date October 2020
+Below referenced as [Updated Volume 3].
+Use page numbers BY DOCUMENT, NOT BY PDF VIEWER.
+
+CPUID new bits list:
+CPUID function number = CPUID input EAX, 
+CPUID subfunction number = CPUID input ECX.
+Listed NEW BITS only, added at CPUID v1.01.06.
+Bits, previously known or previously documented by Intel, not listed at this table.
+--------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+--------------------------------------------------------------------------------------------------
+80000008h    -       EBX     3       INVLPGB, support INVLPGB, TLBSYNC instructions
+80000008h    -       EBX     20      NO LMSLE, EFER.LMSLE unsupported indication
+80000008h    -       EBX     21      INVLPGB NP, support INVLPGB instruction for nested pages
+80000008h    -       EDX     15-0    Maximum page count for INVLPGB instruction
+8000000Ah    -       EDX     19      SSS CHK, SSSCheck, SVM supervisor shadow stack restrictions
+--------------------------------------------------------------------------------------------------
+
+Plus, this previously known bits added.
+--------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+--------------------------------------------------------------------------------------------------
+8000001Ch    -       EAX     0       LWP, LwpAvail, LWP feature is available
+8000001Ch    -       EAX     1       LWPVAL, LWPVAL instruction available
+8000001Ch    -       EAX     2       LWP IRE, LWP instructions retired event available
+8000001Ch    -       EAX     3       LWP BRE, LWP branch retired event available
+8000001Ch    -       EAX     4       LWP DME, LWP DC miss event available
+8000001Ch    -       EAX     5       LWP CNH, LWP core clocks not halted event available
+8000001Ch    -       EAX     6       LWP RNH, LWP core reference clocks not halted event available
+8000001Ch    -       EAX     29      LWP CONT, sampling in continuous mode is available
+8000001Ch    -       EAX     30      LWP PTSC, performance TSC in event record is available
+8000001Ch    -       EAX     31      LWP INT, interrupt on threshold overflow available
+--------------------------------------------------------------------------------------------------
+
+Some details:
+
+1) CPUID function 80000008h, bit EBX.3 (support INVLPGB, TLBSYNC instructions)
+-------------------------------------------------------------------------------
+Listed at [Updated Volume 3], page 623, see CPUID Fn8000_0008_EBX Extended Feature Identifiers
+Details at [Updated Volume 3], see new instructions description:
+[Updated Volume 3], page 389, see INVLPGB, Invalidate TLB Entry(s) with Broadcast,
+[Updated Volume 3], page 480, see TLBSYNC, Synchronize TLB Invalidations
+
+2) CPUID function 80000008h, bit EBX.20 (EFER.LMSLE unsupported indication)
+----------------------------------------------------------------------------
+Listed at [Updated Volume 3], page 623, see CPUID Fn8000_0008_EBX Extended Feature Identifiers.
+Details at [Updated Volume 2], page 118, see 4.12.2 Data Limit Checks in 64-bit mode
+
+3) CPUID function 80000008h, EBX.21 (support INVLPGB instruction for nested pages)
+-----------------------------------------------------------------------------------
+Listed at [Updated Volume 3], page 623, see CPUID Fn8000_0008_EBX Extended Feature Identifiers.
+Details at [Updated Volume 3], see new instructions description:
+[Updated Volume 3], page 389, see INVLPGB, Invalidate TLB Entry(s) with Broadcast,
+
+4) CPUID function 80000008h, EDX.[15-0] (Maximum page count for INVLPGB instruction)
+-------------------------------------------------------------------------------------
+Details at [Updated Volume 3], see new instructions description:
+[Updated Volume 3], page 389, see INVLPGB, Invalidate TLB Entry(s) with Broadcast,
+plus page 390, contains:
+The maximum count supported is reported in CPUID function 8000_0008h, EDX[15:0].
+
+5) CPUID function 8000000Ah, bit EDX.19 (SVM supervisor shadow stack restrictions)
+-----------------------------------------------------------------------------------
+Listed at [Updated Volume 3], page 625, see CPUID Fn8000_000A_EDX SVM Feature Identification
+Details at [Updated Volume 2], page 523, see 15.25.14 Supervisor Shadow Stacks,
+but listed wrong function number = 8008000Ah, 
+correct function number = 8000000Ah, typo error in [Updated Volume 2] ?
+
+6) CPUID function 8000001Ch, register EAX (LWP capabilities)
+-------------------------------------------------------------------
+Listed at [Updated Volume 3], page 629, see CPUID Fn8000_001C_EAX Lightweight Profiling Capabilities 0
+Details at [Updated Volume 2], page 420, see 13.4.3.3 Detecting LWP Capabilities
+
+7) Still unknown undocumented bits:
+-----------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------
+80000007h    -       EBX     4       ?
+80000008h    -       EBX     10      ?
+80000008h    -       EBX     27      ?
+8000000Ah    -       EDX     11      ?
+-----------------------------------------------
+
+
+
 CPUID v1.01.05 (October, 13, 2020)
 
 1) For CPUID function = 00000002h (TLB, Cache, Prefetch information), 

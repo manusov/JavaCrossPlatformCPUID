@@ -26,7 +26,7 @@ private final static String[][] DECODER_EBX =
     { { "CLZERO"    , "CLZERO instruction"          } ,
       { "IRC"       , "Instruction Retired Counter" } ,
       { "EPZR"      , "Error Pointer Zero-Restore"  } ,
-      { "x"         , "Reserved"                    } ,              // bit 3
+      { "INVLPGB"   , "INVLPGB and TLBSYNC instructions" } ,         // bit 3
       { "RDPRU"     , "Read processor privileged registers at user mode" } ,
       { "x"         , "Reserved"                    } ,              // bit 5
       { "BE"        , "AMD Bandwidth Enforcement"   } ,
@@ -43,8 +43,8 @@ private final static String[][] DECODER_EBX =
       { "STIBP AON" , "Single thread indirect branch predictor always on" } ,
       { "IBRS PREF" , "Indirect branch restricted speculation is preferred" } ,
       { "IBRS SM"   , "IBRS provides same mode protection" } ,  // bit 19
-      { "x"         , "Reserved"                    } ,
-      { "x"         , "Reserved"                    } ,
+      { "NO LMSLE"  , "Deprecate 64-bit segment limit, EFER.LMSLE is not supported" } ,
+      { "INVLPGB-N" , "INVLPGB instruction for nested pages translation" } ,
       { "x"         , "Reserved"                    } ,
       { "PPIN"      , "Protected processor inventory number" } ,
       { "SSBD"      , "Speculative Store Bypass Disable" } ,  // 24
@@ -60,7 +60,8 @@ private final static Object[][] DECODER_ECX =
       { "APIC ID size"                        , 15 , 12 } ,
       { "Performance TSC size"                , 17 , 16 } };
 private final static Object[][] DECODER_EDX =
-    { { "RDPRU maximum register number" ,  31 ,  16 } };
+    { { "Maximum page count for INVLPGB instruction" ,  15 ,  0  } ,
+      { "RDPRU maximum register number"              ,  31 ,  16 } };
 // Additional decoders
 private final static String[] DECODER_PERF_TSC =
     { "40 bits" , "48 bits" , "56 bits" , "64 bits" , "Unknown" };
@@ -113,15 +114,15 @@ private final static String[] DECODER_RDPRU =
         // EDX
         dr = decodeBitfields( "EDX", DECODER_EDX, entries[0].edx );
         a.addAll( dr.strings );
-        index = dr.values[0];
+        index = dr.values[1];
         if ( index > 1 ) { index = 2; }
         if   ( rdpruFlag )
             {
-            dr.strings.get(0)[4] = DECODER_RDPRU[index]; 
+            dr.strings.get(1)[4] = DECODER_RDPRU[index]; 
             }
         else
             {
-            dr.strings.get(0)[4] = "n/a"; 
+            dr.strings.get(1)[4] = "n/a"; 
             }
         }
     return a.isEmpty() ? 
