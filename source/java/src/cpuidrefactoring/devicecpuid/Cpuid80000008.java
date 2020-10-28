@@ -43,7 +43,7 @@ private final static String[][] DECODER_EBX =
       { "STIBP AON" , "Single thread indirect branch predictor always on" } ,
       { "IBRS PREF" , "Indirect branch restricted speculation is preferred" } ,
       { "IBRS SM"   , "IBRS provides same mode protection" } ,  // bit 19
-      { "NO LMSLE"  , "Deprecate 64-bit segment limit, EFER.LMSLE is not supported" } ,
+      { "NO LMSLE"  , "Deprecate 64-bit segment limit, EFER.LMSLE is absent" } ,
       { "INVLPGB-N" , "INVLPGB instruction for nested pages translation" } ,
       { "x"         , "Reserved"                    } ,
       { "PPIN"      , "Protected processor inventory number" } ,

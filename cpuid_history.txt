@@ -1,3 +1,15 @@
+CPUID v1.01.07 (October, 28, 2020)
+1) Bugs fixed for old processors that do not support extended CPUID
+(functions 80000000h and higher). Changes at binary level and java code.
+1.1) If function 80000000h not supported, invalid resuts of this function
+     not saved to binary dump.
+1.2) If loaded binary dump contains invalid resuts of function 80000000h,
+     wrong data not parsed, results strings is "n/a" (not available).
+2) Some parameters names changed for function 80000008h, 
+   for prevent too long text strings.
+
+
+
 CPUID v1.01.06 (October, 21, 2020)
 This version associated with AMD public documents update:
 https://www.amd.com/en/support/tech-docs

@@ -2,7 +2,7 @@
 ;                    Native Binary Library for Linux ia32                      ;
 ;         JNI ELF (Java Native Interface Executable Linkable Format 32         ;
 ;                                                                              ;
-;                   Updated at CPUID v1.01.00 refactoring.                     ;
+;                   Updated at CPUID v1.01.07 refactoring.                     ;
 ;------------------------------------------------------------------------------;
 
 format ELF
@@ -221,10 +221,13 @@ NoVirtual:
 mov temp_r9,80000000h     ; mov r9d,80000000h ; R9D  = extended functions start
 mov eax,temp_r9           ; r9d
 cpuid
+test eax,eax
+jns NoExtended            ; Go skip extended functions if bit EAX.31 = 0
 cmp eax,80000000h + ENTRIES_LIMIT/2  ; EAX = maximum extended function number
-ja ErrorCpuId                        ; Go if invalid limit
+ja ErrorCpuId             ; Go if invalid limit
 call SequenceCpuId
-jc ErrorCpuId                        ; Exit if output buffer overflow
+jc ErrorCpuId             ; Exit if output buffer overflow
+NoExtended:
 
 ;---------- Return points -----------------------------------------------------;
 mov eax,temp_ebp          ; Normal exit point, return EAX = number of entries
