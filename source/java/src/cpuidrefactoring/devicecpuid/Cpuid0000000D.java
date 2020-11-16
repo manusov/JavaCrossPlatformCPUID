@@ -27,15 +27,15 @@ private final static String[] CONTEXT_PARMS =
       "AVX512 OPMASK K0..7[63:0] state" ,
       "AVX512 ZMM0..15[511:256] state" ,
       "AVX512 ZMM16..31[511:0] state" ,
-      "PT managed by IA32_XSS" ,
+      "PT state managed by IA32_XSS" ,                  // context component 8
       "PKRU control" ,
       "Reserved" ,                                      // context component 10
-      "CET_U state" ,                                   // 11
-      "CET_S state" ,                                   // 12
-      "HDC managed by IA32_XSS" ,                       // 13
-      "UINTR state" ,                                   // 14
-      "Reserved" ,                                      // 15
-      "HWP managed by IA32_XSS" ,                       // 16
+      "CET_U state managed by IA32_XSS" ,               // 11
+      "CET_S state managed by IA32_XSS" ,               // 12
+      "HDC state managed by IA32_XSS" ,                 // 13
+      "UINTR state managed by IA32_XSS" ,               // 14
+      "LBR state managed by IA32_XSS" ,                 // 15
+      "HWP state managed by IA32_XSS" ,                 // 16
       "AMX XTILECFG state" ,                            // 17
       "AMX XTILEDATA state" };                          // 18
 private final static String ENABLED_BYTES =
@@ -59,6 +59,7 @@ private final static String BASE_SIZE  = "Base/Size";
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
         {
+/*
         // EAX, subfunction 0
         int mask = 1;
         for ( String item : CONTEXT_PARMS ) 
@@ -67,6 +68,37 @@ private final static String BASE_SIZE  = "Base/Size";
                 { item, ( ( entries[0].eax & mask ) != 0 ) ? "1" : "0"} );
             mask <<= 1;
             }
+*/        
+        // EAX, subfunction 0 with conditionally use results of subfunction 1
+        int index = 0;
+        int mask = 1;
+        int mapXcr0 = entries[0].eax;
+        int mapXss = 0;
+        if ( ( entries.length > 1 )&&( entries[1].subfunction == 1 ) )
+            {
+            mapXss = entries[1].ecx;
+            }
+        for ( String item : CONTEXT_PARMS ) 
+            {
+            String s = "n/a";
+            if ( ( ( mapXcr0 & mask ) != 0 ) && ( ( mapXss & mask ) == 0 ) )
+                {
+                s = String.format( "XCR0.%d", index );
+                }
+            if ( ( ( mapXcr0 & mask ) == 0 ) && ( ( mapXss & mask ) != 0 ) )
+                {
+                s = String.format( "XSS.%d", index );
+                }
+            if ( ( ( mapXcr0 & mask ) != 0 ) && ( ( mapXss & mask ) != 0 ) )
+                {
+                s = String.format( "XCR0.%d | XSS.%d", index, index );
+                }
+            a.add( new String[] { item, s } );
+            index++;
+            mask <<= 1;
+            }
+        
+        // XSAVE/XRSTOR bitmap done
         a.add( interval );
         a.add( new String[]  // EBX, subfunction 0
             { ENABLED_BYTES, String.format( "%d Bytes", entries[0].ebx ) } );

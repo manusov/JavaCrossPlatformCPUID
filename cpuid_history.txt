@@ -1,3 +1,85 @@
+CPUID v1.01.08 (November, 16, 2020)
+XSAVE bitmaps updated: add context component #15 = LBR (Last Branch Record),
+some corrections: differentiate XCR0 and XSS bitmaps.
+
+1) Update and correct context save-restore management bitmaps.
+CPUID function 0Dh, subfunction 0, registers EDX:EAX = XCR0 settable bitmap
+CPUID function 0Dh, subfunction 1, registers EDX:ECX = XSS settable bitmap
+Listed features settable bitmaps for XCR0 and XSS, readable by CPUID at any CPLs,
+but actual context management values has restrictions:
+XCR0 readable from any CPLs.
+XSS not readable from CPL>0.
+
+CPUID new and re-ordered bits list:
+---------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------
+--- XCR0 bitmap ---
+0000000Dh    0       EAX     0       x87 context
+0000000Dh    0       EAX     1       SSE XMM[0-15] context
+0000000Dh    0       EAX     2       AVX YMM[0-15] context
+0000000Dh    0       EAX     3       MPX BNDREG context
+0000000Dh    0       EAX     4       MPX BNDCSR context
+0000000Dh    0       EAX     5       AVX512 K[0-7] context
+0000000Dh    0       EAX     6       AVX512 ZMM[0-15] context
+0000000Dh    0       EAX     7       AVX512 ZMM[16-31] context
+0000000Dh    0       EAX     9       PKRU (Protection Key Rights for User Pages) context
+0000000Dh    0       EAX     17      XTILECFG (Intel AMX Tile Configuration) context
+0000000Dh    0       EAX     18      XTILEDATA (Intel AMX Tile Data) context
+0000000Dh    0       EDX     62      LWP (Lightweight Profiling Features) context
+--- XSS bitmap ---
+0000000Dh    1       ECX     8       PT (Processor Trace) context
+0000000Dh    1       ECX     11      CET_U (User Mode Control-flow Enforcement Technology) context
+0000000Dh    1       ECX     12      CET_S (Supervisor Mode Control-flow Enforcement Technology) context
+0000000Dh    1       ECX     13      HDC (Hardware Duty Cycling) context
+0000000Dh    1       ECX     14      UINTR (User Mode Interrupt) context
+0000000Dh    1       ECX     15      NEW:  LBR (Last Branch Record) context
+0000000Dh    1       ECX     16      HWP (Hardware P-states) context
+0000000Dh    1       EDX     -       Reserved for XSS bitmap bits [63-32]
+---------------------------------------------------------------------------------
+
+2) XCR0 new bits list
+( but state component #15 supported by XSS, not readable at CPL>0 ):
+ Bit   Comments
+----------------------------------------------------------------
+ 15    LBR          Reserved for LBR (Last Branch Record) state
+----------------------------------------------------------------
+
+Source (LBR description):
+architecture-instruction-set-extensions-programming-reference.pdf
+Intel Architecture
+Instruction Set Extensions and Future Features
+Programming Reference
+319433-041
+OCTOBER 2020
+https://software.intel.com/content/www/us/en/develop/download/intel-architecture-instruction-set-extensions-programming-reference.html?wapkw=extension%20programming%20reference
+7.1 CONTEXT SWITCH, page 161.
+7.4.2 CPUID for XSAVE LBR Support, page 164.
+
+Source (fundamental information):
+325462-sdm-vol-1-2abcd-3abcd.pdf
+Intel 64 and IA-32 Architectures
+Software Developer's Manual
+Combined Volumes:
+1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
+Order Number: 325462-072US
+May 2020.
+https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4.html
+CHAPTER 13
+Managing state using the XSAVE feature set.
+page 317.
+
+Source (fundamental information):
+AMD64 Architecture Programmer's Manual:
+Volumes 1-5
+Publication # 40332  Revision 4.02  November 2020
+https://www.amd.com/system/files/TechDocs/40332.pdf
+3.2.8  Other MSRs, page 515
+18.13  XSAVE/XRSTOR,page 1081
+E.3.8  Function Dh - Processor Extended State Enumeration, page 1787
+
+
+
 CPUID v1.01.07 (October, 28, 2020)
 1) Bugs fixed for old processors that do not support extended CPUID
 (functions 80000000h and higher). Changes at binary level and java code.
