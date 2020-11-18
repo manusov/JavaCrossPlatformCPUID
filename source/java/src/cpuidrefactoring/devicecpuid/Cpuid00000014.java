@@ -26,7 +26,8 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "IP Filter" , "IP filtering, TraceStop filtering, warm pres." } ,
       { "MTC"       , "MTC timing packet and suppresion of COFI"      } ,
       { "PTWRITE"   , "PTWRITE can generate packets"                  } ,
-      { "PET"       , "Power Event Trace"                             } };
+      { "PET"       , "Power Event Trace"                             } ,
+      { "PSB PMI"   , "PSB and PMI preservation"                      } };
 private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
     { { "TR"        , "Tracing can be enabled with IA32_RTIT_CTL.ToPA" } ,
       { "ToPA"      , "ToPA tables can hold any number of output entries" } ,

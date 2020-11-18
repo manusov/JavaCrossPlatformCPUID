@@ -1,3 +1,29 @@
+CPUID v1.01.09 (November, 18, 2020)
+
+CPUID new bits list:
+---------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------
+0000000Ah    -       EBX     7       Top-down slots event not available flag
+00000014h    0       EBX     6       PSB and PMI preservation
+---------------------------------------------------------------------------------
+
+Source:
+Intel 64 and IA-32 Architectures Software Developer's Manual
+Documentation Changes
+November 2020
+Document Number: 252046-065
+https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32-architectures-software-developers-manual-documentation-changes.html
+CPUID function 0000000Ah, bit EBX.7
+Architectural Performance Monitoring Leaf, page 221 (3-204 Vol.2A).
+CPUID function 00000014h, subfunction 0, bit EBX.6
+Intel Processor Trace Enumeration Main Leaf, page 227 (3-210 Vol.2A).
+PSB (Packet Stream Boundary), see 35.1.1.1 Packet Summary, page 981 (Vol.3C 35-1).
+PMI (Performance Monitoring Interrupt), see ToPA PMI, page 992 (35-12 Vol.3C)
+ToPA is Table of Physical Addresses, see page 869 (25-14 Vol.3C)
+
+
+
 CPUID v1.01.08 (November, 16, 2020)
 XSAVE bitmaps updated: add context component #15 = LBR (Last Branch Record),
 some corrections: differentiate XCR0 and XSS bitmaps.

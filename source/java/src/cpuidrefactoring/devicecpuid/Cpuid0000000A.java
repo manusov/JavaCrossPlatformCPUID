@@ -30,7 +30,8 @@ private final static Object[][] DECODER_EBX =
       { "Last level cache reference event not available flag", 3, 3 } ,
       { "Last level cache misses event not available flag", 4, 4 } ,
       { "Branch instruction retired event not available flag", 5, 5 } ,
-      { "Branch mispredict retired event not available flag", 6, 6 } };
+      { "Branch mispredict retired event not available flag", 6, 6 } ,
+      { "Top-down slots event not available flag", 7, 7 } };
 private final static Object[][] DECODER_ECX =
     { { "Fixed counters bitmap" , 31, 0 } };
 private final static Object[][] DECODER_EDX =
