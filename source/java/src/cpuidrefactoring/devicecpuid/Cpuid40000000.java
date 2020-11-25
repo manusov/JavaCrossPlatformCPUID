@@ -18,11 +18,19 @@ Cpuid40000000()
 @Override String[][] getParametersList()
     {
     String[][] table = new String[][]
-        { { "Virtual CPU vendor string" , "n/a" } };
-    if ( ( entries != null )&&( entries.length == 1 ) )
+          { { "Maximum virtual CPUID level"  , "n/a" } ,
+            { "Virtual CPU vendor string"    , "n/a" } };
+    if ( ( entries != null )&&( entries.length == 1 )&&
+       ( ( entries[0].eax & 0xC0000000 ) == 0x40000000 ) )
         {
+        table[0][1] = String.format( "%08Xh" , entries[0].eax );
         String s = extractVendorString( entries[0] );
-        if ( s != null ) table[0][1] = s;
+        if ( s != null ) table[1][1] = s;
+        }
+    else if( ( entries != null )&&( entries.length == 1 ) )
+        {
+        table[0][1] = "?";
+        table[1][1] = "?";
         }
     return table;
     }

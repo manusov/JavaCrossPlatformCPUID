@@ -1,3 +1,17 @@
+CPUID v1.02.00 (November, 25, 2020)
+
+Start implementing a database containing Vendor-Specific and Model-Specific
+information for x86 processors and virtualization hypervisors. Current version
+only supports Intel Brand Index decoding. This opportunity relevant for older
+processors (Pentium II/III) that support reading the Brand Index byte, but
+not supporting reading the Brand String as text.
+
+Special thanks to Todd Allen.
+https://fossies.org/linux/cpuid/cpuid.c
+https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
+
+
+
 CPUID v1.01.09 (November, 18, 2020)
 
 CPUID new bits list:

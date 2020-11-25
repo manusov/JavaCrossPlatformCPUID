@@ -1,0 +1,79 @@
+/*
+CPUID Utility. (C)2020 IC Book Labs
+------------------------------------
+This file contains Processors and Hypervisors
+data exported from Todd Allen CPUID project.
+Some variables and functions names not compliant with java
+naming conventions, this fields using original C/C++ naming.
+-----------------------------------------------
+Vendor detector for virtual machine monitors (hypervisors).
+Plus, data base management methods.
+*/
+
+package cpuidrefactoring.database;
+
+public class VendorDetectVirtual 
+{
+
+public enum HYPERVISOR_T
+    {
+    HYPERVISOR_UNKNOWN,
+    HYPERVISOR_VMWARE,
+    HYPERVISOR_XEN,
+    HYPERVISOR_KVM,
+    HYPERVISOR_ORACLE_W,
+    HYPERVISOR_ORACLE_L,
+    HYPERVISOR_MICROSOFT,
+    }
+
+final static String[][] V_SIGN =
+    { { null                 , "unknown"             } ,
+      { "VMwareVMware"       , "VMware"              } ,
+      { "XenVMMXenVMM"       , "Xen"                 } ,
+      { "KVMKVMKVM"          , "KVM"                 } ,
+      { "VBoxVBoxVBox"       , "Oracle (Windows VM)" } ,
+      { "KVMKMVMKV"          , "Oracle (Linux VM)"   } ,
+      { "Microsoft Hv"       , "Microsoft"           } };
+
+private HYPERVISOR_T vVendor = null;
+private String   vSign = null;
+private String   vName;
+
+HYPERVISOR_T getVvendor() { return vVendor; }
+
+String detectVirtual( String pattern )
+    {
+    HYPERVISOR_T[] vv = HYPERVISOR_T.values();
+    for ( int i=0; ( i < vv.length )&&( vSign == null ); i++ )
+        {
+        switch ( vv[i] )
+            {
+            case HYPERVISOR_UNKNOWN:
+                vVendor  = vv[i];
+                vSign    = V_SIGN[i][0];
+                vName    = V_SIGN[i][1];
+                break;
+            case HYPERVISOR_VMWARE:
+            case HYPERVISOR_XEN:
+            case HYPERVISOR_KVM:
+            case HYPERVISOR_MICROSOFT:
+            case HYPERVISOR_ORACLE_W:
+            case HYPERVISOR_ORACLE_L:
+                if ( pattern == null )
+                    {
+                    vVendor   = null;
+                    vSign     = null;
+                    vName     = null;
+                    }
+                else if ( V_SIGN[i][0].equals( pattern ) )
+                    {
+                    vVendor   = vv[i];
+                    vSign     = V_SIGN[i][0];
+                    vName     = V_SIGN[i][1];
+                    }
+            }
+        }
+    return vName;
+    }
+    
+}
