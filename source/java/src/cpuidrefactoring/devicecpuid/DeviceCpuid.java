@@ -89,7 +89,17 @@ private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =
 
 private final static ReservedFunctionCpuid[] VIRTUAL_FUNCTIONS =
     {
-    new Cpuid40000000()
+    new Cpuid40000000(),
+    new Cpuid40000001(),
+    new Cpuid40000002(),
+    new Cpuid40000003(),
+    new Cpuid40000004(),
+    new Cpuid40000005(),
+    new Cpuid40000006(),
+    new Cpuid40000007(),
+    new Cpuid40000008(),
+    new Cpuid40000009(),
+    new Cpuid4000000A()
     };
 
 private final static SummaryCpuid[] SUMMARY_SCREENS =

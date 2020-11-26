@@ -14,6 +14,34 @@ package cpuidrefactoring.database;
 
 class VendorDetectPhysical 
 {
+/*
+This static entry point used for early processor vendor detection, 
+required for:
+1) Re-load dump with vendor-specific functions try, note unconditional
+   use of vendor-specific functions can cause hardware failures.
+2) Select or control vendor-specific leafs of CPUID instruction, note
+   vendor type argument required for some parsings and must be valid
+   before paesings.
+pattern = processor vendor signature.
+*/
+private static VENDOR_T savedResult = null;
+public static  VENDOR_T getSavedResult() { return savedResult; }
+public static  VENDOR_T earlyDetect( String signature )
+    {
+    savedResult = null;
+    VENDOR_T[] pv = VENDOR_T.values();
+    for ( VENDOR_T value : pv ) 
+        {
+        String pattern = P_SIGN[ value.ordinal()][0];
+        if ( pattern.equals( signature ) ) 
+            {
+            savedResult = value;
+            break;
+            }
+        }
+    return savedResult;
+    }
+    
 private DatabaseStash stash;
 
 VendorDetectPhysical( DatabaseStash stash )

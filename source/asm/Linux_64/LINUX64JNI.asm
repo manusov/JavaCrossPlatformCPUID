@@ -2,7 +2,7 @@
 ;                    Native Binary Library for Linux x64                       ;
 ;       JNI ELF (Java Native Interface Executable Linkable Format 64           ;
 ;                                                                              ;
-;                   Updated at CPUID v1.01.07 refactoring.                     ;
+; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
 ;------------------------------------------------------------------------------;
 
 format ELF64
@@ -138,14 +138,22 @@ push rdi
 cld
 mov ecx,8
 xor eax,eax
-rep stosd
+rep stosd              ; blank first 8 * 4 = 32 bytes
 mov rcx,rdi
 call Internal_GetCPUID
 pop rdi
 mov [rdi],eax
 ret
 
-ENTRIES_LIMIT = 511    ; Maximum number of output buffer 16352 bytes = 511*32
+; Output buffer restrictions, for prevent buffer overflow
+; when invalid CPUID data returned
+; 511 (not 512) because entry 0 used for data size return
+; -1 because, for example, Limit=1 means only function 0 supported
+; -2 because 511 entries, not 512
+ENTRIES_LIMIT  = 511      ; Output buffer maximum size = 16352 bytes = 511*32
+STANDARD_LIMIT = 192 - 1  ; Limit for standard CPUID functions 000000xxh
+EXTENDED_LIMIT = 192 - 1  ; Limit for extended CPUID functions 800000xxh
+VIRTUAL_LIMIT  = 128 - 2  ; Limit for virtual CPUID functions  400000xxh
 
 ;---------- Target subroutine -------------------------------------------------;
 ; INPUT:  Parameter#1 = RCX = Pointer to output buffer
@@ -176,23 +184,25 @@ jc NoCpuId
 
 ;---------- Get standard CPUID results ----------------------------------------;
 xor r9d,r9d               ; R9D  = standard functions start
-cmp eax,ENTRIES_LIMIT/2   ; EAX = maximum supported standard function number
+cmp eax,STANDARD_LIMIT    ; EAX = maximum supported standard function number
 ja ErrorCpuId             ; Go if invalid limit
 call SequenceCpuId
 jc ErrorCpuId             ; Exit if output buffer overflow at subfunction
 
 ;---------- Get virtual CPUID results -----------------------------------------;
-mov r9d,40000000h         ; R9D = virtual functions start
-mov eax,r9d               ; EAX = Function
-xor ecx,ecx               ; ECX = Subfunction
+mov r9d,040000000h        ; R9D = virtual functions start number
+mov eax,r9d               ; EAX = Function number for CPUID instruction
+xor ecx,ecx               ; ECX = Subfunction, here redundant
 cpuid
-and eax,0FFFFFF00h
-cmp eax,040000000h
+mov ecx,eax
+and ecx,0FFFFFF00h        ; ECX = Pattern bits for check virtual CPUID support
+cmp ecx,r9d               ; Compare pattern bits
 jne NoVirtual             ; Skip virtual CPUID if not supported
-mov eax,r9d               ; EAX = Limit, yet 1 function 40000000h
+cmp eax,40000000h + VIRTUAL_LIMIT  ; EAX = maximum extended function number
+ja ErrorCpuId             ; Go if invalid limit, too big function number
 call SequenceCpuId
 jc ErrorCpuId             ; Exit if output buffer overflow at subfunction
-NoVirtual:
+NoVirtual:                ; This label for skip virtual functions
 
 ;---------- Get extended CPUID results ----------------------------------------;
 mov r9d,80000000h         ; R9D  = extended functions start
@@ -200,7 +210,7 @@ mov eax,r9d
 cpuid
 test eax,eax
 jns NoExtended            ; Go skip extended functions if bit EAX.31 = 0
-cmp eax,80000000h + ENTRIES_LIMIT/2  ; EAX = maximum extended function number
+cmp eax,80000000h + EXTENDED_LIMIT  ; EAX = maximum extended function number
 ja ErrorCpuId             ; Go if invalid limit
 call SequenceCpuId
 jc ErrorCpuId             ; Exit if output buffer overflow

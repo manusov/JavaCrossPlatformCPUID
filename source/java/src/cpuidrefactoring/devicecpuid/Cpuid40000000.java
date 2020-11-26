@@ -2,7 +2,7 @@
 CPUID Utility. (C)2020 IC Book Labs
 ------------------------------------
 Class for support CPUID Virtual Function
-40000000h = Virtual CPUID vendor string.
+40000000h = Virtual CPUID: hypervisor vendor string and maximum function number.
 */
 
 package cpuidrefactoring.devicecpuid;

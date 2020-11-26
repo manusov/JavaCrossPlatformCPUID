@@ -19,14 +19,15 @@ import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 public class DatabaseStash 
 {
 
-VENDOR_T       vendor     = null;
-HYPERVISOR_T   hypervisor = null;
+VENDOR_T      vendor     = null;
+HYPERVISOR_T  hypervisor = null;
 
 boolean  saw_4  = false;
 boolean  saw_b  = false;
 boolean  saw_1f = false;
 
 // this public part of class contains fields, loaded from dump
+// this public part actual AFTER buildStash() method call.
 public int    val_0_eax = 0;
 public int    val_1_eax = 0;
 public int    val_1_ebx = 0;

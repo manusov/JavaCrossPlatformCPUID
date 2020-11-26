@@ -159,6 +159,34 @@ private final static int TFMS_AND_BRAND_CPUID = 0x00000001;
                 }
             }
         }
+
+    
+    /*
+    TODO.
+    
+    1) Use public static methods at VendorDetectPhysical and VendorDetectVirtual
+       classes for early detect processor and hypervisor. Used for:
+        - re-load dump with vendor-specific functions try
+        - select vendor-specific leaf of CPUID instruction
+       early:   class ApplicationCpuid(), line 52.
+       middle:  class DeviceCpuid(), line 155
+       late:    this class, or remove and make 2 stages
+       or store previously detected as static variable at:
+       VendorDetectPhysical and VendorDetectVirtual.
+       early = detect,
+       middle = use stored,
+       late = redetect or use stored, simplify detectPhysical, detectVirtual,
+       or better reserve complexity for complex case.
+    
+    2) Yet Brand Index only supported by database. Add:
+        - microarchitecture,
+        - family, 
+        - physical characteristics, 
+        - synth string,
+        - model 
+        - and other database functionality.
+    */
+
     
     // return default string ( if empty ) or
     // generated strings array ( if not empty )

@@ -1,3 +1,13 @@
+CPUID v1.03.00 (November, 26, 2020)
+
+1) Binary interface updated for read virtual CPUID functions 40000001h-4000000Ah.
+2) Results of CPUID functions 40000001h-4000000Ah visualized yet as dump for
+   reserved functions.
+3) Internal changes: early vendor detection static methods, reserved for
+   vendor-specific CPUID extensions.
+
+
+
 CPUID v1.02.00 (November, 25, 2020)
 
 Start implementing a database containing Vendor-Specific and Model-Specific

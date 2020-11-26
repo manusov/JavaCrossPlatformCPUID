@@ -14,7 +14,34 @@ package cpuidrefactoring.database;
 
 public class VendorDetectVirtual 
 {
-
+/*
+This static entry point used for early hypervisor vendor detection, 
+required for:
+1) Re-load dump with vendor-specific functions try, note unconditional
+   use of vendor-specific functions can cause hardware failures.
+2) Select or control vendor-specific leafs of CPUID instruction, note
+   vendor type argument required for some parsings and must be valid
+   before paesings.
+pattern = hypervisor vendor signature.
+*/
+private static HYPERVISOR_T savedResult = null;
+public static  HYPERVISOR_T getSavedResult() { return savedResult; }
+public static  HYPERVISOR_T earlyDetect( String signature )
+    {
+    savedResult = null;
+    HYPERVISOR_T[] pv = HYPERVISOR_T.values();
+    for ( HYPERVISOR_T value : pv ) 
+        {
+        String pattern = V_SIGN[ value.ordinal()][0];
+        if ( pattern.equals( signature ) ) 
+            {
+            savedResult = value;
+            break;
+            }
+        }
+    return savedResult;
+    }
+    
 public enum HYPERVISOR_T
     {
     HYPERVISOR_UNKNOWN,
