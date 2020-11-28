@@ -7,6 +7,8 @@ CPUID functions and summary screens classes.
 
 package cpuidrefactoring.devicecpuid;
 
+import cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T;
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 import java.util.ArrayList;
 
 class ContainerCpuid 
@@ -124,5 +126,27 @@ ReservedFunctionCpuid findFunction( int x )
         }
     return f;    
     }
+
+private VENDOR_T     cpuVendor = null;
+VENDOR_T getCpuVendor()
+    {
+    return cpuVendor; 
+    }
+void setCpuVendor( VENDOR_T v ) 
+    {
+    cpuVendor = v; 
+    }
+
+private HYPERVISOR_T vmmVendor = null;
+HYPERVISOR_T getVmmVendor()
+    {
+    return vmmVendor;
+    }
+void setVmmVendor( HYPERVISOR_T h ) 
+    {
+    vmmVendor = h; 
+    }
+
+
 
 }

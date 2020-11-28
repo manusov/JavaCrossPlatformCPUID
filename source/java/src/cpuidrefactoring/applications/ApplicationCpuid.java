@@ -11,6 +11,12 @@ package cpuidrefactoring.applications;
 
 import cpuidrefactoring.About;
 import cpuidrefactoring.CpuidRefactoring;
+import cpuidrefactoring.database.VendorDetectPhysical;
+import cpuidrefactoring.database.VendorDetectVirtual;
+import cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T;
+import static cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T.*;
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
+import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.*;
 import cpuidrefactoring.rootmenu.*;
 import cpuidrefactoring.system.Registry;
 import java.awt.event.ActionListener;
@@ -35,12 +41,97 @@ public ApplicationCpuid()
     
 private class BuildModel extends ApplicationModel
     {
+/*
+Support early CPU and VMM vendor detection.
+Database usage 1 of 3 = Early vendor detection.
+See also: DeviceCpuid.java , CpuidSummary.java.
+Early detect CPU vendor, this operation reserved for repeat receive CPUID
+binary data with added vendor-specific functions. Note cannot add this
+functions for all CPUs at first pass, because hardware failures and wrong
+results possible if some incompatible vendor functions used.
+Additionally, static classes store detection results and results can be
+read later without re-detection.
+*/
+    private void earlyVendorDetect( boolean physical )
+        {
+        String       scpu = earlyExtractVendorString( STANDARD_KEY, opb );
+        String       svmm = earlyExtractVendorString( VIRTUAL_KEY, opb );
+        VENDOR_T     vcpu = VendorDetectPhysical.earlyDetect( scpu );
+        HYPERVISOR_T vvmm = VendorDetectVirtual.earlyDetect( svmm );
+/*            
+reserved for secondary read binary data (with vendor-specific functions),
+if vendors match patterns
+physical flag:
+true  = means physical or virtual CPU detection, secondary read possible
+false = means load dump from file, secondary read not possible
+*/
+        if ( physical && vcpu == VENDOR_CYRIX )
+            {
+            // reserved for secondary read with vendor-specific additions
+            }
+        else if ( physical && vcpu == VENDOR_TRANSMETA )
+            {
+            // reserved for secondary read with vendor-specific additions
+            }
+          
+        if ( physical && vvmm == HYPERVISOR_MICROSOFT )
+            {
+            // reserved for secondary read with vendor-specific additions
+            }
+        }
+    
+    // helper for extract CPU and VMM vendor strings from binary dump
+    private final static int STANDARD_KEY = 0;
+    private final static int VIRTUAL_KEY  = 0x40000000;
+    private String earlyExtractVendorString( int key, long[] data )
+        {
+        boolean b = false;
+        StringBuilder sb = new StringBuilder( "" );
+        int n = data.length / 4;
+        int m = ( int )( data[0] & 0x3FF );
+        for( int i=1; ( i<m )&&( i<n ); i++ )
+            {
+            int function = (int)( data[ i*4 ] >> 32 );
+            if ( function == key )
+                {
+                int ebx = (int)( data[ i*4+2 ] >> 32 );
+                int ecx = (int)( data[ i*4+3 ] & (long)0xFFFFFFFF );
+                int edx = (int)( data[ i*4+3 ] >> 32 );
+                int[] signature = { ebx, edx, ecx };
+                for( int j=0; j<3; j++ )
+                    {
+                    int d = signature[j];
+                    for( int k=0; k<4; k++ )
+                        {
+                        char c = (char)( d & 0xFF );
+                        if ( c != 0 )
+                            {
+                            if ( ( c < ' ' )||( c > '}' ) ) c = '.';
+                            sb.append( c );
+                            b = true;
+                            }
+                        d = d >>> 8;
+                        }
+                    }
+                }
+            }
+        return b ? sb.toString() : null;
+        }
+/*
+End of database usage 1 of 3 = Early vendor detection.
+*/                
+
+/*
+Initializing Application Model.
+*/
+    
     // private final static String NAME = "CPUID Results";
     private final static int OPB_SIZE = 2048;  // IPB not used for this funct.
     private final static int FUNCTION_CPUID = 0;
     private final int jniStatus;
     private ViewSet[] viewSets;
     private boolean statusInit, statusParse;
+    
     private BuildModel()
         {
         // Initializing hardware support objects
@@ -57,10 +148,18 @@ private class BuildModel extends ApplicationModel
         device = r.loadDriver( Registry.CPR.DRIVER_CPUID );
         // Send binary data from hardware to CPR module
         device.setBinary( opb );
-        // Analysing data
+        // Analyzing data: verify array size and alignment restrictions
         if ( jniStatus > 0 ) { statusInit = device.initBinary();   }
-        if ( statusInit )    { statusParse = device.parseBinary(); }
-        // Built text data
+        
+        // Early vendor detection, 
+        // parse binary array and generating CPUID data entries
+        if ( statusInit )    
+            {  // this usage of vendor detector when application starts
+            earlyVendorDetect( true );
+            statusParse = device.parseBinary(); 
+            }
+        
+        // Build text data
         if ( statusInit & statusParse ) 
             {
             viewSets = buildStrings();
@@ -88,14 +187,8 @@ private class BuildModel extends ApplicationModel
         }
 
     @Override public boolean setBinary( long[] x )
-        {
-        boolean b1, b2 = false;
-        device.setBinary( x );
-        b1 = device.initBinary();
-        if ( b1 ) { b2 = device.parseBinary(); }
-        if ( b1 & b2 == false ) return false;
-        viewSets = buildStrings();
-        return true;
+        {  // this call for load dump, no physical platform, physical = false
+        return setBinaryHelper( x, false );
         }
 
     @Override public boolean redetectPlatform()
@@ -104,8 +197,8 @@ private class BuildModel extends ApplicationModel
         Registry r = CpuidRefactoring.getRegistry();
         int status = r.binaryGate( null, opb, FUNCTION_CPUID, OPB_SIZE );
         if ( status > 0 )
-            {
-            return setBinary( opb );
+            {  // this call for re-detect physical platform, physical = true
+            return setBinaryHelper( opb, true );
             }
         else
             {
@@ -113,8 +206,22 @@ private class BuildModel extends ApplicationModel
             }
         }
     
-    // Helper method for redetect
-
+    // Helper method for redetect, include early detect vendor by database
+    private boolean setBinaryHelper( long [] x, boolean physical )
+        {
+        boolean b1, b2 = false;
+        device.setBinary( x );
+        b1 = device.initBinary();
+        if ( b1 )
+            {
+            earlyVendorDetect( physical );
+            b2 = device.parseBinary(); 
+            }
+        if ( b1 & b2 == false ) return false;
+        viewSets = buildStrings();
+        return true;
+        }
+    
     private final static int SUMMARY_SCREEN_ID = 0;
     private final static int DUMP_SCREEN_ID = 1;
     private final static int TREE_SCREEN_ID = 2;
@@ -204,6 +311,10 @@ private class BuildModel extends ApplicationModel
         return vs;
         }
     }
+
+/*
+Initializing Application View.
+*/
 
 private class BuildView extends ApplicationView
     {

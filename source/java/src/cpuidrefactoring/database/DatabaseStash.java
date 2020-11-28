@@ -27,7 +27,7 @@ boolean  saw_b  = false;
 boolean  saw_1f = false;
 
 // this public part of class contains fields, loaded from dump
-// this public part actual AFTER buildStash() method call.
+// this public part must be actual before buildStash() method call.
 public int    val_0_eax = 0;
 public int    val_1_eax = 0;
 public int    val_1_ebx = 0;

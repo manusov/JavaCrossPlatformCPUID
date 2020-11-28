@@ -1,3 +1,26 @@
+CPUID v1.03.01 (November, 28, 2020)
+
+1) Add support virtual CPUID functions 40000001h-40000006h,
+   yet for Oracle VirtualBox under Windows, signature "VBoxVBoxVBox". 
+   For other virtualization scenarios virtual functions results dump
+   visualized without decoding, as reserved.
+2) Internal changes: updated early vendor detection static methods,
+   reserved for vendor-specific CPUID extensions.
+
+Data sources:
+1) Hypervisor Top Level Functional Specification. 
+   February 2020: Released Version 6.0b.
+   Microsoft.
+   File: Hypervisor Top Level Functional Specification v6.0b.pdf
+   https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/tlfs
+2) sandpile.org
+   https://www.sandpile.org/x86/cpuid.htm#level_4000_0000h
+3) Special thanks to Todd Allen.
+   https://fossies.org/linux/cpuid/cpuid.c
+   https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
+
+
+
 CPUID v1.03.00 (November, 26, 2020)
 
 1) Binary interface updated for read virtual CPUID functions 40000001h-4000000Ah.

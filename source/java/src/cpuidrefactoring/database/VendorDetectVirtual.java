@@ -33,7 +33,15 @@ public static  HYPERVISOR_T earlyDetect( String signature )
     for ( HYPERVISOR_T value : pv ) 
         {
         String pattern = V_SIGN[ value.ordinal()][0];
-        if ( pattern.equals( signature ) ) 
+        if ( pattern == null )
+            {
+            if ( signature == null )
+                {
+                savedResult = null;
+                break;
+                }
+            }
+        else if ( pattern.equals( signature ) ) 
             {
             savedResult = value;
             break;

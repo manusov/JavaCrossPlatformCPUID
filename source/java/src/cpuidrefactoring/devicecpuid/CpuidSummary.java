@@ -124,7 +124,11 @@ private final static int TFMS_AND_BRAND_CPUID = 0x00000001;
         model = physicalModel[1];
         }
 
-    // Initializing data base for CPU/Hypervisor vendor-specific decoding
+/*
+Database usage 3 of 3 = Late vendor decoding.
+See also: ApplicationCpuid.java , DeviceCpuid.java.
+Initializing data base for CPU/Hypervisor vendor-specific late detection.
+*/                
     String[] interval = new String[] { "", "" };
     if ( ( signP != null )||( signV != null ) )
         {
@@ -159,26 +163,13 @@ private final static int TFMS_AND_BRAND_CPUID = 0x00000001;
                 }
             }
         }
-
-    
+/*
+End of database usage 3 of 3 = Late vendor detection.
+*/                
+   
     /*
     TODO.
-    
-    1) Use public static methods at VendorDetectPhysical and VendorDetectVirtual
-       classes for early detect processor and hypervisor. Used for:
-        - re-load dump with vendor-specific functions try
-        - select vendor-specific leaf of CPUID instruction
-       early:   class ApplicationCpuid(), line 52.
-       middle:  class DeviceCpuid(), line 155
-       late:    this class, or remove and make 2 stages
-       or store previously detected as static variable at:
-       VendorDetectPhysical and VendorDetectVirtual.
-       early = detect,
-       middle = use stored,
-       late = redetect or use stored, simplify detectPhysical, detectVirtual,
-       or better reserve complexity for complex case.
-    
-    2) Yet Brand Index only supported by database. Add:
+    Yet Brand Index only supported by database. Add:
         - microarchitecture,
         - family, 
         - physical characteristics, 

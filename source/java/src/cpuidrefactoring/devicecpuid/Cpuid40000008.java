@@ -7,7 +7,7 @@ Class for support CPUID Virtual Function
 
 package cpuidrefactoring.devicecpuid;
 
-public class Cpuid40000008 extends ReservedFunctionCpuid
+public class Cpuid40000008 extends ParameterFunctionCpuid
 {
 Cpuid40000008()
     { setFunction( 0x40000008 ); }

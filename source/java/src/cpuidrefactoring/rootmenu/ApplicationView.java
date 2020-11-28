@@ -113,16 +113,16 @@ public final class BLoadBinary implements ActionListener       // LOAD BINARY
         long[] dataBackup = new long[size];
         for( int i=0; i<size; i++ ) 
             {
-            dataBackup[i] = data[i];
-            data[i] = 0; 
+            dataBackup[i] = data[i];  // backup element[i]
+            data[i] = 0;              // clear element[i]
             }
         boolean loaded = fileBinary.loadBinaryDialogue( null, data );
         if ( loaded == false ) 
-            { 
+            {  // if dump not loaded, restore buffer from backup
             System.arraycopy( dataBackup, 0, data, 0, size );
             return; 
             }
-        model.setBinary( data );
+        model.setBinary( data );  // if dump loaded, set data + redetect vendor
         if ( t != null )
             {  // revisual data
             t.setSelectedIndex( 0 );    

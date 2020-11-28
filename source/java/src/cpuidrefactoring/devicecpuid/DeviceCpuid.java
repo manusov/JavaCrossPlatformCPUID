@@ -7,6 +7,10 @@ Text arrays = F ( CPUID binary dump ).
 
 package cpuidrefactoring.devicecpuid;
 
+import cpuidrefactoring.database.VendorDetectPhysical;
+import cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T;
+import cpuidrefactoring.database.VendorDetectVirtual;
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 import cpuidrefactoring.system.Device;
 import java.util.ArrayList;
 
@@ -162,6 +166,19 @@ public DeviceCpuid()
 
 @Override public boolean parseBinary()
     {
+
+/*
+Database usage 2 of 3 = Get results of previous early vendor detection.
+See also: ApplicationCpuid.java , CpuidSummary.java.
+*/        
+    VENDOR_T     vcpu = VendorDetectPhysical.getSavedResult();
+    HYPERVISOR_T vvmm = VendorDetectVirtual.getSavedResult();
+    container.setCpuVendor( vcpu );
+    container.setVmmVendor( vvmm );
+    
+/*
+End of database usage 2 of 3 = Get results of previous early vendor detection.
+*/                
     ArrayList<String> shortNames = new ArrayList<>();
     ArrayList<String> longNames = new ArrayList<>();
     ArrayList<String[]> listsUp = new ArrayList<>();

@@ -7,8 +7,122 @@ Class for support CPUID Virtual Function
 
 package cpuidrefactoring.devicecpuid;
 
-public class Cpuid40000003 extends ReservedFunctionCpuid
+import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.*;
+import java.util.ArrayList;
+
+public class Cpuid40000003 extends ParameterFunctionCpuid
 {
 Cpuid40000003()
     { setFunction( 0x40000003 ); }
+
+@Override String getLongName()
+    { 
+    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+        return "Hypervisor optional features";
+    else
+        return super.getLongName();
+    }
+
+// Control tables for results decoding
+private final static String[][] DECODER_EAX =
+    { { "VPRT"    , "VP run time"                        } ,
+      { "PRCNT"   , "Partition reference counter"        } ,
+      { "BSMSR"   , "Basic synIC MSRs"                   } ,
+      { "STMSR"   , "Synthetic timer MSRs"               } ,
+      { "APICMSR" , "APIC access MSRs"                   } ,
+      { "HCMSR"   , "Hypercall MSRs"                     } ,
+      { "AVPMSR"  , "Access virtual processor index MSR" } ,
+      { "VSRMSR"  , "Virtual system reset MSR"           } ,
+      { "SPMSR"   , "Access statistics pages MSR"        } ,
+      { "REFTSC"  , "Reference TSC access"               } ,
+      { "GISMSR"  , "Guest idle state MSR"               } ,
+      { "TAFMSR"  , "TSC/APIC frequency MSRs"            } ,
+      { "GDMSR"   , "Guest debugging MSRs"               } };
+private final static String[][] DECODER_EBX =
+    { { "CRPART" , "CreatePartitions"                  } ,
+      { "ACPART" , "AccessPartitionId"                 } ,
+      { "ACMP"   , "AccessMemoryPool"                  } ,
+      { "ADJMB"  , "AdjustMessageBuffers"              } ,
+      { "PSTMSG" , "PostMessages"                      } ,
+      { "SGEV"   , "SignalEvents"                      } ,
+      { "CRTPRT" , "CreatePort"                        } ,
+      { "CONPRT" , "ConnectPort"                       } ,
+      { "ACST"   , "AccessStats"                       } ,
+      { "x"      , "Reserved"                          } ,
+      { "x"      , "Reserved"                          } ,
+      { "DBG"    , "Debugging"                         } ,
+      { "CPUM"   , "CPUManagement"                     } ,
+      { "CPROF"  , "ConfigureProfiler"                 } ,
+      { "x"      , "Reserved"                          } ,
+      { "x"      , "Reserved"                          } ,
+      { "ACVSM"  , "AccessVSM"                         } ,
+      { "ACREG"  , "AccessVpRegisters"                 } ,
+      { "x"      , "Reserved"                          } ,
+      { "x"      , "Reserved"                          } ,
+      { "EXHYPC" , "EnableExtendedHypercalls"          } ,
+      { "STVP"   , "StartVirtualProcessor"             } };
+private final static Object[][] DECODER_ECX =
+    { { "HPET is required to enter C3"  , 4 , 4 } ,
+      { "Maximum processor power state" , 3 , 0 } };
+private final static String[][] DECODER_EDX =
+    { { "MWAIT"  , "MWAIT available"                             } ,
+      { "GDBG"   , "Guest debugging support available"           } ,
+      { "PERFM"  , "Performance monitor support available"       } ,
+      { "CPUDPE" , "CPU dynamic partitioning events available"   } ,
+      { "HYPXMM" , "Hypercall XMM input parameters available"    } ,
+      { "VGIDL"  , "Virtual guest idle state available"          } ,
+      { "HYPSLP" , "Hypervisor sleep state available"            } ,
+      { "QNUMA"  , "Query NUMA distance available"               } ,
+      { "DTIM"   , "Determine timer frequency available"         } ,
+      { "INJMC"  , "Inject synthetic machine check available"    } ,
+      { "GCRMSR" , "Guest crash MSRs available"                  } ,
+      { "DBGMSR" , "Debug MSRs available"                        } ,
+      { "NPIEP"  , "NPIEP available"                             } ,
+      { "DISHYP" , "Disable hypervisor available"                } ,
+      { "EXTGVA" , "Extended GVA ranges for flush virt address"  } ,
+      { "HYXMMR" , "Hypercall XMM register return available"     } ,
+      { "x"      , "Reserved"                                    } ,
+      { "SINTP"  , "Sint polling mode available"                 } ,
+      { "HMSRLC" , "Hypercall MSR lock available"                } ,
+      { "DSTIM"  , "Use direct synthetic timers"                 } };
+
+@Override String[][] getParametersList()
+    {
+    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+        {
+        DecodeReturn dr;
+        String[] interval = new String[] { "", "", "", "", "" };
+        ArrayList<String[]> strings;
+        ArrayList<String[]> a = new ArrayList<>();
+        if ( ( entries != null )&&( entries.length > 0 ) )
+            {
+            // EAX
+            strings = decodeBitmap( "EAX", DECODER_EAX, entries[0].eax );
+            a.addAll( strings );
+            a.add( interval );
+            // EBX
+            strings = decodeBitmap( "EBX", DECODER_EBX, entries[0].ebx );
+            a.addAll( strings );
+            a.add( interval );
+            // ECX
+            dr = decodeBitfields( "ECX", DECODER_ECX, entries[0].ecx );
+            int x = dr.values[1];
+            String s;
+            if ( x <= 3 ) s = String.format("C%d", x );
+            else          s = "?";
+            dr.strings.get(1)[4] = s;
+            a.addAll( dr.strings );
+            a.add( interval );
+            // EDX
+            strings = decodeBitmap( "EDX", DECODER_EDX, entries[0].edx );
+            a.addAll( strings );
+            }
+        return a.isEmpty() ? 
+            super.getParametersList() : a.toArray( new String[a.size()][] );
+        }
+    else
+        {
+        return super.getParametersList();
+        }
+    }
 }

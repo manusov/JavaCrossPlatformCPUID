@@ -13,7 +13,7 @@ Cpuid40000000()
     { setFunction( 0x40000000 ); }
 
 @Override String getLongName()
-    { return "Virtual CPUID vendor string"; }
+    { return "Virtual CPUID hypervisor vendor string"; }
 
 @Override String[][] getParametersList()
     {

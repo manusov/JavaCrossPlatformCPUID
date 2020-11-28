@@ -12,7 +12,7 @@ Plus, data base management methods.
 
 package cpuidrefactoring.database;
 
-class VendorDetectPhysical 
+public class VendorDetectPhysical 
 {
 /*
 This static entry point used for early processor vendor detection, 
@@ -33,7 +33,15 @@ public static  VENDOR_T earlyDetect( String signature )
     for ( VENDOR_T value : pv ) 
         {
         String pattern = P_SIGN[ value.ordinal()][0];
-        if ( pattern.equals( signature ) ) 
+        if ( pattern == null )
+            {
+            if ( signature == null )
+                {
+                savedResult = value;
+                break;
+                }
+            }
+        else if ( pattern.equals( signature ) ) 
             {
             savedResult = value;
             break;
