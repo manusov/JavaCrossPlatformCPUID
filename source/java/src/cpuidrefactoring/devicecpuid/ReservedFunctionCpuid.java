@@ -85,13 +85,22 @@ final boolean isShow()
 
 // Helpers used by child classes
 
-final String extractVendorString( EntryCpuid entry )
+final String extractVendorString( EntryCpuid entry, boolean virtual )
     {
     boolean b = false;
     int data[] = new int[3];
     data[0] = entry.ebx;
-    data[1] = entry.edx;
-    data[2] = entry.ecx;
+    if ( !virtual )
+        {  // for functions 00000000h, 80000000h order is EBX-EDX-ECX
+        data[1] = entry.edx;
+        data[2] = entry.ecx;
+        }
+    else
+        {  // for virtual function 40000000h order is EBX-ECX-EDX
+        data[1] = entry.ecx;
+        data[2] = entry.edx;
+        }
+
     StringBuilder sb = new StringBuilder( "" );
     for( int i=0; i<3; i++ )
         {

@@ -1,3 +1,14 @@
+CPUID v1.03.02 (November, 29, 2020)
+
+1) Add support virtual CPUID functions 40000007h-4000000Ah.
+2) Add data decoding for hypervisor vendor = Microsoft.
+3) Bug fix for virtual CPUID function vendor string decoding.
+   Note about registers order for vendor signature string build:
+   for physical functions 00000000h, 80000000h, order = EBX-EDX-ECX.
+   for virtual function 40000000h, order = EBX-ECX-EDX.
+
+
+
 CPUID v1.03.01 (November, 28, 2020)
 
 1) Add support virtual CPUID functions 40000001h-40000006h,

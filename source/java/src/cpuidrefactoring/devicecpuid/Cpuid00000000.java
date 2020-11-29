@@ -23,7 +23,7 @@ Cpuid00000000()
     if ( ( entries != null )&&( entries.length == 1 ) )
         {
         table[0][1] = String.format( "%08Xh" , entries[0].eax );
-        String s = extractVendorString( entries[0] );
+        String s = extractVendorString( entries[0], false );
         if ( s != null ) table[1][1] = s;
         }
     return table;

@@ -7,6 +7,7 @@ Class for support CPUID Virtual Function
 
 package cpuidrefactoring.devicecpuid;
 
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.*;
 import java.util.ArrayList;
 
@@ -17,15 +18,16 @@ Cpuid40000004()
 
 @Override String getLongName()
     { 
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
-        return "Hypervisor optimal recommendations";
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
+        return "Guest implementation recommendations";
     else
         return super.getLongName();
     }
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "HYAS" , "Use hypercalls for AS switches"          } ,
+    { { "HYAS"   , "Use hypercalls for AS switches"        } ,    // bit 0
       { "HYLTLB" , "Use hypercalls for local TLB flushes"  } ,
       { "HYRTLB" , "Use hypercalls for remote TLB flushes" } ,
       { "MSRINT" , "Use MSRs to access EOI, ICR, TPR"      } ,
@@ -33,21 +35,30 @@ private final static String[][] DECODER_EAX =
       { "RELTIM" , "Use relaxed timing"                    } ,
       { "DMAR"   , "Use DMA remapping"                     } ,
       { "INTR"   , "Use interrupt remapping"               } ,
-      { "X2MSR"  , "Use x2APIC MSRs"                       } ,
+      { "X2MSR"  , "Use x2APIC MSRs"                       } ,    // bit 8
       { "DAEOI"  , "Deprecate AutoEOI"                     } ,
       { "HYSCL"  , "Use SyntheticClusterIpi hypercall"     } ,
-      { "EXPM"   , "Use ExProcessorMasks"                  } ,
+      { "EXPM"   , "Use ExProcessorMasks interface"        } ,
       { "NEST"   , "Hypervisor is nested with Hyper-V"     } ,
       { "INTM"   , "Use INT for MBEC system calls"         } ,
-      { "EVMCS"  , "Use enlightened VMCS interface"        } };
+      { "EVMCS"  , "Use enlightened VMCS interface"        } ,   // bit 14
+      { "SYNTL"  , "Use SyncedTimeLine, consume QPC bias"  } ,
+      { "x"      , "Reserved"                              } ,   // bit 16
+      { "DIRFLS" , "Use DirectLocalFlushEntire, CR4.PGE"   } ,
+      { "NCORSH" , "Hint NoNonArchitecturalCoreSharing"    } };  // bit 18
 private final static Object[][] DECODER_EBX =
     { { "Recommended spinlock failure retries"  , 31 , 0 } };
+private final static Object[][] DECODER_ECX =
+    { { "Implement physical address bits"       ,  6 , 0 } };
         
 @Override String[][] getParametersList()
     {
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
         {
         DecodeReturn dr;
+        String s;
+        int x;
         String[] interval = new String[] { "", "", "", "", "" };
         ArrayList<String[]> strings;
         ArrayList<String[]> a = new ArrayList<>();
@@ -59,11 +70,17 @@ private final static Object[][] DECODER_EBX =
             a.add( interval );
             // EBX
             dr = decodeBitfields( "EBX", DECODER_EBX, entries[0].ebx );
-            int x = dr.values[0];
-            String s;
+            x = dr.values[0];
             if      ( x > 0   ) s = String.format( "Count = %d", x );
             else if ( x == -1 ) s = "retries=never";
             else                s = "?";
+            dr.strings.get(0)[4] = s;
+            a.addAll( dr.strings );
+            // ECX
+            dr = decodeBitfields( "ECX", DECODER_ECX, entries[0].ecx );
+            x = dr.values[0];
+            if   ( x > 0 ) s = String.format( "Width = %d", x );
+            else           s = "n/a";
             dr.strings.get(0)[4] = s;
             a.addAll( dr.strings );
             }

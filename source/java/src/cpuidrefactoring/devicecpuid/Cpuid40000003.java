@@ -7,6 +7,7 @@ Class for support CPUID Virtual Function
 
 package cpuidrefactoring.devicecpuid;
 
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.*;
 import java.util.ArrayList;
 
@@ -17,8 +18,9 @@ Cpuid40000003()
 
 @Override String getLongName()
     { 
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
-        return "Hypervisor optional features";
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
+        return "Hypervisor feature identification";
     else
         return super.getLongName();
     }
@@ -65,30 +67,38 @@ private final static Object[][] DECODER_ECX =
     { { "HPET is required to enter C3"  , 4 , 4 } ,
       { "Maximum processor power state" , 3 , 0 } };
 private final static String[][] DECODER_EDX =
-    { { "MWAIT"  , "MWAIT available"                             } ,
-      { "GDBG"   , "Guest debugging support available"           } ,
-      { "PERFM"  , "Performance monitor support available"       } ,
-      { "CPUDPE" , "CPU dynamic partitioning events available"   } ,
-      { "HYPXMM" , "Hypercall XMM input parameters available"    } ,
-      { "VGIDL"  , "Virtual guest idle state available"          } ,
-      { "HYPSLP" , "Hypervisor sleep state available"            } ,
-      { "QNUMA"  , "Query NUMA distance available"               } ,
-      { "DTIM"   , "Determine timer frequency available"         } ,
-      { "INJMC"  , "Inject synthetic machine check available"    } ,
-      { "GCRMSR" , "Guest crash MSRs available"                  } ,
-      { "DBGMSR" , "Debug MSRs available"                        } ,
-      { "NPIEP"  , "NPIEP available"                             } ,
-      { "DISHYP" , "Disable hypervisor available"                } ,
-      { "EXTGVA" , "Extended GVA ranges for flush virt address"  } ,
-      { "HYXMMR" , "Hypercall XMM register return available"     } ,
-      { "x"      , "Reserved"                                    } ,
-      { "SINTP"  , "Sint polling mode available"                 } ,
-      { "HMSRLC" , "Hypercall MSR lock available"                } ,
-      { "DSTIM"  , "Use direct synthetic timers"                 } };
+    { { "MWAIT"   , "MWAIT available"                             } ,  // bit 0
+      { "GDBG"    , "Guest debugging support available"           } ,
+      { "PERFM"   , "Performance monitor support available"       } ,
+      { "CPUDPE"  , "CPU dynamic partitioning events available"   } ,
+      { "HYPXMM"  , "Hypercall XMM input parameters available"    } ,
+      { "VGIDL"   , "Virtual guest idle state available"          } ,
+      { "HYPSLP"  , "Hypervisor sleep state available"            } ,
+      { "QNUMA"   , "Query NUMA distance available"               } ,
+      { "DTIM"    , "Determine timer frequency available"         } ,
+      { "INJMC"   , "Inject synthetic machine check available"    } ,
+      { "GCRMSR"  , "Guest crash MSRs available"                  } ,
+      { "DBGMSR"  , "Debug MSRs available"                        } ,
+      { "NPIEP"   , "NPIEP available"                             } ,
+      { "DISHYP"  , "Disable hypervisor available"                } ,
+      { "EXTGVA"  , "Extended GVA ranges for flush virt address"  } ,
+      { "HYXMMR"  , "Hypercall XMM register return available"     } ,
+      { "x"       , "Reserved"                                    } ,  // bit 16
+      { "SINTP"   , "Sint polling mode available"                 } ,
+      { "HMSRLC"  , "Hypercall MSR lock available"                } ,
+      { "DSTIM"   , "Use direct synthetic timers"                 } ,  // bit 19
+      { "PAT"     , "PAT register available for VSM"              } ,
+      { "BNDCFGS" , "BNDCFGS register available for VSN"          } ,
+      { "x"       , "Reserved"                                    } ,  // bit 22
+      { "STIM"    , "Synthetic time unhalted timer available"     } ,
+      { "x"       , "Reserved"                                    } ,  // bit 24
+      { "x"       , "Reserved"                                    } ,  // bit 25
+      { "LBR"     , "Intel Last Branch Recording available"       } }; // bit 26
 
 @Override String[][] getParametersList()
     {
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
         {
         DecodeReturn dr;
         String[] interval = new String[] { "", "", "", "", "" };
@@ -108,7 +118,7 @@ private final static String[][] DECODER_EDX =
             dr = decodeBitfields( "ECX", DECODER_ECX, entries[0].ecx );
             int x = dr.values[1];
             String s;
-            if ( x <= 3 ) s = String.format("C%d", x );
+            if ( x <= 3 ) s = String.format( "C%d", x );
             else          s = "?";
             dr.strings.get(1)[4] = s;
             a.addAll( dr.strings );

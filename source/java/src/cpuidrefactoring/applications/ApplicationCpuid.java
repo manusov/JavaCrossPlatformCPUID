@@ -93,10 +93,16 @@ false = means load dump from file, secondary read not possible
             {
             int function = (int)( data[ i*4 ] >> 32 );
             if ( function == key )
-                {
+                {  // for functions 00000000h, 80000000h order is EBX-EDX-ECX
                 int ebx = (int)( data[ i*4+2 ] >> 32 );
                 int ecx = (int)( data[ i*4+3 ] & (long)0xFFFFFFFF );
                 int edx = (int)( data[ i*4+3 ] >> 32 );
+                if ( key == VIRTUAL_KEY )
+                    {  // for virtual function 40000000h order is EBX-ECX-EDX
+                    int a = ecx;
+                    ecx = edx;
+                    edx = a;
+                    }
                 int[] signature = { ebx, edx, ecx };
                 for( int j=0; j<3; j++ )
                     {

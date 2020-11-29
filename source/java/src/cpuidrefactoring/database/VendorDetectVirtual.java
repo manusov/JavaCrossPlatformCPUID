@@ -56,23 +56,21 @@ public enum HYPERVISOR_T
     HYPERVISOR_VMWARE,
     HYPERVISOR_XEN,
     HYPERVISOR_KVM,
-    HYPERVISOR_ORACLE_W,
-    HYPERVISOR_ORACLE_L,
+    HYPERVISOR_ORACLE,
     HYPERVISOR_MICROSOFT,
     }
 
 final static String[][] V_SIGN =
-    { { null                 , "unknown"             } ,
-      { "VMwareVMware"       , "VMware"              } ,
-      { "XenVMMXenVMM"       , "Xen"                 } ,
-      { "KVMKVMKVM"          , "KVM"                 } ,
-      { "VBoxVBoxVBox"       , "Oracle (Windows VM)" } ,
-      { "KVMKMVMKV"          , "Oracle (Linux VM)"   } ,
-      { "Microsoft Hv"       , "Microsoft"           } };
+    { { null                 , "unknown"   } ,
+      { "VMwareVMware"       , "VMware"    } ,
+      { "XenVMMXenVMM"       , "Xen"       } ,
+      { "KVMKVMKVM"          , "KVM"       } ,
+      { "VBoxVBoxVBox"       , "Oracle"    } ,
+      { "Microsoft Hv"       , "Microsoft" } };
 
 private HYPERVISOR_T vVendor = null;
-private String   vSign = null;
-private String   vName;
+private String vSign = null;
+private String vName;
 
 HYPERVISOR_T getVvendor() { return vVendor; }
 
@@ -92,8 +90,7 @@ String detectVirtual( String pattern )
             case HYPERVISOR_XEN:
             case HYPERVISOR_KVM:
             case HYPERVISOR_MICROSOFT:
-            case HYPERVISOR_ORACLE_W:
-            case HYPERVISOR_ORACLE_L:
+            case HYPERVISOR_ORACLE:
                 if ( pattern == null )
                     {
                     vVendor   = null;

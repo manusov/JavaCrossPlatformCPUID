@@ -7,6 +7,7 @@ Class for support CPUID Virtual Function
 
 package cpuidrefactoring.devicecpuid;
 
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.*;
 import java.util.ArrayList;
 
@@ -17,7 +18,8 @@ Cpuid40000006()
 
 @Override String getLongName()
     { 
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
         return "Hypervisor hardware features in use";
     else
         return super.getLongName();
@@ -25,7 +27,7 @@ Cpuid40000006()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "APICOV" , "APIC overlay assist"                } ,
+    { { "APICOV" , "APIC overlay assist"                } ,  // bit 0
       { "MSRBMP" , "MSR bitmaps"                        } ,
       { "APCNT"  , "Architectural performance counters" } ,
       { "SLVAT"  , "Second-level address translation"   } ,
@@ -34,13 +36,13 @@ private final static String[][] DECODER_EAX =
       { "MEMPS"  , "Memory patrol scrubber"             } ,
       { "DMAPT"  , "DMA protection"                     } ,
       { "HPETRQ" , "HPET requested"                     } ,
-      { "STMVOL" , "Synthetic timers are volatile"      } };
+      { "STMVOL" , "Synthetic timers are volatile"      } };  // bit 9
 
 @Override String[][] getParametersList()
     {
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
         {
-        DecodeReturn dr;
         ArrayList<String[]> strings;
         ArrayList<String[]> a = new ArrayList<>();
         if ( ( entries != null )&&( entries.length > 0 ) )

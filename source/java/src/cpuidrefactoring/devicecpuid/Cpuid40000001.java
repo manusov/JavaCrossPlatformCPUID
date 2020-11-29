@@ -7,6 +7,7 @@ Class for support CPUID Virtual Function
 
 package cpuidrefactoring.devicecpuid;
 
+import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
 import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.*;
 import java.util.ArrayList;
 
@@ -16,9 +17,10 @@ Cpuid40000001()
     { setFunction( 0x40000001 ); }
 
 @Override String getLongName()
-    { 
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
-        return "Hypervisor interface signature";
+    {
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
+        return "Hypervisor interface identification";
     else
         return super.getLongName();
     }
@@ -29,7 +31,8 @@ private final static Object[][] DECODER_EAX =
 
 @Override String[][] getParametersList()
     {
-    if ( container.getVmmVendor() == HYPERVISOR_ORACLE_W )
+    HYPERVISOR_T t = container.getVmmVendor();
+    if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
         {
         DecodeReturn dr;
         ArrayList<String[]> a = new ArrayList<>();
