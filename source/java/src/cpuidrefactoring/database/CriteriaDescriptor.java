@@ -195,7 +195,7 @@ class FQ extends F
     final boolean question;
     @Override boolean detector( int tfms, int bi ) 
     { 
-        return question; 
+        return question && super.detector( tfms, bi ); 
     }
     FQ( int xf, int f, boolean q, String name )
     {

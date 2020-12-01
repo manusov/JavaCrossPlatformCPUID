@@ -22,12 +22,14 @@ public class DatabaseStash
 VENDOR_T      vendor     = null;
 HYPERVISOR_T  hypervisor = null;
 
-boolean  saw_4  = false;
-boolean  saw_b  = false;
-boolean  saw_1f = false;
-
 // this public part of class contains fields, loaded from dump
+// and fields, set as dump analyzing results.
 // this public part must be actual before buildStash() method call.
+
+public boolean  saw_4  = false;   // means CPUID function 00000004h supported
+public boolean  saw_b  = false;   // means CPUID function 0000000Bh supported
+public boolean  saw_1f = false;   // means CPUID function 0000001Fh supported
+
 public int    val_0_eax = 0;
 public int    val_1_eax = 0;
 public int    val_1_ebx = 0;
@@ -45,6 +47,7 @@ public int[]  val_b_ebx  = new int[2];
 public int[]  val_1f_eax = new int[6];
 public int[]  val_1f_ebx = new int[6];
 public int[]  val_1f_ecx = new int[6];
+
 public int    val_80000001_eax = 0;
 public int    val_80000001_ebx = 0;
 public int    val_80000001_ecx = 0;
@@ -61,6 +64,12 @@ public String transmeta_info = null;
 public String override_brand = null;
 public String soc_brand      = null;
 // end of changed, end of public part
+
+// internal (non-public) part, but with getters for some parameters,
+// requires externally read, but not requires externally write
+public String getMpMethod()    { return mp.method;       }
+public int getMpCores()        { return mp.cores;        }
+public int getMpHyperthreads() { return mp.hyperthreads; }
 
 int transmeta_proc_rev = 0;
 

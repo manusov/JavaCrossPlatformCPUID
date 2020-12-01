@@ -195,10 +195,17 @@ private boolean strsub( String st, String subst )
     UX = LU && stash.br.i_10000;
     
     final CriteriaDescriptor[] INTEL_DATA = {
+/*
     new FM  (    0, 4,  0, 0,         "Intel i80486DX-25/33, .18um" ), // process from sandpile.org
     new FM  (    0, 4,  0, 1,         "Intel i80486DX-50, .18um" ),    // process from sandpile.org
     new FM  (    0, 4,  0, 2,         "Intel i80486SX, .18um" ),       // process from sandpile.org
     new FM  (    0, 4,  0, 3,         "Intel i80486DX/2" ),
+*/    
+    new FM  (    0, 4,  0, 0,         "Intel i80486DX-25/33" ),
+    new FM  (    0, 4,  0, 1,         "Intel i80486DX-50" ),
+    new FM  (    0, 4,  0, 2,         "Intel i80486SX" ),
+    new FM  (    0, 4,  0, 3,         "Intel i80486DX/2" ),
+    
     new FM  (    0, 4,  0, 4,         "Intel i80486SL, .8um" ),
     new FM  (    0, 4,  0, 5,         "Intel i80486SX/2, .8um" ),
     new FM  (    0, 4,  0, 7,         "Intel i80486DX/2-WB, .8um" ),

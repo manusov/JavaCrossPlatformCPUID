@@ -103,6 +103,7 @@ String detectVirtual( String pattern )
                     vSign     = V_SIGN[i][0];
                     vName     = V_SIGN[i][1];
                     }
+                break;
             }
         }
     return vName;

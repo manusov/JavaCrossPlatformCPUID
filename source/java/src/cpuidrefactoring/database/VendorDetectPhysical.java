@@ -196,6 +196,7 @@ String detectPhysical( String pattern )
                     pName     = P_SIGN[i][1];
                     pHandler  = P_HAND[i];
                     }
+                break;
             }
         }
     return pName;

@@ -15,5 +15,5 @@ package cpuidrefactoring.database;
 
 class VendorInitVirtual 
 {
-    
+    // reserved for extensions
 }

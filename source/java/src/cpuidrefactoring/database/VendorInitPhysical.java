@@ -17,17 +17,22 @@ class VendorInitPhysical
 
 void buildStash( DatabaseStash stash )
     {
-    VendorParse vp = new VendorParse();
-    vp.decodeBrandString( stash );
-        
+    // universal procedures
+    VendorParse vp = new VendorParse();  // keywords data
+    vp.decodeBrandString( stash );       // detect keywords at model name string
+    
+    VendorMp vm = new VendorMp();        // MP topology
+    vm.decodeMp( stash );                // extract topology parameters
+    
+    // vendor-specific procedures
     switch( stash.vendor )
         {
             case VENDOR_UNKNOWN:
                 break;
                 
             case VENDOR_INTEL:
-                IntelStashBrand isb = new IntelStashBrand();
-                IntelStashCache isc = new IntelStashCache();
+                IntelStashBrand isb = new IntelStashBrand();  // brand index
+                IntelStashCache isc = new IntelStashCache();  // cache descs.
                 isb.detect( stash );
                 isc.detect( stash );
                 break;

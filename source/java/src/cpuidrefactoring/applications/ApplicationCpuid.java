@@ -81,6 +81,9 @@ false = means load dump from file, secondary read not possible
         }
     
     // helper for extract CPU and VMM vendor strings from binary dump
+    // possible optimization, see also ReservedFunctionCpuid.java,
+    // same functionality duplication
+    
     private final static int STANDARD_KEY = 0;
     private final static int VIRTUAL_KEY  = 0x40000000;
     private String earlyExtractVendorString( int key, long[] data )
@@ -93,21 +96,22 @@ false = means load dump from file, secondary read not possible
             {
             int function = (int)( data[ i*4 ] >> 32 );
             if ( function == key )
-                {  // for functions 00000000h, 80000000h order is EBX-EDX-ECX
+                {
                 int ebx = (int)( data[ i*4+2 ] >> 32 );
                 int ecx = (int)( data[ i*4+3 ] & (long)0xFFFFFFFF );
                 int edx = (int)( data[ i*4+3 ] >> 32 );
+                int[] signature;
+                 // for virtual function 40000000h order is EBX-ECX-EDX
                 if ( key == VIRTUAL_KEY )
-                    {  // for virtual function 40000000h order is EBX-ECX-EDX
-                    int a = ecx;
-                    ecx = edx;
-                    edx = a;
-                    }
-                int[] signature = { ebx, edx, ecx };
+                    signature = new int[]{ ebx, ecx, edx };
+                // for functions 00000000h, 80000000h order is EBX-EDX-ECX
+                else
+                    signature = new int[]{ ebx, edx, ecx };
+                // cycle for convert 3 integer numbers to 12-char string
                 for( int j=0; j<3; j++ )
                     {
                     int d = signature[j];
-                    for( int k=0; k<4; k++ )
+                    for( int k=0; k<4; k++ )  // cycle convert int to 4 chars
                         {
                         char c = (char)( d & 0xFF );
                         if ( c != 0 )

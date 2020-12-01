@@ -1,3 +1,17 @@
+CPUID v1.03.03 (December, 1, 2020)
+
+1) Decode CPUID added: function 40000001h for KVM hypervisor.
+2) Decode CPU model by signature (Type, Family, Model, Stepping)
+   and additional parameters.
+3) Decode CPU microarchitecture and physical characteristics.
+
+CPU database porting from C to Java in progress.
+Special thanks to Todd Allen.
+https://fossies.org/linux/cpuid/cpuid.c
+https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
+
+
+
 CPUID v1.03.02 (November, 29, 2020)
 
 1) Add support virtual CPUID functions 40000007h-4000000Ah.

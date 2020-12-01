@@ -84,28 +84,30 @@ final boolean isShow()
     { return isShowFlag; }
 
 // Helpers used by child classes
+// possible optimization, see also ApplicationCpuid.java
+// same functionality duplication
 
 final String extractVendorString( EntryCpuid entry, boolean virtual )
     {
     boolean b = false;
     int data[] = new int[3];
     data[0] = entry.ebx;
-    if ( !virtual )
-        {  // for functions 00000000h, 80000000h order is EBX-EDX-ECX
-        data[1] = entry.edx;
-        data[2] = entry.ecx;
-        }
-    else
+    if ( virtual )  // select registers order for CPU Vendor Signature
         {  // for virtual function 40000000h order is EBX-ECX-EDX
         data[1] = entry.ecx;
         data[2] = entry.edx;
         }
-
+    else
+        {  // for functions 00000000h, 80000000h order is EBX-EDX-ECX
+        data[1] = entry.edx;
+        data[2] = entry.ecx;
+        }
+    // convert 3 integer numbers to 12-char string
     StringBuilder sb = new StringBuilder( "" );
     for( int i=0; i<3; i++ )
         {
         int d = data[i];
-        for( int j=0; j<4; j++ )
+        for( int j=0; j<4; j++ )  // integer to 4 chars
             {
             char c = (char)( d & 0xFF );
             if ( c != 0 )

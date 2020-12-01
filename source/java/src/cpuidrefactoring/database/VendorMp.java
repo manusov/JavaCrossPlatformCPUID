@@ -12,7 +12,7 @@ Processor multicore/multithread parameters detector.
 package cpuidrefactoring.database;
 
 import static cpuidrefactoring.database.DefineArithmetic.*;
-import static cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T.VENDOR_AMD;
+import static cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T.*;
 
 class VendorMp 
 {
@@ -31,7 +31,8 @@ private int Synth_Model( int value )
         
 private int GET_ApicIdCoreIdSize( int val_80000008_ecx )
     {
-    return BIT_EXTRACT_LE( ( val_80000008_ecx ), 0, 4 );
+    // return BIT_EXTRACT_LE( ( val_80000008_ecx ), 0, 4 );  // original bug ?
+    return BIT_EXTRACT_LE( ( val_80000008_ecx ), 12, 16 );
     }
 
 private int GET_LogicalProcessorCount( int val_1_ebx ) 
@@ -86,19 +87,21 @@ void decodeMp( DatabaseStash stash )
     {
     switch ( stash.vendor ) 
         {
+
+/*
+** Logic derived from information in:
+**    Detecting Multi-Core Processor Topology in an IA-32 Platform
+**    by Khang Nguyen and Shihjong Kuo
+** and:
+**    Intel 64 Architecture Processor Topology Enumeration (Whitepaper)
+**    by Shih Kuo
+** Extension to the 0x1f leaf was obvious.
+*/
         case VENDOR_INTEL:
-            /*
-            ** Logic derived from information in:
-            **    Detecting Multi-Core Processor Topology in an IA-32 Platform
-            **    by Khang Nguyen and Shihjong Kuo
-            ** and:
-            **    Intel 64 Architecture Processor Topology Enumeration (Whitepaper)
-            **    by Shih Kuo
-            ** Extension to the 0x1f leaf was obvious.
-            */
+
             if ( stash.saw_1f )
                 {
-                stash.mp.method = "Intel leaf 0x1f";
+                stash.mp.method = "Intel leaf 01Fh";
                 int  tryX;
                 for ( tryX = 0; tryX < stash.val_1f_ecx.length; tryX++ )
                     {
@@ -120,7 +123,7 @@ void decodeMp( DatabaseStash stash )
                 {
                 int ht = GET_X2APIC_PROCESSORS( stash.val_b_ebx[0] );
                 int tc = GET_X2APIC_PROCESSORS( stash.val_b_ebx[1] );
-                stash.mp.method = "Intel leaf 0xb";
+                stash.mp.method = "Intel leaf 0Bh";
                 if ( ht == 0 )
                     {
                     ht = 1;
@@ -132,23 +135,23 @@ void decodeMp( DatabaseStash stash )
                 {
                 int tc = GET_LogicalProcessorCount( stash.val_1_ebx );
                 int  c;
-                if ( (stash.val_4_eax & 0x1f ) != 0) 
+                if ( ( stash.val_4_eax & 0x1f ) != 0) 
                     {
                     c = GET_NC_INTEL( stash.val_4_eax ) + 1;
-                    stash.mp.method = "Intel leaf 1/4";
+                    stash.mp.method = "Intel leaf 01h, 04h";
                     }
                 else
                     {
-                    /* Workaround for older 'cpuid -r' dumps with incomplete 4 data */
+/* Workaround for older 'cpuid -r' dumps with incomplete 4 data */
                     c = tc / 2;
-                    stash.mp.method = "Intel leaf 1/4 (zero fallback)";
+                    stash.mp.method = "Intel leaf 01h, 04h (zero fallback)";
                     }
                 stash.mp.cores = c;
                 stash.mp.hyperthreads = tc / c;
                 }
             else
                 {
-                stash.mp.method = "Intel leaf 1";
+                stash.mp.method = "Intel leaf 01h";
                 stash.mp.cores  = 1;
                 if ( IS_HTT( stash.val_1_edx ) != 0 )
                     {
@@ -161,23 +164,73 @@ void decodeMp( DatabaseStash stash )
                     }
                 }
             break;
+            
+/*
+** Logic deduced by analogy: As Intel's decode_mp_synth code is to AMD's
+** decode_mp_synth code, so is Intel's APIC synth code to this.
+**
+** For Families 10h-16h, the CU (CMT "compute unit") logic was a
+** logical extension.
+**
+** For Families 17h and later, terminology changed to reflect that
+** the Family 10h-16h cores had been sharing resources significantly,
+** similarly to (but less drastically than) SMT threads:
+**    Family 10h-16h => Family 17h
+**    ----------------------------
+**    CU             => core   
+**    core           => thread
+** And leaf 0x8000001e/ebx is used for smt_count, because 1/ebx is
+** unreliable.
+*/
         case VENDOR_AMD:
         case VENDOR_HYGON:
-            /*
-            ** Logic from:
-            **    AMD CPUID Specification (25481 Rev. 2.16),
-            **    3. LogicalProcessorCount, CmpLegacy, HTT, and NC
-            **    AMD CPUID Specification (25481 Rev. 2.28),
-            **    3. Multiple Core Calculation
-            */
-            if ( IS_HTT( stash.val_1_edx ) != 0 )
+
+            int htt = IS_HTT( stash.val_1_edx );
+            int size = GET_ApicIdCoreIdSize( stash.val_80000008_ecx );
+            int mask = ( 1 << size ) - 1;
+            int core_count = 
+                ( ( GET_NC_AMD( stash.val_80000008_ecx ) & mask ) + 1 );
+            int smt_count =
+                ( GET_LogicalProcessorCount( stash.val_1_ebx ) / core_count);
+            // int cu_count = 1;
+            
+            if ( ( GET_CoresPerComputeUnit_AMD( stash.val_8000001e_ebx) != 0 ) 
+                   && ( htt != 0 ) )
+                {
+                if ( Synth_Family( stash.val_80000001_eax ) > 0x16 ) 
+                    {
+                    int threads_per_core = GET_CoresPerComputeUnit_AMD
+                        ( stash.val_8000001e_ebx ) + 1;
+                    smt_count = threads_per_core;
+                    core_count /= threads_per_core;
+                    }
+                    else
+                    {
+                    int cores_per_cu = GET_CoresPerComputeUnit_AMD
+                        ( stash.val_8000001e_ebx ) + 1;
+                    // cu_count   = ( core_count / cores_per_cu );
+                    core_count = cores_per_cu;
+                    }
+                stash.mp.method = "AMD leafs 80000008h, 8000001Eh";
+                stash.mp.cores = core_count;
+                stash.mp.hyperthreads = smt_count;
+                }
+            
+/*
+** Logic from:
+**    AMD CPUID Specification (25481 Rev. 2.16),
+**    3. LogicalProcessorCount, CmpLegacy, HTT, and NC
+**    AMD CPUID Specification (25481 Rev. 2.28),
+**    3. Multiple Core Calculation
+*/
+            else if ( htt != 0 )
                 {
                 int  tc = GET_LogicalProcessorCount( stash.val_1_ebx );
                 int  c;
                 if ( GET_ApicIdCoreIdSize( stash.val_80000008_ecx ) != 0 )
                     {
-                    int size = GET_ApicIdCoreIdSize( stash.val_80000008_ecx );
-                    int  mask = ( 1 << size ) - 1;
+                    // int size = GET_ApicIdCoreIdSize( stash.val_80000008_ecx );
+                    // int  mask = ( 1 << size ) - 1;
                     c = ( GET_NC_AMD( stash.val_80000008_ecx ) & mask ) + 1;
                     }
                 else 
@@ -201,10 +254,10 @@ void decodeMp( DatabaseStash stash )
                     }
                 else 
                     {
-                    /* 
-                    ** Rev 2.28 leaves out mention that this case is nonsensical, but
-                    ** I'm leaving it in here as an "unknown" case.
-                    */
+/* 
+** Rev 2.28 leaves out mention that this case is nonsensical, but
+** I'm leaving it in here as an "unknown" case.
+*/
                     }
                 }
             else 
@@ -215,7 +268,12 @@ void decodeMp( DatabaseStash stash )
                 stash.mp.hyperthreads = 1;
                 }
             break;
+
+/*
+Branch without vendor-specific MP-topology support.
+*/
         default:
+            
             if ( IS_HTT( stash.val_1_edx ) == 0 ) 
                 {
                 stash.mp.method = "Generic leaf 1 no multi-threading";
