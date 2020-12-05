@@ -1,3 +1,23 @@
+CPUID v1.03.04 (December, 05, 2020)
+
+1) Add CPU family and model visualization by data base, summary screen.
+2) Add feature bit:
+---------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------
+00000007h    0       EDX     9       SRBDS mitigation MSR available
+---------------------------------------------------------------------------------
+
+About CPUID function=7 subfunction=0 register=EDX bit=9:
+Special Register Buffer Data Sampling (SRBDS) Hardware Vulnerability in Intel CPUs
+(CVE-2020-0543, aka Crosstalk)
+https://wiki.ubuntu.com/SecurityTeam/KnowledgeBase/SRBDS
+https://www.kernel.org/doc/html/latest/admin-guide/hw-vuln/special-register-buffer-data-sampling.html
+https://software.intel.com/security-software-guidance/best-practices/srbds-mitigation-impact-intel-secure-key
+https://software.intel.com/security-software-guidance/deep-dives/deep-dive-special-register-buffer-data-sampling
+
+
+
 CPUID v1.03.03 (December, 1, 2020)
 
 1) Decode CPUID added: function 40000001h for KVM hypervisor.

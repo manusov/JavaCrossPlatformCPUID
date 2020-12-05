@@ -96,7 +96,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "AVX512VP2IS"  , "AVX512 compute intersection instructions" } ,
-      { "x"            , "Reserved" } ,
+      { "SRBDS"        , "Special Register Buffer Data Sampling mitigation MSR" } ,  // bit 9
       { "MD CLEAR"     , "CPU is not affected by microarch. data sampling (MDS)" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

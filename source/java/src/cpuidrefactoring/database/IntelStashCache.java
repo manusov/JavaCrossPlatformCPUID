@@ -29,7 +29,7 @@ private void detectDword( DatabaseStash stash, int value, int shift )
     {
     if ( ( value & 0x80000000 ) == 0 )
         {
-        value <<= ( shift * 8 );
+        value >>= ( shift * 8 );
         int count = 4 - shift;
         for( int i=0; i<count; i++ )
             {

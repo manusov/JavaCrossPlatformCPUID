@@ -797,7 +797,7 @@ class AmdModel extends Model
             }
        }
     
-    // build string
+    // build model string
     StringBuilder sb = new StringBuilder();
     if ( brand_pre != null )
         {
@@ -813,6 +813,11 @@ class AmdModel extends Model
         sb.append( " " );
         sb.append( proc );
         }
-    return new String[] { brand_pre, brand_post, proc, sb.toString() };
+    String model = null;
+    if ( sb.length() > 1 )
+        {
+        model = sb.toString();
+        }
+    return new String[] { brand_pre, brand_post, proc, model };
     }
 }

@@ -279,10 +279,27 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         MData mdata = manager.getMicroarchitecture();
         String uarch = null;
         String physc = null;
+        String family = null;
         if ( mdata != null )
             {
             uarch = mdata.u;
             physc = mdata.p;
+            if ( ( mdata.f != null ) && ( mdata.u != null ) &&
+                 ( ! mdata.c ) && ( !( mdata.f.equals( mdata.u ) ) ) )
+                {
+                family = mdata.f;
+                }
+            else if ( ( mdata.u == null ) && ( ! mdata.c ) )
+                {
+                family = mdata.f;
+                }
+            }
+        
+        String[] modelSynth = manager.getModel();
+        String msynth = null;
+        if ( ( modelSynth != null )&&( modelSynth.length >= 4 ) )
+            {
+            msynth = modelSynth[3];
             }
         
         // additional summary strings visualization
@@ -296,45 +313,42 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
                 a.add( new String[] { "Hypervisor vendor" , nameV } );
             if ( nameB != null )
                 a.add( new String[] { "Brand Index" , nameB } );
-            if ( synth1 != null )
-                a.add( new String[] { "Model" , synth1 } );
-            if ( synth2 != null )
-                a.add( new String[] { "Model (extended)" , synth2 } );
+
+            boolean physOnce = false;
+            if ( ( family != null )&&( physc != null ) )
+                { physOnce = true;
+                  String temp = String.format
+                    ( "%s ( %s )", family, physc );
+                  a.add( new String[] 
+                    { "Family and physical" , temp } );  }
+            else if ( family != null )
+                a.add( new String[] { "Family" , family } );
             
-            if ( ( uarch != null )&&( physc != null ) )
+            if ( ( ! physOnce )&&( uarch != null )&&( physc != null ) )
                 { String temp = String.format
                     ( "%s ( %s )", uarch, physc );
                   a.add( new String[] 
                     { "Microarchitecture and physical" , temp } );  }
             else if ( uarch != null )
                 a.add( new String[] { "Microarchitecture" , uarch } );
-            
+
             if ( ( nameMP != null )&&( mpc > 0 )&&( mph > 0 ) )
                 { String temp = String.format
                     ( "%s ( %d cores, %d threads )", nameMP, mpc, mpc * mph );
                   a.add( new String[] { "MP enumeration method" , temp } );  }
+            
+            if ( synth1 != null )
+                a.add( new String[] { "Model" , synth1 } );
+            if ( synth2 != null )
+                a.add( new String[] { "Model (extended)" , synth2 } );
+            if ( msynth != null )
+                a.add( new String[] { "Model (reconstructed)" , msynth } );
             }
         }
 
 /*
 End of database usage 3 of 3 = Late vendor detection.
 */                
-   
-/*
-
-TODO.
-Yet Brand Index only supported by database. Add:
-  + synth string,
-  - microarchitecture,
-  - family, 
-  - physical characteristics, 
-  - model
-  + MP topology method
-  + extracted core/ht count (?) rename this name or combine with previous
-  - and other database functionality.
-
-*/
-
     
     // return default string ( if empty ) or
     // generated strings array ( if not empty )
