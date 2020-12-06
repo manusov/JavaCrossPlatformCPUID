@@ -1,0 +1,7 @@
+Sub-functions of function:
+
+CPUID function 00000018h (Deterministic address translation parameters)
+
+not saved at this binary dump file (dump file is old).
+Dump read required with actual Java CPUID version.
+
