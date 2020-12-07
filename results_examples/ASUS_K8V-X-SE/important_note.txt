@@ -1,0 +1,4 @@
+CPUID v1.03.04 bug:
+detected value: 940-pin (AMD Socket 940)
+correct value:  754-pin (AMD Socket 754)
+

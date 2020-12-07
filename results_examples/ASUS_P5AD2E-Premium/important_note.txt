@@ -1,0 +1,5 @@
+CPUID v1.03.04 bug.
+Required:
+Verify situation when Hyper Threading supported, but number of logical processors = 1.
+Verify both situations when Hyper Threading ENABLED and DISABLED by CMOS Setup.
+

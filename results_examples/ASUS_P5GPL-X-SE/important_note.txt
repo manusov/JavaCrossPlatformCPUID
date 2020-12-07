@@ -1,0 +1,2 @@
+CPUID v1.03.04 bug:
+Required differentiate Cedar Mill vs Presler.

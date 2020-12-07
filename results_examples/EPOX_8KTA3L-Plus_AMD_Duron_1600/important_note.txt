@@ -1,0 +1,6 @@
+CPUID v1.03.04 bug.
+Required:
+Verify situation when CPU not recognized by BIOS (this example).
+Verify reconstructed model string, missing (null) in this example.
+Result report is "unknown type" or too big list of possible variants.
+
