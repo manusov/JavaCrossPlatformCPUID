@@ -1,3 +1,11 @@
+CPUID v1.03.05 (December, 7, 2020)
+
+1) Update data base for AMD CPU Family=0Fh, Model=04h, Stepping=0Ah.
+   Example: AMD Athlon(tm) 64 Processor 2800+.
+2) Change web site link, change font for "About" window buttons.
+
+
+
 CPUID v1.03.04 (December, 05, 2020)
 
 1) Add CPU family and model visualization by data base, summary screen.

@@ -19,9 +19,13 @@ import java.net.URISyntaxException;
 public final class ActionAbout 
 {
 private final static Color LOGO_COLOR = new Color( 143,49,40 );
+/*
 private final static Dimension SIZE_BUTTON_HTTP   = new Dimension ( 180, 25 );
 private final static Dimension SIZE_BUTTON_CANCEL = new Dimension ( 89, 25 );
-    
+*/
+private final static Dimension SIZE_BUTTON_HTTP   = new Dimension ( 198, 25 );
+private final static Dimension SIZE_BUTTON_CANCEL = new Dimension ( 75, 25 );
+
 // Handler for "About" dialogue method, setup GUI
 public JDialog createDialog
     ( JFrame parentWin , String longName , String vendorVersion )
@@ -42,7 +46,7 @@ public JDialog createDialog
     JLabel l3 = new JLabel  ( About.getVendorName() );
     l2.setForeground( LOGO_COLOR );
     l3.setForeground( LOGO_COLOR );
-    Font font1 = new Font ( "Verdana", Font.PLAIN, 12 );
+    Font font1 = new Font ( "Verdana", Font.PLAIN, 12 );  // font for main text
     l2.setFont( font1 );
     l3.setFont( font1 );
     JButton b1 = new JButton( sHttp );
@@ -50,6 +54,9 @@ public JDialog createDialog
     // Set buttons sizes
     b1.setPreferredSize( SIZE_BUTTON_HTTP );
     b2.setPreferredSize( SIZE_BUTTON_CANCEL );
+    Font font2 = new Font ( "Verdana", Font.PLAIN, 11 );  // font for buttons
+    b1.setFont( font2 );
+    b2.setFont( font2 );
     // Layout management for panels and labels
     sl1.putConstraint ( SpringLayout.NORTH, l1,  24, SpringLayout.NORTH, p1 );
     sl1.putConstraint ( SpringLayout.WEST,  l1,  28, SpringLayout.WEST,  p1 );
