@@ -153,7 +153,8 @@ private boolean strsub( String st, String subst )
     /* Mobile Pentium II (Deschutes), distinguished from Pentium II (Deschutes) */
     mD = stash.L2_4w_256K;
     /* Intel Celeron (Deschutes), distinguished from  Pentium II (Deschutes) */
-    cD = !( stash.L2_4w_1Mor2M && !stash.L2_4w_512K && !stash.L2_4w_256K );
+    // cD = !( stash.L2_4w_1Mor2M && !stash.L2_4w_512K && !stash.L2_4w_256K );
+    cD = stash.L2_4w_1Mor2M && !stash.L2_4w_512K && !stash.L2_4w_256K;  // CORRECTED
     /* Pentium III Xeon (Katmai), distinguished from Pentium III (Katmai) */
     xK = stash.L2_4w_1Mor2M || stash.L2_8w_1Mor2M;
     /* Pentium II (Katmai), verified, so distinguished from fallback case */
@@ -271,7 +272,8 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  0, 5,  2, xD, "Intel Pentium II Xeon (Deschutes B0)" ),
     new FMSQ(    0, 6,  0, 5,  2, mD, "Intel Mobile Pentium II (Deschutes B0)" ),
     new FMSQ(    0, 6,  0, 5,  2, cD, "Intel Celeron (Deschutes B0)" ),
-    new FMS (    0, 6,  0, 5,  2,     "Intel Pentium II (unknown type) (Deschutes B0)" ),
+    // new FMS (    0, 6,  0, 5,  2,     "Intel Pentium II (unknown type) (Deschutes B0)" ),
+    new FMS (    0, 6,  0, 5,  2,     "Intel Pentium II (Deschutes B0)" ),  // CHANGED
     new FMSQ(    0, 6,  0, 5,  3, xD, "Intel Pentium II Xeon (Deschutes B1)" ),
     new FMSQ(    0, 6,  0, 5,  3, cD, "Intel Celeron (Deschutes B1)" ),
     new FMS (    0, 6,  0, 5,  3,     "Intel Pentium II (unknown type) (Deschutes B1)" ),

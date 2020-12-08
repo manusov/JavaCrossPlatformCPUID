@@ -23,6 +23,7 @@ class IntelBrandId extends Brand
     {
     final CriteriaDescriptor[] INTEL_BRAND = {
     new B   (                   1, "Intel Celeron, .18um" ),
+    new FMSB( 0, 6,  0,11,  1,  2, "Intel Pentium III, .13um" ),       // ADDED
     new B   (                   2, "Intel Pentium III, .18um" ),
     new FMSB( 0, 6,  0,11,  1,  3, "Intel Celeron, .13um" ),
     new B   (                   3, "Intel Pentium III Xeon, .18um" ),

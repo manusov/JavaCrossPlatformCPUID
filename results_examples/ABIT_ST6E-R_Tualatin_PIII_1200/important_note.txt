@@ -1,0 +1,9 @@
+CPUID v1.03.05 bug.
+
+Required:
+Delete duplicated spaces from processor model string.
+
+Required data base correction:
+detection mismatch: .13um / .18um.
+
+

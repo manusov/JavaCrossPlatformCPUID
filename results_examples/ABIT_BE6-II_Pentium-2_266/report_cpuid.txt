@@ -1,0 +1,135 @@
+Report file.
+CPUID v1.03.05
+(C)2020 IC Book Labs
+
+  Parameter                       Value                                  
+----------------------------------------------------------------------------------
+  CPU vendor string               GenuineIntel                           
+  Maximum standard CPUID level    00000002h                              
+                                                                         
+  Processor vendor                Intel                                  
+  Family and physical             P6 Pentium II ( .35um )                
+  MP enumeration method           Intel leaf 01h ( 1 cores, 1 threads )  
+  Model                           Intel Pentium II (Klamath C1)          
+----------------------------------------------------------------------------------
+
+  Function    Subfunction   Pass        EAX         EBX         ECX         EDX       
+-------------------------------------------------------------------------------------
+  00000000    00000000      00000000    00000002    756E6547    6C65746E    49656E69  
+  00000001    00000000      00000000    00000634    00000000    00000000    0080F9FF  
+  00000002    00000000      00000000    03020101    00000000    00000000    0C040843  
+-------------------------------------------------------------------------------------
+
+  Parameter                       Value         
+---------------------------------------------------------
+  Maximum standard CPUID level    00000002h     
+  CPU vendor string               GenuineIntel  
+---------------------------------------------------------
+
+  Function    Subfunction   Pass        EAX         EBX         ECX         EDX       
+-------------------------------------------------------------------------------------
+  00000000    00000000      00000000    00000002    756E6547    6C65746E    49656E69  
+-------------------------------------------------------------------------------------
+
+  Parameter                                                 Register   Bit(s)         Value, hex   Comments         
+-----------------------------------------------------------------------------------------------------------------------
+  Extended Family                                           EAX        27-20          0            06h              
+  Extended Model                                            EAX        19-16          0            00h + 03h = 03h  
+  Type                                                      EAX        13-12          0                             
+  Base Family                                               EAX        11-8           6                             
+  Base Model                                                EAX        7-4            3                             
+  Stepping                                                  EAX        3-0            4                             
+                                                                                                                    
+  Initial local APIC ID                                     EBX        31-24          0                             
+  Allocated IDs per package                                 EBX        23-16          0                             
+  CLFLUSH size                                              EBX        15-8           0                             
+  Brand ID                                                  EBX        7-0            0                             
+                                                                                                                    
+  Streaming SIMD extension 3                                ECX        0 = SSE3       0            not supported    
+  PCLMULQDQ instruction                                     ECX        1 = PCLM       0            not supported    
+  Debug store for 64-bit branches history                   ECX        2 = DS64       0            not supported    
+  MONITOR/MWAIT instructions                                ECX        3 = MON        0            not supported    
+  CPL qualified debug store                                 ECX        4 = DSCPL      0            not supported    
+  Virtual machine extension                                 ECX        5 = VMX        0            not supported    
+  Safer mode extension                                      ECX        6 = SMX        0            not supported    
+  Enhanced Intel SpeedStep technology                       ECX        7 = EIST       0            not supported    
+  Thermal monitor 2                                         ECX        8 = TM2        0            not supported    
+  Supplemental streaming SIMD extension 3                   ECX        9 = SSSE3      0            not supported    
+  L1 context ID                                             ECX        10 = CXTID     0            not supported    
+  Debug Interface MSR for silicon debug                     ECX        11 = SDBG      0            not supported    
+  Fused Multiply and Addition instructions                  ECX        12 = FMA       0            not supported    
+  CMPXCHG16B instruction                                    ECX        13 = CX16      0            not supported    
+  xTPR update control                                       ECX        14 = xTPR      0            not supported    
+  Performance monitoring and debug capability               ECX        15 = PDCM      0            not supported    
+  Reserved                                                  ECX        16 = x         0            not supported    
+  Processor Context identifiers                             ECX        17 = PCID      0            not supported    
+  Direct cache access                                       ECX        18 = DCA       0            not supported    
+  Streaming SIMD extension 4.1                              ECX        19 = SSE41     0            not supported    
+  Streaming SIMD extension 4.2                              ECX        20 = SSE42     0            not supported    
+  x2APIC (extended xAPIC) support                           ECX        21 = x2APIC    0            not supported    
+  MOVBE instruction                                         ECX        22 = MOVBE     0            not supported    
+  POPCNT instruction                                        ECX        23 = PCNT      0            not supported    
+  TSC deadline interrupt                                    ECX        24 = TSCDL     0            not supported    
+  Advanced Encryption Standard new instructions             ECX        25 = AESNI     0            not supported    
+  XSAVE/XRSTOR states, XSETBV/XGETBV instructions           ECX        26 = XSAVE     0            not supported    
+  OS has enabled XSETBV/XGETBV instructions                 ECX        27 = OSXSV     0            not supported    
+  Advanced Vector Extension                                 ECX        28 = AVX       0            not supported    
+  16-bit Floating Point conversion instructions             ECX        29 = F16C      0            not supported    
+  RDRAND instruction, random number generator               ECX        30 = RDRAND    0            not supported    
+  (AMD) Reserved for Hypervisor to indicate Guest status    ECX        31 = HPGS      0            not supported    
+                                                                                                                    
+  x87 floating point unit on chip                           EDX        0 = FPU        1            supported        
+  Virtual mode extension                                    EDX        1 = VME        1            supported        
+  Debugging extension                                       EDX        2 = DE         1            supported        
+  Page size extension                                       EDX        3 = PSE        1            supported        
+  Time stamp counter                                        EDX        4 = TSC        1            supported        
+  Model-specific registers                                  EDX        5 = MSR        1            supported        
+  Physical address extension                                EDX        6 = PAE        1            supported        
+  Machine check extension                                   EDX        7 = MCE        1            supported        
+  CMPXCHG8B instruction                                     EDX        8 = CX8        1            supported        
+  On-chip local APIC                                        EDX        9 = APIC       0            not supported    
+  Reserved                                                  EDX        10 = x         0            not supported    
+  SYSENTER/SYSEXIT, fast system call instructions           EDX        11 = SEP       1            supported        
+  Memory type range registers                               EDX        12 = MTRR      1            supported        
+  Page global enable                                        EDX        13 = PGE       1            supported        
+  Machine check architecture                                EDX        14 = MCA       1            supported        
+  Conditional move instruction                              EDX        15 = CMOV      1            supported        
+  Page attribute table                                      EDX        16 = PAT       0            not supported    
+  36-bit address page size extension (2/4MB pages)          EDX        17 = PSE36     0            not supported    
+  Processor serial number (present and enabled)             EDX        18 = PSN       0            not supported    
+  CLFLUSH instruction                                       EDX        19 = CLFSH     0            not supported    
+  Reserved                                                  EDX        20 = x         0            not supported    
+  Debug store                                               EDX        21 = DS        0            not supported    
+  Thermal monitor and software controlled clock             EDX        22 = ACPI      0            not supported    
+  Multimedia extension                                      EDX        23 = MMX       1            supported        
+  FXSAVE/FXRSTOR instructions                               EDX        24 = FXSR      0            not supported    
+  Streaming SIMD extension                                  EDX        25 = SSE       0            not supported    
+  Streaming SIMD extension 2                                EDX        26 = SSE2      0            not supported    
+  Self-snoop                                                EDX        27 = SS        0            not supported    
+  Hyper-Threading technology                                EDX        28 = HTT       0            not supported    
+  Thermal monitor                                           EDX        29 = TM        0            not supported    
+  Intel Architecture 64 (Itanium)                           EDX        30 = IA64      0            not supported    
+  Pending break enable                                      EDX        31 = PBE       0            not supported    
+-----------------------------------------------------------------------------------------------------------------------
+
+  Function    Subfunction   Pass        EAX         EBX         ECX         EDX       
+-------------------------------------------------------------------------------------
+  00000001    00000000      00000000    00000634    00000000    00000000    0080F9FF  
+-------------------------------------------------------------------------------------
+
+  Cache descriptor, hex   Cache or TLB type                                      
+------------------------------------------------------------------------------------------
+  01                      code TLB, 4K pages, 4 ways, 32 entries                 
+  02                      code TLB, 4M pages, fully, 2 entries                   
+  03                      data TLB, 4K pages, 4 ways, 64 entries                 
+  43                      code and data L2 cache, 512 KB, 4 ways, 32 byte lines  
+  08                      code L1 cache, 16 KB, 4 ways, 32 byte lines            
+  04                      data TLB, 4M pages, 4 ways, 8 entries                  
+  0C                      data L1 cache, 16 KB, 4 ways, 32 byte lines            
+------------------------------------------------------------------------------------------
+
+  Function    Subfunction   Pass        EAX         EBX         ECX         EDX       
+-------------------------------------------------------------------------------------
+  00000002    00000000      00000000    03020101    00000000    00000000    0C040843  
+-------------------------------------------------------------------------------------
+
