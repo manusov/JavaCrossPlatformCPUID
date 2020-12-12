@@ -82,8 +82,7 @@ private int loadText( JFrame parent, String filePath, long[] opb )
         boolean parsed1 = false, parsed2 = false;
         String line = reader.readLine();
         
-        while( ( line != null ) && ( ! ( ( ! parsed1 )&&( parsed2 ) ) ) &&
-               ( cpus < 2 ) )
+        while( ( line != null ) && ( cpus < 2 ) )
             {
             if ( count >= opb.length / 4 )
                 {
@@ -97,7 +96,7 @@ private int loadText( JFrame parent, String filePath, long[] opb )
                 {
                 line = line.substring( START_S.length() ).trim();
                 String[] words = line.split( SPLIT_S1 );
-                if ( ( words != null ) && ( words.length == 2 ) )
+                if ( ( words != null ) && ( words.length >= 2 ) )
                     {
                     String function = words[0];
                     String[] values = words[1].split( SPLIT_S2 );
@@ -106,12 +105,14 @@ private int loadText( JFrame parent, String filePath, long[] opb )
                         try
                             {
                             long x = Integer.parseUnsignedInt( function, 16 );
+                            x &= 0xFFFFFFFFL;
                             if ( ( x != 0 ) || ( cpus == 0 ) )
                                 {
                                 long[] y = new long[4];
                                 for( int i=0; i<4; i++ )
                                     {
                                     y[i] = Integer.parseUnsignedInt( values[i], 16 );
+                                    y[i] &= 0xFFFFFFFFL;
                                     }
                                 if ( x != functionChanged )
                                     {
@@ -135,6 +136,10 @@ private int loadText( JFrame parent, String filePath, long[] opb )
                             }
                         }
                     }
+                }
+            if (( ! parsed1 )&&( parsed2 ))
+                {
+                break;
                 }
             parsed2 = parsed1;
             line = reader.readLine();
