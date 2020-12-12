@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/3-java/project_cpuid/actual_v1_04_XX/java/src/cpuidrefactoring/rootmenu/RootMenu.java</file>
-            <file>file:/C:/3-java/project_cpuid/actual_v1_04_XX/java/src/cpuidrefactoring/tools/ActionText.java</file>
             <file>file:/C:/3-java/project_cpuid/actual_v1_04_XX/java/src/cpuidrefactoring/CpuidRefactoring.java</file>
+            <file>file:/C:/3-java/project_cpuid/actual_v1_04_XX/java/src/cpuidrefactoring/database/AmdSynth.java</file>
             <file>file:/C:/3-java/project_cpuid/actual_v1_04_XX/java/src/cpuidrefactoring/About.java</file>
+            <file>file:/C:/3-java/project_cpuid/actual_v1_04_XX/java/src/cpuidrefactoring/database/AmdMicroarchitecture.java</file>
         </group>
     </open-files>
 </project-private>

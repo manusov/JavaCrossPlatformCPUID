@@ -36,12 +36,13 @@ AmdMicroarchitecture( DatabaseStash stash )
     new FM  ( 0, 5, 0, 6,      ()-> { u = "K6"; p = ".30um"; } ),
     new FM  ( 0, 5, 0, 7,      ()-> { u = "K6"; p = ".25um"; } ), // p from sandpile.org
     new FM  ( 0, 5, 0, 13,     ()-> { u = "K6"; p = ".18um"; } ), // p from sandpile.org
-    new F   ( 0, 5,            ()-> { u = "K6"; } ),
+//  new F   ( 0, 5,            ()-> { u = "K6"; } ),
+    new F   ( 0, 5,            ()-> { u = "K5"; } ),                             // CHANGED
     new FM  ( 0, 6, 0, 1,      ()-> { u = "K7"; p = ".25um"; } ),
     new FM  ( 0, 6, 0, 2,      ()-> { u = "K7"; p = ".18um"; } ),
     new F   ( 0, 6,            ()-> { u = "K7"; } ),
     new FMS ( 0, 15, 0, 4, 8,  ()-> { u = "K8"; p = "754-pin, .13um"; } ),
-    new FMS ( 0, 15, 0, 4, 10, ()-> { u = "K8"; p = "754-pin, .13um"; } ),        // ADDED
+    new FMS ( 0, 15, 0, 4, 10, ()-> { u = "K8"; p = "754-pin, .13um"; } ),       // ADDED
     new FM  ( 0, 15, 0, 4,     ()-> { u = "K8"; p = "940-pin, .13um"; } ),
     new FM  ( 0, 15, 0, 5,     ()-> { u = "K8"; p = "940-pin, .13um"; } ),
     new FM  ( 0, 15, 0, 7,     ()-> { u = "K8"; p = "939-pin, .13um"; } ),
