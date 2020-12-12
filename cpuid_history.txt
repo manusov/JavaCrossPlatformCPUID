@@ -21,6 +21,7 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 
 
 
+
 CPUID v1.03.06 (December, 8, 2020)
 
 1) Correct data base. Detection Pentium III (Tualatin) with Brand Index=2.
