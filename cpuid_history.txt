@@ -1,3 +1,26 @@
+CPUID v1.04.00 (December, 12, 2020)
+
+1) Add feature bit for Virtual CPUID:
+---------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------
+40000003h    -       EBX     14      EnableExpandedStackwalking
+---------------------------------------------------------------------------------
+   Data source:
+   https://github.com/chipsec/chipsec/blob/master/chipsec/modules/tools/vmm/hv/define.py
+
+2) Fix panel split position change after use root menu item:
+   " Target \ Local redetect ".
+
+3) Add root menu item " Target \ InstLatx64 CPUID file "
+   for load CPUID dump information as text file.
+   Format compatible with InstLatx64 (EVEREST, AIDA64) CPUID files.
+   https://github.com/InstLatx64/InstLatx64
+   Yet interpret data for first logical CPU only.
+   This function is experimental, under debug.
+
+
+
 CPUID v1.03.06 (December, 8, 2020)
 
 1) Correct data base. Detection Pentium III (Tualatin) with Brand Index=2.

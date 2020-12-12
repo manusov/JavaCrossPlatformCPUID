@@ -9,6 +9,7 @@ package cpuidrefactoring.rootmenu;
 
 import cpuidrefactoring.About;
 import static cpuidrefactoring.CpuidRefactoring.createRegistry;
+import cpuidrefactoring.applications.ApplicationCpuid;
 import cpuidrefactoring.tools.ActionAbout;
 import cpuidrefactoring.tools.ActionReport;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,9 @@ protected JScrollPane scrollApp;
 protected JTree tRoot;
 protected DefaultTreeModel mRoot;
 
+// used for load text
+private ApplicationCpuid appCpuid;
+
 // root menu sub-menus names strings
 private final static String[] NAMES_M1 = { "File" , "Target" , "Info" };
 // mnemonics keys for root menu sub-menus
@@ -42,36 +46,37 @@ private final static char[] MNEMONICS_M1 =  { 'F' , 'T' , 'I' };
 // root menu items names strings
 private final static String[][] NAMES_M2 = 
     { { "System report" , "Exit" } ,
-      { "Local redetect" , 
+      { "Local redetect" , "InstLatx64 CPUID file" ,
         "Remote deserialize" , "File deserialize" ,
         "Serialize remote"   , "Serialize file" } ,
         { "About" } };
 // mnemonics keys for root menu items
 private final static char[][] MNEMONICS_M2 =
     { { 'S' , 'X' } , 
-      { 'L' , 'R' , 'F' , 'S' , 'E' } ,
+      { 'L' , 'I' , 'R' , 'F' , 'S' , 'E' } ,
       { 'A' } };
 // accelerator keys for root menu sub-menus
 private final static KeyStroke[][] ACCELERATORS_M2 =
     { { KeyStroke.getKeyStroke( 'S' , KeyEvent.ALT_MASK )  , 
         KeyStroke.getKeyStroke( 'X' , KeyEvent.ALT_MASK ) } ,
-        { null , null , null , null , null } ,
+        { null , null , null , null , null , null } ,
         { null } };
 // root menu separators
 private final static boolean[][] SEPARATORS_M2 =
     { { false , false } , 
-      { false , false , true , false , false } ,
+      { false , true , false , true , false , false } ,
       { false } };
 // root menu items status: true = supported, false = not supported (gray)
 private final static boolean[][] ITEM_ACTIVE =
     { { true  , true } , 
-      { true  , false , false , false , false } ,
+      { true  , true , false , false , false , false } ,
       { true } };
 // listeners (handlers) for service buttons press
 protected final AbstractAction[] listeners = 
     { new HandlerSystemReport() ,
       new HandlerExit() ,
       new HandlerLocalRedetect() ,
+      new HandlerInstLatx64CpuidFile() ,
       new HandlerRemoteDeserialize() ,
       new HandlerFileDeserialize() ,
       new HandlerSerializeRemote() ,
@@ -133,12 +138,14 @@ public RootMenu()
     pApps = stb.getApplicationPanels();   // array of applications panels
     rApps = stb.getApplicationReports();  // array of applications table models
     mRoot = stb.getApplicationTrees();    // default tree model
+    // Store application CPUID for special usage: load text
+    appCpuid = stb.getAppCpuid();
     // Tree=f(Model)
     tRoot = new JTree( mRoot );
     tRoot.getSelectionModel().setSelectionMode
         ( TreeSelectionModel.SINGLE_TREE_SELECTION );
     // Listener for tree events
-    tRoot.addTreeSelectionListener(new RootListener());
+    tRoot.addTreeSelectionListener( new RootListener()) ;
     // Scroll panel for tree
     scrollApp = new JScrollPane( tRoot );
     // Built split panel
@@ -155,7 +162,7 @@ public RootMenu()
 public void showGUI()
     {
     thisFrame = this;    // this = JFrame
-    setJMenuBar(jmenu);
+    setJMenuBar( jmenu );
     add( split );
     setDefaultCloseOperation( EXIT_ON_CLOSE );
     setSize( About.getX1size(), About.getY1size() );
@@ -210,10 +217,35 @@ class HandlerLocalRedetect extends AbstractAction
             pApps = stb.getApplicationPanels();
             rApps = stb.getApplicationReports();
             mRoot = stb.getApplicationTrees();
+            // Store application CPUID for special usage: load text
+            appCpuid = stb.getAppCpuid();
+            // Select CPUID application panel, restore split panel divider
             split.setRightComponent( pApps[0] );
+            split.setDividerLocation( About.getX1size() / 7 + 5 );  // v1.04.00, fix split relocation bug after redetect
             // Unselect tree node
             TreePath tp = tRoot.getPathForRow( 0 );
             tRoot.setSelectionPath( tp );
+            }
+        }
+    }
+
+class HandlerInstLatx64CpuidFile extends AbstractAction
+    {
+    @Override public void actionPerformed( ActionEvent e )
+        {
+        if ( appCpuid != null )
+            {
+            ApplicationView av = appCpuid.getView();
+            if ( av != null )
+                {
+                av.entryBLoadText();
+                // Select CPUID application panel, restore split panel divider
+                split.setRightComponent( pApps[0] );
+                split.setDividerLocation( About.getX1size() / 7 + 5 );
+                // Unselect tree node
+                TreePath tp = tRoot.getPathForRow( 0 );
+                tRoot.setSelectionPath( tp );
+                }
             }
         }
     }

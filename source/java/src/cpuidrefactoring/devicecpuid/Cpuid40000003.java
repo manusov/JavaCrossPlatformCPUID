@@ -55,7 +55,7 @@ private final static String[][] DECODER_EBX =
       { "DBG"    , "Debugging"                         } ,
       { "CPUM"   , "CPUManagement"                     } ,
       { "CPROF"  , "ConfigureProfiler"                 } ,
-      { "x"      , "Reserved"                          } ,
+      { "STWALK" , "EnableExpandedStackwalking"        } ,  // bit 14
       { "x"      , "Reserved"                          } ,
       { "ACVSM"  , "AccessVSM"                         } ,
       { "ACREG"  , "AccessVpRegisters"                 } ,

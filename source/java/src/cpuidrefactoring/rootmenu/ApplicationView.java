@@ -11,6 +11,7 @@ import cpuidrefactoring.About;
 import cpuidrefactoring.tools.ActionAbout;
 import cpuidrefactoring.tools.ActionBinary;
 import cpuidrefactoring.tools.ActionReport;
+import cpuidrefactoring.tools.ActionText;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -107,7 +108,7 @@ public final class BLoadBinary implements ActionListener       // LOAD BINARY
     {
     @Override public void actionPerformed ( ActionEvent e )
         {
-        ActionBinary fileBinary = new ActionBinary();  // load data
+        ActionBinary fileBinary = new ActionBinary();  // class for load data dialogue
         long[] data = model.getBinary();
         int size = data.length;
         long[] dataBackup = new long[size];
@@ -131,6 +132,42 @@ public final class BLoadBinary implements ActionListener       // LOAD BINARY
         buildGUI();
         }
     }
+
+public void entryBLoadText()
+    {
+    BLoadText blt = new BLoadText();
+    blt.actionPerformed( null );
+    }
+
+private final class BLoadText implements ActionListener       // LOAD TEXT, InstLatx64 compatible
+    {
+    @Override public void actionPerformed ( ActionEvent e )
+        {
+        ActionText fileText = new ActionText();  // class for load text dialogue
+        long[] data = model.getBinary();
+        int size = data.length;
+        long[] dataBackup = new long[size];
+        for( int i=0; i<size; i++ ) 
+            {
+            dataBackup[i] = data[i];  // backup element[i]
+            data[i] = 0;              // clear element[i]
+            }
+        boolean loaded = fileText.loadTextDialogue( null, data );
+        if ( loaded == false ) 
+            {  // if dump not loaded, restore buffer from backup
+            System.arraycopy( dataBackup, 0, data, 0, size );
+            return; 
+            }
+        model.setBinary( data );  // if dump loaded, set data + redetect vendor
+        if ( t != null )
+            {  // revisual data
+            t.setSelectedIndex( 0 );    
+            t.removeAll();
+            }
+        buildGUI();
+        }
+    }
+
 
 public final class BSaveBinary implements ActionListener       // SAVE BINARY
     {

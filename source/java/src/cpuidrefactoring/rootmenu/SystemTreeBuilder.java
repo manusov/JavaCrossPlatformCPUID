@@ -7,6 +7,7 @@ Sub-applications provided as sets of panels, table models and tree models.
 
 package cpuidrefactoring.rootmenu;
 
+import cpuidrefactoring.applications.ApplicationCpuid;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import javax.swing.JPanel;
@@ -79,6 +80,11 @@ SystemTreeBuilder()
                 o = c.newInstance();
                 if ( o instanceof ApplicationController )
                     {
+                    // Store CPUID application for special usage at root menu
+                    if ( o instanceof ApplicationCpuid )
+                        {
+                        appCpuid = (ApplicationCpuid) o;
+                        }
                     // Store applications panels
                     ApplicationView av = ( (ApplicationController)o ).getView();
                     if ( av != null )
@@ -164,5 +170,11 @@ ChangeableTableModel[] getApplicationReports()  { return applicationReports; }
 
 // Get tree
 DefaultTreeModel getApplicationTrees() { return applicationTrees; }
-    
+
+// Special method for get ApplicationCpuid, used for application-specific
+// operations from root menu, 
+// for example load InstLatx64 compatible text report.
+private ApplicationCpuid appCpuid = null;
+ApplicationCpuid getAppCpuid() { return appCpuid; }
+
 }

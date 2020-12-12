@@ -25,7 +25,7 @@ private static final String FILE_NAME = "cpuid.bin";
 private static final JFileChooser CHOOSER = new JFileChooser();
 private FileNameExtensionFilter filter;
 
-public boolean loadBinaryDialogue( JFrame parentWin, long[] opb ) 
+public boolean loadBinaryDialogue( JFrame parentWin, long[] opb )
     {
     boolean loaded = false;
     CHOOSER.setDialogTitle( "Load binary - select file" );
@@ -34,7 +34,7 @@ public boolean loadBinaryDialogue( JFrame parentWin, long[] opb )
     CHOOSER.setFileSelectionMode( JFileChooser.FILES_ONLY );
     CHOOSER.setSelectedFile( new File(FILE_NAME) );
     int select = CHOOSER.showOpenDialog( parentWin );
-    if(select==JFileChooser.APPROVE_OPTION)
+    if( select == JFileChooser.APPROVE_OPTION )
         {
         String s1 = CHOOSER.getSelectedFile().getPath();
         int status = loadBinary( parentWin, s1, opb );
@@ -140,17 +140,17 @@ OUTPUT:  integer status: 0 = loaded OK, 1 = error
 */
 private int loadBinary( JFrame parentWin, String filePath, long[] opbData )
     {
-    int status=0;
+    int status = 0;
     int availableBytes = 0;
     int opbBytes = opbData.length * 8;
     byte[] fileData = new byte[opbBytes];
-    try { FileInputStream reader = new FileInputStream(filePath);
+    try { FileInputStream reader = new FileInputStream( filePath );
           availableBytes = reader.available();
           reader.read ( fileData, 0, availableBytes );
         } 
     catch( IOException ex ) 
         {
-        status=1; 
+        status = 1; 
         } 
     if ( status == 0 ) 
         {  // this executed if loaded OK
