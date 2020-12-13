@@ -1,3 +1,42 @@
+CPUID v1.04.03 (December, 13, 2020)
+
+1) Fixed CPUID subfunctions numeration bug for load InstLatx64 reports.
+2) Fixed CPUID functions visualization bugs: 
+   00000010h (Platform QoS enforcement), 
+   00000014h (Intel processor trace enumeration), 
+   visualization bugs caused by subfunctions numeration bug
+   (load InstLatx64 reports node).
+3) Fixed CPUID functions visualization bugs:
+   00000004h (Intel Deterministic Cache Parameters), 
+   8000001Dh (AMD Deterministic Cache Parameters),
+   wrong data visualization if empty data entry exist in the dump.
+4) Add visual for bits: 
+   CPUID function 0000000Fh, subfunction 1, bit EDX.3,
+   CPUID function 80000007h, bit EBX.5,
+   purpose of this bits still unknown, 
+   but found "1" at (example): AMD Ryzen 9 5950X 16-Core Processor.
+
+Appendix.
+List of undocumented bits (unknown values or reserved but found "1").
+--------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+--------------------------------------------------------------------------------
+0000000Fh    1       EAX     7-0     Unknown counter width value 0Fh
+0000000Fh    1       EDX     3       ?
+80000007h    -       EBX     4       ?
+80000007h    -       EBX     5       ?
+80000008h    -       EBX     10      ?
+80000008h    -       EBX     27      ?
+80000008h    -       EBX     28      ?
+8000000Ah    -       EDX     11      ?
+80000021h    -       -       -       Entire function undocumented (AMD Vermeer)
+80000022h    -       -       -       Entire function undocumented (AMD Vermeer)
+80000023h    -       -       -       Entire function undocumented (AMD Vermeer)
+--------------------------------------------------------------------------------
+
+
+
+
 CPUID v1.04.00 (December, 12, 2020)
 
 1) Add feature bit for Virtual CPUID:
@@ -18,7 +57,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
    https://github.com/InstLatx64/InstLatx64
    Yet interpret data for first logical CPU only.
    This function is experimental, under debug.
-
 
 
 

@@ -27,6 +27,7 @@ private final static String[][] DECODER_EBX =
       { "SUCCOR"   , "Software uncorrectable error containment and recovery" } ,
       { "HWA"      , "Hardware assert MSR C001_10[DF...C0]h" } ,
       { "SCMCA"    , "Scalable MCA" } ,
+      { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } };
 private final static Object[][] DECODER_ECX =
     { { "Ratio of power accumulator sample period to GTSC" , 31 , 0 } };

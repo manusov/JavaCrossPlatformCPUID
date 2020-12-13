@@ -79,7 +79,7 @@ private int loadText( JFrame parent, String filePath, long[] opb )
         
         int subfunction = 0;
         long functionChanged = -1;
-        boolean parsed1 = false, parsed2 = false;
+        boolean parsed1, parsed2 = false;
         String line = reader.readLine();
         
         while( ( line != null ) && ( cpus < 2 ) )
@@ -123,7 +123,8 @@ private int loadText( JFrame parent, String filePath, long[] opb )
                                 opb[count * 4 + 1] = subfunction;
                                 opb[count * 4 + 2] = y[0] + ( y[1] << 32 );
                                 opb[count * 4 + 3] = y[2] + ( y[3] << 32 );
-                                count += 1;
+                                count++;
+                                subfunction++;
                                 parsed1 = true;
                                 }
                             if ( x == 0 )

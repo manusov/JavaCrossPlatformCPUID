@@ -74,6 +74,8 @@ private final static int L3_UNIFIED = 0x63;
                     j = 0;
                     break;
                 }
+            // Not visual data if known entries not found
+            if ( j == 0 ) continue;
             // Temporary variables with cache parameters    
             int x1 = entries[i].ecx + 1;
             int x2 = ( entries[i].ebx & 0xFFF ) + 1;

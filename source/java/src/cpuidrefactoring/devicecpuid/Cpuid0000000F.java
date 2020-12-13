@@ -33,7 +33,8 @@ private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =
 private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "L3 OM" , "L3 occupancy monitoring"       } ,
       { "L3 TB" , "L3 total bandwidth monitoring" } ,
-      { "L3 LB" , "L3 local bandwidth monitoring" } };
+      { "L3 LB" , "L3 local bandwidth monitoring" } ,
+      { "x"     , "Reserved" }                    };
 
 @Override String[][] getParametersList()
     {
