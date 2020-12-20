@@ -1,3 +1,37 @@
+CPUID v1.04.04 (December, 20, 2020)
+1) Preparing for support vendor-specific and device-specific CPUID functions.
+----------------------------------------------------------------------------------
+ Function    Comment
+----------------------------------------------------------------------------------
+ 20000000h   Maximum device-specific function for Intel Xeon Phi
+ 20000001h   Xeon Phi architecture and graphics function features
+ 80860000h   Transmeta maximum vendor function and vendor string
+ 80860001h   Transmeta processor information
+ 80860002h   Transmeta Code Morphing Software (CMS) information
+ 80860003h   Transmeta information string [1 of 4]
+ 80860004h   Transmeta information string [2 of 4]
+ 80860005h   Transmeta information string [3 of 4]
+ 80860006h   Transmeta information string [4 of 4]
+ 80860007h   Transmeta processor actual operational mode information
+ 8FFFFFFFh   AMD Processor non official signature
+ C0000000h   VIA (Centaur) maximum vendor function and (optional) vendor string
+ C0000001h   VIA (Centaur) vendor extended features flags
+ C0000002h   VIA C7 actual performance data
+ C0000003h   VIA reserved or aliased to function 80000003h
+ C0000004h   VIA C7 actual operational parameters
+ C0000005h   VIA reserved or aliased to function 80000005h
+----------------------------------------------------------------------------------
+IMPORTANT WARNING.
+This functions yet supported for text dump load only.
+Support of this functions for native platform is under construction.
+Java code updated. Changed to assembler JNI libraries is under construction.
+
+2) Fix model visualization bug, for CPUID function 00000001h.
+Cpuid00000001.java, Line 137. get(1) vs get(0).
+
+
+
+
 CPUID v1.04.03 (December, 13, 2020)
 
 1) Fixed CPUID subfunctions numeration bug for load InstLatx64 reports.
@@ -33,7 +67,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 80000022h    -       -       -       Entire function undocumented (AMD Vermeer)
 80000023h    -       -       -       Entire function undocumented (AMD Vermeer)
 --------------------------------------------------------------------------------
-
 
 
 

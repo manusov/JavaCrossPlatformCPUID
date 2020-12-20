@@ -17,16 +17,19 @@ private long[] binaryDump;
 private final ReservedFunctionCpuid[] standardFunctions;
 private final ReservedFunctionCpuid[] extendedFunctions;
 private final ReservedFunctionCpuid[] virtualFunctions;
+private final ReservedFunctionCpuid[] vendorFunctions;
 private final SummaryCpuid[] summaryScreens;
 private ReservedFunctionCpuid[] detectedFunctions;
 
 ContainerCpuid( ReservedFunctionCpuid[] sf, ReservedFunctionCpuid[] ef,
-                ReservedFunctionCpuid[] vf, SummaryCpuid[] ss )
+                ReservedFunctionCpuid[] nf, ReservedFunctionCpuid[] vf, 
+                SummaryCpuid[] ss )
     {
     standardFunctions = sf;
     extendedFunctions = ef;
-    virtualFunctions = vf;
-    summaryScreens = ss;
+    vendorFunctions   = nf;
+    virtualFunctions  = vf;
+    summaryScreens    = ss;
     }
 
 long[] getBinaryDump()
@@ -47,6 +50,11 @@ ReservedFunctionCpuid[] getStandardFunctions()
 ReservedFunctionCpuid[] getExtendedFunctions()
     {
     return extendedFunctions;
+    }
+
+ReservedFunctionCpuid[] getVendorFunctions()
+    {
+    return vendorFunctions;
     }
 
 ReservedFunctionCpuid[] getVirtualFunctions()
@@ -146,7 +154,4 @@ void setVmmVendor( HYPERVISOR_T h )
     {
     vmmVendor = h; 
     }
-
-
-
 }

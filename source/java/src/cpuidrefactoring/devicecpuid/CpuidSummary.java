@@ -24,6 +24,11 @@ class CpuidSummary extends SummaryCpuid
 
 private final static int BASE_STANDARD_CPUID  = 0x00000000;
 private final static int BASE_EXTENDED_CPUID  = 0x80000000;
+
+private final static int BASE_VENDOR_CPUID_PHI       = 0x20000000;
+private final static int BASE_VENDOR_CPUID_TRANSMETA = 0x80860000;
+private final static int BASE_VENDOR_CPUID_VIA       = 0xC0000000;
+
 private final static int BASE_VIRTUAL_CPUID   = 0x40000000;
 private final static int NAME_STRING_CPUID    = 0x80000002;
 
@@ -33,9 +38,25 @@ private final static int CORE_PHYSICAL        = 0x80000008;
 
 private final static int CACHE_DESCRIPTORS    = 0x00000002;
 private final static int CACHE_DETERMINISTIC  = 0x00000004;
+private final static int CACHE_AMD            = 0x80000006;
 private final static int EXTENDED_TOPOLOGY    = 0x0000000B;
 private final static int V2_EXTENDED_TOPOLOGY = 0x0000001F;
 private final static int AMD_MP_TOPOLOGY      = 0x8000001E;
+
+private final static int TRANSMETA_INFO       = 0x80860001;
+
+private void writeMaxLevel( int x, ArrayList<String[]> a )
+    {
+    ReservedFunctionCpuid f = container.findFunction( x );
+    if ( f != null )
+        {
+        String[][] s = f.getParametersList();
+        if ( ( s != null )&&( s.length >= 1 ) )
+            {
+            a.add( s[0] );  // Write Maximum CPUID level
+            }
+        }
+   }
 
 @Override String[][] getParametersList()
     {
@@ -46,7 +67,7 @@ private final static int AMD_MP_TOPOLOGY      = 0x8000001E;
     String[] physicalVendor = null;
     String[] physicalModel  = null;
     String[] virtualVendor  = null;
-    String[] virtualMax =  null;
+    String[] virtualMax     = null;
     
     // Get and Write CPU model name string,    
     ReservedFunctionCpuid f = container.findFunction( NAME_STRING_CPUID );
@@ -100,18 +121,19 @@ private final static int AMD_MP_TOPOLOGY      = 0x8000001E;
             }
         }
     
-    // Get and Write Maximum extended CPUID level
-    f = container.findFunction( BASE_EXTENDED_CPUID );
-    if ( f != null )
-        {
-        s = f.getParametersList();
-        if ( ( s != null )&&( s.length >= 1 ) )
-            {
-            a.add( s[0] );  // Write Maximum extended CPUID level
-            }
-        }
+    // Get and Write Maximum extended CPUID level to summary report
+    writeMaxLevel( BASE_EXTENDED_CPUID, a );
     
-    // Write Maximum virtual CPUID level
+    // Get and Write Maximum vendor CPUID level to summary report, for Xeon Phi
+    writeMaxLevel( BASE_VENDOR_CPUID_PHI, a );
+
+    // Get and Write Maximum vendor CPUID level to summary report, for Transmeta
+    writeMaxLevel( BASE_VENDOR_CPUID_TRANSMETA, a );
+    
+    // Get and Write Maximum vendor CPUID level to summary report, for VIA
+    writeMaxLevel( BASE_VENDOR_CPUID_VIA, a );
+    
+    // Write Maximum virtual CPUID level to summary report
     if ( virtualMax != null )
         {
         a.add( virtualMax );
@@ -199,6 +221,13 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
                 }
             }
         
+        // load from dump to stash: L2 cache by function 80000006h
+        e = container.buildEntries( CACHE_AMD );
+        if ( ( e != null )&&( e.length >= 1 ) )
+            {
+            stash.val_80000006_ecx = e[0].ecx;
+            }
+        
         // load from dump to stash: cache and MP topology by function 0Bh
         e = container.buildEntries( EXTENDED_TOPOLOGY );
         if ( ( e != null )&&( e.length >= 1 ) )
@@ -247,6 +276,13 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         if ( ( e != null )&&( e.length >= 1 ) )
             {
                 stash.val_8000001e_ebx = e[0].ebx;
+            }
+
+        // load from dump to stash: Transmeta processor info
+        e = container.buildEntries( TRANSMETA_INFO );
+        if ( ( e != null )&&( e.length >= 1 ) )
+            {
+                stash.transmeta_proc_rev = e[0].ebx;
             }
         
         // set model string at stash, used for parsing and keywords detection

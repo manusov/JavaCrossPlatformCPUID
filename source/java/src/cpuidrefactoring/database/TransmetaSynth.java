@@ -42,7 +42,7 @@ TransmetaSynth ( DatabaseStash stash )
 
 private boolean tm_rev( int rev )
     {
-    return is_transmeta && ( stash.transmeta_proc_rev & 0xffff0000 ) == rev;
+    return is_transmeta && ( stash.transmeta_proc_rev & 0xFFFF0000 ) == rev;
     }
 
 @Override String[] detect( int stdTfms, int extTfms, int bi )
@@ -62,9 +62,11 @@ private boolean tm_rev( int rev )
     /* TODO: Add cases for Transmeta Efficeon */
     t2 = tm_rev( 0x01010000 );
     t4 = tm_rev( 0x01020000 ) || ( tm_rev( 0x01030000 ) && stash.L2_4w_256K );
-    t5 = ( tm_rev( 0x01040000 ) || tm_rev( 0x01040000 ) ) && stash.L2_4w_256K;
+//  t5 = ( tm_rev( 0x01040000 ) || tm_rev( 0x01040000 ) ) && stash.L2_4w_256K;
+    t5 = ( tm_rev( 0x01040000 ) || tm_rev( 0x01050000 ) ) && stash.L2_4w_256K;   // changed
     t6 = tm_rev( 0x01030000 ) && stash.L2_4w_512K;
-    t8 = ( tm_rev(0x01040000 ) || tm_rev( 0x01040000 ) ) && stash.L2_4w_512K;
+//  t8 = ( tm_rev(0x01040000 ) || tm_rev( 0x01040000 ) ) && stash.L2_4w_512K;
+    t8 = ( tm_rev(0x01040000 ) || tm_rev( 0x01050000 ) ) && stash.L2_4w_512K;    // changed
         
     final CriteriaDescriptor[] TRANSMETA_DATA = {
     new FMSQ( 0, 5,  0,4,  2, t2, "Transmeta Crusoe TM3200" ),

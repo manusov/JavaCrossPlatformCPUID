@@ -54,6 +54,11 @@ public int    val_80000001_ecx = 0;
 public int    val_80000001_edx = 0;
 public int    val_80000008_ecx = 0;
 public int    val_8000001e_ebx = 0;
+
+// added
+public int    val_80000006_ecx = 0;
+// end of added
+
 // changed
 // byte[]   brand          = new byte[48+1];
 // byte[]   transmeta_info = new byte[64+1];
@@ -71,7 +76,7 @@ public String getMpMethod()    { return mp.method;       }
 public int getMpCores()        { return mp.cores;        }
 public int getMpHyperthreads() { return mp.hyperthreads; }
 
-int transmeta_proc_rev = 0;
+public int transmeta_proc_rev = 0;
 
 MP mp = new MP();
 class MP

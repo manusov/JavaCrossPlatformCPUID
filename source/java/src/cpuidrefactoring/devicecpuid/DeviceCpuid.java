@@ -88,7 +88,28 @@ private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =
     new Cpuid8000001D(),
     new Cpuid8000001E(),
     new Cpuid8000001F(),
-    new Cpuid80000020()
+    new Cpuid80000020(),
+    new Cpuid8FFFFFFF()
+    };
+
+private final static ReservedFunctionCpuid[] VENDOR_FUNCTIONS =
+    {
+    new Cpuid20000000(),
+    new Cpuid20000001(),
+    new Cpuid80860000(),
+    new Cpuid80860001(),
+    new Cpuid80860002(),
+    new Cpuid80860003(),
+    new Cpuid80860004(),
+    new Cpuid80860005(),
+    new Cpuid80860006(),
+    new Cpuid80860007(),
+    new CpuidC0000000(),
+    new CpuidC0000001(),
+    new CpuidC0000002(),
+    new CpuidC0000003(),
+    new CpuidC0000004(),
+    new CpuidC0000005()
     };
 
 private final static ReservedFunctionCpuid[] VIRTUAL_FUNCTIONS =
@@ -115,7 +136,8 @@ private final static SummaryCpuid[] SUMMARY_SCREENS =
 
 private final ContainerCpuid container = new ContainerCpuid
     ( STANDARD_FUNCTIONS, EXTENDED_FUNCTIONS, 
-      VIRTUAL_FUNCTIONS, SUMMARY_SCREENS );
+      VENDOR_FUNCTIONS, VIRTUAL_FUNCTIONS, 
+      SUMMARY_SCREENS );
 
 private String[]     screensShortNames;
 private String[]     screensLongNames;
@@ -196,6 +218,10 @@ End of database usage 2 of 3 = Get results of previous early vendor detection.
             ( item, shortNames, longNames, listsUp, lists, dumpsUp, dumps,
               functions );
     for( ReservedFunctionCpuid item : EXTENDED_FUNCTIONS )
+        helperInitAndAddFunction
+            ( item, shortNames, longNames, listsUp, lists, dumpsUp, dumps,
+              functions );
+    for( ReservedFunctionCpuid item : VENDOR_FUNCTIONS )
         helperInitAndAddFunction
             ( item, shortNames, longNames, listsUp, lists, dumpsUp, dumps,
               functions );

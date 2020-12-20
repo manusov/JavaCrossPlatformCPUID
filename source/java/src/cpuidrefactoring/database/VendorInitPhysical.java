@@ -38,11 +38,13 @@ void buildStash( DatabaseStash stash )
                 break;
             
             case VENDOR_AMD:
+            case VENDOR_TRANSMETA:
+                AmdStashCache asc = new AmdStashCache();
+                asc.detect( stash );
                 break;
             
             case VENDOR_CYRIX:
             case VENDOR_VIA:
-            case VENDOR_TRANSMETA:
             case VENDOR_UMC:
             case VENDOR_NEXGEN:
             case VENDOR_RISE:

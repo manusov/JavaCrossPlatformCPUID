@@ -264,26 +264,33 @@ Initializing Application Model.
         centerText = lists[ DUMP_SCREEN_ID ];
         model1 = new ChangeableTableModel( upText, centerText );
         vs[ DUMP_SCREEN_ID ] = new ViewSetSingleTable( shortName, model1 );
+        
         // Build CPUID tree panel
+        ArrayList<DefaultMutableTreeNode> al1 = new ArrayList();
         ListEntry le1 = new ListEntry( "CPUID", "", "", true, false );
         DefaultMutableTreeNode dmtn1 = new DefaultMutableTreeNode( le1, true );
-        ArrayList<DefaultMutableTreeNode> al1 = new ArrayList();
         al1.add( dmtn1 );
+        
         ListEntry le2 =  // Child node 1 = Standard CPUID
             new ListEntry( "Standard functions", "", "", true, false );
-        DefaultMutableTreeNode dmtn2 = 
-            new DefaultMutableTreeNode( le2, true );
-        dmtn1.add(dmtn2);
+        DefaultMutableTreeNode dmtn2 = new DefaultMutableTreeNode( le2, true );
+        dmtn1.add( dmtn2 );
+        
         ListEntry le3 =  // Child node 2 = Extended CPUID
             new ListEntry( "Extended functions", "", "", true, false );
-        DefaultMutableTreeNode dmtn3 = 
-            new DefaultMutableTreeNode( le3, true );
-        dmtn1.add(dmtn3);
-        ListEntry le4 =  // Child node 3 = Virtual CPUID
-            new ListEntry( "Virtual functions", "", "", true, false );
-        DefaultMutableTreeNode dmtn4 = 
-            new DefaultMutableTreeNode( le4, true );
+        DefaultMutableTreeNode dmtn3 = new DefaultMutableTreeNode( le3, true );
+        dmtn1.add( dmtn3 );
+        
+        ListEntry le4 =  // Child node 3 = Vendor CPUID
+            new ListEntry( "Vendor functions", "", "", true, false );
+        DefaultMutableTreeNode dmtn4 = new DefaultMutableTreeNode( le4, true );
         dmtn1.add( dmtn4 );
+
+        ListEntry le5 =  // Child node 4 = Virtual CPUID
+            new ListEntry( "Virtual functions", "", "", true, false );
+        DefaultMutableTreeNode dmtn5 = new DefaultMutableTreeNode( le5, true );
+        dmtn1.add( dmtn5 );
+        
         // Build CPUID functions double tables panels and tree branches
         String[][] dumpsUp = device.getScreensDumpsUp();
         String[][][] dumps = device.getScreensDumps();
@@ -310,11 +317,37 @@ Initializing Application Model.
                 ( shortName , longName , "" , true , true , model1 , model2 );
                 DefaultMutableTreeNode dmtn = new DefaultMutableTreeNode
                     ( let , false );
+                
                 char c1 = shortName.charAt(0);
-                if ( c1 == '0' ) { dmtn2.add( dmtn );  }
-                if ( c1 == '8' ) { dmtn3.add( dmtn );  }
-                if ( c1 == '4' ) { dmtn4.add( dmtn );  }
+                String s1 = "";
+                if ( shortName.length() > 4 )
+                    s1 = shortName.substring( 0, 4 ); 
+/*
+
+Select function group (tree branch) for current analused function
+
+00000000h - 7FFFFFFFh  = Range for Standard CPUID functions
+80000000h - FFFFFFFFh  = Range for Extended CPUID functions
+8FFFFFFFh              = Special signature for AMD
+C0000000h - CFFFFFFFh  = Range for VIA/IDT Vendor CPUID functions
+80860000h - 8086FFFFh  = Range for Transmeta Vendor CPUID functions
+20000000h - 2FFFFFFFh  = Range for Intel Xeon Phi Vendor CPUID functions
+40000000h - 4FFFFFFFh  = Range for Virtual CPUID functions
+
+Note about checks sequence is important, because 8086xxxx can match 8xxxxxxx.
+Note about ranges reduced by this check algorithm:
+
+00000000h - 0FFFFFFFh  = Range for Standard CPUID functions
+80000000h - 8FFFFFFFh  = Range for Extended CPUID functions
+                
+*/
+                if ( ( c1 == '2' ) || ( c1 == 'C' ) || ( s1.equals( "8086" )) ) 
+                                       dmtn4.add( dmtn );
+                else if ( c1 == '0' )  dmtn2.add( dmtn );
+                else if ( c1 == '8' )  dmtn3.add( dmtn );
+                else if ( c1 == '4' )  dmtn5.add( dmtn );
             }
+        
         // store CPUID tree and done
         DefaultTreeModel treeModel = new DefaultTreeModel( al1.get(0) , true );
         vs[ TREE_SCREEN_ID ] = new ViewSetTree( "CPUID Tree", treeModel );

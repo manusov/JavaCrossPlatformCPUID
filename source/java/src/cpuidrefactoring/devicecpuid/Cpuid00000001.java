@@ -134,7 +134,7 @@ private final static String[][] DECODER_EDX =
         else
             {
             displayModel = baseModel;
-            dr.strings.get(0)[4] = String.format( "%02Xh", displayModel );
+            dr.strings.get(1)[4] = String.format( "%02Xh", displayModel );
             }
         a.addAll( dr.strings );
         a.add( interval );
