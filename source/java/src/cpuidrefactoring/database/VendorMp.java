@@ -77,7 +77,7 @@ private int GET_V2_TOPO_PROCESSORS( int val_1f_ebx )
    
 private int GET_CoresPerComputeUnit_AMD( int val_8000001e_ebx )
     {
-    return (BIT_EXTRACT_LE( ( val_8000001e_ebx ), 8, 16 ) );
+    return BIT_EXTRACT_LE( ( val_8000001e_ebx ), 8, 16 );
     }
 
 private final int V2_TOPO_SMT  = 1;
@@ -156,7 +156,8 @@ void decodeMp( DatabaseStash stash )
                 if ( IS_HTT( stash.val_1_edx ) != 0 )
                     {
                     int tc = GET_LogicalProcessorCount( stash.val_1_ebx );
-                    stash.mp.hyperthreads = tc >= 2 ? tc : 2;
+//                  stash.mp.hyperthreads = tc >= 2 ? tc : 2;
+                    stash.mp.hyperthreads = ( tc > 1 ) ? 2 : 1;
                     }
                 else
                     {
@@ -192,9 +193,9 @@ void decodeMp( DatabaseStash stash )
                 ( ( GET_NC_AMD( stash.val_80000008_ecx ) & mask ) + 1 );
             int smt_count =
                 ( GET_LogicalProcessorCount( stash.val_1_ebx ) / core_count);
-            // int cu_count = 1;
+            int cu_count = 1;
             
-            if ( ( GET_CoresPerComputeUnit_AMD( stash.val_8000001e_ebx) != 0 ) 
+            if ( ( GET_CoresPerComputeUnit_AMD( stash.val_8000001e_ebx ) != 0 ) 
                    && ( htt != 0 ) )
                 {
                 if ( Synth_Family( stash.val_80000001_eax ) > 0x16 ) 
@@ -204,16 +205,17 @@ void decodeMp( DatabaseStash stash )
                     smt_count = threads_per_core;
                     core_count /= threads_per_core;
                     }
-                    else
+                else
                     {
                     int cores_per_cu = GET_CoresPerComputeUnit_AMD
                         ( stash.val_8000001e_ebx ) + 1;
-                    // cu_count   = ( core_count / cores_per_cu );
+                    cu_count   = core_count / cores_per_cu;
                     core_count = cores_per_cu;
                     }
                 stash.mp.method = "AMD leafs 80000008h, 8000001Eh";
                 stash.mp.cores = core_count;
                 stash.mp.hyperthreads = smt_count;
+                stash.mp.units = cu_count;
                 }
             
 /*

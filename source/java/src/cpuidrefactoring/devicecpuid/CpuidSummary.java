@@ -171,7 +171,7 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         EntryCpuid[] e = container.buildEntries( BASE_STANDARD_CPUID );
         if ( ( e != null )&&( e.length >= 1 ) )
             {
-                stash.val_0_eax = e[0].eax;
+            stash.val_0_eax = e[0].eax;
             }        
         // load from dump to stash: type, family, model, stepping, brand index
         e = container.buildEntries( TFMS_AND_BRAND_CPUID );
@@ -299,6 +299,7 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         String nameMP = stash.getMpMethod();
         int mpc = stash.getMpCores();
         int mph = stash.getMpHyperthreads();
+        int mpu = stash.getMpUnits();
         
         String[] synth = manager.getSynth();
         String synth1 = null;
@@ -369,9 +370,20 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
                 a.add( new String[] { "Microarchitecture" , uarch } );
 
             if ( ( nameMP != null )&&( mpc > 0 )&&( mph > 0 ) )
-                { String temp = String.format
-                    ( "%s ( %d cores, %d threads )", nameMP, mpc, mpc * mph );
-                  a.add( new String[] { "MP enumeration method" , temp } );  }
+                {
+                String sm;
+                if ( mpu > 1 )
+                    {  // MP topology with units
+                    sm = String.format( "%s ( %d cores, %d threads, %d units )", 
+                                      nameMP, mpc * mpu, mpc * mpu * mph, mpu );
+                    }
+                else
+                    {  // MP topology without units
+                    sm = String.format( "%s ( %d cores, %d threads )", 
+                                      nameMP, mpc, mpc * mph );
+                    }
+                a.add( new String[] { "MP enumeration method" , sm } );  
+                }
             
             if ( synth1 != null )
                 a.add( new String[] { "Model" , synth1 } );

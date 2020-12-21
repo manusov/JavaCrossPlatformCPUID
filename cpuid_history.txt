@@ -1,3 +1,9 @@
+CPUID v1.04.05 (December, 21, 2020)
+1) Change Intel MP enumeration logic.
+2) Change AMD MP enumeration logic.
+
+
+
 CPUID v1.04.04 (December, 20, 2020)
 1) Preparing for support vendor-specific and device-specific CPUID functions.
 ----------------------------------------------------------------------------------
@@ -28,7 +34,6 @@ Java code updated. Changed to assembler JNI libraries is under construction.
 
 2) Fix model visualization bug, for CPUID function 00000001h.
 Cpuid00000001.java, Line 137. get(1) vs get(0).
-
 
 
 

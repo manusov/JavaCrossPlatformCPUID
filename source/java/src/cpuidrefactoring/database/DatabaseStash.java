@@ -75,6 +75,7 @@ public String soc_brand      = null;
 public String getMpMethod()    { return mp.method;       }
 public int getMpCores()        { return mp.cores;        }
 public int getMpHyperthreads() { return mp.hyperthreads; }
+public int getMpUnits()        { return mp.units;        }
 
 public int transmeta_proc_rev = 0;
 
@@ -84,6 +85,7 @@ class MP
     String method       = null;
     int    cores        = 0;
     int    hyperthreads = 0;
+    int    units        = 0;
     }
 
 BR br = new BR();
