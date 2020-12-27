@@ -65,17 +65,16 @@ private int loadText( JFrame parent, String filePath, long[] opb )
     int status = 0;
     int count = 1;
     int cpus = 0;
+
+    File file = new File( filePath );
     
-    try
+    try ( FileReader fr = new FileReader( file );
+          BufferedReader reader = new BufferedReader( fr ) )
         {
         for( int i=0; i<opb.length; i++ )
             {
             opb[i] = 0;
             }
-            
-        File file = new File( filePath );
-        FileReader fr = new FileReader( file );
-        BufferedReader reader = new BufferedReader( fr );
         
         int subfunction = 0;
         long functionChanged = -1;

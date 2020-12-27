@@ -11,6 +11,7 @@ import cpuidrefactoring.database.VendorDetectPhysical;
 import cpuidrefactoring.database.VendorDetectPhysical.VENDOR_T;
 import cpuidrefactoring.database.VendorDetectVirtual;
 import cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T;
+import static cpuidrefactoring.database.VendorDetectVirtual.HYPERVISOR_T.HYPERVISOR_XEN;
 import cpuidrefactoring.system.Device;
 import java.util.ArrayList;
 
@@ -112,20 +113,59 @@ private final static ReservedFunctionCpuid[] VENDOR_FUNCTIONS =
     new CpuidC0000005()
     };
 
+private final static int REPLACE_BY_XEN = 1;
 private final static ReservedFunctionCpuid[] VIRTUAL_FUNCTIONS =
     {
     new Cpuid40000000(),
-    new Cpuid40000001(),
+    new Cpuid40000001(),   // start range replaced for Xen
     new Cpuid40000002(),
     new Cpuid40000003(),
     new Cpuid40000004(),
-    new Cpuid40000005(),
+    new Cpuid40000005(),   // end range replaced for Xen
     new Cpuid40000006(),
     new Cpuid40000007(),
     new Cpuid40000008(),
     new Cpuid40000009(),
-    new Cpuid4000000A()
+    new Cpuid4000000A(),
+    new Cpuid40000010()    // generic function
     };
+
+private void restoreDefault()
+    {
+    ReservedFunctionCpuid[] defaultFunctions =
+        {
+        new Cpuid40000001(),
+        new Cpuid40000002(),
+        new Cpuid40000003(),
+        new Cpuid40000004(),
+        new Cpuid40000005()
+        };
+    int n = defaultFunctions.length;
+    System.arraycopy( defaultFunctions, 0, VIRTUAL_FUNCTIONS, REPLACE_BY_XEN, n );
+    }
+
+private void replaceByXen( int index )
+    {
+    ReservedFunctionCpuid[] xenFunctions =
+        {
+        new Cpuid40000X01( index ),
+        new Cpuid40000X02( index ),
+        new Cpuid40000X03( index ),
+        new Cpuid40000X04( index ),
+        new Cpuid40000X05( index )
+        };
+    int n = xenFunctions.length;
+    System.arraycopy( xenFunctions, 0, VIRTUAL_FUNCTIONS, REPLACE_BY_XEN, n );
+    }
+
+/*
+private void extendByXen( int index )
+    {
+    // UNDER CONSTRUCTION.
+    // Reserved for Xen and default functions co-exist,
+    // Xen functions can start from 40000X01h, for example 40000100h.
+    }
+*/
 
 private final static SummaryCpuid[] SUMMARY_SCREENS =
     {
@@ -201,6 +241,27 @@ See also: ApplicationCpuid.java , CpuidSummary.java.
 /*
 End of database usage 2 of 3 = Get results of previous early vendor detection.
 */                
+
+/*
+Vendor-specific initialization for functions, 
+can replace functions numbers 40000001h ... 40000005h
+or co-exist with other hypervisor, 
+if co-exist, Xen functions starts from 40000X01h, X=index.
+Yet supported only replace mode with index = 0.
+*/
+    if ( vvmm == HYPERVISOR_XEN )
+        {
+        replaceByXen( 0 );  // Yet supported only replace mode with index = 0
+        }
+    else
+        {
+        restoreDefault();   // Restore required after Xen support
+        }
+
+/*
+End of vendor-specific initialization
+*/
+
     ArrayList<String> shortNames = new ArrayList<>();
     ArrayList<String> longNames = new ArrayList<>();
     ArrayList<String[]> listsUp = new ArrayList<>();

@@ -1,3 +1,122 @@
+CPUID v1.04.06 (December, 27, 2020)
+
+1) Removed duplicated spaces for CPU model string, which return by functions
+   80000002h...80000004h.
+2) File operations (Save report, Load text data, Save binary data, Load binary data)
+   converted to "try with resource" form, for release file resource after operation.
+3) Add signature detection for Cyrix: family=5, model=3.
+4) Add support for Xen hypervisor-specific virtual CPUID (not verified yet).
+------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+------------------------------------------------------------------------------------------
+40000001h    -       EAX     31-16   Xen major version
+40000001h    -       EAX     15-0    Xen minor version
+----------
+40000002h    -       EAX     31-0    Number of hypercall-transfer pages
+40000002h    -       EBX     31-0    Base address of Xen-specific MSRs (MSR base address)
+40000002h    -       ECX     0       MMU_PT_UPDATE_PRESERVE_AD (save Access and Dirty flags)
+----------
+40000003h    0       EAX     0       Virtual TSC, VTSC (emulated TSC)
+40000003h    0       EAX     1       Host TSC is safe (host tsc is known to be reliable)
+40000003h    0       EAX     2       Boot CPU has RDTSCP
+40000003h    0       EBX     31-0    Guest TSC mode, see decode below
+40000003h    0       ECX     31-0    Guest TSC frequency, kHz
+40000003h    0       EDX     31-0    Guest TSC incarnation (migration count)
+----------
+40000003h    1       EAX     31-0    Virtual TSC offset, vtsc_offset, low 32 bits
+40000003h    1       EBX     31-0    Virtual TSC offset, vtsc_offset, high 32 bits
+40000003h    1       ECX     31-0    VTSC multiplicator for tsc->ns conversion, vtsc_mul_frac
+40000003h    1       EDX     31-0    VTSC shift amount for tsc->ns conversion, vtsc_shift
+----------
+40000003h    2       EAX     31-0    Host TSC frequency, kHz
+----------
+40000004h    -       EAX     0       Virtualized APIC registers
+40000004h    -       EAX     1       Virtualized x2APIC accesses
+40000004h    -       EAX     2       IOMMU mappings for other domain memory
+40000004h    -       EAX     3       VCPU ID is valid
+40000004h    -       EAX     4       Domain ID is valid
+40000004h    -       EBX     31-0    VCPU ID
+40000004h    -       ECX     31-0    Domain ID
+----------
+40000005h    0       EAX     31-0    Maximum available sub-leaf
+40000005h    0       EBX     0-7     Maximum machine address width
+-----------------------------------------------------------------------------------------
+
+5) Add support for generic hypervisor virtual CPUID (not verified yet).
+------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+----------------------------------------------------------------------------------------------
+40000010h   -        EAX    31-0     (Virtual) TSC frequency in kHz
+40000010h   -        EBX    31-0     (Virtual) System bus (local APIC timer) frequency in kHz
+----------------------------------------------------------------------------------------------
+
+Details:
+
+function 40000001h, bits EAX[31-16] = Xen major version
+function 40000001h, bits EAX[15-00] = Xen minor version
+function 40000002h, bits EAX[31-00] = Number of hypercall-transfer pages
+function 40000002h, bits EBX[31-00] = Base address of Xen-specific MSRs (MSR base address)
+-------------------------------------------------------------------------------------------
+https://xenbits.xenproject.org/people/ianc/docs/cpuid_8h_source.html
+https://xenbits.xen.org/docs/unstable/hypercall/x86_32/include,public,arch-x86,cpuid.h.html
+
+function 40000002h, bit ECX.0 = MMU_PT_UPDATE_PRESERVE_AD
+----------------------------------------------------------
+https://xenbits.xenproject.org/people/ianc/docs/cpuid_8h_source.html
+https://xenbits.xen.org/docs/unstable/hypercall/x86_32/include,public,arch-x86,cpuid.h.html
+https://code.woboq.org/linux/linux/include/xen/interface/xen.h.html
+
+function 40000003h, subfunction 0, bit EAX.0 = Virtual TSC, VTSC
+-----------------------------------------------------------------
+https://xenbits.xenproject.org/people/ianc/docs/cpuid_8h_source.html
+https://xenbits.xen.org/docs/unstable/hypercall/x86_32/include,public,arch-x86,cpuid.h.html
+https://patchwork.kernel.org/project/xen-devel/patch/alpine.DEB.2.10.1604251308370.24872@sstabellini-ThinkPad-X260/
+
+function 40000003h, subfunction 0, bit  EAX.1 = Host TSC is safe
+function 40000003h, subfunction 0, bit  EAX.2 = Boot CPU has RDTSCP
+function 40000003h, subfunction 0, bits EBX.[31-00] = Guest TSC mode, see decode above
+function 40000003h, subfunction 0, bits ECX.[31-00] = Guest TSC frequency, kHz
+function 40000003h, subfunction 0, bits EDX.[31-00] = Guest TSC incarnation (migration count)
+function 40000003h, subfunction 1, bits EAX.[31-00] = Virtual TSC offset, vtsc_offset, low 32 bits
+function 40000003h, subfunction 1, bits EBX.[31-00] = Virtual TSC offset, vtsc_offset, high 32 bits
+function 40000003h, subfunction 1, bits ECX.[31-00] = VTSC multiplicator for tsc->ns conversion, vtsc_mul_frac
+function 40000003h, subfunction 1, bits EDX.[31-00] = VTSC shift amount for tsc->ns conversion, vtsc_shift
+function 40000003h, subfunction 2, bits EAX.[31-00] = Host TSC frequency, kHz
+----------------------------------------------------------------
+https://xenbits.xenproject.org/people/ianc/docs/cpuid_8h_source.html
+https://xenbits.xen.org/docs/unstable/hypercall/x86_32/include,public,arch-x86,cpuid.h.html
+https://xenbits.xen.org/docs/unstable/man/xen-tscmode.7.html
+
+function 40000004h, bit  EAX.0 = Virtualized APIC registers
+function 40000004h, bit  EAX.1 = Virtualized x2APIC accesses
+function 40000004h, bit  EAX.2 = IOMMU mappings for other domain memory
+function 40000004h, bit  EAX.3 = VCPU ID is valid
+function 40000004h, bit  EAX.4 = Domain ID is valid
+function 40000004h, bits EBX.[31-00] = VCPU ID
+function 40000004h, bits ECX.[31-00] = Domain ID
+function 40000005h, bits EAX.[31-00] = Maximum available sub-leaf
+function 40000005h, bits EBX.[00-07] = Maximum machine address width
+--------------------------------------------------------------------------
+https://xenbits.xenproject.org/people/ianc/docs/cpuid_8h_source.html
+https://xenbits.xen.org/docs/unstable/hypercall/x86_32/include,public,arch-x86,cpuid.h.html
+https://lists.xenproject.org/archives/html/xen-devel/2014-03/msg00877.html
+
+function 40000010h, bits EAX.[31-00] = (Virtual) TSC frequency in kHz
+function 40000010h, bits EBX.[31-00] = (Virtual) System bus (local APIC timer) frequency in kHz
+------------------------------------------------------------------------------------------------
+https://projectacrn.github.io/2.1/developer-guides/hld/hv-cpu-virt.html
+https://github.com/fffaraz/Etcetera/blob/master/cpp/cpuid.h
+
+Plus, information about all listed bits
+----------------------------------------
+Special thanks to Todd Allen for this bits systematization.
+https://fossies.org/linux/cpuid/cpuid.c
+https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
+https://fossies.org/linux/cpuid/ChangeLog
+
+
+
+
 CPUID v1.04.05 (December, 21, 2020)
 1) Change Intel MP enumeration logic.
 2) Change AMD MP enumeration logic.

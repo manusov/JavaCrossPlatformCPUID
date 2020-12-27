@@ -48,7 +48,7 @@ Cpuid80000002()
                 d = d >>> 8;
                 }
             }
-        table[0][1] = sb.toString().trim();
+        table[0][1] = sb.toString().trim().replaceAll( "\\s+", " " );
         }
     else
         {

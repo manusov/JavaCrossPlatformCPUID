@@ -49,6 +49,7 @@ CyrixSynth( DatabaseStash stash )
     new FM ( 0,4,  0,9,     "Cyrix 5x86" ),
     new F  ( 0,4,           "Cyrix 5x86 (unknown model)" ),
     new FM ( 0,5,  0,2,     "Cyrix M1 6x86" ),
+    new FM ( 0,5,  0,3,     "Cyrix M1 6x86" ),         // added
     new FMQ( 0,5,  0,4, cm, "Cyrix MediaGX (C6)" ),
     new FM ( 0,5,  0,4,     "Cyrix M1 WinChip (C6)" ),
     new FM ( 0,5,  0,8,     "Cyrix M1 WinChip 2 (C6-2)" ),

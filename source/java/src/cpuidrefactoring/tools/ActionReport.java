@@ -255,7 +255,7 @@ private void saveReport( JFrame parentWin, String filePath, String fileData )
     try ( FileWriter writer = new FileWriter( filePath, false ) )
         {
         writer.write( fileData );
-        writer.flush(); 
+        writer.flush();
         }
     catch( Exception ex )
         {

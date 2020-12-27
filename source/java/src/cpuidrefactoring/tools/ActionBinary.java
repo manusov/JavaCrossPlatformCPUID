@@ -108,7 +108,7 @@ private void saveBinary( JFrame parentWin, String filePath, long[] opbData )
     opbLength *= 4;
     byte[] fileData = IOPB.receiveBytes( opbData, 4, opbLength );
     int status=0;
-    try ( FileOutputStream writer = new FileOutputStream(filePath, false) )
+    try ( FileOutputStream writer = new FileOutputStream( filePath, false ) )
         {
         writer.write( fileData );
         writer.flush(); 
@@ -144,9 +144,10 @@ private int loadBinary( JFrame parentWin, String filePath, long[] opbData )
     int availableBytes = 0;
     int opbBytes = opbData.length * 8;
     byte[] fileData = new byte[opbBytes];
-    try { FileInputStream reader = new FileInputStream( filePath );
-          availableBytes = reader.available();
-          reader.read ( fileData, 0, availableBytes );
+    try ( FileInputStream reader = new FileInputStream( filePath ) )
+        {
+        availableBytes = reader.available();
+        reader.read ( fileData, 0, availableBytes );
         } 
     catch( IOException ex ) 
         {
