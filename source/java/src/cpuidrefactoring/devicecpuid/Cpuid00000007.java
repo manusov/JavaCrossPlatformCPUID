@@ -70,7 +70,7 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
       { "TME"          , "Total Memory Encryption" } ,
       { "AVX512PDQ"    , "AVX512 VPOPCNTDQ instruction, count number of set bits" } ,
       { "x"            , "Reserved" } , // bit 15 reserved
-      { "5LP"          , "5-level paging" } ,
+      { "5LP"          , "5-level paging and 57-bit linear address" } ,
       { "MAWAU[0]"     , "MPX address width adjust" } ,
       { "MAWAU[1]"     , "MPX address width adjust" } ,
       { "MAWAU[2]"     , "MPX address width adjust" } ,
@@ -115,7 +115,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "AMX INT8"     , "Advanced Matrix Extensions, operations on INT8 numbers" } ,
       { "IBRS IBPB"    , "Indirect branch restricted speculation and predictor barrier" } ,  // bit 26
       { "STIBP"        , "Single thread indirect branch predictor" } ,  // bit 27
-      { "L1D flush"    , "L1 Data Cache (L1D) flush" } ,
+      { "L1D FLUSH"    , "L1 Data Cache (L1D) flush, IA32_FLUSH_CMD MSR" } ,
       { "ACAP MSR"     , "IA32_ARCH_CAPABILITIES MSR" } ,        // bit 29
       { "CCAP MSR"     , "IA32_CORE_CAPABILITIES MSR" } ,
       { "SSBD"         , "Speculative Store Bypass Disable" } };
@@ -146,7 +146,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,  // bit 24
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "LAM"          , "Linear Address Masking" } ,  // bit 26
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
@@ -182,15 +182,14 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
         strings = decodeBitmap
             ( "EDX", DECODER_EDX_SUBFUNCTION_0, entries[0].edx );
         a.addAll( strings );
-        a.add( interval );
         // EAX, subfunction 1
         if ( ( entries.length > 1 )&&( maxSubFunction > 0 )&&
              ( entries[1].subfunction == 1 ) )
             {
             strings = decodeBitmap
                 ( "EAX", DECODER_EAX_SUBFUNCTION_1, entries[1].eax );
-            a.addAll( strings );
             a.add( interval );
+            a.addAll( strings );
             }
         }
     return a.isEmpty() ? 

@@ -1,3 +1,20 @@
+CPUID v1.04.07 (December, 29, 2020)
+Add new features, update bitfields size.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000006h    -       ECX     15-8    Number of supported EHFI classes (old version use bits [11-8])
+00000007h    1       EAX     26      LAM, Linear Address Masking
+-----------------------------------------------------------------------------------------------------
+Source:
+Intel Architecture Instruction Set Extensions and Future Features Programming Reference
+Document #319433-042
+DECEMBER 2020
+https://software.intel.com/content/dam/develop/external/us/en/documents-tps/architecture-instruction-set-extensions-programming-reference.pdf
+
+
+
+
 CPUID v1.04.06 (December, 27, 2020)
 
 1) Removed duplicated spaces for CPU model string, which return by functions
@@ -113,7 +130,6 @@ Special thanks to Todd Allen for this bits systematization.
 https://fossies.org/linux/cpuid/cpuid.c
 https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
 https://fossies.org/linux/cpuid/ChangeLog
-
 
 
 

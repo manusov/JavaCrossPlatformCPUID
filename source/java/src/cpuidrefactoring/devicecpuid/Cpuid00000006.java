@@ -58,7 +58,8 @@ private final static Object[][] DECODER_ECX =
     { { "Hardware coordination feedback capability, MPERF, APERF"  , 0 , 0 } ,
       { "ACNT2"                                                    , 1 , 1 } ,
       { "Performance-energy bias preference, ENERGY_PERF_BIAS MSR" , 3 , 3 } ,
-      { "EHFI classes count"                                    , 11 , 8  } };
+      { "EHFI classes count"                                     , 15 ,  8 } ,
+      { "Reserved"                                               , 31 , 16 } };
 private final static Object[][] DECODER_EDX =
     { { "Performance capability reporting"                       ,  0 , 0  } ,
       { "Energy efficiency capability reporting"                 ,  1 , 1  } ,
