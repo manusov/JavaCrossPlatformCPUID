@@ -1,3 +1,9 @@
+CPUID v1.04.08 (January, 30, 2021)
+AMD Cezanne added to data base. Signature = 00A50F00h.
+
+
+
+
 CPUID v1.04.07 (December, 29, 2020)
 Add new features, update bitfields size.
 -----------------------------------------------------------------------------------------------------
@@ -11,7 +17,6 @@ Intel Architecture Instruction Set Extensions and Future Features Programming Re
 Document #319433-042
 DECEMBER 2020
 https://software.intel.com/content/dam/develop/external/us/en/documents-tps/architecture-instruction-set-extensions-programming-reference.pdf
-
 
 
 

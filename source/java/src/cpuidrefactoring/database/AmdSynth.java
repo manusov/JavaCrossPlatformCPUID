@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2021 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -972,6 +972,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  ( 8,15,  7, 1,         "AMD Ryzen (Matisse)" ), // undocumented, but samples from Steven Noonan
     new F   ( 8,15,                "AMD (unknown model)" ),
     new FMS (10,15,  2, 1,  0,     "AMD Ryzen (Vermeer)"),
+    new FMS (10,15,  5, 0,  0,     "AMD Ryzen (Cezanne)"),
     new F   (10,15,                "AMD (unknown model)") }; // undocumented, but samples from Steven Noonan
     
     final CriteriaDescriptor[] AMD_X_DATA = {
