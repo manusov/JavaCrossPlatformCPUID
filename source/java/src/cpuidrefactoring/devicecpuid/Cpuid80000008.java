@@ -49,12 +49,12 @@ private final static String[][] DECODER_EBX =
       { "PPIN"      , "Protected processor inventory number" } ,
       { "SSBD"      , "Speculative Store Bypass Disable" } ,  // 24
       { "SSBD KL"   , "Speculative Store Bypass Disable, keep loads" } ,  // 25
-      { "SSBD NO"   , "SSBD no longer need" } ,  // 26
-      { "x"         , "Reserved"                    } ,
-      { "x"         , "Reserved"                    } ,
-      { "x"         , "Reserved"                    } ,
-      { "x"         , "Reserved"                    } ,
-      { "x"         , "Reserved"                    } };   // bit 31
+      { "SSBD NO"   , "SSBD no longer need"              } ,              // 26
+      { "x"         , "Reserved"                         } ,              // 27
+      { "PSFD"      , "Predicted store forward disable"  } ,
+      { "x"         , "Reserved"                         } ,
+      { "x"         , "Reserved"                         } ,
+      { "x"         , "Reserved"                         } };         // bit 31
 private final static Object[][] DECODER_ECX =
     { { "Number of threads per processor - 1" ,  7 ,  0 } ,
       { "APIC ID size"                        , 15 , 12 } ,

@@ -11,6 +11,5 @@ Single JAR runs under Windows 32/64, Linux 32/64.
 
 java -jar NAME.jar
 
-v0.62 build at JDK7 mode (legacy)
+or click icon at GUI.
 
-v0.63 build at JDK8 mode (advanced)

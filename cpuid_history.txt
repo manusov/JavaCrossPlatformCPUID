@@ -1,6 +1,23 @@
+CPUID v1.04.09 (March, 9, 2021)
+Add new AMD feature.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+80000008h    -       EBX     28      PSFD, Predicted store forward disable
+-----------------------------------------------------------------------------------------------------
+Source:
+AMD64 Architecture Programmer's Manual Volume 2: System Programming.
+Publication No. 24593. Revision 3.37. Date March 2021.
+All documents:
+https://developer.amd.com/resources/developer-guides-manuals/
+Updates monitoring:
+https://www.amd.com/en/support/tech-docs
+
+
+
+
 CPUID v1.04.08 (January, 30, 2021)
 AMD Cezanne added to data base. Signature = 00A50F00h.
-
 
 
 

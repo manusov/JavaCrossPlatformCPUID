@@ -9,14 +9,11 @@ package cpuidrefactoring;
 
 public class About 
 {
-private final static String VERSION_NAME = "v1.04.08";
+private final static String VERSION_NAME = "v1.04.09";
 
 private final static String VENDOR_NAME  = "(C)2021 IC Book Labs";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;
-/*
-private final static String WEB_SITE     = "http://icbook.com.ua";
-*/
 private final static String WEB_SITE     = "https://github.com/manusov";
 
 private final static String VENDOR_ICON  = 

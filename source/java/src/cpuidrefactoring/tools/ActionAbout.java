@@ -19,10 +19,6 @@ import java.net.URISyntaxException;
 public final class ActionAbout 
 {
 private final static Color LOGO_COLOR = new Color( 143,49,40 );
-/*
-private final static Dimension SIZE_BUTTON_HTTP   = new Dimension ( 180, 25 );
-private final static Dimension SIZE_BUTTON_CANCEL = new Dimension ( 89, 25 );
-*/
 private final static Dimension SIZE_BUTTON_HTTP   = new Dimension ( 198, 25 );
 private final static Dimension SIZE_BUTTON_CANCEL = new Dimension ( 75, 25 );
 
