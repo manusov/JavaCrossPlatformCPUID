@@ -1,3 +1,23 @@
+CPUID v1.04.10 (March, 9, 2021)
+Add new AMD function and features.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+80000021h    -       EAX      2      LAS, LFENCE always serializing
+80000021h    -       EAX      3      SPCL, SMM page configuration lock
+80000021h    -       EAX      6      NSCB, Null selector clear base
+-----------------------------------------------------------------------------------------------------
+Source:
+AMD64 Architecture Programmer's Manual Volume 2: System Programming.
+Publication No. 24593. Revision 3.37. Date March 2021.
+All documents:
+https://developer.amd.com/resources/developer-guides-manuals/
+Updates monitoring:
+https://www.amd.com/en/support/tech-docs
+
+
+
+
 CPUID v1.04.09 (March, 9, 2021)
 Add new AMD feature.
 -----------------------------------------------------------------------------------------------------
@@ -12,7 +32,6 @@ All documents:
 https://developer.amd.com/resources/developer-guides-manuals/
 Updates monitoring:
 https://www.amd.com/en/support/tech-docs
-
 
 
 

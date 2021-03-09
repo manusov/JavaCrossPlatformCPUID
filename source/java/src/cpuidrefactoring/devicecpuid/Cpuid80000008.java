@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2021 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
 80000008h = Address size and physical core information.

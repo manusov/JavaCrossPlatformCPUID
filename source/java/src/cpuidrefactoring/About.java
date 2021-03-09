@@ -1,5 +1,5 @@
 /* 
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2021 IC Book Labs
 ------------------------------------
 Vendor, Product and Version description strings, 
 pictogram resource reference, GUI geometry data.
@@ -9,7 +9,7 @@ package cpuidrefactoring;
 
 public class About 
 {
-private final static String VERSION_NAME = "v1.04.09";
+private final static String VERSION_NAME = "v1.04.10";
 
 private final static String VENDOR_NAME  = "(C)2021 IC Book Labs";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
