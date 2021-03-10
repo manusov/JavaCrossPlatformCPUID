@@ -1,5 +1,13 @@
+CPUID v1.04.11 (March, 10, 2021)
+Added template visualization for new reserved undocumented AMD functions
+80000022h, 80000023h, if processor declares this functions exists, by
+maximum extended function number value.
+
+
+
+
 CPUID v1.04.10 (March, 9, 2021)
-Add new AMD function and features.
+Added new AMD function and features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 -----------------------------------------------------------------------------------------------------
@@ -17,9 +25,8 @@ https://www.amd.com/en/support/tech-docs
 
 
 
-
 CPUID v1.04.09 (March, 9, 2021)
-Add new AMD feature.
+Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 -----------------------------------------------------------------------------------------------------
@@ -41,7 +48,7 @@ AMD Cezanne added to data base. Signature = 00A50F00h.
 
 
 CPUID v1.04.07 (December, 29, 2020)
-Add new features, update bitfields size.
+Added new features, update bitfields size.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 -----------------------------------------------------------------------------------------------------

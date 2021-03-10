@@ -91,6 +91,8 @@ private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =
     new Cpuid8000001F(),
     new Cpuid80000020(),
     new Cpuid80000021(),
+    new Cpuid80000022(),
+    new Cpuid80000023(),
     new Cpuid8FFFFFFF()
     };
 

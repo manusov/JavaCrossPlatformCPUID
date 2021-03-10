@@ -54,7 +54,6 @@ private final static String[][] DECODER_EAX =
 
 @Override String[][] getParametersList()
     {
-    DecodeReturn dr;
     ArrayList<String[]> strings;
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
