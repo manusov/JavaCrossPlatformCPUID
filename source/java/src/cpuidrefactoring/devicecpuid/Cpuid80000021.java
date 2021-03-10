@@ -19,7 +19,7 @@ Cpuid80000021()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "x"         , "Reserved"          } ,                         // bit 0
+    { { "NNDBP"     , "Processor ignores nested data breakpoints" } ,  // bit 0
       { "x"         , "Reserved"          } ,
       { "LAS"       , "LFENCE always serializing"    } ,              // bit 2
       { "SPCL"      , "SMM page configuration lock"  } ,              // bit 3
@@ -32,7 +32,7 @@ private final static String[][] DECODER_EAX =
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
+      { "PCMSR"     , "Prefetch control MSR"  } ,                     // bit 13
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,                         // bit 16

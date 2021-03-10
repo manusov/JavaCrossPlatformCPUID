@@ -1,8 +1,28 @@
+CPUID v1.04.12 (March, 10, 2021)
+Added new AMD features.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+8000000Ah    -       EDX      23     HMCOV, Host MCE override
+80000021h    -       EAX      0      NNDBP, Processor ignores nested data breakpoints
+80000021h    -       EAX      13     PCMSR, Prefetch control MSR
+-----------------------------------------------------------------------------------------------------
+Source:
+AMD64 Architecture Programmer's Manual Volume 3:
+General-Purpose and System Instructions.
+Publication No. 24594. Revision 3.32. Date March 2021.
+All documents:
+https://developer.amd.com/resources/developer-guides-manuals/
+Updates monitoring:
+https://www.amd.com/en/support/tech-docs
+
+
+
+
 CPUID v1.04.11 (March, 10, 2021)
 Added template visualization for new reserved undocumented AMD functions
 80000022h, 80000023h, if processor declares this functions exists, by
 maximum extended function number value.
-
 
 
 

@@ -47,7 +47,7 @@ private final static String[][] DECODER_EDX =
       { "SPEC CTL" , "Guest Spec Ctl, hardware handled MSR update" } , // bit 20
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,  // bit 23
+      { "HMCOV"    , "Host MCE override" } ,                                   // bit 23
       { "TLBICTL"  , "TLB instruction control, broadcast synchronization" } ,  // bit 24
       { "x"        , "Reserved" } ,  // bit 25
       { "x"        , "Reserved" } ,
