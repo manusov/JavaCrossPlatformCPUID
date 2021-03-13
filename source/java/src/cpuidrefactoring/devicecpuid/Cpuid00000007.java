@@ -137,8 +137,8 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,  // bit 16
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "FRED"         , "Flexible return and event delivery" } ,
+      { "LKGS"         , "Load into IA32 kernel GS base, LKGS instruction" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

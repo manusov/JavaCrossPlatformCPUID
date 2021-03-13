@@ -1,3 +1,19 @@
+CPUID v1.04.13 (March, 13, 2021)
+Added new Intel features.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000007h    1       EAX      17     FRED, Flexible return and event delivery
+00000007h    1       EAX      18     LKGS, Load into IA32 kernel GS base, LKGS instruction
+-----------------------------------------------------------------------------------------------------
+Source:
+Flexible Return and Event Delivery (FRED) Draft Specification.
+March 2021  Revision 1.0.
+Document Number: 346446-001US.
+
+
+
+
 CPUID v1.04.12 (March, 10, 2021)
 Added new AMD features.
 -----------------------------------------------------------------------------------------------------
@@ -15,7 +31,6 @@ All documents:
 https://developer.amd.com/resources/developer-guides-manuals/
 Updates monitoring:
 https://www.amd.com/en/support/tech-docs
-
 
 
 
