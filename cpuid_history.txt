@@ -1,3 +1,19 @@
+CPUID v1.04.15 (March, 17, 2021)
+Added new AMD feature.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+80000008h    -       EBX      31     BR SAMP, Branch sampling
+-----------------------------------------------------------------------------------------------------
+Source:
+Preliminary Processor Programming Reference (PPR) for
+AMD Family 19h Model 01h, Revision B1 Processors.
+Volume 1 of 2.
+Doc# 55898 Rev 0.35 - Feb 5, 2021.
+
+
+
+
 CPUID v1.04.14 (March, 17, 2021)
 Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
@@ -10,7 +26,6 @@ Preliminary Processor Programming Reference (PPR) for
 AMD Family 19h Model 01h, Revision B1 Processors.
 Volume 1 of 2.
 Doc# 55898 Rev 0.35 - Feb 5, 2021.
-
 
 
 

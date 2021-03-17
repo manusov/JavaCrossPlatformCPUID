@@ -54,7 +54,7 @@ private final static String[][] DECODER_EBX =
       { "PSFD"      , "Predicted store forward disable"  } ,
       { "x"         , "Reserved"                         } ,
       { "x"         , "Reserved"                         } ,
-      { "x"         , "Reserved"                         } };         // bit 31
+      { "BR SAMP"   , "Branch sampling"                  } };         // bit 31
 private final static Object[][] DECODER_ECX =
     { { "Number of threads per processor - 1" ,  7 ,  0 } ,
       { "APIC ID size"                        , 15 , 12 } ,
