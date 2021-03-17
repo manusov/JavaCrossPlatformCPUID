@@ -50,7 +50,7 @@ private final static String[][] DECODER_EBX =
       { "SSBD"      , "Speculative Store Bypass Disable" } ,  // 24
       { "SSBD KL"   , "Speculative Store Bypass Disable, keep loads" } ,  // 25
       { "SSBD NO"   , "SSBD no longer need"              } ,              // 26
-      { "x"         , "Reserved"                         } ,              // 27
+      { "CPPC"      , "Collaborative processor performance control"  } ,  // 27
       { "PSFD"      , "Predicted store forward disable"  } ,
       { "x"         , "Reserved"                         } ,
       { "x"         , "Reserved"                         } ,
