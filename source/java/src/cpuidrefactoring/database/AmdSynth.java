@@ -973,6 +973,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new F   ( 8,15,                "AMD (unknown model)" ),
     new FMS (10,15,  2, 1,  0,     "AMD Ryzen (Vermeer)"),
     new FMS (10,15,  5, 0,  0,     "AMD Ryzen (Cezanne)"),
+    new FMS (10,15,  0, 1,  1,     "AMD EPYC (Milan)"),
     new F   (10,15,                "AMD (unknown model)") }; // undocumented, but samples from Steven Noonan
     
     final CriteriaDescriptor[] AMD_X_DATA = {

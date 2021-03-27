@@ -52,7 +52,7 @@ private final static String[][] DECODER_EDX =
       { "x"        , "Reserved" } ,  // bit 25
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
+      { "SGPFIX"   , "Hypervisor spurious GP fault fixed" } ,  // bit 28
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } };  // bit 31
