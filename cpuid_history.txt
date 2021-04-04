@@ -1,3 +1,18 @@
+CPUID v1.04.17 (April, 4, 2021)
+Added new INTEL feature.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000006h    -       EAX      22     HWP MSR, IA32_HWP_CTL MSR
+-----------------------------------------------------------------------------------------------------
+Source:
+Intel 64 and IA-32 Architectures Software Developer's Manual. Documentation Changes.
+April 2021. Document Number 252046-066
+Item 14.4.4.4  IA32_HWP_CTL MSR (Address 776H Logical Processor Scope).
+
+
+
+
 CPUID v1.04.16 (March, 27, 2021)
 Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
@@ -8,7 +23,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 Source:
 Revision Guide for AMD Family 17h Models 30h-3Fh Processors.
 Publication # 56323  Revision: 0.78  March 2021.
-
 
 
 

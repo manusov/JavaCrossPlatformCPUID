@@ -41,7 +41,7 @@ private final static String[][] DECODER_EAX =
       { "HW FB"    , "HW Feedback with thermal status" } ,  // bit 18
       { "IGN HWP"  , "Ignoring idle logical processor HWP request" } ,
       { "x"        , "Reserved" } ,  // bit 21
-      { "x"        , "Reserved" } ,  // bit 22
+      { "HWP MSR"  , "IA32_HWP_CTL MSR available" } ,            // bit 22
       { "EHFI"     , "Enhanced hardware feedback interface" } ,  // bit 23
       { "x"        , "Reserved" } ,  // bit 24
       { "x"        , "Reserved" } ,
