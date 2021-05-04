@@ -1,3 +1,21 @@
+CPUID v1.04.19 (May, 4, 2021)
+Added new INTEL features.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+0000000Ah    -       EDX     16      TopDown support
+0000000Ah    -       EDX     31-24   Bit vector length
+00000014h    0       EBX     7       PT event trace support
+-----------------------------------------------------------------------------------------------------
+Source:
+Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module.
+Document 344425-002US
+4/25/2021
+Document pages 121, 123.
+
+
+
+
 CPUID v1.04.18 (May, 4, 2021)
 
 1) Added new INTEL function.

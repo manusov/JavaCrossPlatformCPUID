@@ -37,7 +37,9 @@ private final static Object[][] DECODER_ECX =
 private final static Object[][] DECODER_EDX =
     { { "Number of fixed-function performance counters" , 4, 0 } ,
       { "Bit width of fixed-function performance counters" , 12, 5 } ,
-      { "Any thread deprecation" , 15 , 15 } };
+      { "Any thread deprecation" , 15 , 15 } ,
+      { "TopDown" , 16 , 16 } ,
+      { "Bit vector length" , 31 , 24 } };
 
 @Override String[][] getParametersList()
     {
