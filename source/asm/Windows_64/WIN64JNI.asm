@@ -1,6 +1,6 @@
 ;------------------------------------------------------------------------------;
 ;                 Native Binary Library for Windows x64                        ;
-;           JNI DLL (Java Native Interface Dynamical Load Library)             ;
+;      JNI DLL ( Java Native Interface module as Dynamical Load Library )      ;
 ; Note. Kernel Mode Support functions removed, see previous library versions.  ;
 ;                                                                              ;
 ; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
@@ -70,7 +70,7 @@ mov rax,[rbx]                          ; RAX = Pointer to functions table
 call qword [rax+188*8]                 ; JNI call [GetLongArrayElements]
 test rax,rax
 jz StatusRet                           ; Go skip if error = NULL pointer
-xchg rdi,rax                           ; RSI = Pointer to OPB
+xchg rdi,rax                           ; RDI = Pointer to OPB
 @@: 
 ;--- Target operation ---
 test rsi,rsi
@@ -266,8 +266,8 @@ je Function04
 cmp eax,80000020h
 je Function10
 ;--- Default handling for functions without subfunctions ---
-xor esi,esi               ; ESI = sub-function number for CPUID
-xor ecx,ecx               ; ECX = sub-function number for save entry 
+xor esi,esi               ; ESI = sub-function number for save entry
+xor ecx,ecx               ; ECX = sub-function number for CPUID  
 call StoreCpuId
 ja OverSubFunction
 AfterSubFunction:         ; Return point after sub-function specific handler
@@ -347,8 +347,8 @@ jmp AfterSubFunction
 ;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
 Function0F:
 Function10:
-xor esi,esi           ; ESI = sub-function number for CPUID
-xor ecx,ecx           ; ECX = sub-function number for save entry 
+xor esi,esi           ; ESI = sub-function number for save entry 
+xor ecx,ecx           ; ECX = sub-function number for CPUID 
 push rax r9       
 call StoreCpuId       ; Subfunction 0 of fixed list [0,1]
 pop r9 rax
@@ -540,7 +540,7 @@ sub rax,rbx                     ; RAX = Delta TSC = frequency (1 second)
 ;--- Restore RSP, pop extra registers, exit ---
 ExitCpuClk:
 mov rsp,rbp                            ; Restore RSP after alignment and shadow
-pop rbx r11 r10 r9 r8 rbp rsi rdx rcx rbx  ; First POP RBX for RSP-8 only 
+pop rbx r11 r10 r9 r8 rbp rsi rdx rcx rbx  ; First POP RBX for RSP + 8 only 
 ret
 
 ;------------------------------------------------------------------------;

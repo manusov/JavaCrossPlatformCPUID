@@ -1,6 +1,6 @@
 ;------------------------------------------------------------------------------;
 ;                Native Binary Library for Windows ia32                        ;
-;            JNI DLL (Java Native Interface Dynamical Load Library)            ;
+;     JNI DLL ( Java Native Interface module as Dynamical Load Library )       ;
 ; Note. Kernel Mode Support functions removed, see previous library versions.  ;
 ;                                                                              ;
 ; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
@@ -125,8 +125,8 @@ push 0 edi ecx ebx
 call dword [eax+196*4]                 ; call [ReleaseLongArrayElements]
 @@:
 ;--- Return with status = EAX ---
-mov eax,1                              ; RAX=1 (true) means OK from Win32 DLL 
-StatusRet:                             ; Entry point with RAX=0 (error)
+mov eax,1                              ; EAX=1 (true) means OK from Win32 DLL 
+StatusRet:                             ; Entry point with EAX=0 (error)
 pop ecx ecx ebp edi esi ebx            ; Restore non-volatile registers
 ret 24                                 ; Return to Java JNI service caller 
 ;--- Special fast case, no Input Parameters Block ---
@@ -204,7 +204,7 @@ mov ebp,esp
 ;--- Start ---
 mov edi,[esp+32+4]
 mov temp_ebp,0            ; xor ebp,ebp ; EBP = Global output entries counter
-call CheckCPUID            ; Return CF=Error flag, EAX=Maximum standard function
+call CheckCPUID           ; Return CF=Error flag, EAX=Maximum standard function
 jc NoCpuId
 
 ;---------- Get standard CPUID results ----------------------------------------;
@@ -247,18 +247,18 @@ ExitCpuId:
 add esp,16
 pop edi esi ebp ebx
 ret 4
-NoCpuId:                  ; Exit for CPUID not supported, RAX=0  
+NoCpuId:                  ; Exit for CPUID not supported, EAX=0  
 xor eax,eax
 jmp ExitCpuId
-ErrorCpuId:               ; Exit for CPUID error, RAX=-1=FFFFFFFFFFFFFFFFh
+ErrorCpuId:               ; Exit for CPUID error, EAX=-1=FFFFFFFFFFFFFFFFh
 mov eax,-1
 jmp ExitCpuId 
 
 ;---------- Subroutine, sequence of CPUID functions ---------------------------;
 ; INPUT:  R9D = Start CPUID function number
 ;         EAX = Limit CPUID function number (inclusive)
-;         RDI = Pointer to memory buffer
-; OUTPUT: RDI = Modified by store CPUID input parms + output parms entry
+;         EDI = Pointer to memory buffer
+; OUTPUT: EDI = Modified by store CPUID input parms + output parms entry
 ;         Flags condition code: Carry (C) = means entries count limit
 ;------------------------------------------------------------------------------;
 SequenceCpuId:
@@ -293,8 +293,8 @@ je Function04
 cmp eax,80000020h
 je Function10
 ;--- Default handling for functions without subfunctions ---
-xor esi,esi               ; ESI = sub-function number for CPUID
-xor ecx,ecx               ; ECX = sub-function number for save entry 
+xor esi,esi               ; ESI = sub-function number for save entry
+xor ecx,ecx               ; ECX = sub-function number for CPUID  
 call StoreCpuId
 ja OverSubFunction
 AfterSubFunction:         ; Return point after sub-function specific handler
@@ -377,8 +377,8 @@ jmp AfterSubFunction
 ;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
 Function0F:
 Function10:
-xor esi,esi           ; ESI = sub-function number for CPUID
-xor ecx,ecx           ; ECX = sub-function number for save entry 
+xor esi,esi           ; ESI = sub-function number for save entry 
+xor ecx,ecx           ; ECX = sub-function number for CPUID 
 push eax temp_r9      ; r9       
 call StoreCpuId       ; Subfunction 0 of fixed list [0,1]
 pop temp_r9 eax       ; r9
@@ -433,11 +433,11 @@ jmp AfterSubFunction
 
 ;---------- Subroutine, one CPUID function execution --------------------------;
 ; INPUT:  EAX = CPUID function number
-;         R9D = EAX (R8-R15 emulated in memory, because port from x64)
+;         R9D = EAX ( R8-R15 emulated in memory, because port from x64 )
 ;         ECX = CPUID subfunction number
 ;         ESI = ECX
-;         RDI = Pointer to memory buffer
-; OUTPUT: RDI = Modified by store CPUID input parms + output parms entry
+;         EDI = Pointer to memory buffer
+; OUTPUT: EDI = Modified by store CPUID input parms + output parms entry
 ;         Flags condition code: Above (A) = means entries count limit
 ;------------------------------------------------------------------------------;
 StoreCpuId:
@@ -575,7 +575,7 @@ sub eax,ebx
 sbb edx,ecx
 ;--- Exit ---
 ExitCpuClk:
-pop ebp ebp ebp edi esi          ; First POP EBP for RSP-8 only 
+pop ebp ebp ebp edi esi          ; First POP EBP for ESP+4 only 
 ret
 
 ;------------------------------------------------------------------------;

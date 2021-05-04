@@ -1,3 +1,25 @@
+CPUID v1.04.18 (May, 4, 2021)
+
+1) Added new INTEL function.
+Function 00000021h used by Intel TDX (Trust Domain Extensions) module
+for virtual CPUID emulation, include signature as 12-char text string.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000021h    0       EAX     31-0    Maximum supported sub-function number, yet 0 only.
+00000021h    0       EBX     31-0    Intel TDX signature, part 1 of 3.
+00000021h    0       ECX     31-0    Intel TDX signature, part 3 of 3.
+00000021h    0       EDX     31-0    Intel TDX signature, part 2 of 3.
+-----------------------------------------------------------------------------------------------------
+Source:
+Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module.
+Document 344425-002US
+4/25/2021
+
+2) Correct comments at JNI native libraries (asm files).
+
+
+
 CPUID v1.04.17 (April, 4, 2021)
 Added new INTEL feature.
 -----------------------------------------------------------------------------------------------------
@@ -9,7 +31,6 @@ Source:
 Intel 64 and IA-32 Architectures Software Developer's Manual. Documentation Changes.
 April 2021. Document Number 252046-066
 Item 14.4.4.4  IA32_HWP_CTL MSR (Address 776H Logical Processor Scope).
-
 
 
 

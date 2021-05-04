@@ -1,6 +1,6 @@
 ;------------------------------------------------------------------------------;
 ;                    Native Binary Library for Linux ia32                      ;
-;         JNI ELF (Java Native Interface Executable Linkable Format 32         ;
+;  JNI ELF ( Java Native Interface module in Executable Linkable Format 32 )   ;
 ;                                                                              ;
 ; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
 ;------------------------------------------------------------------------------;
@@ -52,21 +52,21 @@ mov ecx,[ebp+12+24]             ; Parm#2 = Array reference
 jecxz @f                        ; Go skip IPB extract. if IPB=null
 mov ebx,[ebp+04+24]             ; Parm#1 = Environment
 lea edx,[ebp-4]                 ; Parm#3 = isCopyAddress
-mov eax,[ebx]                   ; RAX = Pointer to functions table
+mov eax,[ebx]                   ; EAX = Pointer to functions table
 ;--- Get IPB, parms: EBX=env, ECX=IPB Object, EDX=Pointer to flag --
 push edx ecx ebx
 call dword [eax+188*4]          ; JNI call [GetLongArrayElements]
 add esp,12
 test eax,eax
 jz StatusRet                    ; Go skip if error = NULL pointer
-xchg esi,eax                    ; RSI = Pointer to IPB
+xchg esi,eax                    ; ESI = Pointer to IPB
 @@:
 ;--- Check OPB presence ---
 mov ecx,[ebp+16+24]             ; Parm#2 = Array reference
 jecxz @f                        ; Go skip OPB extract. if OPB=null
 mov ebx,[ebp+04+24]             ; Parm#1 = Environment
 lea edx,[ebp-8]                 ; Parm#3 = isCopyAddress
-mov eax,[ebx]                   ; RAX = Pointer to functions table
+mov eax,[ebx]                   ; EAX = Pointer to functions table
 ;--- Get OPB, parms: EBX=env, ECX=IPB Object, EDX=Pointer to flag --
 push ebp ebp esi esi            ; Push twice for alignment 16
 push edx ecx ebx
@@ -75,7 +75,7 @@ add esp,12
 pop esi esi ebp ebp
 test eax,eax
 jz StatusRet                    ; Go skip if error = NULL pointer
-xchg edi,eax                    ; RSI = Pointer to IPB
+xchg edi,eax                    ; EDI = Pointer to OPB
 @@:
 ;--- Target operation ---
 test esi,esi
@@ -85,7 +85,7 @@ xor eax,eax
 mov edx,[esi]                ; DWORD IPB[0] = Function selector 
 cmp edx,iFunctionCount
 jae @f
-lea ecx,[iFunctionSelector]  ; RCX must be adjustable by *.SO maker
+lea ecx,[iFunctionSelector]  ; ECX must be adjustable by *.SO maker
 call dword [ecx+edx*4]
 @@:
 ;--- Return point ---
@@ -96,7 +96,7 @@ je @f                           ; Go skip if IPB release not req.
 mov ecx,[ebp+12+24]             ; Parm#2 = Array reference
 jecxz @f                        ; Go skip IPB extract. if IPB=null
 mov ebx,[ebp+04+24]             ; Parm#1 = Environment
-mov edx,esi                     ; Parm#3 = Copy address, note RSI
+mov edx,esi                     ; Parm#3 = Copy address, note ESI
 xor esi,esi                     ; Parm#4 = Release mode
 mov eax,[ebx]                   ; EAX = Pointer to functions table
 ;--- Release IPB, parms: EBX=env, ECX=obj, EDX=P, ESI=Mode --- 
@@ -112,7 +112,7 @@ je @f                           ; Go skip if OPB release not req.
 mov ecx,[ebp+16+24]             ; Parm#2 = Array reference
 jecxz @f                        ; Go skip IPB extract. if IPB=null
 mov ebx,[ebp+04+24]             ; Parm#1 = Environment
-mov edx,edi                     ; Parm#3 = Copy address, note RSI
+mov edx,edi                     ; Parm#3 = Copy address, note EDI
 xor esi,esi                     ; Parm#4 = Release mode
 mov eax,[ebx]                   ; EAX = Pointer to functions table
 ;--- Release OPB, parms: EBX=env, ECX=obj, EDX=P, ESI=Mode --- 
@@ -132,7 +132,7 @@ xor eax,eax
 mov edx,[ebp+20+24]          ; EDX = Selector / IPB size place
 cmp edx,FunctionCount        ; DWORD EDX = Function selector 
 jae @f
-lea ecx,[FunctionSelector]   ; RCX must be adjustable by *.SO maker
+lea ecx,[FunctionSelector]   ; ECX must be adjustable by *.SO maker
 call dword [ecx+edx*4]
 @@:
 jmp ReleaseRet
@@ -168,7 +168,7 @@ VIRTUAL_LIMIT  = 128 - 2  ; Limit for virtual CPUID functions  400000xxh
 
 ;---------- Target subroutine -------------------------------------------------;
 ; INPUT:  Parameter#1 = [esp+4] = Pointer to output buffer
-; OUTPUT: RAX = Number of output entries
+; OUTPUT: EAX = Number of output entries
 ;         Output buffer updated
 ;---
 ; Output buffer maximum size is 16352 bytes, 511 entries * 32 bytes
@@ -245,18 +245,18 @@ ExitCpuId:
 add esp,16
 pop edi esi ebp ebx
 ret 4
-NoCpuId:                  ; Exit for CPUID not supported, RAX=0  
+NoCpuId:                  ; Exit for CPUID not supported, EAX=0  
 xor eax,eax
 jmp ExitCpuId
-ErrorCpuId:               ; Exit for CPUID error, RAX=-1=FFFFFFFFFFFFFFFFh
+ErrorCpuId:               ; Exit for CPUID error, EAX=-1=FFFFFFFFh
 mov eax,-1
 jmp ExitCpuId 
 
 ;---------- Subroutine, sequence of CPUID functions ---------------------------;
 ; INPUT:  R9D = Start CPUID function number
 ;         EAX = Limit CPUID function number (inclusive)
-;         RDI = Pointer to memory buffer
-; OUTPUT: RDI = Modified by store CPUID input parms + output parms entry
+;         EDI = Pointer to memory buffer
+; OUTPUT: EDI = Modified by store CPUID input parms + output parms entry
 ;         Flags condition code: Carry (C) = means entries count limit
 ;------------------------------------------------------------------------------;
 SequenceCpuId:
@@ -291,8 +291,8 @@ je Function04
 cmp eax,80000020h
 je Function10
 ;--- Default handling for functions without subfunctions ---
-xor esi,esi               ; ESI = sub-function number for CPUID
-xor ecx,ecx               ; ECX = sub-function number for save entry 
+xor esi,esi               ; ESI = sub-function number for save entry 
+xor ecx,ecx               ; ECX = sub-function number for CPUID 
 call StoreCpuId
 ja OverSubFunction
 AfterSubFunction:         ; Return point after sub-function specific handler
@@ -375,8 +375,8 @@ jmp AfterSubFunction
 ;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
 Function0F:
 Function10:
-xor esi,esi           ; ESI = sub-function number for CPUID
-xor ecx,ecx           ; ECX = sub-function number for save entry 
+xor esi,esi           ; ESI = sub-function number for save entry 
+xor ecx,ecx           ; ECX = sub-function number for CPUID 
 push eax temp_r9      ; r9       
 call StoreCpuId       ; Subfunction 0 of fixed list [0,1]
 pop temp_r9 eax       ; r9
@@ -434,8 +434,8 @@ jmp AfterSubFunction
 ;         R9D = EAX (R8-R15 emulated in memory, because port from x64)
 ;         ECX = CPUID subfunction number
 ;         ESI = ECX
-;         RDI = Pointer to memory buffer
-; OUTPUT: RDI = Modified by store CPUID input parms + output parms entry
+;         EDI = Pointer to memory buffer
+; OUTPUT: EDI = Modified by store CPUID input parms + output parms entry
 ;         Flags condition code: Above (A) = means entries count limit
 ;------------------------------------------------------------------------------;
 StoreCpuId:
@@ -465,7 +465,7 @@ ret
 ;------------------------------------------------------------------------------;
 ; Measure CPU Clock frequency by Time Stamp Counter (TSC)                      ;
 ;                                                                              ;
-; INPUT:   RDI = Pointer to OPB (Output Parameters Block)                      ;
+; INPUT:   EDI = Pointer to OPB (Output Parameters Block)                      ;
 ;                                                                              ;
 ; OUTPUT:  QWORD OPB[00] = Frequency, Hz, 0 if measurement error               ;
 ;------------------------------------------------------------------------------;
@@ -532,7 +532,7 @@ ret
 ; INPUT:   None                                                                ;
 ;                                                                              ;
 ; OUTPUT:  CF flag = Status: 0(NC)=Measured OK, 1(C)=Measurement error	       ;
-;          Output RAX,RDX valid only if CF=0(NC)                               ;
+;          Output EAX,EDX valid only if CF=0(NC)                               ;
 ;          EDX:EAX = TSC Frequency, Hz, F = Delta TSC per 1 second             ;
 ;------------------------------------------------------------------------------;
 MeasureCpuClk:

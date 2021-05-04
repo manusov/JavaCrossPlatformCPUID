@@ -1,6 +1,6 @@
 ;------------------------------------------------------------------------------;
 ;                    Native Binary Library for Linux x64                       ;
-;       JNI ELF (Java Native Interface Executable Linkable Format 64           ;
+;  JNI ELF ( Java Native Interface module in Executable Linkable Format 64 )   ;
 ;                                                                              ;
 ; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
 ;------------------------------------------------------------------------------;
@@ -67,7 +67,7 @@ call qword [rax+188*8]          ; JNI call [GetLongArrayElements]
 pop rsi rsi
 test rax,rax
 jz StatusRet                    ; Go skip if error = NULL pointer
-xchg rdi,rax                    ; RSI = Pointer to OPB
+xchg rdi,rax                    ; RDI = Pointer to OPB
 @@: 
 ;--- Target operation ---
 test rsi,rsi
@@ -267,8 +267,8 @@ je Function04
 cmp eax,80000020h
 je Function10
 ;--- Default handling for functions without subfunctions ---
-xor esi,esi               ; ESI = sub-function number for CPUID
-xor ecx,ecx               ; ECX = sub-function number for save entry 
+xor esi,esi               ; ESI = sub-function number for save entry 
+xor ecx,ecx               ; ECX = sub-function number for CPUID 
 call StoreCpuId
 ja OverSubFunction
 AfterSubFunction:         ; Return point after sub-function specific handler
@@ -348,8 +348,8 @@ jmp AfterSubFunction
 ;---------- CPUID function 10h = L3 cache QoS enforcement enumeration (same) --;
 Function0F:
 Function10:
-xor esi,esi           ; ESI = sub-function number for CPUID
-xor ecx,ecx           ; ECX = sub-function number for save entry 
+xor esi,esi           ; ESI = sub-function number for save entry 
+xor ecx,ecx           ; ECX = sub-function number for CPUID 
 push rax r9       
 call StoreCpuId       ; Subfunction 0 of fixed list [0,1]
 pop r9 rax
