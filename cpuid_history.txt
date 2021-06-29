@@ -1,3 +1,21 @@
+CPUID v1.04.20 (June, 29, 2021)
+Added new INTEL flags for disable TSX.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000007h    0       EDX     11      RTM_ALWAYS_ABORT
+00000007h    0       EDX     13      TSX_FORCE_ABORT MSR existance
+-----------------------------------------------------------------------------------------------------
+Source:
+Performance Monitoring Impact of Intel Transactional
+Synchronization Extension Memory Ordering Issue.
+White Paper. June 2021. Revision 1.4.
+Document Number: 604224.
+https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
+
+
+
+
 CPUID v1.04.19 (May, 4, 2021)
 Added new INTEL features.
 -----------------------------------------------------------------------------------------------------
@@ -12,7 +30,6 @@ Architecture Specification: Intel Trust Domain Extensions (Intel TDX) Module.
 Document 344425-002US
 4/25/2021
 Document pages 121, 123.
-
 
 
 

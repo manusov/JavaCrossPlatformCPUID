@@ -98,9 +98,9 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "AVX512VP2IS"  , "AVX512 compute intersection instructions" } ,
       { "SRBDS"        , "Special Register Buffer Data Sampling mitigation MSR" } ,  // bit 9
       { "MD CLEAR"     , "CPU is not affected by microarch. data sampling (MDS)" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,               // bit 13
+      { "RTM AA"       , "RTM always abort mode" } ,  // bit 11
+      { "x"            , "Reserved" } ,               // bit 12
+      { "TSX FA MSR"   , "TSX force abort MSR" } ,    // bit 13
       { "SERIALIZE"    , "SERIALIZE instruction" } ,  // bit 14
       { "HYBRID"       , "Processor is identified as a hybrid part" } ,  // bit 15
       { "TSXLDTRK"     , "XRESLDTRK and XSUSLDTRK instructions" } ,      // bit 16
