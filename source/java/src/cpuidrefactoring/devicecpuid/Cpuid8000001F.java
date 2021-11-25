@@ -27,7 +27,7 @@ private final static String[][] DECODER_EAX =
       { "VMPL"    , "Virtual Machine Permission (Privilege) levels" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "SEC TSC" , "Secure TSC" } ,  // bit 8
       { "x"       , "Reserved" } ,
       { "HWCC ED" , "Hardware cache coherency across encryption domains" } ,
       { "HOST 64" , "SEV guest execution only for 64-bit hosts" } ,
@@ -43,7 +43,7 @@ private final static String[][] DECODER_EAX =
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,  // bit 24
+      { "VMSA RP" , "VM Save Area Register Protection" } ,  // bit 24
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
@@ -75,7 +75,7 @@ private final static Object[][] DECODER_EDX =
         // EBX
         dr = decodeBitfields( "EBX", DECODER_EBX, entries[0].ebx );
         dr.strings.get(0)[4] = String.format( "bit %d", dr.values[0] );
-        if ( dr.values[1]==0 )
+        if ( dr.values[1] == 0 )
             {
             dr.strings.get(1)[4] = "no reduction";
             }

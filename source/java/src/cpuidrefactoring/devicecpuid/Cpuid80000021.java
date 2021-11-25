@@ -26,9 +26,9 @@ private final static String[][] DECODER_EAX =
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "NSCB"      , "Null selector clear base"      } ,             // bit 6
-      { "x"         , "Reserved"          } ,
+      { "UAIGN"     , "Upper address ignore"          } ,
       { "x"         , "Reserved"          } ,                         // bit 8
-      { "x"         , "Reserved"          } ,
+      { "NOSCM"     , "No SMM control MSR (MSR C001_0116h is absent)" } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
@@ -51,9 +51,13 @@ private final static String[][] DECODER_EAX =
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } };                        // bit 31
+private final static Object[][] DECODER_EBX =
+    { { "Microcode patch size, 16-byte units" ,  11 ,  0 } };
 
 @Override String[][] getParametersList()
     {
+    DecodeReturn dr;
+    String[] interval = new String[] { "", "", "", "", "" };
     ArrayList<String[]> strings;
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
@@ -61,6 +65,20 @@ private final static String[][] DECODER_EAX =
         // EAX
         strings = decodeBitmap( "EAX", DECODER_EAX, entries[0].eax );
         a.addAll( strings );
+        a.add( interval );
+        // EBX
+        dr = decodeBitfields( "EBX", DECODER_EBX, entries[0].ebx );
+        int n = dr.values[0];
+        if ( n == 0 )
+            {
+            dr.strings.get(0)[4] = "at most 5568 (15C0h) bytes";
+            }
+        else
+            {
+            n = n * 16;
+            dr.strings.get(0)[4] =  String.format( "%d bytes", n );
+            }
+        a.addAll( dr.strings );
         }
     return a.isEmpty() ? 
         super.getParametersList() : a.toArray( new String[a.size()][] );

@@ -1,3 +1,24 @@
+CPUID v1.04.21 (November, 25, 2021)
+Added new AMD features.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+8000001Fh    -       EAX     8       Secure TSC
+8000001Fh    -       EAX     24      VMSA (VM save area) register protection
+80000021h    -       EAX     7       Upper address ignore
+80000021h    -       EAX     9       No SMM control MSR ( MSR C001_0116h is absent )
+80000021h    -       EBX     11-0    Microcode patch size, 16-byte units
+80000022h    -       EBX     3-0     NumCorePmc, number of Core Performance Monitor Counters
+80000022h    -       EBX     15-10   NumDfPmc, number of Northbridge Performance Monitor Counters
+-----------------------------------------------------------------------------------------------------
+Source:
+AMD64 Architecture Programmer's Manual
+Volume 3: General-Purpose and System Instructions.
+Publication No. 24594. Revision 3.33. November 2021.
+
+
+
+
 CPUID v1.04.20 (June, 29, 2021)
 Added new INTEL flags for disable TSX.
 -----------------------------------------------------------------------------------------------------
@@ -12,7 +33,6 @@ Synchronization Extension Memory Ordering Issue.
 White Paper. June 2021. Revision 1.4.
 Document Number: 604224.
 https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
-
 
 
 
