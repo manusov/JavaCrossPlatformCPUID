@@ -73,7 +73,8 @@ public enum VENDOR_T
     VENDOR_VORTEX,
     VENDOR_RDC,
     VENDOR_HYGON,
-    VENDOR_ZHAOXIN
+    VENDOR_ZHAOXIN,
+    VENDOR_MONTAGE
     };
 
 final static String[][] P_SIGN =
@@ -91,7 +92,8 @@ final static String[][] P_SIGN =
       { "Vortex86 SoC" , "Vortex"    } ,
       { "Genuine  RDC" , "RDC"       } ,
       { "HygonGenuine" , "Hygon"     } ,
-      { "  Shanghai  " , "Zhaoxin"   } };
+      { "  Shanghai  " , "Zhaoxin"   } ,
+      { "GenuineIntel" , "Montage"   } };
 
 private final Phandler[] P_HAND =
     { 

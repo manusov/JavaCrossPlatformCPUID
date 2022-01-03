@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -102,28 +102,32 @@ void decodeMp( DatabaseStash stash )
             if ( stash.saw_1f )
                 {
                 stash.mp.method = "Intel leaf 01Fh";
-                int  tryX;
+                int  tryX, ht = 0, tc = 0;
                 for ( tryX = 0; tryX < stash.val_1f_ecx.length; tryX++ )
                     {
                     if ( GET_V2_TOPO_LEVEL( stash.val_1f_ecx[tryX] ) ==
                          V2_TOPO_SMT) 
                         {
-                        stash.mp.hyperthreads = 
-                            GET_V2_TOPO_PROCESSORS( stash.val_1f_ebx[tryX] );
+                        ht = GET_V2_TOPO_PROCESSORS( stash.val_1f_ebx[tryX] );
                         }
                     else if( GET_V2_TOPO_LEVEL( stash.val_1f_ecx[tryX]) ==
                              V2_TOPO_CORE ) 
                         {
-                        stash.mp.cores = 
-                            GET_V2_TOPO_PROCESSORS( stash.val_1f_ebx[tryX] );
+                        tc = GET_V2_TOPO_PROCESSORS( stash.val_1f_ebx[tryX] );
                         }
                     }
+                if ( ht == 0 )
+                    {
+                    ht = 1;
+                    }
+                stash.mp.cores = tc / ht;
+                stash.mp.hyperthreads = ht;
                 }
             else if ( stash.saw_b ) 
                 {
+                stash.mp.method = "Intel leaf 0Bh";
                 int ht = GET_X2APIC_PROCESSORS( stash.val_b_ebx[0] );
                 int tc = GET_X2APIC_PROCESSORS( stash.val_b_ebx[1] );
-                stash.mp.method = "Intel leaf 0Bh";
                 if ( ht == 0 )
                     {
                     ht = 1;

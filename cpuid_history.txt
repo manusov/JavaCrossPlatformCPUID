@@ -1,3 +1,24 @@
+CPUID v1.05.00 (January, 3, 2022)
+------------------------------------
+1) Detect Montage Jintide processor.
+2) Update data base for detection Intel Gen11 and Gen12 processors.
+3) Bug fix for detect MP topology by CPUID function 0000001Fh, actual for Intel Gen12 processors.
+4) Detect runs on Performance core (Golden Cove) or Efficient core (Gracemont) of hybrid CPU.
+But user-defined threads affinization and P/E cores count is yet UNDER CONSTRUCTION.
+------------------------------------
+Data sources:
+------------------------------------
+1) Special thanks to Todd Allen CPUID project
+https://fossies.org/linux/cpuid/cpuid.c
+http://www.etallen.com/
+2) Use Java CPUID utility root menu (Target\InstLatx64 CPUID file), text dump can be loaded from:
+https://github.com/InstLatx64/InstLatx64/blob/master/GenuineIntel/GenuineIntel0050654_SkylakeXeon_Jintide_CPUID1.txt
+3) See also popular info:
+https://www.techradar.com/uk/news/intel-and-amd-shouldnt-panic-yet-but-this-chinese-vendor-has-repacked-a-xeon-cpu
+
+
+
+
 CPUID v1.04.21 (November, 25, 2021)
 Added new AMD features.
 -----------------------------------------------------------------------------------------------------
@@ -15,7 +36,6 @@ Source:
 AMD64 Architecture Programmer's Manual
 Volume 3: General-Purpose and System Instructions.
 Publication No. 24594. Revision 3.33. November 2021.
-
 
 
 

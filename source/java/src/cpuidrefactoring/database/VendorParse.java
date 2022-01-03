@@ -64,6 +64,9 @@ void decodeBrandString( DatabaseStash stash )
     stash.br.i_8000    = strreg( brand, "Core.* [im][3579]-8[0-9][0-9][0-9]" );
     stash.br.i_10000   = strreg( brand, "Core.* i[3579]-10[0-9][0-9][0-9]" );
     stash.br.cc150     = strreg( brand, "CC150" );
+    
+    // Montage Jintide, undocumented, only instlatx64 example
+    stash.br.montage   = strsub( brand, "Montage(R)" );
 
     stash.br.athlon_lv = strsub( brand, "Athlon(tm) XP-M (LV)" );
     stash.br.athlon_xp = strsub( brand, "Athlon(tm) XP" ) ||

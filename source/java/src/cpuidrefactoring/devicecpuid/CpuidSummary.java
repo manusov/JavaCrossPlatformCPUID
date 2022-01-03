@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Summary Information,
 Processor name string, Vendor String, 
@@ -44,6 +44,10 @@ private final static int V2_EXTENDED_TOPOLOGY = 0x0000001F;
 private final static int AMD_MP_TOPOLOGY      = 0x8000001E;
 
 private final static int TRANSMETA_INFO       = 0x80860001;
+
+private final static int INTEL_HYBRID         = 0x0000001A;
+private final static int HYBRID_BIG           = 0x40;
+private final static int HYBRID_SMALL         = 0x20;
 
 private void writeMaxLevel( int x, ArrayList<String[]> a )
     {
@@ -204,10 +208,10 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         e = container.buildEntries( CACHE_DESCRIPTORS );
         if ( ( e != null )&&( e.length >= 1 ) )
             {
-                stash.val_2_eax = e[0].eax;
-                stash.val_2_ebx = e[0].ebx;
-                stash.val_2_ecx = e[0].ecx;
-                stash.val_2_edx = e[0].edx;
+            stash.val_2_eax = e[0].eax;
+            stash.val_2_ebx = e[0].ebx;
+            stash.val_2_ecx = e[0].ecx;
+            stash.val_2_edx = e[0].edx;
             }
         
         // load from dump to stash: cache and MP topology by function 04h
@@ -275,16 +279,25 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         e = container.buildEntries( AMD_MP_TOPOLOGY );
         if ( ( e != null )&&( e.length >= 1 ) )
             {
-                stash.val_8000001e_ebx = e[0].ebx;
+            stash.val_8000001e_ebx = e[0].ebx;
             }
 
         // load from dump to stash: Transmeta processor info
         e = container.buildEntries( TRANSMETA_INFO );
         if ( ( e != null )&&( e.length >= 1 ) )
             {
-                stash.transmeta_proc_rev = e[0].ebx;
+            stash.transmeta_proc_rev = e[0].ebx;
             }
         
+        // Intel Hybrid CPU support
+        e = container.buildEntries( INTEL_HYBRID );
+        if ( ( e != null )&&( e.length >= 1 ) )
+            {
+            int hybridId = e[0].eax >> 24;
+            if ( hybridId == HYBRID_BIG ) stash.bigCore = true;
+            else if ( hybridId == HYBRID_SMALL ) stash.smallCore = true;
+            }
+
         // set model string at stash, used for parsing and keywords detection
         stash.brand = model;
         
@@ -372,7 +385,19 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
             if ( ( nameMP != null )&&( mpc > 0 )&&( mph > 0 ) )
                 {
                 String sm;
-                if ( mpu > 1 )
+                if ( stash.bigCore )
+                    {
+                    sm = String.format
+                        ( "%s ( now runs at hybrid CPU P-core, smt=%d, total %d threads per CPU )", 
+                          nameMP, mph, mpc * mph );
+                    }
+                else if ( stash.smallCore )
+                    {
+                    sm = String.format
+                        ( "%s ( now runs at hybrid CPU E-core, smt=%d, total %d threads per CPU )", 
+                          nameMP, mph, mpc * mph );
+                    }
+                else if ( mpu > 1 )
                     {  // MP topology with units
                     sm = String.format( "%s ( %d cores, %d threads, %d units )", 
                                       nameMP, mpc * mpu, mpc * mpu * mph, mpu );

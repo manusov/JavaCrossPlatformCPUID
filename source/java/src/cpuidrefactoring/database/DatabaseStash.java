@@ -26,22 +26,23 @@ HYPERVISOR_T  hypervisor = null;
 // and fields, set as dump analyzing results.
 // this public part must be actual before buildStash() method call.
 
-public boolean  saw_4  = false;   // means CPUID function 00000004h supported
-public boolean  saw_b  = false;   // means CPUID function 0000000Bh supported
-public boolean  saw_1f = false;   // means CPUID function 0000001Fh supported
+public boolean  saw_4  = false;    // means CPUID function 00000004h supported
+public boolean  saw_b  = false;    // means CPUID function 0000000Bh supported
+public boolean  saw_1f = false;    // means CPUID function 0000001Fh supported
+
+public boolean bigCore   = false;  // Intel Hybrid technology support
+public boolean smallCore = false;
 
 public int    val_0_eax = 0;
 public int    val_1_eax = 0;
 public int    val_1_ebx = 0;
 public int    val_1_ecx = 0;
 public int    val_1_edx = 0;
-public int    val_4_eax = 0;
-// added
 public int    val_2_eax = 0;
 public int    val_2_ebx = 0;
 public int    val_2_ecx = 0;
 public int    val_2_edx = 0;
-// end of added
+public int    val_4_eax = 0;
 public int[]  val_b_eax  = new int[2];
 public int[]  val_b_ebx  = new int[2]; 
 public int[]  val_1f_eax = new int[6];
@@ -54,21 +55,12 @@ public int    val_80000001_ecx = 0;
 public int    val_80000001_edx = 0;
 public int    val_80000008_ecx = 0;
 public int    val_8000001e_ebx = 0;
-
-// added
 public int    val_80000006_ecx = 0;
-// end of added
 
-// changed
-// byte[]   brand          = new byte[48+1];
-// byte[]   transmeta_info = new byte[64+1];
-// byte[]   override_brand = new byte[48*2+1];
-// byte[]   soc_brand      = new byte[48+1];
 public String brand          = null;
 public String transmeta_info = null;
 public String override_brand = null;
 public String soc_brand      = null;
-// end of changed, end of public part
 
 // internal (non-public) part, but with getters for some parameters,
 // requires externally read, but not requires externally write
@@ -113,6 +105,8 @@ class BR
         boolean i_8000    = false;
         boolean i_10000   = false;
         boolean cc150     = false;
+        // Montage Jintide, undocumented, only instlatx64 example
+        boolean montage   = false;
 //      }
     
 //  AMD amd;

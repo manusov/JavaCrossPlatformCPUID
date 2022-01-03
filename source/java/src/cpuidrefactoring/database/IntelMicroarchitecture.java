@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -49,6 +49,10 @@ IntelMicroarchitecture( DatabaseStash stash )
     
 @Override MData detect( int tfms, int bi )
     {
+    boolean mt = stash.br.montage;
+    boolean bc = stash.bigCore;
+    boolean sc = stash.smallCore;
+    
     final CriteriaDescriptor[] INTEL_MICROARCHITECTURE = {
     new F   ( 0, 4,            ()-> { f = "i486"; } ), // p depends on core
     new FM  ( 0, 5, 0, 0,      ()-> { f = "P5"; p = ".8um"; } ),
@@ -107,6 +111,8 @@ IntelMicroarchitecture( DatabaseStash stash )
     new FMS ( 0, 6, 4, 14, 8,  ()-> { u = "Kaby Lake"; f = "Skylake"; p = "14nm"; } ),
     new FM  ( 0, 6, 4, 14,     ()-> { u = "Skylake"; c = true; f = "Skylake"; p = "14nm"; } ),
     new FM  ( 0, 6, 4, 15,     ()-> { u = "Broadwell"; c = true; f = "Haswell"; p = "14nm"; } ),
+    // undocumented; only instlatx64 example
+    new FMQ ( 0, 6, 5, 5, mt,  ()-> { u = "Jintide Gen1"; c = true; } ),
     new FMS ( 0, 6, 5, 5, 6,   ()-> { u = "Cascade Lake"; c = true; f = "Skylake"; p = "14nm"; } ), // no docs, but example from Greg Stewart
     new FMS ( 0, 6, 5, 5, 7,   ()-> { u = "Cascade Lake"; c = true; f = "Skylake"; p = "14nm"; } ),
     new FMS ( 0, 6, 5, 5, 10,  ()-> { u = "Cooper Lake"; c = true; f = "Skylake"; p = "14nm"; } ),
@@ -134,8 +140,14 @@ IntelMicroarchitecture( DatabaseStash stash )
     new FM  ( 0, 6, 8, 14,     ()-> { u = "Kaby Lake"; f = "Skylake"; p = "14nm"; } ),
     new FM  ( 0, 6, 8, 15,     ()-> { u = "Sapphire Rapids"; f = "Sunny Cove"; p = "10nm"; } ), // LX*
     new FM  ( 0, 6, 9, 6,      ()-> { u = "Tremont"; p = "10nm"; } ), // LX*
-    new FM  ( 0, 6, 9, 7,      ()-> { u = "Golden Cove"; p = "10nm"; } ), // LX*
-    new FM  ( 0, 6, 9, 10,     ()-> { u = "Golden Cove"; p = "10nm"; } ), // Coreboot*
+    // Hybrid CPU support
+    // new FM  ( 0, 6, 9, 7,      ()-> { u = "Golden Cove"; p = "10nm"; } ), // LX*
+    // new FM  ( 0, 6, 9, 10,     ()-> { u = "Golden Cove"; p = "10nm"; } ), // Coreboot*
+    new FMQ ( 0, 6, 9, 7,  bc, ()-> { u = "Golden Cove"; p = "10nm"; } ),
+    new FMQ ( 0, 6, 9, 10, bc, ()-> { u = "Golden Cove"; p = "10nm"; } ),
+    new FMQ ( 0, 6, 9, 7,  sc, ()-> { u = "Gracemont"; p = "10nm"; } ),
+    new FMQ ( 0, 6, 9, 10, sc, ()-> { u = "Gracemont"; p = "10nm"; } ),
+    // end of Hybrid CPU support
     new FM  ( 0, 6, 9, 12,     ()-> { u = "Tremont"; p = "10nm"; } ), // LX*
     new FM  ( 0, 6, 9, 13,     ()-> { u = "Sunny Cove"; f = "Sunny Cove"; p = "10nm"; } ), // LX*
     new FMS ( 0, 6, 9, 14, 9,  ()-> { u = "Kaby Lake"; f = "Skylake"; p = "14nm"; } ),

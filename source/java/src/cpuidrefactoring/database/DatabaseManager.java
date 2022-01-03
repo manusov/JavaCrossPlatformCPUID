@@ -71,6 +71,10 @@ public String getPhysicalVendor()
         {  // support special case VIA vs Zhaoxin
         s = P_SIGN[ VENDOR_ZHAOXIN.ordinal() ][1];
         }
+    else if ( ( stash.vendor == VENDOR_INTEL )&&( stash.br.montage ) )
+        {
+        s = P_SIGN[ VENDOR_MONTAGE.ordinal() ][1];
+        }
     return s; 
     }
 

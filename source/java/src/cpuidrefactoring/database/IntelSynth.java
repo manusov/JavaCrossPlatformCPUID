@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -73,6 +73,7 @@ private boolean sS = false;
 private boolean YC = false;
 private boolean dL = false;
 private boolean DG = false;
+private boolean iM = false;
 
 private boolean is_vmx (int val_1_ecx )
     {
@@ -194,6 +195,8 @@ private boolean strsub( String st, String subst )
     Y8 = LY && stash.br.i_8000;
     /* Comet Lake V1, distinguished from Whiskey Lake V0 */
     UX = LU && stash.br.i_10000;
+    /* Montage Jintide, undocumented, only instlatx64 example */
+    iM = is_intel && stash.br.montage;
     
     final CriteriaDescriptor[] INTEL_DATA = {
 /*
@@ -807,6 +810,7 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  5, 5,  4, sS, "Intel Scalable Bronze/Silver/Gold/Platinum (Skylake H0/M0/U0)" ),
     new FMSQ(    0, 6,  5, 5,  4, sX, "Intel Xeon W 2000 / D-2100 (Skylake H0/M0/U0)" ), // D-2100 from MRG* 2018-03-06
     new FMSQ(    0, 6,  5, 5,  4, dc, "Intel Core i9-7000X (Skylake-X H0/M0/U0)" ), // only from MRG* 2018-03-06
+    new FMSQ(    0, 6,  5, 5,  4, iM, "Montage Jintide Gen1" ), // undocumented; only instlatx64 example
     new FMSQ(    0, 6,  5, 5,  6, sS, "Intel Scalable (2nd Gen) Bronze/Silver/Gold/Platinum (Cascade Lake)" ), // no docs, but example from Greg Stewart
     new FMSQ(    0, 6,  5, 5,  6, sX, "Intel Xeon W 2000 (Cascade Lake)" ), // no docs, but example from Greg Stewart
     new FMSQ(    0, 6,  5, 5,  7, dc, "Intel Core i*-10000X (Cascade Lake-X B1/L1/R1)" ), // no docs, but instlatx64 example
@@ -879,8 +883,11 @@ private boolean strsub( String st, String subst )
     new FMS (    0, 6,  6, 6,  2,     "Intel Core (Cannon Lake C0)" ),
     new FMS (    0, 6,  6, 6,  3,     "Intel Core (Cannon Lake D0)" ),
     new FM  (    0, 6,  6, 6,         "Intel Core (Cannon Lake)" ),
-    new FM  (    0, 6,  6,10,         "Intel Core (Ice Lake)" ), // no spec update; only MSR_CPUID_table* so far
-    new FM  (    0, 6,  6,12,         "Intel Core (Ice Lake)" ), // no spec update; only MSR_CPUID_table* so far
+    new FM  (    0, 6,  6, 7,         "Intel Core (Cannon Lake)"), // DPTF*
+    new FMSQ(    0, 6,  6,10,  6, sS, "Intel Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Ice Lake D2/M1)"),
+    new FMQ (    0, 6,  6,10,     sS, "Intel Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Ice Lake)"),
+    new FM  (    0, 6,  6,10,         "Intel (unknown type) (Ice Lake)" ),
+    new FM  (    0, 6,  6,12,         "Intel Core (Ice Lake)" ),  // no spec update; only MSR_CPUID_table* so far; DPTF* claims this is Meteor Lake S.
     // No spec update; only MRG* 2018-03-06, 2019-08-31.  It is some sort of Atom,
     // but no idea which uarch or core.
     new FM  (    0, 6,  6,14,         "Intel Puma 7" ),
@@ -916,11 +923,27 @@ private boolean strsub( String st, String subst )
     new FM  (    0, 6,  8, 5,         "Intel Xeon Phi (Knights Mill)" ),
     new FM  (    0, 6,  8, 6,         "Intel Atom (Elkhart Lake)" ),
     new FM  (    0, 6,  8,10,         "Intel Atom (Lakefield)" ), // no spec update; LX*
+    // changed
     // Coreboot* provides steppings.
-    new FMS (    0, 6,  8,12,  0,     "Intel Core (Tiger Lake-U A0)" ),
-    new FMS (    0, 6,  8,12,  1,     "Intel Core (Tiger Lake-U B0)" ),
-    new FM  (    0, 6,  8,12,         "Intel Core (Tiger Lake-U)" ),
-    new FM  (    0, 6,  8,13,         "Intel Core (Tiger Lake)" ), // LX*
+    // new FMS (    0, 6,  8,12,  0,     "Intel Core (Tiger Lake-U A0)" ),
+    // new FMS (    0, 6,  8,12,  1,     "Intel Core (Tiger Lake-U B0)" ),
+    // new FM  (    0, 6,  8,12,         "Intel Core (Tiger Lake-U)" ),
+    // new FM  (    0, 6,  8,13,         "Intel Core (Tiger Lake)" ), // LX*
+    // Coreboot* provides steppings.
+    new FMS (    0, 6,  8,12,  0,     "Intel Core (Tiger Lake-U A0)"),
+    new FMSQ(    0, 6,  8,12,  1, dC, "Intel Celeron 6000 (Tiger Lake-U B0)"),
+    new FMSQ(    0, 6,  8,12,  1, dP, "Intel Pentium Gold 7505 (Tiger Lake-U B0)"),
+    new FMSQ(    0, 6,  8,12,  1, dc, "Intel Core i*-11000 / i*-1100G* (Tiger Lake-U B0)"),
+    new FMS (    0, 6,  8,12,  1,     "Intel (unknown type) (Tiger Lake-U B0)"),
+    new FMQ (    0, 6,  8,12,     dC, "Intel Celeron (Tiger Lake-U)"),
+    new FMQ (    0, 6,  8,12,     dP, "Intel Pentium (Tiger Lake-U)"),
+    new FMQ (    0, 6,  8,12,     dc, "Intel Core (Tiger Lake-U)"),
+    new FM  (    0, 6,  8,12,         "Intel (unknown type) (Tiger Lake-U)"),
+    // no spec update; only MSR_CPUID_table* so far
+    // Coreboot* provides stepping.
+    new FMS (    0, 6,  8,13,  1,     "Intel Core (Tiger Lake R0)"),
+    new FM  (    0, 6,  8,13,         "Intel Core (Tiger Lake)"),
+    // end of changed
     // Intel docs (334663) omit the stepping numbers for (0,6),(8,14)
     // H0, J1 & Y0, but (338025, 615213) provide some.
     // Coreboot* provides the 9 (H0) & 10 (Y0) stepping, but not J1.
@@ -945,20 +968,55 @@ private boolean strsub( String st, String subst )
     new FMS (    0, 6,  8,14, 12,     "Intel (unknown type) (Whiskey Lake-U V0 / Comet Lake-U V1)" ),
     new FM  (    0, 6,  8,14,         "Intel Core (unknown type) (Kaby Lake / Amber Lake-Y / Whiskey Lake-U / Comet Lake-U)" ),
     new FM  (    0, 6,  8,15,         "Intel Xeon (unknown type) (Sapphire Rapids)" ), // LX*
+    // changed
     // LX*.  Coreboot* provides stepping.
-    new FMS (    0, 6,  9, 6,  0,     "Intel Atom (Elkhart Lake A0)" ),
-    new FMS (    0, 6,  9, 6,  1,     "Intel Atom (Elkhart Lake B0)" ),
-    new FM  (    0, 6,  9, 6,         "Intel Atom (Elkhart Lake)" ),
+    // new FMS (    0, 6,  9, 6,  0,     "Intel Atom (Elkhart Lake A0)" ),
+    // new FMS (    0, 6,  9, 6,  1,     "Intel Atom (Elkhart Lake B0)" ),
+    // new FM  (    0, 6,  9, 6,         "Intel Atom (Elkhart Lake)" ),
     // LX*.  Coreboot* provides stepping.
-    new FMS (    0, 6,  9, 7,  0,     "Intel Atom (Alder Lake-S A0)" ),
-    new FM  (    0, 6,  9, 7,         "Intel Atom (Alder Lake-S)" ),
+    // new FMS (    0, 6,  9, 7,  0,     "Intel Atom (Alder Lake-S A0)" ),
+    // new FM  (    0, 6,  9, 7,         "Intel Atom (Alder Lake-S)" ),
     // Coreboot*.  Coreboot* provides stepping.
-    new FMS (    0, 6,  9,10,  0,     "Intel Atom (Alder Lake-P A0)" ),
-    new FM  (    0, 6,  9,10,         "Intel Atom (Alder Lake-P)" ),
+    // new FMS (    0, 6,  9,10,  0,     "Intel Atom (Alder Lake-P A0)" ),
+    // new FM  (    0, 6,  9,10,         "Intel Atom (Alder Lake-P)" ),
     // LX*.  Coreboot* provides stepping.
-    new FMS (    0, 6,  9,12,  0,     "Intel Atom (Jasper Lake A0)" ),
-    new FM  (    0, 6,  9,12,         "Intel Atom (Jasper Lake)" ),
-    new FM  (    0, 6,  9,13,         "Intel NNP I-1000 (Spring Hill)" ), // LX*
+    // new FMS (    0, 6,  9,12,  0,     "Intel Atom (Jasper Lake A0)" ),
+    // new FM  (    0, 6,  9,12,         "Intel Atom (Jasper Lake)" ),
+    // new FM  (    0, 6,  9,13,         "Intel NNP I-1000 (Spring Hill)" ), // LX*
+    // LX*.  Coreboot* provides stepping.
+    new FMSQ(    0, 6,  9, 6,  0, dC, "Intel Celeron J6400 / N6400 (Elkhart Lake A0)"),
+    new FMSQ(    0, 6,  9, 6,  0, dP, "Intel Pentium J6400 / N6400 (Elkhart Lake A0)"),
+    new FMSQ(    0, 6,  9, 6,  0, da, "Intel Atom (Elkhart Lake A0)"),
+    new FMS (    0, 6,  9, 6,  0,     "Intel (unknown type) (Elkhart Lake A0)"),
+    new FMSQ(    0, 6,  9, 6,  1, dC, "Intel Celeron J6400 / N6400 (Elkhart Lake B0/B1)"),
+    new FMSQ(    0, 6,  9, 6,  1, dP, "Intel Pentium J6400 / N6400 (Elkhart Lake B0/B1)"),
+    new FMSQ(    0, 6,  9, 6,  1, da, "Intel Atom (Elkhart Lake B0/B1)"),
+    new FMS (    0, 6,  9, 6,  1,     "Intel (unknown type) (Elkhart Lake B0/B1)"),
+    new FMQ (    0, 6,  9, 6,     dC, "Intel Celeron (Elkhart Lake)"),
+    new FMQ (    0, 6,  9, 6,     dP, "Intel Pentium (Elkhart Lake)"),
+    new FMQ (    0, 6,  9, 6,     da, "Intel Atom (Elkhart Lake)"),
+    new FM  (    0, 6,  9, 6,         "Intel (unknown type) (Elkhart Lake)"),
+    // Coreboot* provides A0 stepping.
+    // Intel docs (682436) mention Core stepping value 2, but omit stepping name.
+    new FMSQ(    0, 6,  9, 7,  0, dc, "Intel Core (Alder Lake-S A0)"),
+    new FMS (    0, 6,  9, 7,  0,     "Intel (unknown type) (Alder Lake-S A0)"),
+    new FMQ (    0, 6,  9, 7,     dc, "Intel Core i*-12000K / i*-12000KF (Alder Lake-S)"),
+    new FM  (    0, 6,  9, 7,         "Intel (unknown type) (Alder Lake-S)"),
+    // Coreboot*.  Coreboot* provides stepping.
+    new FMS (    0, 6,  9,10,  0,     "Intel Atom (Alder Lake A0)"),
+    new FMS (    0, 6,  9,10,  1,     "Intel Atom (Alder Lake A1)"),
+    new FMS (    0, 6,  9,10,  2,     "Intel Atom (Alder Lake A2)"),
+    new FMS (    0, 6,  9,10,  4,     "Intel Atom (Alder Lake A3)"),
+    new FM  (    0, 6,  9,10,         "Intel Atom (Alder Lake)"),
+    // LX*.  Coreboot* provides stepping.
+    new FMSQ(    0, 6,  9,12,  0, dC, "Intel Celeron N4500 / N5100 (Jasper Lake A0)"),
+    new FMSQ(    0, 6,  9,12,  0, dP, "Intel Pentium N6000 (Jasper Lake A0)"),
+    new FMS (    0, 6,  9,12,  0,     "Intel (unknown type) (Jasper Lake A0)"),
+    new FMQ (    0, 6,  9,12,     dC, "Intel Celeron N4500 / N5100 (Jasper Lake)"),
+    new FMQ (    0, 6,  9,12,     dP, "Intel Pentium N6000 (Jasper Lake)"),
+    new FM  (    0, 6,  9,12,         "Intel (unknown type) (Jasper Lake)"),
+    new FM  (    0, 6,  9,13,         "Intel NNP I-1000 (Spring Hill)"), // LX*
+    // end of changed
     // Intel docs (334663, 335718, 336466, 338014) omit the stepping numbers for
     // (0,6),(9,14) B0, but (337346) provides some.
     // Coreboot* provides the 9 (B0) stepping.
@@ -978,44 +1036,119 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  9,14, 13, dc, "Intel Core i*-9000 H Line (Coffee Lake R0)" ),
     new FMSQ(    0, 6,  9,14, 13, sX, "Intel Xeon E-2200 (Coffee Lake R0)" ), // no docs on stepping; only MRG 2019-11-13
     new FM  (    0, 6,  9,14,         "Intel (unknown type) (Kaby Lake / Coffee Lake)" ),
+    new FM  (    0, 6,  9,15,         "Intel (unknown type) (Ice Lake)"), // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    // changed
     // LX*.  Coreboot* provides more detail & steppings
     // (615213) mentions the (0,6),(10,5),2 and (0,6),(10,5),5 steppings, but
     // does not provide their names.
     // en.wikichip.org provides more details on stepping names.
-    new FMSQ(    0, 6, 10, 5,  0, dc, "Intel Core i*-10000 (Comet Lake-H/S G0)" ),
-    new FMS (    0, 6, 10, 5,  0,     "Intel (unknown type) (Comet Lake-H/S G0)" ),
-    new FMSQ(    0, 6, 10, 5,  1, dc, "Intel Core i*-10000 (Comet Lake-H/S P0)" ),
-    new FMS (    0, 6, 10, 5,  1,     "Intel (unknown type) (Comet Lake-H/S P0)" ),
-    new FMSQ(    0, 6, 10, 5,  2, dc, "Intel Core i*-10000 (Comet Lake-H/S R1)" ),
-    new FMS (    0, 6, 10, 5,  2,     "Intel (unknown type) (Comet Lake-H/S R1)" ),
-    new FMSQ(    0, 6, 10, 5,  3, dc, "Intel Core i*-10000 (Comet Lake-H/S G1)" ),
-    new FMS (    0, 6, 10, 5,  3,     "Intel (unknown type) (Comet Lake-H/S G1)" ),
-    new FMSQ(    0, 6, 10, 5,  4, dc, "Intel Core i*-10000 (Comet Lake-H/S P1)" ),
-    new FMS (    0, 6, 10, 5,  4,     "Intel (unknown type) (Comet Lake-H/S P1)" ),
-    new FMSQ(    0, 6, 10, 5,  5, dc, "Intel Core i*-10000 (Comet Lake-H/S Q0)" ),
-    new FMS (    0, 6, 10, 5,  5,     "Intel (unknown type) (Comet Lake-H/S Q0)" ),
-    new FMQ (    0, 6, 10, 5,     dc, "Intel Core i*-10000 (Comet Lake-H/S)" ),
-    new FM  (    0, 6, 10, 5,         "Intel (unknown type) (Comet Lake-H/S)" ),
+    // new FMSQ(    0, 6, 10, 5,  0, dc, "Intel Core i*-10000 (Comet Lake-H/S G0)" ),
+    // new FMS (    0, 6, 10, 5,  0,     "Intel (unknown type) (Comet Lake-H/S G0)" ),
+    // new FMSQ(    0, 6, 10, 5,  1, dc, "Intel Core i*-10000 (Comet Lake-H/S P0)" ),
+    // new FMS (    0, 6, 10, 5,  1,     "Intel (unknown type) (Comet Lake-H/S P0)" ),
+    // new FMSQ(    0, 6, 10, 5,  2, dc, "Intel Core i*-10000 (Comet Lake-H/S R1)" ),
+    // new FMS (    0, 6, 10, 5,  2,     "Intel (unknown type) (Comet Lake-H/S R1)" ),
+    // new FMSQ(    0, 6, 10, 5,  3, dc, "Intel Core i*-10000 (Comet Lake-H/S G1)" ),
+    // new FMS (    0, 6, 10, 5,  3,     "Intel (unknown type) (Comet Lake-H/S G1)" ),
+    // new FMSQ(    0, 6, 10, 5,  4, dc, "Intel Core i*-10000 (Comet Lake-H/S P1)" ),
+    // new FMS (    0, 6, 10, 5,  4,     "Intel (unknown type) (Comet Lake-H/S P1)" ),
+    // new FMSQ(    0, 6, 10, 5,  5, dc, "Intel Core i*-10000 (Comet Lake-H/S Q0)" ),
+    // new FMS (    0, 6, 10, 5,  5,     "Intel (unknown type) (Comet Lake-H/S Q0)" ),
+    // new FMQ (    0, 6, 10, 5,     dc, "Intel Core i*-10000 (Comet Lake-H/S)" ),
+    // new FM  (    0, 6, 10, 5,         "Intel (unknown type) (Comet Lake-H/S)" ),
+    // LX*.  Coreboot* provides more detail & steppings
+    // (615213) mentions the (0,6),(10,5),2 and (0,6),(10,5),5 steppings, but
+    // does not provide their names.
+    // en.wikichip.org provides more details on stepping names.
+    new FMSQ(    0, 6, 10, 5,  0, dC, "Intel Celeron 5000 (Comet Lake-H/S G0)"),
+    new FMSQ(    0, 6, 10, 5,  0, dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S G0)"),
+    new FMSQ(    0, 6, 10, 5,  0, dc, "Intel Core i*-10000 (Comet Lake-H/S G0)"),
+    new FMSQ(    0, 6, 10, 5,  0, sX, "Intel Xeon W-1200 (Comet Lake-H/S G0)"),
+    new FMS (    0, 6, 10, 5,  0,     "Intel (unknown type) (Comet Lake-H/S G0)"),
+    new FMSQ(    0, 6, 10, 5,  1, dC, "Intel Celeron 5000 (Comet Lake-H/S P0)"),
+    new FMSQ(    0, 6, 10, 5,  1, dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S P0)"),
+    new FMSQ(    0, 6, 10, 5,  1, dc, "Intel Core i*-10000 (Comet Lake-H/S P0)"),
+    new FMSQ(    0, 6, 10, 5,  1, sX, "Intel Xeon W-1200 (Comet Lake-H/S P0)"),
+    new FMS (    0, 6, 10, 5,  1,     "Intel (unknown type) (Comet Lake-H/S P0)"),
+    new FMSQ(    0, 6, 10, 5,  2, dC, "Intel Celeron 5000 (Comet Lake-H/S R1)"),
+    new FMSQ(    0, 6, 10, 5,  2, dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S R1)"),
+    new FMSQ(    0, 6, 10, 5,  2, dc, "Intel Core i*-10000 (Comet Lake-H/S R1)"),
+    new FMSQ(    0, 6, 10, 5,  2, sX, "Intel Xeon W-1200 (Comet Lake-H/S R1)"),
+    new FMS (    0, 6, 10, 5,  2,     "Intel (unknown type) (Comet Lake-H/S R1)"),
+    new FMSQ(    0, 6, 10, 5,  3, dC, "Intel Celeron 5000 (Comet Lake-H/S G1)"),
+    new FMSQ(    0, 6, 10, 5,  3, dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S G1)"),
+    new FMSQ(    0, 6, 10, 5,  3, dc, "Intel Core i*-10000 (Comet Lake-H/S G1)"),
+    new FMSQ(    0, 6, 10, 5,  3, sX, "Intel Xeon W-1200 (Comet Lake-H/S G1)"),
+    new FMS (    0, 6, 10, 5,  3,     "Intel (unknown type) (Comet Lake-H/S G1)"),
+    new FMSQ(    0, 6, 10, 5,  4, dC, "Intel Celeron 5000 (Comet Lake-H/S P1)"),
+    new FMSQ(    0, 6, 10, 5,  4, dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S P1)"),
+    new FMSQ(    0, 6, 10, 5,  4, dc, "Intel Core i*-10000 (Comet Lake-H/S P1)"),
+    new FMSQ(    0, 6, 10, 5,  4, sX, "Intel Xeon W-1200 (Comet Lake-H/S P1)"),
+    new FMS (    0, 6, 10, 5,  4,     "Intel (unknown type) (Comet Lake-H/S P1)"),
+    new FMSQ(    0, 6, 10, 5,  5, dC, "Intel Celeron 5000 (Comet Lake-H/S Q0)"),
+    new FMSQ(    0, 6, 10, 5,  5, dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S Q0)"),
+    new FMSQ(    0, 6, 10, 5,  5, dc, "Intel Core i*-10000 (Comet Lake-H/S Q0)"),
+    new FMSQ(    0, 6, 10, 5,  5, sX, "Intel Xeon W-1200 (Comet Lake-H/S Q0)"),
+    new FMS (    0, 6, 10, 5,  5,     "Intel (unknown type) (Comet Lake-H/S Q0)"),
+    new FMQ (    0, 6, 10, 5,     dC, "Intel Celeron 5000 (Comet Lake-H/S)"),
+    new FMQ (    0, 6, 10, 5,     dP, "Intel Pentium Gold G6400 / G6500 (Comet Lake-H/S)"),
+    new FMQ (    0, 6, 10, 5,     dc, "Intel Core i*-10000 (Comet Lake-H/S)"),
+    new FMQ (    0, 6, 10, 5,     sX, "Intel Xeon W-1200 (Comet Lake-H/S)"),
+    new FM  (    0, 6, 10, 5,         "Intel (unknown type) (Comet Lake-H/S)"),
+    // end of changed
+    // changed
     // (615213) provides steppings.
     // MRG* 2019-11-13 & instlatx64 example
     // Coreboot* provides steppings.
-    new FMS (    0, 6, 10, 6,  0,     "Intel Core i*-10000 (Comet Lake-U A0)" ),
-    new FMS (    0, 6, 10, 6,  1,     "Intel Core i*-10000 (Comet Lake-U K0/K1/S0)" ),
-    new FMS (    0, 6, 10, 6,  2,     "Intel Core i*-10000 (Comet Lake-H R1)" ),
-    new FMS (    0, 6, 10, 6,  3,     "Intel Core i*-10000 (Comet Lake-S G1)" ),
-    new FMS (    0, 6, 10, 6,  5,     "Intel Core i*-10000 (Comet Lake-S Q0)" ),
-    new FM  (    0, 6, 10, 6,         "Intel Core i*-10000 (Comet Lake)" ),
-    new FM  (    0, 6, 10, 7,         "Intel (unknown type) (Rocket Lake)" ),
-    new FQ  (    0, 6,            sX, "Intel Xeon (unknown model)" ),
-    new FQ  (    0, 6,            se, "Intel Xeon (unknown model)" ),
-    new FQ  (    0, 6,            MC, "Intel Mobile Celeron (unknown model)" ),
-    new FQ  (    0, 6,            dC, "Intel Celeron (unknown model)" ),
-    new FQ  (    0, 6,            Xc, "Intel Core Extreme (unknown model)" ),
-    new FQ  (    0, 6,            Mc, "Intel Mobile Core (unknown model)" ),
-    new FQ  (    0, 6,            dc, "Intel Core (unknown model)" ),
-    new FQ  (    0, 6,            MP, "Intel Mobile Pentium (unknown model)" ),
-    new FQ  (    0, 6,            dP, "Intel Pentium (unknown model)" ),
-    new F   (    0, 6,                "Intel (unknown model)" ),
+    // new FMS (    0, 6, 10, 6,  0,     "Intel Core i*-10000 (Comet Lake-U A0)" ),
+    // new FMS (    0, 6, 10, 6,  1,     "Intel Core i*-10000 (Comet Lake-U K0/K1/S0)" ),
+    // new FMS (    0, 6, 10, 6,  2,     "Intel Core i*-10000 (Comet Lake-H R1)" ),
+    // new FMS (    0, 6, 10, 6,  3,     "Intel Core i*-10000 (Comet Lake-S G1)" ),
+    // new FMS (    0, 6, 10, 6,  5,     "Intel Core i*-10000 (Comet Lake-S Q0)" ),
+    // new FM  (    0, 6, 10, 6,         "Intel Core i*-10000 (Comet Lake)" ),
+    // new FM  (    0, 6, 10, 7,         "Intel (unknown type) (Rocket Lake)" ),
+    // new FQ  (    0, 6,            sX, "Intel Xeon (unknown model)" ),
+    // new FQ  (    0, 6,            se, "Intel Xeon (unknown model)" ),
+    // new FQ  (    0, 6,            MC, "Intel Mobile Celeron (unknown model)" ),
+    // new FQ  (    0, 6,            dC, "Intel Celeron (unknown model)" ),
+    // new FQ  (    0, 6,            Xc, "Intel Core Extreme (unknown model)" ),
+    // new FQ  (    0, 6,            Mc, "Intel Mobile Core (unknown model)" ),
+    // new FQ  (    0, 6,            dc, "Intel Core (unknown model)" ),
+    // new FQ  (    0, 6,            MP, "Intel Mobile Pentium (unknown model)" ),
+    // new FQ  (    0, 6,            dP, "Intel Pentium (unknown model)" ),
+    // new F   (    0, 6,                "Intel (unknown model)" ),
+    // (615213) provides steppings.
+    // MRG* 2019-11-13 & instlatx64 example
+    // Coreboot* provides steppings.
+    new FMS (    0, 6, 10, 6,  0,     "Intel Core i*-10000 (Comet Lake-U A0)"),
+    new FMS (    0, 6, 10, 6,  1,     "Intel Core i*-10000 (Comet Lake-U K0/K1/S0)"),
+    new FMS (    0, 6, 10, 6,  2,     "Intel Core i*-10000 (Comet Lake-H R1)"),
+    new FMS (    0, 6, 10, 6,  3,     "Intel Core i*-10000 (Comet Lake-S G1)"),
+    new FMS (    0, 6, 10, 6,  5,     "Intel Core i*-10000 (Comet Lake-S Q0)"),
+    new FM  (    0, 6, 10, 6,         "Intel Core i*-10000 (Comet Lake)"),
+    new FMQ (    0, 6, 10, 7,     dc, "Intel Core i*-11000 (Rocket Lake)"),
+    new FMQ (    0, 6, 10, 7,     sX, "Intel Xeon E-1300 / E-2300G (Rocket Lake)"),
+    new FM  (    0, 6, 10, 7,         "Intel (unknown type) (Rocket Lake)"),
+    new FM  (    0, 6, 10, 8,         "Intel (unknown type) (Rocket Lake)"),    // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    new FM  (    0, 6, 10,10,         "Intel (unknown type) (Meteor Lake-M)"),  // DPTF*; undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    new FM  (    0, 6, 10,11,         "Intel (unknown type) (Meteor Lake-N)"),  // DPTF*
+    new FM  (    0, 6, 10,12,         "Intel (unknown type) (Meteor Lake-S)"),  // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    new FM  (    0, 6, 10,13,         "Intel (unknown type) (Granite Rapids)"), // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    new FM  (    0, 6, 10,15,         "Intel (unknown type) (Sierra Forest)"),  // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    new FM  (    0, 6, 11, 7,         "Intel (unknown type) (Raptor Lake)"),    // LX*; DPTF* (which also says Raptor Lake-S)
+    new FM  (    0, 6, 11,10,         "Intel (unknown type) (Raptor Lake-P)"),  // LX*; DPTF*
+    new FM  (    0, 6, 11,14,         "Intel (unknown type) (Alder Lake)"),     // Coreboot* (or maybe Gracemont "little" cores tied to Alder Lake?) (Alder Lake-N stepping 0=A0, when I'm sure)
+    new FQ  (    0, 6,            sX, "Intel Xeon (unknown model)"),
+    new FQ  (    0, 6,            se, "Intel Xeon (unknown model)"),
+    new FQ  (    0, 6,            MC, "Intel Mobile Celeron (unknown model)"),
+    new FQ  (    0, 6,            dC, "Intel Celeron (unknown model)"),
+    new FQ  (    0, 6,            Xc, "Intel Core Extreme (unknown model)"),
+    new FQ  (    0, 6,            Mc, "Intel Mobile Core (unknown model)"),
+    new FQ  (    0, 6,            dc, "Intel Core (unknown model)"),
+    new FQ  (    0, 6,            MP, "Intel Mobile Pentium (unknown model)"),
+    new FQ  (    0, 6,            dP, "Intel Pentium (unknown model)"),
+    new F   (    0, 6,                "Intel (unknown model)"),
+    // end of changed
     // Intel docs (249720).
     new FMS (    0, 7,  0, 0,  6,     "Intel Itanium (Merced C0)" ),
     new FMS (    0, 7,  0, 0,  7,     "Intel Itanium (Merced C1)" ),
@@ -1188,6 +1321,7 @@ private boolean strsub( String st, String subst )
     new FMS (    2, 1,  0, 0,  5,     "Intel Itanium2 Processor 9700 (Kittson E0), 22nm" ),
     new FM  (    2, 1,  0, 0,         "Intel Itanium2 (unknown model) (Poulson/Kittson)" ),
     new F   (    2, 1,                "Intel Itanium2 (unknown model)" ) };
+    
     String s1 = detectorHelper( stdTfms, bi, INTEL_DATA );
     return new String[] { s1, null };
     }
