@@ -1,3 +1,14 @@
+CPUID v1.05.01 (January, 4, 2022)
+1) Updated data base for AMD processors.
+2) Added ACRN hypervisor signature to data base.
+Data sources:
+Special thanks to Todd Allen CPUID project
+https://fossies.org/linux/cpuid/cpuid.c
+http://www.etallen.com/
+
+
+
+
 CPUID v1.05.00 (January, 3, 2022)
 ------------------------------------
 1) Detect Montage Jintide processor.
@@ -15,7 +26,6 @@ http://www.etallen.com/
 https://github.com/InstLatx64/InstLatx64/blob/master/GenuineIntel/GenuineIntel0050654_SkylakeXeon_Jintide_CPUID1.txt
 3) See also popular info:
 https://www.techradar.com/uk/news/intel-and-amd-shouldnt-panic-yet-but-this-chinese-vendor-has-repacked-a-xeon-cpu
-
 
 
 

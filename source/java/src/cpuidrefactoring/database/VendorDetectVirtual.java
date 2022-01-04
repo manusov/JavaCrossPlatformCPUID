@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -58,6 +58,7 @@ public enum HYPERVISOR_T
     HYPERVISOR_KVM,
     HYPERVISOR_ORACLE,
     HYPERVISOR_MICROSOFT,
+    HYPERVISOR_ACRN
     }
 
 final static String[][] V_SIGN =
@@ -66,7 +67,8 @@ final static String[][] V_SIGN =
       { "XenVMMXenVMM"       , "Xen"       } ,
       { "KVMKVMKVM"          , "KVM"       } ,
       { "VBoxVBoxVBox"       , "Oracle"    } ,
-      { "Microsoft Hv"       , "Microsoft" } };
+      { "Microsoft Hv"       , "Microsoft" } ,
+      { "ACRNACRNACRN"       , "ACRN"      } };
 
 private HYPERVISOR_T vVendor = null;
 private String vSign = null;
@@ -91,6 +93,7 @@ String detectVirtual( String pattern )
             case HYPERVISOR_KVM:
             case HYPERVISOR_MICROSOFT:
             case HYPERVISOR_ORACLE:
+            case HYPERVISOR_ACRN:
                 if ( pattern == null )
                     {
                     vVendor   = null;

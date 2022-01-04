@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -97,8 +97,11 @@ void decodeBrandString( DatabaseStash stash )
     stash.br.ryzen     = strsub( brand, "Ryzen" );
     stash.br.epyc      = strsub( brand, "EPYC" );
     stash.br.epyc_3000 = strreg( brand, "EPYC 3[0-9][0-9][0-9]" );
+    stash.br.threadripper = strsub( brand, "Threadripper" );
 
     stash.br.embedded   = strsub( brand, "Embedded" );
+    stash.br.embedded_V = strsub( brand, "Embedded V" );
+    stash.br.embedded_R = strsub( brand, "Embedded R" );
    
     if ( strsub( brand, "Dual Core" ) || strsub( brand, " X2 ") ) 
         {

@@ -139,6 +139,9 @@ class BR
         boolean ryzen     = false;
         boolean epyc      = false;
         boolean epyc_3000 = false;
+        boolean threadripper = false;
+        boolean embedded_V   = false;
+        boolean embedded_R   = false;
 
         boolean embedded  = false;
         int     cores     = 0;

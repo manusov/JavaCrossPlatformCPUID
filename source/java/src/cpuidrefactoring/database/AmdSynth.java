@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2021 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -84,6 +84,9 @@ private boolean EE = false;
 private boolean sE = false;
 private boolean ER = false;
 private boolean AR = false;
+private boolean dH = false;  // added
+private boolean VR = false;  // added
+private boolean RR = false;  // added
 
 AmdSynth( DatabaseStash stash ) 
     {
@@ -255,6 +258,11 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     dr = dA && stash.L2_512K;
     /* Trinidad, distinguished from Taylor */
     Mt = MT && stash.L2_512K;
+    // added for Ryzen ThreadRipper
+    dH = is_amd && !is_mobile && stash.br.threadripper;
+    // added for Ryzen Embedded
+    VR = is_amd && stash.br.ryzen && stash.br.embedded_V;
+    RR = is_amd && stash.br.ryzen && stash.br.embedded_R;
         
     final CriteriaDescriptor[] AMD_DATA = {
     new FM  ( 0, 4,  0, 3,         "AMD 80486DX2" ),
@@ -859,6 +867,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMSQ( 6,15,  3, 0,  1, Sa, "AMD Elite Performance A-Series (Kaveri KV-A1)" ),
     new FMSQ( 6,15,  3, 0,  1, Mr, "AMD Mobile R-Series (Kaveri KV-A1)" ),
     new FMSQ( 6,15,  3, 0,  1, sO, "AMD Opteron X1200 / X2200 (Kaveri KV-A1)" ),
+    new FMSQ( 6,15,  3, 0,  1, Sr, "AMD R-Series (Bald Eagle KV-A1)"),  // undocumented, but instlatx64 example
     new FMS ( 6,15,  3, 0,  1,     "AMD (unknown type) (Kaveri KV-A1)" ),
     new FMQ ( 6,15,  3, 0,     Sa, "AMD Elite Performance A-Series (Kaveri)" ),
     new FMQ ( 6,15,  3, 0,     Mr, "AMD Mobile R-Series (Kaveri)" ),
@@ -910,10 +919,10 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMQ ( 7,15,  0, 0,     sO, "AMD Opteron X1100/X2100 Series (Kyoto)" ),
     new FM  ( 7,15,  0, 0,         "AMD (unknown type) (Kabini/Temash/Kyoto)" ),
     new FM  ( 7,15,  2, 6,         "AMD (unknown type) (Cato)" ), // undocumented; instlatx64 sample; engr sample?
-   // sandpile.org mentions (7,15),(0,4) Jaguar-esque "BV" cores
-   // (with stepping 1 = A1), but I have no idea of any such code name.
-   // The AMD docs (53072) omit the CPUID entirely.  But if this sticks to the
-   // recent AMD pattern, these must be (7,15),(3,0).
+    // sandpile.org mentions (7,15),(0,4) Jaguar-esque "BV" cores
+    // (with stepping 1 = A1), but I have no idea of any such code name.
+    // The AMD docs (53072) omit the CPUID entirely.  But if this sticks to the
+    // recent AMD pattern, these must be (7,15),(3,0).
     new FMSQ( 7,15,  3, 0,  1, Sa, "AMD A-Series (Beema ML-A1)" ),
     new FMSQ( 7,15,  3, 0,  1, Se, "AMD E-Series (Beema ML-A1)" ),
     new FMSQ( 7,15,  3, 0,  1, Sg, "AMD G-Series (Steppe Eagle/Crowned Eagle ML-A1)" ), // undocumented; instlatx64 sample
@@ -926,17 +935,24 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMQ ( 7,15,  3, 0,     Ta, "AMD A-Series Micro (Mullins)" ),
     new FMQ ( 7,15,  3, 0,     Te, "AMD E-Series Micro (Mullins)" ),
     new FM  ( 7,15,  3, 0,         "AMD (unknown type) (Beema/Mullins/Steppe Eagle/Crowned Eagle)" ),
-   // sandpile.org mentions (7,15),(6,0) Puma-esque "NL" cores
-   // (with stepping 1 = A1), but I have no idea of any such code name.
+    // sandpile.org mentions (7,15),(6,0) Puma-esque "NL" cores
+    // (with stepping 1 = A1), but I have no idea of any such code name.
+    // changed
+    /*
     new F   ( 7,15,                "AMD (unknown model)" ),
     new FMS ( 8,15,  0, 0,  1,     "AMD (unknown type) (Summit Ridge/Naples ZP-A1)" ), // sandpile.org
     new FMSQ( 8,15,  0, 1,  0, EE, "AMD EPYC (Snowy Owl ZP-B0)" ),
-    new FMSQ( 8,15,  0, 1,  0, sE, "AMD EPYC (Naples ZP-B0)" ),
-    new FMSQ( 8,15,  0, 1,  0, dR, "AMD Ryzen (Summit Ridge ZP-B0)" ),
+//  new FMSQ( 8,15,  0, 1,  0, sE, "AMD EPYC (Naples ZP-B0)" ),
+    new FMSQ( 8,15,  0, 1,  0, sE, "AMD EPYC (1st Gen) (Naples ZP-B0)"),             // changed
+    new FMSQ( 8,15,  0, 1,  0, dH, "AMD Ryzen Threadripper 1000 (Whitehaven B0)"),   // added
+//  new FMSQ( 8,15,  0, 1,  0, dR, "AMD Ryzen (Summit Ridge ZP-B0)" ),
+    new FMSQ( 8,15,  0, 1,  0, dR, "AMD Ryzen 1000 (Summit Ridge ZP-B0)"),           // added
     new FMS ( 8,15,  0, 1,  0,     "AMD (unknown type) (Summit Ridge/Naples ZP-B0)" ),
     new FMSQ( 8,15,  0, 1,  1, EE, "AMD EPYC (Snowy Owl ZP-B1)" ),
     new FMSQ( 8,15,  0, 1,  1, sE, "AMD EPYC (Naples ZP-B1)" ),
-    new FMSQ( 8,15,  0, 1,  1, dR, "AMD Ryzen (Summit Ridge ZP-B1)" ),
+    new FMSQ( 8,15,  0, 1,  1, dH, "AMD Ryzen Threadripper 1000 (Whitehaven B1)"),   // added
+//  new FMSQ( 8,15,  0, 1,  1, dR, "AMD Ryzen (Summit Ridge ZP-B1)" ),
+    new FMSQ( 8,15,  0, 1,  1, dR, "AMD Ryzen 1000 (Summit Ridge ZP-B1)"),           // changed
     new FMS ( 8,15,  0, 1,  1,     "AMD (unknown type) (Summit Ridge/Naples ZP-B1)" ),
     new FMSQ( 8,15,  0, 1,  2, EE, "AMD EPYC (Snowy Owl ZP-B2)" ),
     new FMSQ( 8,15,  0, 1,  2, sE, "AMD EPYC (Naples ZP-B2)" ),
@@ -974,6 +990,106 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMS (10,15,  2, 1,  0,     "AMD Ryzen (Vermeer)"),
     new FMS (10,15,  5, 0,  0,     "AMD Ryzen (Cezanne)"),
     new FMS (10,15,  0, 1,  1,     "AMD EPYC (Milan)"),
+    */
+    new F   ( 7,15,                "AMD (unknown model)"),
+    new FMS ( 8,15,  0, 0,  1,     "AMD (unknown type) (Summit Ridge/Naples ZP-A1)"), // sandpile.org
+    new FMSQ( 8,15,  0, 1,  0, EE, "AMD EPYC (1st Gen) (Snowy Owl ZP-B0)"),
+    new FMSQ( 8,15,  0, 1,  0, sE, "AMD EPYC (1st Gen) (Naples ZP-B0)"),
+    new FMSQ( 8,15,  0, 1,  0, dH, "AMD Ryzen Threadripper 1000 (Whitehaven B0)"),
+    new FMSQ( 8,15,  0, 1,  0, dR, "AMD Ryzen 1000 (Summit Ridge ZP-B0)"),
+    new FMS ( 8,15,  0, 1,  0,     "AMD (unknown type) (Summit Ridge/Naples ZP-B0)"),
+    new FMSQ( 8,15,  0, 1,  1, EE, "AMD EPYC (1st Gen) (Snowy Owl ZP-B1)"),
+    new FMSQ( 8,15,  0, 1,  1, sE, "AMD EPYC (1st Gen) (Naples ZP-B1)"),
+    new FMSQ( 8,15,  0, 1,  1, dH, "AMD Ryzen Threadripper 1000 (Whitehaven B1)"),
+    new FMSQ( 8,15,  0, 1,  1, dR, "AMD Ryzen 1000 (Summit Ridge ZP-B1)"),
+    new FMS ( 8,15,  0, 1,  1,     "AMD (unknown type) (Summit Ridge/Naples ZP-B1)"),
+    new FMSQ( 8,15,  0, 1,  2, EE, "AMD EPYC (1st Gen) (Snowy Owl ZP-B2)"),
+    new FMSQ( 8,15,  0, 1,  2, sE, "AMD EPYC (1st Gen) (Naples ZP-B2)"),
+    new FMSQ( 8,15,  0, 1,  2, dH, "AMD Ryzen Threadripper 1000 (Whitehaven B2)"),
+    new FMSQ( 8,15,  0, 1,  2, dR, "AMD Ryzen 1000 (Summit Ridge ZP-B2)"),
+    new FMS ( 8,15,  0, 1,  2,     "AMD (unknown type) (Summit Ridge/Naples ZP-B2)"),
+    new FMQ ( 8,15,  0, 1,     EE, "AMD EPYC (1st Gen) (Snowy Owl)"),
+    new FMQ ( 8,15,  0, 1,     sE, "AMD EPYC (1st Gen) (Naples)"),
+    new FMQ ( 8,15,  0, 1,     dH, "AMD Ryzen Threadripper 1000 (Whitehaven)"),
+    new FMQ ( 8,15,  0, 1,     dR, "AMD Ryzen 1000 (Summit Ridge)"),
+    new FM  ( 8,15,  0, 1,         "AMD (unknown type) (Summit Ridge/Naples)"),
+    new FMSQ( 8,15,  0, 8,  2, dH, "AMD Ryzen Threadripper 2000 (Colfax B2)"),
+    new FMSQ( 8,15,  0, 8,  2, dR, "AMD Ryzen 2000 (Pinnacle Ridge PiR-B2)"),
+    new FMS ( 8,15,  0, 8,  2,     "AMD Ryzen (unknown type) (Pinnacle Ridge PiR-B2)"),
+    new FMQ ( 8,15,  0, 8,     dH, "AMD Ryzen Threadripper 2000 (Colfax)"),
+    new FMQ ( 8,15,  0, 8,     dR, "AMD Ryzen 2000 (Pinnacle Ridge)"),
+    new FM  ( 8,15,  0, 8,         "AMD Ryzen (unknown type) (Pinnacle Ridge)"),
+    new FMS ( 8,15,  1, 0,  1,     "AMD Ryzen (unknown type) (Raven Ridge/Great Horned Owl/Banded Kestrel RV-A1)"), // found only on en.wikichip.org & instlatx64 examples; sandpile.org
+    new FMSQ( 8,15,  1, 1,  0, dA, "AMD Athlon Pro 200 (Raven Ridge RV-A1)"),
+    new FMSQ( 8,15,  1, 1,  0, VR, "AMD Ryzen Embedded V1000 (Great Horned Owl RV-B0)"), // only instlatx64 example; stepping from usual pattern
+    new FMSQ( 8,15,  1, 1,  0, RR, "AMD Ryzen Embedded R1000 (Banded Kestrel RV-B0)"), // guess based on Great Horned Owl pattern
+    new FMSQ( 8,15,  1, 1,  0, AR, "AMD Ryzen 2000 (Raven Ridge RV-B0)"), // found only on en.wikichip.org & instlatx64 examples; stepping from usual pattern
+    new FMS ( 8,15,  1, 1,  0,     "AMD Ryzen (unknown type) (Raven Ridge/Great Horned Owl/Banded Kestrel RV-B0)"), // found only on en.wikichip.org & instlatx64 examples; stepping from usual pattern
+    new FMQ ( 8,15,  1, 1,     dA, "AMD Athlon Pro 200 (Raven Ridge)"),
+    new FMQ ( 8,15,  1, 1,     VR, "AMD Ryzen Embedded V1000 (Great Horned Owl)"), // only instlatx64 example
+    new FMQ ( 8,15,  1, 1,     RR, "AMD Ryzen Embedded R1000 (Banded Kestrel)"), // guess based on Great Horned Owl pattern
+    new FMQ ( 8,15,  1, 1,     AR, "AMD Ryzen 2000 (Raven Ridge)"), // found only on en.wikichip.org & instlatx64 examples
+    new FM  ( 8,15,  1, 1,         "AMD Ryzen (unknown type) (Raven Ridge/Great Horned Owl/Banded Kestrel)"), // found only on en.wikichip.org & instlatx64 examples
+    new FMSQ( 8,15,  1, 8,  1, dA, "AMD Athlon Pro 300 (Picasso A1)"), // only instlatx64 example
+    new FMSQ( 8,15,  1, 8,  1, AR, "AMD Ryzen 3000 (Picasso A1)"),
+    new FMS ( 8,15,  1, 8,  1,     "AMD (unknown type) (Picasso A1)"),
+    new FMQ ( 8,15,  1, 8,     dA, "AMD Athlon Pro 300 (Picasso)"),
+    new FMQ ( 8,15,  1, 8,     AR, "AMD Ryzen 3000 (Picasso)"),
+    new FM  ( 8,15,  1, 8,         "AMD (unknown type) (Picasso)"),
+    new FMSQ( 8,15,  2, 0,  1, dR, "AMD Ryzen 1000 (Dali A1)"),
+    new FMS ( 8,15,  2, 0,  1,     "AMD (unknown type) (Dali A1)"),
+    new FMQ ( 8,15,  2, 0,     dR, "AMD Ryzen 1000 (Dali)"),
+    new FM  ( 8,15,  2, 0,         "AMD (unknown type) (Dali)"),
+    new FMSQ( 8,15,  3, 1,  0, dR, "AMD Ryzen Threadripper 3000 (Castle Peak B0)"),
+    new FMQ ( 8,15,  3, 1,     dR, "AMD Ryzen Threadripper 3000 (Castle Peak)"),
+    new FMSQ( 8,15,  3, 1,  0, sE, "AMD EPYC (2nd Gen) (Rome B0)"),
+    new FMQ ( 8,15,  3, 1,     sE, "AMD EPYC (2nd Gen) (Rome)"),
+    new FMS ( 8,15,  3, 1,  0,     "AMD (unknown type) (Castle Peak/Rome B0)"),
+    new FM  ( 8,15,  3, 1,         "AMD (unknown type) (Castle Peak/Rome)"),
+    new FM  ( 8,15,  4, 7,         "AMD 4700S Desktop Kit (Oberon)"), // undocumented; instlatx64 sample; engr sample?
+    new FM  ( 8,15,  5, 0,         "AMD DG02SRTBP4MFA (Fenghuang 15FF)"), // internal model, only instlatx64 example
+    new FMSQ( 8,15,  6, 0,  1, ER, "AMD Ryzen Embedded V2000 (Grey Hawk A1)"), // found only on en.wikichip.org
+    new FMSQ( 8,15,  6, 0,  1, dR, "AMD Ryzen 4000 (Renoir A1)"),
+    new FMS ( 8,15,  6, 0,  1,     "AMD (unknown type) (Renoir/Grey Hawk A1)"),
+    new FMQ ( 8,15,  6, 0,     ER, "AMD Ryzen Embedded V2000 (Grey Hawk)"), // found only on en.wikichip.org
+    new FMQ ( 8,15,  6, 0,     dR, "AMD Ryzen 4000 (Renoir)"),
+    new FM  ( 8,15,  6, 0,         "AMD (unknown type) (Renoir/Grey Hawk)"),
+    new FMS ( 8,15,  6, 8,  1,     "AMD Ryzen 5000 (Lucienne A1)"), // undocumented, but instlatx64 samples
+    new FM  ( 8,15,  6, 8,         "AMD Ryzen 5000 (Lucienne)"), // undocumented, but instlatx64 samples
+    new FMS ( 8,15,  7, 1,  0,     "AMD Ryzen 3000 (Matisse B0)"), // undocumented, but samples from Steven Noonan
+    new FM  ( 8,15,  7, 1,         "AMD Ryzen 3000 (Matisse)"), // undocumented, but samples from Steven Noonan
+    new FMS ( 8,15,  9, 0,  0,     "AMD Ryzen (Van Gogh A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  ( 8,15,  9, 0,         "AMD Ryzen (Van Gogh)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  ( 8,15,  9, 8,         "AMD Ryzen (Mero)"), // undocumented, but (engr?) sample via instlatx64 from @zimogorets
+    new FM  ( 8,15, 10, 0,         "AMD Ryzen (Mendocino)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new F   ( 8,15,                "AMD (unknown model)"),
+    new FMS (10,15,  0, 1,  1,     "AMD EPYC (3rd Gen) (Milan B1)"),
+    new FM  (10,15,  0, 1,         "AMD EPYC (3rd Gen) (Milan)"),
+    new FMS (10,15,  0, 8,  0,     "AMD Ryzen Threadripper 5000 (Chagall A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new FM  (10,15,  0, 8,         "AMD Ryzen Threadripper 5000 (Chagall)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new FMS (10,15,  1, 0,  0,     "AMD EPYC (Genoa A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new FM  (10,15,  1, 0,         "AMD EPYC (Genoa)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new FMS (10,15,  1, 8,  0,     "AMD Ryzen (Storm Peak A0)"), // undocumented, but (engr?) sample from @patrickschur_
+    new FM  (10,15,  1, 8,         "AMD Ryzen (Storm Peak)"), // undocumented, but (engr?) sample from @patrickschur_
+    new FMS (10,15,  2, 1,  0,     "AMD Ryzen 5000 (Vermeer B0)"), // undocumented, but instlatx64 samples
+    new FMS (10,15,  2, 1,  1,     "AMD Ryzen 5000 (Vermeer B1)"), // undocumented, but sample from @patrickschur_
+    new FMS (10,15,  2, 1,  2,     "AMD Ryzen 5000 (Vermeer B2)"), // undocumented, but sample from @patrickschur_
+    new FM  (10,15,  2, 1,         "AMD Ryzen 5000 (Vermeer)"),
+    new FMS (10,15,  3, 0,  0,     "AMD Ryzen (Badami A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  (10,15,  3, 0,         "AMD Ryzen (Badami)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FMS (10,15,  4, 0,  0,     "AMD Ryzen (Rembrandt A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  (10,15,  4, 0,         "AMD Ryzen (Rembrandt)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FMS (10,15,  5, 0,  0,     "AMD Ryzen 5000 (Cezanne A0)"), // undocumented, but instlatx64 samples
+    new FM  (10,15,  5, 0,         "AMD Ryzen 5000 (Cezanne)"), // undocumented, but instlatx64 samples
+    new FMS (10,15,  5, 1,  1,     "AMD Ryzen 5000 (Cezanne B1)"),
+    new FM  (10,15,  5, 1,         "AMD Ryzen 5000 (Cezanne)"),
+    new FMS (10,15,  6, 0,  0,     "AMD Ryzen (Raphael A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  (10,15,  6, 0,         "AMD Ryzen (Raphael)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FMS (10,15,  7, 0,  0,     "AMD Ryzen (Phoenix A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  (10,15,  7, 0,         "AMD Ryzen (Phoenix)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FMS (10,15, 10, 0,  0,     "AMD Ryzen (Bergamo A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new FM  (10,15, 10, 0,         "AMD Ryzen (Bergamo)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    // end of changed
     new F   (10,15,                "AMD (unknown model)") }; // undocumented, but samples from Steven Noonan
     
     final CriteriaDescriptor[] AMD_X_DATA = {
