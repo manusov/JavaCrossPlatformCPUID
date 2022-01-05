@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000018h = Deterministic address translation parameters.
@@ -59,7 +59,6 @@ private final static int NDT = DECODER_TYPE.length - 1;
         for( int i=0; i<entries.length; i++ )
             {
             if ( i > maxSubFunction ) break;
-            a.add( interval );
             // EDX, per subfunctions, detect subfunction validity and type
             dr = decodeBitfields( "EDX", DECODER_EDX, entries[i].edx );
             int j = dr.values[0];    // j = TLB type
@@ -67,6 +66,7 @@ private final static int NDT = DECODER_TYPE.length - 1;
             if ( j > NDT ) j = 0;
             dr.strings.get(0)[4] = DECODER_TYPE[j];
             dr.strings.get(1)[4] = "L" + dr.values[1];
+            a.add( interval );
             a.addAll( dr.strings );
             // ECX for valid subfunction
             dr = decodeBitfields( "ECX", DECODER_ECX, entries[i].ecx );

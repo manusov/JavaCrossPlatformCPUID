@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000007h = Structured extended feature enumeration.
@@ -152,13 +152,16 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } };  // bit 31
-    
+private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
+    { { "PPIN"         , "Protected Processor Inventory Number" } };  // bit 0
+
 @Override String[][] getParametersList()
     {
     DecodeReturn dr;
     String[] interval = new String[] { "", "", "", "", "" };
     ArrayList<String[]> strings;
     ArrayList<String[]> a = new ArrayList<>();
+    // subfunction 0
     if ( ( entries != null )&&( entries.length > 0 ) )
         {
         // EAX, subfunction 0
@@ -182,12 +185,18 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
         strings = decodeBitmap
             ( "EDX", DECODER_EDX_SUBFUNCTION_0, entries[0].edx );
         a.addAll( strings );
-        // EAX, subfunction 1
+        // subfunction 1
         if ( ( entries.length > 1 )&&( maxSubFunction > 0 )&&
              ( entries[1].subfunction == 1 ) )
             {
+            // EAX, subfunction 1
             strings = decodeBitmap
                 ( "EAX", DECODER_EAX_SUBFUNCTION_1, entries[1].eax );
+            a.add( interval );
+            a.addAll( strings );
+            // EBX, subfunction 1
+            strings = decodeBitmap
+                ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
             a.add( interval );
             a.addAll( strings );
             }

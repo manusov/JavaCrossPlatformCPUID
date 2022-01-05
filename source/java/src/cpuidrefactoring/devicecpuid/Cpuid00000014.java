@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000014h = Intel processor trace enumeration information.
@@ -28,7 +28,8 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "PTWRITE"   , "PTWRITE can generate packets"                  } ,
       { "PET"       , "Power event trace"                             } ,
       { "PSB PMI"   , "PSB and PMI preservation"                      } ,
-      { "PT ET"     , "PT event trace"                                } };
+      { "PT ET"     , "PT event trace"                                } ,
+      { "TNT DIS"   , "Disabling TNT (Taken Not Taken) packets"       } };
 private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
     { { "TR"        , "Tracing can be enabled with IA32_RTIT_CTL.ToPA" } ,
       { "ToPA"      , "ToPA tables can hold any number of output entries" } ,
@@ -80,25 +81,28 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
         // EAX, subfunction 0
         dr = decodeBitfields
             ( "EAX", DECODER_EAX_SUBFUNCTION_0, entries[0].eax );
-        a.addAll( dr.strings );
         // EBX, subfunction 0
+        a.addAll( dr.strings );
         strings = decodeBitmap
             ( "EBX", DECODER_EBX_SUBFUNCTION_0, entries[0].ebx );
+        a.add( interval );
         a.addAll( strings );
         // ECX, subfunction 0
         strings = decodeBitmap
             ( "ECX", DECODER_ECX_SUBFUNCTION_0, entries[0].ecx );
+        a.add( interval );
         a.addAll( strings );
         if ( ( entries.length > 1 )&&( entries[1].subfunction == 1 ) )
             {
-            a.add( interval );
             // EAX, subfunction 1
             dr = decodeBitfields
                 ( "EAX", DECODER_EAX_SUBFUNCTION_1, entries[1].eax );
+            a.add( interval );
             a.addAll( dr.strings );
             // EBX, subfunction 1
             dr = decodeBitfields
                 ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
+            a.add( interval );
             a.addAll( dr.strings );
             }
         }
