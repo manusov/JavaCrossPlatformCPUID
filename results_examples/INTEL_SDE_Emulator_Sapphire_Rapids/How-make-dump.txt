@@ -1,0 +1,8 @@
+How make CPUID dump under Intel SDE:
+https://github.com/manusov/Prototyping/tree/master/ConsoleAffinizedCpuidDump64
+https://github.com/manusov/Prototyping/tree/master/ConsoleAffinizedCpuidDump32
+
+How debug Intel AMX (Advanced Matrix Extensions) under Intel SDE:
+https://github.com/manusov/Prototyping/tree/master/ConsoleDumpAmx64
+
+

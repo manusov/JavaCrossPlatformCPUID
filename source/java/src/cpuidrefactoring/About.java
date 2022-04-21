@@ -9,7 +9,7 @@ package cpuidrefactoring;
 
 public class About 
 {
-private final static String VERSION_NAME = "v1.05.02";
+private final static String VERSION_NAME = "v1.05.03";
 
 private final static String VENDOR_NAME  = "(C)2022 IC Book Labs";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;

@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 0000001Eh = Tile Matrix Multiply Unit (TMUL) information.

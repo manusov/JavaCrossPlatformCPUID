@@ -1,3 +1,21 @@
+CPUID v1.05.03 (April, 21, 2022)
+Updates and corrections for Intel AMX (Advanced Matrix Extensions) technology.
+1) Fixed function 0000001Dh matrix rows count naming.
+2) Added report for results under Intel SDE Emulator.
+Data sources:
+Intel Architecture Instruction Set Extensions and Future Features
+Programming Reference.
+Document #319433-044.
+MAY 2021.
+How make CPUID dump under Intel SDE:
+https://github.com/manusov/Prototyping/tree/master/ConsoleAffinizedCpuidDump64
+https://github.com/manusov/Prototyping/tree/master/ConsoleAffinizedCpuidDump32
+How debug Intel AMX under Intel SDE:
+https://github.com/manusov/Prototyping/tree/master/ConsoleDumpAmx64
+
+
+
+
 CPUID v1.05.02 (January, 5, 2022)
 Added new INTEL features.
 -----------------------------------------------------------------------------------------------------
@@ -10,7 +28,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 Data sources:
 Intel 64 and IA-32 Architectures Software Developer's Manual. Documentation Changes.
 December 2021. Document Number 252046-068.
-
 
 
 

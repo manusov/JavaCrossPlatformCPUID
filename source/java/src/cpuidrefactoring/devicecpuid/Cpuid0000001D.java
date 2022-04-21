@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 0000001Dh = Intel AMX Tile and Palette information.
@@ -61,7 +61,7 @@ private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =
             // ECX, subfunction [index]
             obj = buildStrings( DECODER_ECX_SUBFUNCTION_1, index);
             dr = decodeBitfields( "ECX", obj, entries[index].ecx );
-            dr.strings.get(0)[4] = String.format("%d Bytes", dr.values[0]);
+            dr.strings.get(0)[4] = String.format("%d Rows", dr.values[0]);
             a.addAll( dr.strings );
             index++;
             }
