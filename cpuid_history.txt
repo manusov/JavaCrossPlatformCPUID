@@ -1,3 +1,18 @@
+CPUID v1.05.04 (June, 11, 2022)
+Added new AMD QoS (Quality of Service Extensions) features.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+80000020h    0       EBX     2       L3SBE, L3 external slow memory bandwidth enforcement.
+80000020h    0       EBX     3       BMEC, bandwidth monitoring event configuration.
+-----------------------------------------------------------------------------------------------------
+Data sources:
+AMD64 Technology Platform Quality of Service Extensions.
+Publication# 56375. Revision 1.03. Issue Date: February 2022.
+
+
+
+
 CPUID v1.05.03 (April, 21, 2022)
 Updates and corrections for Intel AMX (Advanced Matrix Extensions) technology.
 1) Fixed function 0000001Dh matrix rows count naming.
@@ -12,7 +27,6 @@ https://github.com/manusov/Prototyping/tree/master/ConsoleAffinizedCpuidDump64
 https://github.com/manusov/Prototyping/tree/master/ConsoleAffinizedCpuidDump32
 How debug Intel AMX under Intel SDE:
 https://github.com/manusov/Prototyping/tree/master/ConsoleDumpAmx64
-
 
 
 

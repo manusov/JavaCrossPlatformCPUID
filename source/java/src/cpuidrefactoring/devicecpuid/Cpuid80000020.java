@@ -20,7 +20,9 @@ Cpuid80000020()
 // Control tables for results decoding
 private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "Reserved" , "x" } ,
-      { "L3BE"     , "L3 external read bandwidth enforcement" } };
+      { "L3BE"     , "L3 external read bandwidth enforcement" } ,
+      { "L3SBE"    , "L3 external slow memory bandwidth enforcement" } ,
+      { "BMEC"     , "Bandwidth monitoring event configuration" } };
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "L3 external read bandwidth enforcement bit range length" , 31 , 0 } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_1 =
@@ -38,9 +40,9 @@ private final static Object[][] DECODER_EDX_SUBFUNCTION_1 =
         strings = decodeBitmap
             ( "EBX", DECODER_EBX_SUBFUNCTION_0, entries[0].ebx );
         a.addAll( strings );
-        a.add( interval );
         if ( entries.length > 1 )
             {
+            a.add( interval );
             // EAX, subfunction 1
             dr = decodeBitfields
                 ( "EAX", DECODER_EAX_SUBFUNCTION_1, entries[1].eax );
