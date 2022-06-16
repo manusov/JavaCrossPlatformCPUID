@@ -1,3 +1,20 @@
+CPUID v1.05.05 (June, 16, 2022)
+Added more detail info about Intel Hybrid CPUs.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+0000001Ah    0       EAX    23-0     Enumerates native model ID
+0000001Ah    0       EAX    31-24    Enumerates native core type
+-----------------------------------------------------------------------------------------------------
+Data sources:
+Intel 64 and IA-32 Architectures Software Developer's Manual
+Combined Volumes:
+1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
+Order Number: 325462-077US. April 2022.
+
+
+
+
 CPUID v1.05.04 (June, 11, 2022)
 Added new AMD QoS (Quality of Service Extensions) features.
 -----------------------------------------------------------------------------------------------------
@@ -9,7 +26,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 Data sources:
 AMD64 Technology Platform Quality of Service Extensions.
 Publication# 56375. Revision 1.03. Issue Date: February 2022.
-
 
 
 

@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 0000001Ah = Reserved function.
@@ -19,7 +19,8 @@ Cpuid0000001A()
 
 // Control tables for results decoding, subfunction 0, only 0 subf. supported
 private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
-    { { "Enumerates the native model ID and core type" , 31 , 24 } };
+    { { "Enumerates the native model ID"  , 23 , 0  } ,
+      { "Enumerates the native core type" , 31 , 24 } };
 
 @Override String[][] getParametersList()
     {
@@ -30,23 +31,23 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
         // EAX, subfunction 0
         dr = decodeBitfields
             ( "EAX", DECODER_EAX_SUBFUNCTION_0, entries[0].eax );
-        switch( dr.values[0] )
+        switch( dr.values[1] )
             {
             case 0:
-                dr.strings.get(0)[4] = "n/a";
+                dr.strings.get(1)[4] = "n/a";
                 break;
             case 0x10:
             case 0x30:
-                dr.strings.get(0)[4] = "Reserved";
+                dr.strings.get(1)[4] = "Reserved";
                 break;
             case 0x20:
-                dr.strings.get(0)[4] = "Intel Atom";
+                dr.strings.get(1)[4] = "Intel Atom";
                 break;
             case 0x40:
-                dr.strings.get(0)[4] = "Intel Core";
+                dr.strings.get(1)[4] = "Intel Core";
                 break;
             default:
-                dr.strings.get(0)[4] = "Unknown";
+                dr.strings.get(1)[4] = "Unknown";
                 break;
             }
         a.addAll( dr.strings );
