@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000012h = Intel security guard extensions information.
@@ -26,7 +26,11 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_0 =
       { "x"        , "Reserved" } ,   // bit 4
       { "ENCLV"    , "ENCLV instruction leaves" } , 
       { "ENCLS"    , "ENCLS instruction leaves" } ,
-      { "ENCLU R2" , "EVERIFYREPORT2 leaf of ENCLU instruction" } };
+      { "ENCLU R2" , "EVERIFYREPORT2 leaf of ENCLU instruction" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "EDECCSSA" , "EDECCSSA leaf of ENCLU instruction" } };  // bit 11
 private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "MISCSELECT extended features bit vector" , 31 , 0 } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_0 =

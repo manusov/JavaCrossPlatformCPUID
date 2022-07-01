@@ -1,3 +1,22 @@
+CPUID v1.05.06 (July, 1, 2022)
+Added new feature.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000012h    0       EAX     11      EDECCSSA instruction, ENCLU[EDECCSSA] leaf.
+-----------------------------------------------------------------------------------------------------
+EDECCSSA means Enclave DECrement Current State Save Area.
+Data sources:
+1) Intel Architecture Instruction Set Extensions and Future Features Programming Reference
+   Document #319433-045
+   JUNE 2022.
+2) Intel Software Guard Extensions Programming Reference
+   329298-002
+   OCTOBER 2014.
+
+
+
+
 CPUID v1.05.05 (June, 16, 2022)
 Added more detail info about Intel Hybrid CPUs.
 -----------------------------------------------------------------------------------------------------
@@ -11,7 +30,6 @@ Intel 64 and IA-32 Architectures Software Developer's Manual
 Combined Volumes:
 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
 Order Number: 325462-077US. April 2022.
-
 
 
 
