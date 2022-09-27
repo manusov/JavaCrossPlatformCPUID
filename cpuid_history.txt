@@ -1,3 +1,12 @@
+CPUID v1.05.07 (September, 27, 2022)
+Updated data base for AMD Zen4 processors:
+AMD Ryzen 5 7600X 6-Core Processor,
+AMD Ryzen 9 7900X 12-Core Processor,
+AMD Ryzen 9 7950X 16-Core Processor.
+
+
+
+
 CPUID v1.05.06 (July, 1, 2022)
 Added new feature.
 -----------------------------------------------------------------------------------------------------
@@ -13,7 +22,6 @@ Data sources:
 2) Intel Software Guard Extensions Programming Reference
    329298-002
    OCTOBER 2014.
-
 
 
 

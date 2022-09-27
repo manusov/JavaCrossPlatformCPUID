@@ -115,6 +115,7 @@ AmdMicroarchitecture( DatabaseStash stash )
     new FM  ( 8, 15, 3, 1,     ()-> { u = "Zen 2"; p = "7nm"; } ),  // found only on en.wikichip.org
     new FM  ( 8, 15, 6, 0,     ()-> { u = "Zen 2"; p = "7nm"; } ),
     new FM  ( 8, 15, 7, 1,     ()-> { u = "Zen 2"; p = "7nm"; } ),   // undocumented, but samples from Steven Noonan
+    new FM  ( 10, 15, 6, 1,    ()-> { u = "Zen 4"; p = "5nm"; } ),
     new F   ( 10, 15,          ()-> { u = "Zen 3"; p = "7nm"; } ) };  // undocumented, LX*
     return detectorHelper( tfms, 0, AMD_MICROARCHITECTURE );
     }

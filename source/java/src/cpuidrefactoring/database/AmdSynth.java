@@ -1085,6 +1085,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  (10,15,  5, 1,         "AMD Ryzen 5000 (Cezanne)"),
     new FMS (10,15,  6, 0,  0,     "AMD Ryzen (Raphael A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
     new FM  (10,15,  6, 0,         "AMD Ryzen (Raphael)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
+    new FM  (10,15,  6, 1,         "AMD Ryzen (Raphael)"),
     new FMS (10,15,  7, 0,  0,     "AMD Ryzen (Phoenix A0)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
     new FM  (10,15,  7, 0,         "AMD Ryzen (Phoenix)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
     new FMS (10,15, 10, 0,  0,     "AMD Ryzen (Bergamo A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
