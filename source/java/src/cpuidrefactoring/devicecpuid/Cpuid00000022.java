@@ -2,13 +2,13 @@
 CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
-0000000Eh = Reserved function.
+00000022h = Reserved function.
 */
 
 package cpuidrefactoring.devicecpuid;
 
-class Cpuid0000000E extends ReservedFunctionCpuid
+class Cpuid00000022 extends ReservedFunctionCpuid
 {
-Cpuid0000000E()
-    { setFunction( 0x0000000E ); }
+Cpuid00000022()
+    { setFunction( 0x00000022 ); }
 }

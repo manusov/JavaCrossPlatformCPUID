@@ -123,12 +123,12 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,  // bit 0
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "RAO INT"      , "Register atomical operations for integer" } ,
       { "AVX VNNI"     , "AVX versions of Vector Neural Network instructions" } ,  // bit 4
       { "AVX512BF16"   , "VNNI instructions supports BFLOAT16 format" } ,
       { "x"            , "Reserved" } ,  // bit 6
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "CMPccXADD"    , "Compare and add if condition (cc) is met" } ,
+      { "ARC PM EXT"   , "Architectural performance monitoring extended leaf 23h" } ,
       { "x"            , "Reserved" } ,
       { "FAST M"       , "Fast zero-length MOVSB" } ,   // bit 10
       { "FAST S"       , "Fast short STOSB" } ,         // bit 11
@@ -139,21 +139,38 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,  // bit 16
       { "FRED"         , "Flexible return and event delivery" } ,
       { "LKGS"         , "Load into IA32 kernel GS base, LKGS instruction" } ,
+      { "WRMSRNS"      , "Non serializing write to MSR" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "AMX FP16"     , "Advanced Matrix Extensions, operations on FP16 numbers" } ,
       { "HRESET"       , "Processor history reset CPUID leaf 20h" } ,  // bit 22
-      { "x"            , "Reserved" } ,
+      { "AVX IFMA"     , "AVX (128/256) version for IFMA instructions" } ,
       { "x"            , "Reserved" } ,  // bit 24
       { "x"            , "Reserved" } ,
       { "LAM"          , "Linear Address Masking" } ,  // bit 26
-      { "x"            , "Reserved" } ,
+      { "MSRLIST"      , "Read and write MSR by lists" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } };  // bit 31
 private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "PPIN"         , "Protected Processor Inventory Number" } };  // bit 0
+private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
+    { { "x"            , "Reserved" } ,  // bit 0
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "AVX VNNI 8"   , "AVX (128/256) version for VNNI INT8 instructions" } ,
+      { "AVX CONV"     , "AVX (128/256) version for convert BF16, FP16, FP32" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,
+      { "x"            , "Reserved" } };  // bit 15
 
 @Override String[][] getParametersList()
     {
@@ -197,6 +214,11 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
             // EBX, subfunction 1
             strings = decodeBitmap
                 ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
+            a.add( interval );
+            a.addAll( strings );
+            // EDX, subfunction 1
+            strings = decodeBitmap
+                ( "EDX", DECODER_EDX_SUBFUNCTION_1, entries[1].edx );
             a.add( interval );
             a.addAll( strings );
             }

@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000006h = Thermal and power management features.

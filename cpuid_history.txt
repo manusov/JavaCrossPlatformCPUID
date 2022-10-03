@@ -1,9 +1,111 @@
+CPUID v1.05.08 (October, 3, 2022)
+Added new features and functions.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000007h    1       EAX     3       Intel RAO-INT instructions.
+00000007h    1       EAX     7       Intel CMPccXADD instructions.
+00000007h    1       EAX     8       Intel ArchPerfMonExt (Leaf 23).
+00000007h    1       EAX     19      Intel WRMSRNS instruction.
+00000007h    1       EAX     21      Intel AMX-FP16 operations.
+00000007h    1       EAX     23      Intel AVX-IFMA instructions.
+00000007h    1       EAX     27      Intel MSRLIST, means RDMSRLIST, WRMSRLIST instructions.
+00000007h    1       EDX     4       Intel AVX-VNNI-INT8 instructions.
+00000007h    1       EDX     5       Intel AVX-NE-CONVERT instructions.
+00000007h    1       EDX     14      Intel PREFETCHIT0/1 instructions.
+00000022h    -       -       -       Intel undocumented function, only registers hex dump show.
+00000023h    0       EAX     31-0    Intel function 23h valid sub-leaves limit.
+00000023h    1       EAX     31-0    General counters bitmap.
+00000023h    1       EBX     31-0    Fixed counters bitmap.
+00000023h    3       EAX     0       Core cycles monitoring event.
+00000023h    3       EAX     1       Instructions retired monitoring event.
+00000023h    3       EAX     2       Reference cycles monitoring event.
+00000023h    3       EAX     3       Last level cache references monitoring event.
+00000023h    3       EAX     4       Last level cache misses monitoring event.
+00000023h    3       EAX     5       Branch instructions retired monitoring event.
+00000023h    3       EAX     6       Branch mispredicts retired monitoring event.
+00000023h    3       EAX     7       Topdown slots monitoring event.
+00000023h    3       EAX     8       Topdown backend bound monitoring event.
+00000023h    3       EAX     9       Topdown bad speculation monitoring event.
+00000023h    3       EAX     10      Topdown frontend bound monitoring event.
+00000023h    3       EAX     11      Topdown retiring monitoring event.
+---------
+80000024h    -       -       -       AMD undocumented function, only registers hex dump show.
+80000025h    -       -       -       AMD undocumented function, only registers hex dump show.
+80000026h    -       -       -       AMD undocumented function, only registers hex dump show.
+80000027h    -       -       -       AMD undocumented function, only registers hex dump show.
+80000028h    -       -       -       AMD undocumented function, only registers hex dump show.
+-----------------------------------------------------------------------------------------------------
+Data sources:
+1) Intel Architecture Instruction Set Extensions and Future Features.
+Programming Reference. September 2022. 319433-046.
+https://www.intel.com/content/www/us/en/developer/tools/isa-extensions/overview.html
+Some details:
+ 1.1)  Intel RAO-INT instructions.
+       RAO (Register atomical operations?) for integer.
+       Atomically ADD, AND, OR, XOR instructions for destination=memory, source=register.
+       Optimize atomical read-modify-write operations with data arrays, accessed by >1 execution thread.
+ 1.2)  Intel CMPccXADD instructions.
+       Compare and add if condition (cc) is met.
+ 1.3)  Intel ArchPerfMonExt (Leaf 23).
+       Architectural Performance Monitoring Extended Leaf (CPUID function 23h).
+ 1.4)  Intel WRMSRNS instruction.
+       Non-serializing write to model-specific register.
+ 1.5)  Intel AMX-FP16 operations.
+       Hardware matrix multiply with FP16 elements, TDPFP16PS instruction.
+ 1.6)  Intel AVX-IFMA instructions.
+       128/256-bit version for IFMA instructions, VPMADD52HUQ, VPMADD52LUQ instructions.
+ 1.7)  Intel MSRLIST, means RDMSRLIST, WRMSRLIST instructions.
+       Read and Write list of model-specific registers.
+ 1.8)  Intel AVX-VNNI-INT8 instructions.
+       128/256-bit version for VNNI instructions with 8-bit integers.
+ 1.9)  Intel AVX-NE-CONVERT instructions.
+       128/256-bit version for convert between BF16, FP16, FP32.
+ 1.10) Intel PREFETCHIT0/1 instructions.
+       Prefetch hints for instruction cache.
+ 1.11) Intel undocumented function, only registers hex dump show.
+       Function 22h yet undocumented.
+ 1.12) Intel function 23h valid sub-leaves limit.
+       Used for get number of sub-functions for CPUID function 23h.
+ 1.13) General counters bitmap.
+       Bitmap for events, supported by general purpose performance monitoring.
+ 1.14) Fixed counters bitmap.
+       Bitmap for events, supported by fixed function performance monitoring.
+ 1.15) Core cycles monitoring event.
+       No details.
+ 1.16) Instructions retired monitoring event.
+       No details.
+ 1.17) Reference cycles monitoring event.
+       No details.
+ 1.18) Last level cache references monitoring event.
+       No details.
+ 1.19) Last level cache misses monitoring event.
+       No details.
+ 1.20) Branch instructions retired monitoring event.
+       No details.
+ 1.21) Branch mispredicts retired monitoring event.
+       No details.
+ 1.22) Topdown slots monitoring event.
+       See document item 15.2.1.
+ 1.23) Topdown backend bound monitoring event.
+       See document item 15.2.1.1.
+ 1.24) Topdown bad speculation monitoring event.
+       See document item 15.2.1.2.
+ 1.25) Topdown frontend bound monitoring event.
+       See document item 15.2.1.3.
+ 1.26) Topdown retiring monitoring event.
+       See document item 15.2.1.4.
+2) Information about undocumented AMD CPUID functions from CPUID dumps at InstLatx64 page, one of dumps:
+https://github.com/InstLatx64/InstLatx64/blob/master/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_01_CPUID.txt
+
+
+
+
 CPUID v1.05.07 (September, 27, 2022)
 Updated data base for AMD Zen4 processors:
 AMD Ryzen 5 7600X 6-Core Processor,
 AMD Ryzen 9 7900X 12-Core Processor,
 AMD Ryzen 9 7950X 16-Core Processor.
-
 
 
 

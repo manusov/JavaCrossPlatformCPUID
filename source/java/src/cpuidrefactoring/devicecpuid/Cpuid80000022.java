@@ -1,8 +1,8 @@
 /*
-CPUID Utility. (C)2021 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
-80000022h = Reserved (undocumented) function.
+80000022h = AMD core and northbridge performance monitoring.
 */
 
 package cpuidrefactoring.devicecpuid;

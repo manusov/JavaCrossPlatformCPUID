@@ -2,13 +2,13 @@
 CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
-80000023h = Reserved (undocumented) function.
+80000024h = Reserved (undocumented) function.
 */
 
 package cpuidrefactoring.devicecpuid;
 
-class Cpuid80000023 extends ReservedFunctionCpuid
+class Cpuid80000024 extends ReservedFunctionCpuid
 {
-Cpuid80000023()
-    { setFunction( 0x80000023 ); }
+Cpuid80000024()
+    { setFunction( 0x80000024 ); }
 }

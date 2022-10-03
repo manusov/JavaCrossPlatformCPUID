@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2021 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Driver class for interpreting CPUID information.
 Text arrays = F ( CPUID binary dump ).
@@ -53,7 +53,9 @@ private final static ReservedFunctionCpuid[] STANDARD_FUNCTIONS =
     new Cpuid0000001E(),
     new Cpuid0000001F(),
     new Cpuid00000020(),
-    new Cpuid00000021()
+    new Cpuid00000021(),
+    new Cpuid00000022(),
+    new Cpuid00000023()
     };
     
 private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =
@@ -94,6 +96,11 @@ private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =
     new Cpuid80000021(),
     new Cpuid80000022(),
     new Cpuid80000023(),
+    new Cpuid80000024(),
+    new Cpuid80000025(),
+    new Cpuid80000026(),
+    new Cpuid80000027(),
+    new Cpuid80000028(),
     new Cpuid8FFFFFFF()
     };
 
