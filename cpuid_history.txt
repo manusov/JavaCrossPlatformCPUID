@@ -1,3 +1,8 @@
+CPUID v1.05.09 (October, 4, 2022)
+Fixed bug at function 00000023h (Architectural Performance Monitoring Extended Leaf).
+
+
+
 CPUID v1.05.08 (October, 3, 2022)
 Added new features and functions.
 -----------------------------------------------------------------------------------------------------
@@ -97,7 +102,6 @@ Some details:
        See document item 15.2.1.4.
 2) Information about undocumented AMD CPUID functions from CPUID dumps at InstLatx64 page, one of dumps:
 https://github.com/InstLatx64/InstLatx64/blob/master/AuthenticAMD/AuthenticAMD0A60F12_K19_Raphael_01_CPUID.txt
-
 
 
 

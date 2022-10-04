@@ -67,7 +67,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
             dr = decodeBitfields
                 ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
             a.addAll( dr.strings );
-            if ( ( entries.length > 1 )&&( maxSubFunction > 2 )&&
+            if ( ( entries.length > 3 )&&( maxSubFunction > 2 )&&
              ( entries[3].subfunction == 3 ) )
                 {
                 // EAX, subfunction 3
