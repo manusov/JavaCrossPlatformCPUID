@@ -1,7 +1,213 @@
+CPUID v1.05.10 (October, 16, 2022)
+1) Changed L2/L3 Cache and TLB associativity field encoding for functions 80000006h, 80000019h.
+2) Added new features and functions.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+80000008h    -       EBX     29      BTC NO, Processor is not affected by branch type confusion.
+8000000Ah    -       EDX     18      x2AVIC, Advanced virtual interrupt controller for x2APIC mode.
+8000000Ah    -       EDX     21      ROGPT, Read-only guest page table.
+8000000Ah    -       EDX     25      VNMI, NMI virtualization.
+8000000Ah    -       EDX     26      IBSVIRT, Instruction based sampling virtualization.
+8000000Ah    -       EDX     27      EILVTR, Extended interrupt local vector table registers.
+8000001Bh    -       EAX     11      IBS L3MF, L3 miss filtering for instruction based sampling.
+8000001Fh    -       EAX     6       RMPQ, RMPQUERY instruction, read RMP permissions.
+8000001Fh    -       EAX     7       VMPLSSS, VMPL supervisor shadow stack.
+8000001Fh    -       EAX     9       TSCAUXV, TSC AUX virtualization.
+8000001Fh    -       EAX     17      VMGEXIT, VMGEXIT instruction pass parameter to hypervisor.
+8000001Fh    -       EAX     18      VTOMMSR, Virtual TOM MSR.
+8000001Fh    -       EAX     19      IBSVSG, IBS virtualization for SEV-ES guests.
+8000001Fh    -       EAX     25      SMT PT, SMT protection from sibling thread side channel attacks.
+8000001Fh    -       EAX     28      SVSM CP, SVSM communication page MSR.
+8000001Fh    -       EAX     29      NV SNP, Nested virtualization SNP MSR.
+80000020h    -       EBX     4       L3RR, L3 cache range reservation.
+80000021h    -       EAX     8       AIBRS, Automatic IBRS.
+80000021h    -       EAX     17      CPUIDUD, CPUID disable for non-privileged software.
+80000022h    -       EAX     0       PMV2, Performance monitoring, v2.
+80000022h    -       EAX     1       LBRST, Last branch record stack.
+80000022h    -       EAX     2       LBRFRZ, Freezing core performance counters and LBR stack.
+80000022h    -       EBX     9-4     LBRSTSZ, Number of last branch record stack entries.
+80000023h    -       EAX     0       MEM-HMK, Secure host multi key memory encryption mode.
+80000023h    -       EBX     15-0    MAXHMK, Number of simultaneously available host encryption key ID.
+80000026h    0-4     EAX     4-0     MSKWDT, Mask width, shift extended APIC ID to topology ID.
+80000026h    0-4     EAX     29      ERNK, Efficiency ranking available.
+80000026h    0-4     EAX     30      HTC, Heterogeneous cores.
+80000026h    0-4     EAX     31      ASYMT, Asymmetric topology.
+80000026h    0-4     EBX     15-0    NUMLP, Number of logical processors at the hierarchy level.
+80000026h    0-4     EBX     23-16   PWRERNK, Power efficiency ranking.
+80000026h    0-4     EBX     27-24   NATMID, Native model ID.
+80000026h    0-4     EBX     31-28   CTYPE, Core type.
+80000026h    0-4     ECX     7-0     INPUT, Input ECX[7-0].
+80000026h    0-4     ECX     15-8    LTYPE, Level type.
+80000026h    0-4     EDX     31-0    EXAPICID, Extended APIC ID.
+-----------------------------------------------------------------------------------------------------
+Data sources:
+AMD64 Architecture Programmer's Manual:
+Volumes 1-5
+Publication # 40332  Revision 4.05  October 2022
+https://www.amd.com/system/files/TechDocs/40332_4.05.pdf
+Some details (below used references to this document items):
+ 1.1)  Changed L2/L3 Cache and TLB associativity field encoding for functions 80000006h, 80000019h.
+       Table E-4. L2/L3 Cache and TLB Associativity Field Encoding.
+ 2.1)  CPUID 80000008h EBX.29 = BTC NO. 
+       Processor is not affected by branch type confusion.
+       Document item E.4.7.
+       Additional document about branch type confusion:
+       https://www.amd.com/en/corporate/product-security/bulletin/amd-sb-1037
+       https://www.amd.com/system/files/documents/technical-guidance-for-mitigating-branch-type-confusion_v7_20220712.pdf
+       Technical guidance for mitigating branch type confusion.
+ 2.2)  CPUID 8000000Ah EDX.18 = x2AVIC.
+       Advanced virtual interrupt controller for x2APIC mode.
+       Document item E.4.9, details at item 15.29.10.
+ 2.3)  CPUID 8000000Ah EDX.21 = ROGPT.
+       Read-only guest page table.
+       Document item E.4.9, details at item 15.25.5.
+ 2.4)  CPUID 8000000Ah EDX.25 = VNMI.
+       NMI virtualization.
+       Document item E.4.9, details at item 15.21.10.
+ 2.5)  CPUID 8000000Ah EDX.26 = IBSVIRT.
+       Instruction based sampling virtualization.
+       Document item E.4.9, details at item 15.38.
+ 2.6)  CPUID 8000000Ah EDX.27 = EILVTR.
+       Extended interrupt local vector table registers.
+       Document item 15.29.3.1, details at table 15-22 (for offset 500h-530h).
+       This bit not listed at main CPUID table, document item E.4.9.
+ 2.7)  CPUID 8000001Bh EAX.11 = IBS L3MF.
+       L3 miss filtering for instruction based sampling.
+       Document item E.4.13, details at item 13.3.4.1.
+ 2.8)  CPUID 8000001Fh EAX.6 = RMPQ.
+       RMPQUERY instruction.
+       Document item E.4.17, details at item "RMPQUERY" at system instruction reference.
+       Read RMP permissions. RMP is Reverse Map Table, see item 15.36.3.
+ 2.9)  CPUID 8000001Fh EAX.7 =  VMPLSSS.
+       VMPL supervisor shadow stack.
+       Document item E.4.17, details at item 15.36.7.
+       VMPL is Virtual Machine Privilege Levels see item 15.36.7.
+ 2.10) CPUID 8000001Fh EAX.9 = TSCAUXV.
+       TSC AUX virtualization.
+       Document item E.4.17, details at table B-4. VMSA Layout, State Save Area for SEV-ES.
+       TSC_AUX is MSR C000_0103h, details at item 6.2.5, table A-1 at MSR Cross-Reference.
+ 2.11) CPUID 8000001Fh EAX.17 = VMGEXIT.
+       VMGEXIT, VMGEXIT instruction pass parameter to hypervisor.
+       Document item E.4.17, details at item 15.35.6.
+ 2.12) CPUID 8000001Fh EAX.18 = VTOMMSR.
+       Virtual TOM (Top of Memory) MSR.
+       Document item E.4.17, details at item 15.36.8.
+ 2.13) CPUID 8000001Fh EAX.19 = IBSVSG.
+       IBS virtualization for SEV-ES guests.
+       Document item E.4.17, details at item 15.38, but for SEV-ES guests.
+ 2.14) CPUID 8000001Fh EAX.25 = SMT PT.
+       SMT protection from sibling thread side channel attacks.
+       Document item E.4.17, details at item 15.36.17.
+       SMT is Simultaneous Multi Threading.
+ 2.15) CPUID 8000001Fh EAX.28 = SVSM CP.
+       SVSM communication page MSR.
+       Document item E.4.17.
+       Additional documents about SVSM (Secure VM service module):
+       https://developer.amd.com/sev/
+       https://developer.amd.com/wp-content/resources/58019.pdf
+       https://developer.amd.com/wp-content/resources/56421.pdf
+       https://www.amd.com/system/files/TechDocs/56860.pdf
+ 2.16) CPUID 8000001Fh EAX.29 = NV SNP.
+       Nested virtualization SNP MSR.
+       Document item E.4.17, details at item 15.36.19.
+ 2.17) CPUID 80000020h EBX.4 = L3RR.
+       L3 cache range reservation.
+       Document item E.4.18, details at item 7.6.6.
+ 2.18) CPUID 80000021h EAX.8 = AIBRS.
+       Automatic IBRS.
+       Document item E.4.19, details at item 3.1.7.
+       IBRS is Indirect Branch Restricted Speculation.
+ 2.19) CPUID 80000021h EAX.17 = CPUIDUD.
+       CPUID disable for non-privileged software.
+       Document item E.4.19, details at item 3.2.10.
+ 2.20) CPUID 80000022h EAX.0 = PMV2.
+       Performance monitoring, v2.
+       Document item E.4.20, include note about EBX, details at item 13.2.2.
+ 2.21) CPUID 80000022h EAX.1 = LBRST.
+       Last branch record stack.
+       Document item E.4.20, details at items 13.1.1.8, 13.1.1.9, 13.1.8.
+ 2.22) CPUID 80000022h EAX.2 = LBRFRZ.
+       Freezing core performance counters and LBR stack.
+       Document item E.4.20, details at items 13.1.1.6, 13.2.2.
+ 2.23) CPUID 80000022h EBX.[9-4] = LBRSTSZ.
+       Number of last branch record stack entries.
+       Document item E.4.20, details at items 13.1.1.9, 13.1.8.
+ 2.24) CPUID 80000023h EAX.0 = MEM-HMK.
+       Secure host multi key memory encryption mode.
+       Document item E.4.21, details at item 7.10.9.
+ 2.25) CPUID 80000023h EBX.[15-0] = MAXHMK.
+       Number of simultaneously available host encryption key ID.
+       Document item E.4.21, details at item 7.10.9.
+ 2.26) CPUID 80000026h, subfunctions 0-4, EAX.[4-0] = MSKWDT.
+       Mask width, shift extended APIC ID to topology ID.
+       Document item E.4.24.
+ 2.27) CPUID 80000026h, subfunctions 0-4, EAX.29 = ERNK.
+       Efficiency ranking available.
+       Document item E.4.24.
+ 2.28) CPUID 80000026h, subfunctions 0-4, EAX.30 = HTC.
+       Heterogeneous cores.
+       Document item E.4.24.
+ 2.29) CPUID 80000026h, subfunctions 0-4, EAX.31 = ASYMT.
+       Asymmetric topology.
+       Document item E.4.24.
+ 2.30) CPUID 80000026h, subfunctions 0-4, EBX.[15-0] = NUMLP.
+       Number of logical processors at the hierarchy level.
+       Document item E.4.24.
+ 2.31) CPUID 80000026h, subfunctions 0-4, EBX.[23-16] = PWRERNK.
+       Power efficiency ranking.
+       Document item E.4.24.
+ 2.32) CPUID 80000026h, subfunctions 0-4, EBX.[27-24] = NATMID.
+       Native model ID.
+       Document item E.4.24.
+ 2.33) CPUID 80000026h, subfunctions 0-4, EBX.[31-28] = CTYPE.
+       Core type.
+       Document item E.4.24.
+ 2.34) CPUID 80000026h, subfunctions 0-4, ECX.[15-8] = LTYPE.
+       Level type.
+       Document item E.4.24.
+ 2.35) CPUID 80000026h, subfunctions 0-4, ECX.[7-0] = INPUT.
+       Input ECX[7-0], subfunction ID.
+       Document item E.4.24.
+ 2.36) CPUID 80000026h, subfunctions 0-4, EDX.[31-0] = EXAPICID.
+       Extended APIC ID.
+       Document item E.4.24.
+-----------------------------------------------------------------------------
+AMD undocumented bits list changes.
+-----------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------
+80000007h    -       EBX     4       Still undocumented bit
+80000007h    -       EBX     5       Still undocumented bit
+8000000Ah    -       EDX     11      Still undocumented bit
+8000000Ah    -       EDX     18      x2AVIC
+8000000Ah    -       EDX     21      ROGPT
+8000000Ah    -       EDX     25      VNMI
+8000000Ah    -       EDX     26      IBSVIRT
+8000000Ah    -       EDX     27      EILVTR (Table 15-22)
+8000001Bh    -       EAX     11      IBS L3MF
+80000021h    -       EAX     1       Still undocumented bit
+80000021h    -       EAX     8       AIBRS
+80000021h    -       EAX     10      Still undocumented bit
+80000021h    -       EAX     11      Still undocumented bit
+80000021h    -       EAX     17      CPUIDUD
+80000021h    -       EAX     18      Still undocumented bit
+80000022h    -       EBX     16-31   Still undocumented bits
+80000022h    -       ECX     0       Still undocumented bit
+80000022h    -       ECX     1       Still undocumented bit
+80000024h    -       all     all     Still undocumented function
+80000025h    -       all     all     Still undocumented function
+80000026h    -       all     all     Extended CPU topology function
+80000027h    -       all     all     Still undocumented function
+80000028h    -       all     all     Still undocumented function
+-----------------------------------------------------------------------------
+Known bug: yet no subfunctions support at binary level for CPUID 80000026h.
+-----------------------------------------------------------------------------
+
+
+
 CPUID v1.05.09 (October, 4, 2022)
 Fixed bug at function 00000023h (Architectural Performance Monitoring Extended Leaf).
-
-
 
 CPUID v1.05.08 (October, 3, 2022)
 Added new features and functions.

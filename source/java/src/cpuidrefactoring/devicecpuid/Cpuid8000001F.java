@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
 8000001Fh = AMD secure encrypted virtualization.
@@ -24,11 +24,11 @@ private final static String[][] DECODER_EAX =
       { "PGFMSR"  , "Page Flush MSR" } ,
       { "SEV-ES"  , "Encrypted State" } ,
       { "SEV-SNP" , "Secure Nested Paging" } ,
-      { "VMPL"    , "Virtual Machine Permission (Privilege) levels" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "VMPL"    , "Virtual Machine Permission (Privilege) levels" } ,  // bit 5
+      { "RMPQ"    , "RMPQUERY instruction, read RMP permissions" } ,
+      { "VMPLSSS" , "VMPL supervisor shadow stack" } ,
       { "SEC TSC" , "Secure TSC" } ,  // bit 8
-      { "x"       , "Reserved" } ,
+      { "TSCAUXV" , "TSC AUX virtualization" } ,
       { "HWCC ED" , "Hardware cache coherency across encryption domains" } ,
       { "HOST 64" , "SEV guest execution only for 64-bit hosts" } ,
       { "RES INJ" , "Restricted Injection" } ,
@@ -36,19 +36,19 @@ private final static String[][] DECODER_EAX =
       { "DBG SW"  , "Debug state swap for SEV-ES guests" } ,
       { "PHIBS"   , "Prevent Host Instruction Based Sampling" } ,  // bit 15
       { "VTE"     , "Virtual Transparent Encryption" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "VMGEXIT" , "VMGEXIT instruction pass parameter to hypervisor" } ,
+      { "VTOMMSR" , "Virtual TOM MSR" } ,
+      { "IBSVSG"  , "IBS virtualization for SEV-ES guests" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
       { "VMSA RP" , "VM Save Area Register Protection" } ,  // bit 24
+      { "SMT PT"  , "SMT protection from sibling thread side channel" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "SVSM CP" , "SVSM communication page MSR" } ,  // bit 28
+      { "NV SNP"  , "Nested virtualization SNP MSR" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } };  // bit 31
 private final static Object[][] DECODER_EBX =

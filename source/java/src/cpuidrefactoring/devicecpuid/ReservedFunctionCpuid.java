@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Parent class for CPUID functions classes.
 This class inherited by standard, extended and virtual
@@ -266,7 +266,7 @@ final String writeSize( int valueBits )
     }
 
 /*
-Return string cache associativity = f( numeric value)
+Return string cache associativity = f( numeric value )
 variant 1.
 */
 final String writeAssociativityV1 ( int a )
@@ -281,7 +281,7 @@ final String writeAssociativityV1 ( int a )
     }
 
 /*
-Return string cache associativity = f( numeric value)
+Return string cache associativity = f( numeric value )
 variant 2.
 */
 final String writeAssociativityV2 ( int a )
@@ -293,17 +293,17 @@ final String writeAssociativityV2 ( int a )
         case 1:  { s = "1 way, direct mapped"; break; }
         case 2:  { s = "2 ways";               break; }
         case 3:  { s = "3 ways";               break; }
-        case 4:  { s = "4 ways";               break; }
-        case 5:  { s = "6 ways";               break; }
-        case 6:  { s = "8 ways";               break; }
+        case 4:  { s = "4 to 5 ways";          break; }
+        case 5:  { s = "6 to 7 ways";          break; }
+        case 6:  { s = "8 to 15 ways";         break; }
         case 7:  { s = "Reserved";             break; }
-        case 8:  { s = "16 ways";              break; }
+        case 8:  { s = "16 to 31 ways";        break; }
         case 9:  { s = "Use f=8000001Dh";      break; }
-        case 10: { s = "32 ways";              break; }
-        case 11: { s = "48 ways";              break; }
-        case 12: { s = "64 ways";              break; }
-        case 13: { s = "96 ways";              break; }
-        case 14: { s = "128 ways";             break; }
+        case 10: { s = "32 to 47 ways";        break; }
+        case 11: { s = "48 to 63 ways";        break; }
+        case 12: { s = "64 to 95 ways";        break; }
+        case 13: { s = "96 to 127 ways";       break; }
+        case 14: { s = "128 or above ways";    break; }
         case 15: { s = "Fully associative";    break; }
         default: { s = "Invalid";              break; }
         }

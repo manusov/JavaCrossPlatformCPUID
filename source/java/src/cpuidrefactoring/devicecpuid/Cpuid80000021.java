@@ -27,7 +27,7 @@ private final static String[][] DECODER_EAX =
       { "x"         , "Reserved"          } ,
       { "NSCB"      , "Null selector clear base"      } ,             // bit 6
       { "UAIGN"     , "Upper address ignore"          } ,
-      { "x"         , "Reserved"          } ,                         // bit 8
+      { "AIBRS"     , "Automatic IBRS"    } ,                         // bit 8
       { "NOSCM"     , "No SMM control MSR (MSR C001_0116h is absent)" } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
@@ -36,7 +36,7 @@ private final static String[][] DECODER_EAX =
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,                         // bit 16
-      { "x"         , "Reserved"          } ,
+      { "CPUIDUD"   , "CPUID disable for non-privileged software" } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,

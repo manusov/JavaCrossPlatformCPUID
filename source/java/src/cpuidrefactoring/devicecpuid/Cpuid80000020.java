@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2021 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
 80000020h = AMD bandwidth enforcement.
@@ -19,10 +19,12 @@ Cpuid80000020()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
-    { { "Reserved" , "x" } ,
+    { { "Reserved" , "x" } ,  // bit 0
       { "L3BE"     , "L3 external read bandwidth enforcement" } ,
       { "L3SBE"    , "L3 external slow memory bandwidth enforcement" } ,
-      { "BMEC"     , "Bandwidth monitoring event configuration" } };
+      { "BMEC"     , "Bandwidth monitoring event configuration" } ,
+      { "L3RR"     , "L3 cache range reservation" } ,  // bit 4
+    };
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "L3 external read bandwidth enforcement bit range length" , 31 , 0 } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_1 =

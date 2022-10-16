@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2022 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
 8000001Bh = AMD Instruction based sampling.
@@ -19,7 +19,7 @@ Cpuid8000001B()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "IBS FFV"     , "Instruction based sampling feature flag valid" } ,
+    { { "IBS FFV"     , "Instruction based sampling feature flag valid" } ,       // bit 0
       { "FETCH SAMP"  , "IBS fetch sampling" } , 
       { "OP SAM"      , "IBS execution sampling supported" } , 
       { "RW OP CNT"   , "Read write of OP counter" } , 
@@ -29,7 +29,8 @@ private final static String[][] DECODER_EAX =
       { "RIP INV"     , "Invalid RIP indication" } , 
       { "OP BRN FUSE" , "Fused branch micro-op indication" } ,
       { "IBS F MSR"   , "IBS fetch control extended MSR" } ,
-      { "IBS OP D"    , "IBS op data 4 MSR" } };
+      { "IBS OP D"    , "IBS op data 4 MSR" } ,                                   // bit 10
+      { "IBS L3MF"    , "L3 miss filtering for instruction based sampling" } };   // bit 11
 
 @Override String[][] getParametersList()
     {

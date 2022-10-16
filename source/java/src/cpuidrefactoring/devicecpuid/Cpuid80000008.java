@@ -52,7 +52,7 @@ private final static String[][] DECODER_EBX =
       { "SSBD NO"   , "SSBD no longer need"              } ,              // 26
       { "CPPC"      , "Collaborative processor performance control"  } ,  // 27
       { "PSFD"      , "Predicted store forward disable"  } ,
-      { "x"         , "Reserved"                         } ,
+      { "BTC NO"    , "Processor is not affected by branch type confusion" } ,
       { "x"         , "Reserved"                         } ,
       { "BR SAMP"   , "Branch sampling"                  } };         // bit 31
 private final static Object[][] DECODER_ECX =

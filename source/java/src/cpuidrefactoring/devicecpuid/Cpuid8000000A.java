@@ -42,16 +42,16 @@ private final static String[][] DECODER_EDX =
       { "VVMLS"    , "Virtualized VMLOAD and VMSAVE" } ,
       { "VGIF"     , "Virtualized global interrupt flag" } ,
       { "GMET"     , "Guest mode execute trap extension" } ,  // bit 17
-      { "x"        , "Reserved" } ,
+      { "x2AVIC"   , "Advanced virtual interrupt controller for x2APIC" } ,
       { "SSS CHK"  , "Supervisor shadow stack restrictions check" } ,  // bit 19
       { "SPEC CTL" , "Guest Spec Ctl, hardware handled MSR update" } , // bit 20
-      { "x"        , "Reserved" } ,
+      { "ROGPT"    , "Read-only guest page table" } ,
       { "x"        , "Reserved" } ,
       { "HMCOV"    , "Host MCE override" } ,                                   // bit 23
       { "TLBICTL"  , "TLB instruction control, broadcast synchronization" } ,  // bit 24
-      { "x"        , "Reserved" } ,  // bit 25
-      { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
+      { "VNMI"     , "NMI virtualization" } ,  // bit 25
+      { "IBSVIRT"  , "Instruction based sampling virtualization" } ,
+      { "EILVTR"   , "Extended interrupt local vector table registers" } ,
       { "SGPFIX"   , "Hypervisor spurious GP fault fixed" } ,  // bit 28
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
