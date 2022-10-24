@@ -1,3 +1,8 @@
+CPUID v1.05.11 (October, 24, 2022)
+Updated data base for Intel Raptor Lake.
+
+
+
 CPUID v1.05.10 (October, 16, 2022)
 1) Changed L2/L3 Cache and TLB associativity field encoding for functions 80000006h, 80000019h.
 2) Added new features and functions.
