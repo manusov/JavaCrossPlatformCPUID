@@ -19,38 +19,38 @@ Cpuid80000021()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "NNDBP"     , "Processor ignores nested data breakpoints" } ,  // bit 0
+    { { "NNDBP"     , "Processor ignores nested data breakpoints"  } ,  // bit 0
+      { "FSGSNS"    , "FS,GS bases MSR writes are non serializing" } ,
+      { "LAS"       , "LFENCE always serializing"    } ,            // bit 2
+      { "SPCL"      , "SMM page configuration lock"  } ,            // bit 3
       { "x"         , "Reserved"          } ,
-      { "LAS"       , "LFENCE always serializing"    } ,              // bit 2
-      { "SPCL"      , "SMM page configuration lock"  } ,              // bit 3
       { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "NSCB"      , "Null selector clear base"      } ,             // bit 6
-      { "UAIGN"     , "Upper address ignore"          } ,
-      { "AIBRS"     , "Automatic IBRS"    } ,                         // bit 8
+      { "NSCB"      , "Null selector clear base"     } ,            // bit 6
+      { "UAIGN"     , "Upper address ignore"         } ,
+      { "AIBRS"     , "Automatic IBRS"    } ,                       // bit 8
       { "NOSCM"     , "No SMM control MSR (MSR C001_0116h is absent)" } ,
+      { "FSRS"      , "Fast short REP STOSB"  } ,
+      { "FSRC"      , "Fast short REPE CMPSB" } ,
+      { "x"         , "Reserved"          } ,
+      { "PCMSR"     , "Prefetch control MSR"  } ,                    // bit 13
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "PCMSR"     , "Prefetch control MSR"  } ,                     // bit 13
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,                         // bit 16
+      { "x"         , "Reserved"          } ,                        // bit 16
       { "CPUIDUD"   , "CPUID disable for non-privileged software" } ,
+      { "EPSF"      , "Enhanced predictive store forwarding"      } ,
+      { "x"         , "Reserved"          } ,
+      { "x"         , "Reserved"          } ,
+      { "x"         , "Reserved"          } ,
+      { "x"         , "Reserved"          } ,
+      { "x"         , "Reserved"          } ,
+      { "x"         , "Reserved"          } ,                        // bit 24
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,                         // bit 24
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } };                        // bit 31
+      { "x"         , "Reserved"          } };                       // bit 31
 private final static Object[][] DECODER_EBX =
     { { "Microcode patch size, 16-byte units" ,  11 ,  0 } };
 

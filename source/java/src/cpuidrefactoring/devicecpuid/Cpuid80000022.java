@@ -25,7 +25,11 @@ private final static String[][] DECODER_EAX =
 private final static Object[][] DECODER_EBX =
     { { "Number of core performance monitor counters"        ,   3 ,  0 } ,
       { "Number of last branch record stack entries"         ,   9 ,  4 } ,
-      { "Number of northbridge performance monitor counters" ,  15 , 10 } };
+      { "Number of northbridge performance monitor counters" ,  15 , 10 } ,
+      { "Number of Unified Memory Controllers (UMC) PMCs"    ,  21 , 16 } };
+private final static Object[][] DECODER_ECX =
+    { { "Active Unified Memory Controllers (UMC) mask"       ,  31 ,  0 } };
+
 
 @Override String[][] getParametersList()
     {
@@ -45,6 +49,10 @@ private final static Object[][] DECODER_EBX =
         dr.strings.get(1)[4] = String.format( "%d", dr.values[1] );
         dr.strings.get(2)[4] = String.format( "%d", dr.values[2] );
         a.addAll( dr.strings );
+        // ECX
+        dr = decodeBitfields
+            ( "ECX", DECODER_ECX, entries[0].ecx );
+            a.addAll( dr.strings );
         }
     return a.isEmpty() ? 
         super.getParametersList() : a.toArray( new String[a.size()][] );

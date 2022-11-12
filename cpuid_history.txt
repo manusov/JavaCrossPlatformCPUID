@@ -1,6 +1,35 @@
+CPUID v1.05.12 (November, 12, 2022)
+Added new features and functions.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+80000020h    2       EAX     31-0    BW_LEN  , Slow memory bandwidth enforcement bit range length.
+80000020h    2       EDX     31-0    COS_MAX , Maximum Class Of Service number for memory bandwidth.
+80000020h    3       EBX     7-0     EVT_NUM , Number of bandwidth events that can be configured.
+80000020h    3       ECX     0       LOCRD   , Reads from local memory.
+80000020h    3       ECX     1       REMRD   , Reads from remote memory.
+80000020h    3       ECX     2       LOCNTW  , Non-temporal writes to local memory.
+80000020h    3       ECX     3       REMLTW  , Non-temporal writes to remote memory.
+80000020h    3       ECX     4       LOCRDSL , Reads from local memory identified as slow memory.
+80000020h    3       ECX     5       REMRDSL , Reads from remote memory identified as slow memory.
+80000020h    3       ECX     6       DVICT   , Dirty victims to all types of memory.
+80000021h    -       EAX     1       FSGSNS  , FS,GS bases MSR writes are non serializing.
+80000021h    -       EAX     10      FSRS    , Fast short REP STOSB.
+80000021h    -       EAX     11      FSRC    , Fast short REPE CMPSB.
+80000021h    -       EAX     18      EPSF    , Enhanced predictive store forwarding.
+80000022h    -       EBX     16-21   NPUMC   , Number of available UMC PMCs.
+80000022h    -       ECX     31-0    AUMCM   , Active Unified Memory Controllers (UMC) mask.
+-----------------------------------------------------------------------------------------------------
+Data sources:
+Processor Programming Reference (PPR)
+for AMD Family 19h Model 11h, Revision B1 Processors.
+Volume 1 of 6.
+https://www.amd.com/en/support/tech-docs
+
+
+
 CPUID v1.05.11 (October, 24, 2022)
 Updated data base for Intel Raptor Lake.
-
 
 
 CPUID v1.05.10 (October, 16, 2022)
