@@ -1,3 +1,21 @@
+CPUID v1.05.13 (December, 21, 2022)
+Added new features and functions.
+-----------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-----------------------------------------------------------------------------------------------------
+00000007h    2       EDX     0       PSFD       , Can disable FSFP without disabling SSB.
+00000007h    2       EDX     1       IPRED_CTRL , Can disable indirect predictor.
+00000007h    2       EDX     2       RRSBA_CTRL , Can disable restricted RSB alternate enumeration.
+00000007h    2       EDX     4       BHI_CTRL   , Can prevent branch history injection attack.
+00000007h    2       EDX     5       MCDT_NO    , Not exhibit MXCSR configuration dependent Timing.
+-----------------------------------------------------------------------------------------------------
+Data sources:
+Intel CPUID enumeration and architectural MSRs.
+https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
+https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/branch-history-injection.html
+
+
+
 CPUID v1.05.12 (November, 12, 2022)
 Added new features and functions.
 -----------------------------------------------------------------------------------------------------
@@ -25,7 +43,6 @@ Processor Programming Reference (PPR)
 for AMD Family 19h Model 11h, Revision B1 Processors.
 Volume 1 of 6.
 https://www.amd.com/en/support/tech-docs
-
 
 
 CPUID v1.05.11 (October, 24, 2022)

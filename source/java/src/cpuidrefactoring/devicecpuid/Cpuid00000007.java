@@ -171,6 +171,23 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,
       { "x"            , "Reserved" } };  // bit 15
+private final static String[][] DECODER_EDX_SUBFUNCTION_2 =
+    { { "PSFD"         , "Can disable FSFP without disabling SSB" } ,  // bit 0
+      { "IPRED"        , "Can disable indirect predictor"         } ,  // bit 1
+      { "RRSBA"        , "Can disable restricted RSB alternate enumeration" } ,
+      { "x"            , "Reserved" } ,
+      { "BHI"          , "Can prevent branch history injection attack"      } ,
+      { "MCDT"         , "Not exhibit MXCSR configuration dependent timing" } ,
+      { "x"            , "Reserved" } ,  // bit 6
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } };  // bit 15
 
 @Override String[][] getParametersList()
     {
@@ -219,6 +236,15 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
             // EDX, subfunction 1
             strings = decodeBitmap
                 ( "EDX", DECODER_EDX_SUBFUNCTION_1, entries[1].edx );
+            a.add( interval );
+            a.addAll( strings );
+            }
+        if ( ( entries.length > 2 )&&( maxSubFunction > 1 )&&
+             ( entries[2].subfunction == 2 ) )
+            {
+            // EDX, subfunction 2
+            strings = decodeBitmap
+                ( "EDX", DECODER_EDX_SUBFUNCTION_2, entries[2].edx );
             a.add( interval );
             a.addAll( strings );
             }
