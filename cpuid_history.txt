@@ -1,3 +1,22 @@
+CPUID v1.05.14 (December, 31, 2022)
+Added new features.
+-------------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+-------------------------------------------------------------------------------------------------------------
+00000006h    -       EAX     24      HFN      , Hardware feedback notification (IA32_THERM_INTERRUPT MSR.25).
+00000007h    0       EDX     1       SGX KEYS , Attestation services for Intel SGX.
+00000007h    1       EAX     6       LASS     , Linear address space separation.
+00000007h    1       EDX     18      CET SSS  , Supervisor shadow stacks pushes PF condition.
+00000007h    2       EDX     3       DDPD     , Disabling data dependent prefetcher supported.
+-------------------------------------------------------------------------------------------------------------
+Data sources:
+1) Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference. December 2022. Document ID: 319433-047.
+2) Intel 64 and IA-32 Architectures Software Developer's Manual.
+   Documentation Changes. December 2022. Document ID: 252046-070.
+
+
+
 CPUID v1.05.13 (December, 21, 2022)
 Added new features and functions.
 -----------------------------------------------------------------------------------------------------
@@ -13,7 +32,6 @@ Data sources:
 Intel CPUID enumeration and architectural MSRs.
 https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/cpuid-enumeration-and-architectural-msrs.html
 https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/branch-history-injection.html
-
 
 
 CPUID v1.05.12 (November, 12, 2022)

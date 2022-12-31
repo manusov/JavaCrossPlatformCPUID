@@ -88,7 +88,7 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
       { "PKS"          , "Protection keys for supervisor-mode pages" } };   // bit 31
 private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
     { { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "SGX KEYS"     , "Attestation services for Intel SGX" } ,
       { "4VNNIW"       , "AVX512_4VNNIW 4-iteration VNNI, word mode" } ,
       { "4FMAPS"       , "AVX512_4FMAPS 4-iteration FMA, single precision" } ,
       { "FS REP MOV"   , "Fast short REP MOV" } ,
@@ -126,7 +126,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "RAO INT"      , "Register atomical operations for integer" } ,
       { "AVX VNNI"     , "AVX versions of Vector Neural Network instructions" } ,  // bit 4
       { "AVX512BF16"   , "VNNI instructions supports BFLOAT16 format" } ,
-      { "x"            , "Reserved" } ,  // bit 6
+      { "LASS"         , "Linear address space separation" } ,  // bit 6
       { "CMPccXADD"    , "Compare and add if condition (cc) is met" } ,
       { "ARC PM EXT"   , "Architectural performance monitoring extended leaf 23h" } ,
       { "x"            , "Reserved" } ,
@@ -169,13 +169,29 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,
-      { "x"            , "Reserved" } };  // bit 15
+      { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,  // bit 14
+      { "x"            , "Reserved" } ,  // bit 15
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,  // bit 17
+      { "CET SSS"      , "Supervisor shadow stacks pushes PF condition" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,  // bit 24
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } };  // bit 31
 private final static String[][] DECODER_EDX_SUBFUNCTION_2 =
     { { "PSFD"         , "Can disable FSFP without disabling SSB" } ,  // bit 0
       { "IPRED"        , "Can disable indirect predictor"         } ,  // bit 1
       { "RRSBA"        , "Can disable restricted RSB alternate enumeration" } ,
-      { "x"            , "Reserved" } ,
+      { "DDPD"         , "Disabling data dependent prefetcher supported" } ,
       { "BHI"          , "Can prevent branch history injection attack"      } ,
       { "MCDT"         , "Not exhibit MXCSR configuration dependent timing" } ,
       { "x"            , "Reserved" } ,  // bit 6

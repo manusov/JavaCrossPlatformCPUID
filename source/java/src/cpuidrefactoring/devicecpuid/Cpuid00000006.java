@@ -43,7 +43,7 @@ private final static String[][] DECODER_EAX =
       { "x"        , "Reserved" } ,  // bit 21
       { "HWP MSR"  , "IA32_HWP_CTL MSR available" } ,            // bit 22
       { "EHFI"     , "Enhanced hardware feedback interface" } ,  // bit 23
-      { "x"        , "Reserved" } ,  // bit 24
+      { "HFN"      , "Hardware feedback notification" } ,        // bit 24
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
