@@ -1,3 +1,22 @@
+CPUID v1.05.15 (February, 15, 2023)
+Added new features and updates.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+0000000Fh    1       EAX     7-0     Encode counter width offset from 24 (new values validated).
+80000007h    -       EDX     15      FastCPPC, Fast collaborative processor performance control.
+---------------------------------------------------------------------------------------------------
+Data sources:
+Processor Programming Reference (PPR)
+for AMD Family 19h Model 61h, Revision B1 Processors.
+Publication # 56713 Rev 3.04 - Jan 31. 2023.
+56713-B1-PUB_3.04.pdf
+https://www.amd.com/en/support/tech-docs
+https://docs.kernel.org/admin-guide/acpi/cppc_sysfs.html
+https://docs.kernel.org/admin-guide/pm/amd-pstate.html
+
+
+
 CPUID v1.05.14 (December, 31, 2022)
 Added new features.
 -------------------------------------------------------------------------------------------------------------
@@ -14,7 +33,6 @@ Data sources:
    Programming Reference. December 2022. Document ID: 319433-047.
 2) Intel 64 and IA-32 Architectures Software Developer's Manual.
    Documentation Changes. December 2022. Document ID: 252046-070.
-
 
 
 CPUID v1.05.13 (December, 21, 2022)

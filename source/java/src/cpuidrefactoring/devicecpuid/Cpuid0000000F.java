@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 0000000Fh = Platform quality of service enumeration.
@@ -65,7 +65,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
                     {
                     dr.strings.get(0)[4] = "n/a";
                     }
-                else if( ( n == 24 )||( n == 25 )||( n == 61 ) )
+                else if( ( n == 24 )||( n == 25 )||( n == 44 )||( n == 61 ) )
                     {
                     dr.strings.get(0)[4] = String.format( "%d Bits", n );    
                     }

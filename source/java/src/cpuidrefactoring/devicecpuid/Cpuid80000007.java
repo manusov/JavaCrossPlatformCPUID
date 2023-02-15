@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
 80000007h = Advanced power management information.
@@ -46,7 +46,8 @@ private final static String[][] DECODER_EDX =
       { "PFI"       , "Processor feedback interface (deprecated)" } ,
       { "PPR"       , "Processor core power reporting interface" } ,
       { "CSB"       , "Connected standby" } ,
-      { "RAPL"      , "Running average power limit" } };
+      { "RAPL"      , "Running average power limit" } ,
+      { "FastCPPC"  , "Fast collaborative processor performance control" } };
 
 @Override String[][] getParametersList()
     {

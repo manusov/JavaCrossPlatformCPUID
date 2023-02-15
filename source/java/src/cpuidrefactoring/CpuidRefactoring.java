@@ -1,5 +1,5 @@
 /* 
-CPUID Utility. (C)2022 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Application main class.
 */
