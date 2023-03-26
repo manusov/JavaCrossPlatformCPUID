@@ -1,3 +1,24 @@
+CPUID v1.05.16 (March, 26, 2023)
+Added new INTEL feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000012h    0       EAX     10      EUPDATESVN leaf of ENCLS instruction.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) INTEL fundamental document:
+325462-sdm-vol-1-2abcd-3abcd.pdf
+Intel 64 and IA-32 Architectures
+Software Developer's Manual
+Combined Volumes:
+1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
+Order Number: 325462-079US
+March 2023.
+2) Additional information:
+https://patchwork.kernel.org/project/intel-sgx/patch/20220421110326.856-9-cathy.zhang@intel.com/
+
+
+
 CPUID v1.05.15 (February, 15, 2023)
 Added new features and updates.
 ---------------------------------------------------------------------------------------------------
@@ -14,7 +35,6 @@ Publication # 56713 Rev 3.04 - Jan 31. 2023.
 https://www.amd.com/en/support/tech-docs
 https://docs.kernel.org/admin-guide/acpi/cppc_sysfs.html
 https://docs.kernel.org/admin-guide/pm/amd-pstate.html
-
 
 
 CPUID v1.05.14 (December, 31, 2022)
