@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2022 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000007h = Structured extended feature enumeration.
@@ -163,7 +163,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "AVX CONV"     , "AVX (128/256) version for convert BF16, FP16, FP32" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "AMX COMPL"    , "AMX complex math instructions" } ,  // bit 8
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
@@ -194,7 +194,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_2 =
       { "DDPD"         , "Disabling data dependent prefetcher supported" } ,
       { "BHI"          , "Can prevent branch history injection attack"      } ,
       { "MCDT"         , "Not exhibit MXCSR configuration dependent timing" } ,
-      { "x"            , "Reserved" } ,  // bit 6
+      { "UCLOCKDIS"    , "Uncacheable lock disable" } ,  // bit 6
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

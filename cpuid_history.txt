@@ -1,3 +1,22 @@
+CPUID v1.05.17 (March, 31, 2023)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EDX     8       AMX COMPL , AMX complex math instructions.
+00000007h    2       EDX     6       UCLOCKDIS , Uncacheable lock disable feature.
+00000010h    1       ECX     3       NCONT     , Non-contiguous 1s value supported.
+00000010h    2       ECX     3       NCONT     , Non-contiguous 1s value supported.
+0000001Ch    0       ECX     19-16   EVTLOG[n] , Event logging supported bitmap.
+00000023h    0       EBX     0       UNITMSK2  , UnitMask2 field in the IA32_PERFEVTSELx MSRs.
+00000023h    0       EBX     1       ZBIT      , Zero-bit in the IA32_PERFEVTSELx MSRs.
+---------------------------------------------------------------------------------------------------
+Data sources:
+Intel Architecture Instruction Set Extensions and Future Features.
+Programming Reference. March 2023. Document ID: 319433-048.
+
+
+
 CPUID v1.05.16 (March, 26, 2023)
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------
@@ -16,7 +35,6 @@ Order Number: 325462-079US
 March 2023.
 2) Additional information:
 https://patchwork.kernel.org/project/intel-sgx/patch/20220421110326.856-9-cathy.zhang@intel.com/
-
 
 
 CPUID v1.05.15 (February, 15, 2023)

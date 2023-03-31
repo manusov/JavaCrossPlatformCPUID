@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000010h = Platform quality of service enforcement.
@@ -32,15 +32,21 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
 private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
     { { "x"      , "Reserved" } , 
       { "UCOS"   , "Update of COS should be infrequent" } ,
-      { "CDP"    , "Code and Data prioritization technology" } };
+      { "CDP"    , "Code and Data prioritization technology" } ,
+      { "NCONT"  , "Non-contiguous 1 value" } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "Highest COS number supported for this ResID" , 15 , 0 } };
-// subfunction 2, note ECX reserved for this subfunction
+// subfunction 2, note ECX redefined for this subfunction
 private final static Object[][] DECODER_EAX_SUBFUNCTION_2 =
     { { "[ L2 Cache QoS ]"
         + "  Length of the capacity bit mask for ResID" , 4 , 0 } };
 private final static Object[][]
         DECODER_EBX_SUBFUNCTION_2 = DECODER_EBX_SUBFUNCTION_1;
+private final static String[][] DECODER_ECX_SUBFUNCTION_2 =
+    { { "x"      , "Reserved" } , 
+      { "x"      , "Reserved" } , 
+      { "x"      , "Reserved" } , 
+      { "NCONT"  , "Non-contiguous 1 value" } };
 private final static Object[][]
         DECODER_EDX_SUBFUNCTION_2 = DECODER_EDX_SUBFUNCTION_1;
 // subfunction 3, note EBX reserved for this subfunction
@@ -94,6 +100,9 @@ private final static Object[][]
                         dr = decodeBitfields( "EBX", 
                             DECODER_EBX_SUBFUNCTION_2, entries[i].ebx );
                         a.addAll( dr.strings );
+                        strings = decodeBitmap( "ECX", 
+                            DECODER_ECX_SUBFUNCTION_2, entries[i].ecx );
+                        a.addAll( strings );
                         dr = decodeBitfields ( "EDX",
                             DECODER_EDX_SUBFUNCTION_2, entries[i].edx );
                         a.addAll( dr.strings );

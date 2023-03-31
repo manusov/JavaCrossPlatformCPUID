@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2022 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 00000023h = Architectural performance monitoring extended leaf.
@@ -17,13 +17,18 @@ Cpuid00000023()
 @Override String getLongName()
     { return "Architectural performance monitoring extended leaf"; }
 
-// Control tables for results decoding
+// Control tables for results decoding, subfunction 0
 private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
     { { "Intel architectural performance valid sub-leaves limit" , 31 , 0  } };
+private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
+    { { "UNITMSK2"     , "UnitMask2 field in the IA32_PERFEVTSELx MSRs" } , // bit 0
+      { "ZBIT"         , "Zero-bit in the IA32_PERFEVTSELx MSRs" } };       // bit 1
+// subfunction 1
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "General counters bitmap"   , 31 , 0 } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "Fixed counters bitmap"   , 31 , 0 } };
+// subfunction 3
 private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
     { { "x"            , "Core cycles monitoring event" } ,  // bit 0
       { "x"            , "Instructions retired monitoring event" } ,
@@ -54,6 +59,9 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
         dr = decodeBitfields
             ( "EAX", DECODER_EAX_SUBFUNCTION_0, entries[0].eax );
         a.addAll( dr.strings );
+        strings = decodeBitmap
+            ( "EBX", DECODER_EBX_SUBFUNCTION_0, entries[0].ebx );
+        a.addAll( strings );
         int maxSubFunction = dr.values[0];
         if ( ( entries.length > 1 )&&( maxSubFunction > 0 )&&
              ( entries[1].subfunction == 1 ) )

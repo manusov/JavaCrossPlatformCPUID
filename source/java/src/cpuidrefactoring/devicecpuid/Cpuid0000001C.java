@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2022 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 0000001Ch = Enumeration of Architectural LBR Capabilities.
@@ -27,9 +27,26 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "BRN FLTR"   , "Branch filtering" } ,
       { "CST MODE"   , "Call-stack mode" } };
 private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
-    { { "MISP BIT"   , "Indication of branch misprediction" } ,
+    { { "MISP BIT"   , "Indication of branch misprediction" } ,        // bit 0
       { "TIME LBR"   , "Hold CPU cycles since last LBR entry" } ,
-      { "BR TYPE"    , "Hold indication of the recorded operation" } };
+      { "BR TYPE"    , "Hold indication of the recorded operation" } , // bit 2
+      { "x"          , "Reserved" } ,  // bit 3
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,  // bit 8
+      { "x"          , "Reserved" } ,  // bit 9
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,
+      { "x"          , "Reserved" } ,  // bit 15
+      { "EVTLOG[0]"  , "Event logging supported bitmap [0]" } ,  // bit 16
+      { "EVTLOG[1]"  , "Event logging supported bitmap [1]" } ,
+      { "EVTLOG[2]"  , "Event logging supported bitmap [2]" } ,
+      { "EVTLOG[3]"  , "Event logging supported bitmap [3]" } };  // bit 19
 
 @Override String[][] getParametersList()
     {
