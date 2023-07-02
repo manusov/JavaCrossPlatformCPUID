@@ -120,9 +120,9 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "CCAP MSR"     , "IA32_CORE_CAPABILITIES MSR" } ,
       { "SSBD"         , "Speculative Store Bypass Disable" } };
 private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
-    { { "x"            , "Reserved" } ,  // bit 0
-      { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+    { { "SHA512"       , "SHA512 encryption instructions" } ,  // bit 0
+      { "SM3"          , "SM3 crypto algorithm" } ,
+      { "SM4"          , "SM4 crypto algorithm" } ,
       { "RAO INT"      , "Register atomical operations for integer" } ,
       { "AVX VNNI"     , "AVX versions of Vector Neural Network instructions" } ,  // bit 4
       { "AVX512BF16"   , "VNNI instructions supports BFLOAT16 format" } ,
@@ -153,7 +153,8 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } };  // bit 31
 private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
-    { { "PPIN"         , "Protected Processor Inventory Number" } };  // bit 0
+    { { "PPIN"         , "Protected Processor Inventory Number" } ,          // bit 0
+      { "TSE"          , "Total storage encryption, PBNDKB instruction" } }; // bit 1
 private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,  // bit 0
       { "x"            , "Reserved" } ,
@@ -165,14 +166,14 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "AMX COMPL"    , "AMX complex math instructions" } ,  // bit 8
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "AV VNNI 16"   , "AVX VNNI INT16 instructions" } ,    // bit 10
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,  // bit 14
       { "x"            , "Reserved" } ,  // bit 15
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,  // bit 17
+      { "UIRET F"      , "UIRET sets UIF to stack image RFLAGS.1" } , // bit 17
       { "CET SSS"      , "Supervisor shadow stacks pushes PF condition" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

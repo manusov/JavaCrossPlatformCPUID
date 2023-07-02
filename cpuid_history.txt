@@ -1,3 +1,21 @@
+CPUID v1.05.18 (July, 2, 2023)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EAX     0       SHA512      , SHA512 encryption instructions.
+00000007h    1       EAX     1       SM3         , SM3 crypto algorithm.
+00000007h    1       EAX     2       SM4         , SM4 crypto algorithm.
+00000007h    1       EBX     1       TSE         , Total storage encryption, PBNDKB instruction.
+00000007h    1       EDX     10      AVX VNNI 16 , AVX-VNNI-INT16 instructions.
+00000007h    1       EDX     17      UIRET F     , UIRET sets UIF to stack image RFLAGS.1.
+---------------------------------------------------------------------------------------------------
+Data sources:
+Intel Architecture Instruction Set Extensions and Future Features.
+Programming Reference. June 2023. Document ID: 319433-049.
+
+
+
 CPUID v1.05.17 (March, 31, 2023)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
@@ -14,7 +32,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 Data sources:
 Intel Architecture Instruction Set Extensions and Future Features.
 Programming Reference. March 2023. Document ID: 319433-048.
-
 
 
 CPUID v1.05.16 (March, 26, 2023)
