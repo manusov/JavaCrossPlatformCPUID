@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2021 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Extended Function
 80000008h = Address size and physical core information.
@@ -53,7 +53,7 @@ private final static String[][] DECODER_EBX =
       { "CPPC"      , "Collaborative processor performance control"  } ,  // 27
       { "PSFD"      , "Predicted store forward disable"  } ,
       { "BTC NO"    , "Processor is not affected by branch type confusion" } ,
-      { "x"         , "Reserved"                         } ,
+      { "IBPB RET"  , "Clear return address predictor by MSR"              } ,
       { "BR SAMP"   , "Branch sampling"                  } };         // bit 31
 private final static Object[][] DECODER_ECX =
     { { "Number of threads per processor - 1" ,  7 ,  0 } ,

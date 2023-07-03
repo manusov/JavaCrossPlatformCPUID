@@ -1,3 +1,25 @@
+CPUID v1.05.19 (July, 3, 2023)
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000008     -       EBX     30      IBPB RET , Clear return address predictor by MSR.
+8000000A     -       EDX     29      LCK THR  , Bus lock threshold.
+80000020     0       EBX     5       ABMC     , Assignable bandwidth monitoring counters.
+80000020     0       EBX     6       SDCIAE   , Smart data cache injection allocation enforcement.
+80000020     5       EAX     7-0     QM CTR   , QM_CTR counter width, offset from 24.
+80000020     5       EAX     8       QM OVF   , QM_CTR bit 61 is an overflow bit.
+80000020     5       EBX     15-0    MAX ABMC , Maximum supported ABMC counter ID.
+80000020     5       ECX     0       SEL COS  , Bandwidth counter for COS instead RMID.
+---------------------------------------------------------------------------------------------------
+Data sources:
+AMD64 Technology
+AMD64 Architecture Programmer's Manual:
+Volumes 1-5
+Publication # 40332  Revision 4.07  June 2023.
+
+
+
 CPUID v1.05.18 (July, 2, 2023)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
@@ -13,7 +35,6 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 Data sources:
 Intel Architecture Instruction Set Extensions and Future Features.
 Programming Reference. June 2023. Document ID: 319433-049.
-
 
 
 CPUID v1.05.17 (March, 31, 2023)

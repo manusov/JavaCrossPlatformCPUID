@@ -53,7 +53,7 @@ private final static String[][] DECODER_EDX =
       { "IBSVIRT"  , "Instruction based sampling virtualization" } ,
       { "EILVTR"   , "Extended interrupt local vector table registers" } ,
       { "SGPFIX"   , "Hypervisor spurious GP fault fixed" } ,  // bit 28
-      { "x"        , "Reserved" } ,
+      { "LCK THR"  , "Bus lock threshold" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } };  // bit 31
 
