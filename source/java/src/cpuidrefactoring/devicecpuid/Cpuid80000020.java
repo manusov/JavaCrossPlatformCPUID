@@ -116,9 +116,11 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_5 =
                 dr.strings.get(0)[4] = String.format( "%d bits", counters );    
                 }
             a.addAll( dr.strings );
+            // EBX, subfunction 5
             dr = decodeBitfields
                 ( "EBX", DECODER_EBX_SUBFUNCTION_5, entries[5].ebx );
             a.addAll( dr.strings );
+            // ECX, subfunction 5
             strings = decodeBitmap
                 ( "ECX", DECODER_ECX_SUBFUNCTION_5, entries[5].ecx );
             a.addAll( strings );

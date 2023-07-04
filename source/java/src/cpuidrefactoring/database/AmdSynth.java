@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2022 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -1069,6 +1069,8 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  (10,15,  0, 8,         "AMD Ryzen Threadripper 5000 (Chagall)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
     new FMS (10,15,  1, 0,  0,     "AMD EPYC (Genoa A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
     new FM  (10,15,  1, 0,         "AMD EPYC (Genoa)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
+    new FMS (10,15,  1, 1,  1,     "AMD EPYC (Genoa)"),
+    new FMS (10,15,  7, 4,  1,     "AMD Ryzen 7000 (Phoenix)"),
     new FMS (10,15,  1, 8,  0,     "AMD Ryzen (Storm Peak A0)"), // undocumented, but (engr?) sample from @patrickschur_
     new FM  (10,15,  1, 8,         "AMD Ryzen (Storm Peak)"), // undocumented, but (engr?) sample from @patrickschur_
     new FMS (10,15,  2, 1,  0,     "AMD Ryzen 5000 (Vermeer B0)"), // undocumented, but instlatx64 samples

@@ -221,7 +221,6 @@ class B extends CriteriaDescriptor
         super( name );
         brandId = bi;
     }
-
 }
 
 interface WriteParms

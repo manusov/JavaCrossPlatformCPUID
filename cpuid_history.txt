@@ -1,3 +1,10 @@
+CPUID v1.05.20 (July, 4, 2023)
+Processors Type, Family, Model, Stepping (TFMS)
+some additions for INTEL and AMD.
+Special thanks to:
+https://github.com/InstLatx64/InstLatx64
+
+
 CPUID v1.05.19 (July, 3, 2023)
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
@@ -17,7 +24,44 @@ AMD64 Technology
 AMD64 Architecture Programmer's Manual:
 Volumes 1-5
 Publication # 40332  Revision 4.07  June 2023.
-
+Some details. Below used references to this document items, pages by PDF reader (not
+by document internal pages numeration), total 3336 pages at current document version.
+ 1) CPUID 80000008h EBX.30 = IBPB_RET.
+    The processor clears the return address predictor when MSR PRED_CMD.IBPB is written to 1.
+    Means predictor command indirect branch prediction barrier.
+    Page 1893, CPUID bit.
+    Page 524, PRED_CMD (MSR 049h).
+ 2) CPUID 8000000Ah EDX.29 = LCK THR.
+    Bus lock threshold for virtual machine.
+    Page 1896, CPUID bit.
+    Page 979, item 15.14.5. Bus Lock Threshold.
+    Page 650, item 7.3.3. Cacheable Locks and Bus Locks.
+ 3) CPUID 80000020h subfunction 0 EBX.5 = ABMC.
+    Assignable bandwidth monitoring counters.
+    Page 1906, CPUID bit.
+    Page 1149, item 19.3.3. Monitoring L3 Memory Bandwidth (MBM).
+    Page 1152, item 19.3.3.3. Assignable Bandwidth Monitoring (ABMC).
+ 4) CPUID 80000020h subfunction 0 EBX.6 = SDCIAE.
+    Smart data cache injection (SDCI) allocation enforcement.
+    Page 1906, CPUID bit.
+    Page 1164, item 19.4.7. L3 Smart Data Cache Injection Allocation Enforcement (SDCIAE).
+ 5) CPUID 80000020h subfunction 5 EAX.[7-0] = QM_CTR.
+    Counter size. QM_CTR counter width, bits. Contain offset from 24 bits.
+    Page 1907, CPUID bit.
+    Page 1147, item 19.3.1.3 QM_CTR.
+ 6) CPUID 80000020h subfunction 5 EAX.8 = QM_OVF.
+    Indicates that QM_CTR bit 61 is an overflow bit.
+    Page 1907, CPUID bit.
+    Page 1147, item 19.3.1.3 QM_CTR.
+ 7) CPUID 80000020h subfunction 5 EBX.[15-0] = MAX_ABMC.
+    Maximum supported ABMC counter ID.
+    Page 1908, CPUID bit.
+    Page 1152, item 19.3.3.3. Assignable Bandwidth Monitoring (ABMC).
+ 8) CPUID 80000020h subfunction 5 ECX.0 = SEL_COS.
+    Bandwidth counters can be configured to measure bendwidth
+    consumed by a COS instead of an RMID.
+    Page 1908, CPUID bit.
+    Page 1152, item 19.3.3.3. Assignable Bandwidth Monitoring (ABMC).
 
 
 CPUID v1.05.18 (July, 2, 2023)
@@ -35,6 +79,33 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 Data sources:
 Intel Architecture Instruction Set Extensions and Future Features.
 Programming Reference. June 2023. Document ID: 319433-049.
+Some details. Below used references to this document items, pages by PDF reader (not
+by document internal pages numeration), total 188 pages at current document version.
+ 1) CPUID 00000007h subfunction 1 EAX.0 = SHA512.
+    SHA512 (Secure Hash Algorithm) instructions.
+    Page 28, CPUID bit.
+    Page 119, VSHA512MSG1 instruction, plus other.
+ 2) CPUID 00000007h subfunction 1 EAX.1 = SM3.
+    SM3 crypto algorithm instructions.
+    Page 28, CPUID bit.
+    Page 123, VSM3MSG1 instruction, plus other.
+ 3) CPUID 00000007h subfunction 1 EAX.2 = SM4.
+    SM4 crypto algorithm instructions.
+    Page 28, CPUID bit.
+    Page 129, VSM4KEY4 instruction, plus other.
+ 4) CPUID 00000007h subfunction 1 EBX.1 = TSE.
+    Total storage encryption, PBNDKB instruction, IA32_TSE_CAPABILITY MSR.
+    Page 29, CPUID bit.
+    Page 85, PBNDKB instruction - Platform Bind Key to Binary Large Object.
+    Page 187, CHAPTER 11. Total Storage Encryption in Intel Architecture.
+ 5) CPUID 00000007h subfunction 1 EDX.10 = AVX-VNNI-INT16.
+    VNNI support 16-bit integers, for processor with AVX/AVX2 (but without AVX512).
+    Page 29, CPUID bit.
+    Page 114, VPDPW[...] instruction, plus other.
+ 6) CPUID 00000007h subfunction 1 EDX.17 = UIRET.
+    UIRET instruction sets UIF flag to the value of bit 1 of the RFLAGS image
+    loaded from the stack.
+    Page 29, CPUID bit.   
 
 
 CPUID v1.05.17 (March, 31, 2023)

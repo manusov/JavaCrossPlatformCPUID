@@ -967,6 +967,7 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  8,14, 12, dC, "Intel Celeron 5000U (Comet Lake-U V1)" ), // MRG* 2019-08-31 pinned down stepping
     new FMS (    0, 6,  8,14, 12,     "Intel (unknown type) (Whiskey Lake-U V0 / Comet Lake-U V1)" ),
     new FM  (    0, 6,  8,14,         "Intel Core (unknown type) (Kaby Lake / Amber Lake-Y / Whiskey Lake-U / Comet Lake-U)" ),
+    new FMS (    0, 6,  8,15, 8,      "Intel Xeon (Sapphire Rapids)" ),
     new FM  (    0, 6,  8,15,         "Intel Xeon (unknown type) (Sapphire Rapids)" ), // LX*
     // changed
     // LX*.  Coreboot* provides stepping.
