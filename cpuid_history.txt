@@ -1,3 +1,4 @@
+CPUID v1.05.21 (July, 4, 2023)
 CPUID v1.05.20 (July, 4, 2023)
 Processors Type, Family, Model, Stepping (TFMS)
 some additions for INTEL and AMD.

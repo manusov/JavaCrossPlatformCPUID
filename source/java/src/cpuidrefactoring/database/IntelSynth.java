@@ -1138,8 +1138,11 @@ private boolean strsub( String st, String subst )
     new FM  (    0, 6, 10,15,         "Intel (unknown type) (Sierra Forest)"),  // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
     new FMS (    0, 6, 11, 7, 1,      "Intel Core i*-13000 (Raptor Lake)"),
     new FM  (    0, 6, 11, 7,         "Intel (unknown type) (Raptor Lake)"),    // LX*; DPTF* (which also says Raptor Lake-S)
+    new FMS  (   0, 6, 11,10,2,       "Intel Core i*-13xx (Raptor Lake)"),
+    new FMS  (   0, 6, 11,10,3,       "Intel Core i*-13xx (Raptor Lake)"),
     new FM  (    0, 6, 11,10,         "Intel (unknown type) (Raptor Lake-P)"),  // LX*; DPTF*
     new FM  (    0, 6, 11,14,         "Intel (unknown type) (Alder Lake)"),     // Coreboot* (or maybe Gracemont "little" cores tied to Alder Lake?) (Alder Lake-N stepping 0=A0, when I'm sure)
+    new FMS  (   0, 6, 11,15,2,       "Intel Core i*-13xx (Raptor Lake)"),
     new FQ  (    0, 6,            sX, "Intel Xeon (unknown model)"),
     new FQ  (    0, 6,            se, "Intel Xeon (unknown model)"),
     new FQ  (    0, 6,            MC, "Intel Mobile Celeron (unknown model)"),
