@@ -1,3 +1,4 @@
+CPUID v1.05.22 (July, 4, 2023)
 CPUID v1.05.21 (July, 4, 2023)
 CPUID v1.05.20 (July, 4, 2023)
 Processors Type, Family, Model, Stepping (TFMS)
@@ -123,8 +124,42 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 00000023h    0       EBX     1       ZBIT      , Zero-bit in the IA32_PERFEVTSELx MSRs.
 ---------------------------------------------------------------------------------------------------
 Data sources:
-Intel Architecture Instruction Set Extensions and Future Features.
-Programming Reference. March 2023. Document ID: 319433-048.
+1) Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference. March 2023. Document ID: 319433-048.
+2) Intel 64 and IA-32 Architectures Software Developer's Manual.
+   Combined Volumes:
+   1,2A,2B,2C,2D,3A,3B,3C,3D, and 4.
+   Order Number: 325462-079US. March 2023.
+Some details.
+1) CPUID 00000007h subfunction 1 EDX.8 = AMX COMPL.
+   AMX complex math instructions.
+   TCMMIMFP16PS/TCMMRLFP16PS instructions:
+   Matrix Multiplication of Complex Tiles Accumulated into Packed Single Precision Tile.
+   Document [1] pages 21, 28, 114 by viewer.
+2) CPUID 00000007h subfunction 2 EDX.6 = UCLOCKDIS.
+   Uncacheable lock disable feature.
+   Document [1] pages 29, 119-120 by viewer.
+3) CPUID 00000010h subfunction ECX.3 = NCONT.
+   Non-contiguous 1s value supported.
+   For L3 cache allocation bitmap.
+   Document [1] page 34 by viewer.
+   Document [2] pages 3685-3686, 3694-3695, 4840 by viewer.
+4) CPUID 00000010h subfunction 2 ECX.3 = NCONT.
+   Non-contiguous 1s value supported.
+   Same for L2 cache allocation bitmap.
+   Document [1] page 34 by viewer.
+   Document [2] pages 3685-3686, 3694-3695, 4840 by viewer.
+5) CPUID 0000001Ch subfunction 0 ECX.[19-16] = EVTLOG[n].
+   Event logging supported bitmap.
+   Document [1] pages 41, 142 by viewer.
+6) CPUID 00000023h subfunction 0 EBX.0 = UNITMSK2.
+   UnitMask2 field in the IA32_PERFEVTSELx MSRs.
+   Document [1] pages 44, 142 by viewer.
+   YET NO DATA ABOUT THIS FEATURE.
+7) CPUID 00000023h subfunction 0 EBX.1 = ZBIT.
+   Zero-bit in the IA32_PERFEVTSELx MSRs.
+   Document [1] pages 44, 142 by viewer.
+   YET NO DATA ABOUT THIS FEATURE.
 
 
 CPUID v1.05.16 (March, 26, 2023)

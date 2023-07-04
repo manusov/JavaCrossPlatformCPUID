@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2022 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 This file contains Processors and Hypervisors
 data exported from Todd Allen CPUID project.
@@ -138,7 +138,7 @@ IntelMicroarchitecture( DatabaseStash stash )
     new FM  ( 0, 6, 8, 12,     ()-> { u = "Willow Cove"; f = "Sunny Cove"; p = "10nm"; } ), // found only on en.wikichip.org
     new FM  ( 0, 6, 8, 13,     ()-> { u = "Willow Cove"; f = "Sunny Cove"; p = "10nm"; } ), // LX*
     new FM  ( 0, 6, 8, 14,     ()-> { u = "Kaby Lake"; f = "Skylake"; p = "14nm"; } ),
-    new FM  ( 0, 6, 8, 15,     ()-> { u = "Sapphire Rapids"; f = "Sunny Cove"; p = "10nm"; } ), // LX*
+    new FM  ( 0, 6, 8, 15,     ()-> { u = "Sapphire Rapids"; f = "Golden Cove"; p = "10nm"; } ), // LX*
     new FM  ( 0, 6, 9, 6,      ()-> { u = "Tremont"; p = "10nm"; } ), // LX*
     // Hybrid CPU support
     // new FM  ( 0, 6, 9, 7,      ()-> { u = "Golden Cove"; p = "10nm"; } ), // LX*
