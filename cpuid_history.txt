@@ -1,3 +1,21 @@
+CPUID v1.05.23 (July, 25, 2023)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EDX     19      AVX10     , Advanced Vector Extensions 10.
+00000007h    1       EDX     21      APX       , Advanced Performance Extensions (APX_F).
+00000024h    0       EBX     7-0     AVX10 ver , AVX10 support level.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) Intel Advanced Performance Extensions (Intel APX) Architecture Specification.
+   July 2023. Revision 1.0. Document Number: 355828-001US.
+2) Intel Advanced Performance Extensions (Intel APX) Software Enabling Introduction.
+   July 2023. Revision 1.0. Document Number: 356112-001US.
+3) The Converged Vector ISA: Intel Advanced Vector Extensions 10. Technical Paper.
+   July 2023. Revision 1.0. Order Number: 356368-001US.
+
+
 CPUID v1.05.22 (July, 4, 2023)
 CPUID v1.05.21 (July, 4, 2023)
 CPUID v1.05.20 (July, 4, 2023)
@@ -12,14 +30,14 @@ Added new AMD features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------
-80000008     -       EBX     30      IBPB RET , Clear return address predictor by MSR.
-8000000A     -       EDX     29      LCK THR  , Bus lock threshold.
-80000020     0       EBX     5       ABMC     , Assignable bandwidth monitoring counters.
-80000020     0       EBX     6       SDCIAE   , Smart data cache injection allocation enforcement.
-80000020     5       EAX     7-0     QM CTR   , QM_CTR counter width, offset from 24.
-80000020     5       EAX     8       QM OVF   , QM_CTR bit 61 is an overflow bit.
-80000020     5       EBX     15-0    MAX ABMC , Maximum supported ABMC counter ID.
-80000020     5       ECX     0       SEL COS  , Bandwidth counter for COS instead RMID.
+80000008h    -       EBX     30      IBPB RET , Clear return address predictor by MSR.
+8000000Ah    -       EDX     29      LCK THR  , Bus lock threshold.
+80000020h    0       EBX     5       ABMC     , Assignable bandwidth monitoring counters.
+80000020h    0       EBX     6       SDCIAE   , Smart data cache injection allocation enforcement.
+80000020h    5       EAX     7-0     QM CTR   , QM_CTR counter width, offset from 24.
+80000020h    5       EAX     8       QM OVF   , QM_CTR bit 61 is an overflow bit.
+80000020h    5       EBX     15-0    MAX ABMC , Maximum supported ABMC counter ID.
+80000020h    5       ECX     0       SEL COS  , Bandwidth counter for COS instead RMID.
 ---------------------------------------------------------------------------------------------------
 Data sources:
 AMD64 Technology
