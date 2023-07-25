@@ -1,5 +1,5 @@
 /* 
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for convert CPU context management information to array of text strings.
 Argument is binary array of longs provided by native layer.
@@ -37,7 +37,7 @@ private static final String[] CONTEXT_NAMES =
         "Hardware P-states (HWP), reserved for IA32_XSS" ,           // bit 16
         "Intel AMX tile configuration (XTILECFG)" ,                  // bit 17
         "Intel AMX tile data (XTILEDATA)" ,                          // bit 18
-        "Reserved" ,
+        "Intel APX EGPR state (R16-R31)" ,                           // bit 19
         "Reserved" ,
         "Reserved" ,
         "Reserved" ,

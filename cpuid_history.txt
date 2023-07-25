@@ -1,3 +1,15 @@
+CPUID v1.05.24 (July, 25, 2023)
+Added XCR0 context bit.
+------------------------------------------------------------
+ Bit        Comments
+------------------------------------------------------------
+ XCR0.19    Advanced Performance Extensions (APX_F) state.
+------------------------------------------------------------
+Data source:
+Intel Advanced Performance Extensions (Intel APX) Software Enabling Introduction.
+July 2023. Revision 1.0. Document Number: 356112-001US.
+
+
 CPUID v1.05.23 (July, 25, 2023)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------

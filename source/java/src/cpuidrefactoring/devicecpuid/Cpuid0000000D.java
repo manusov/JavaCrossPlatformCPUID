@@ -1,5 +1,5 @@
 /*
-CPUID Utility. (C)2020 IC Book Labs
+CPUID Utility. (C)2023 IC Book Labs
 ------------------------------------
 Class for support CPUID Standard Function
 0000000Dh = Processor extended states context management enumeration.
@@ -37,7 +37,8 @@ private final static String[] CONTEXT_PARMS =
       "LBR state managed by IA32_XSS" ,                 // 15
       "HWP state managed by IA32_XSS" ,                 // 16
       "AMX XTILECFG state" ,                            // 17
-      "AMX XTILEDATA state" };                          // 18
+      "AMX XTILEDATA state" ,                           // 18
+      "APX EGPR state (R16-R31)" };                     // 19
 private final static String ENABLED_BYTES =
     "Maximum size for XSAVE/XRSTOR area, enabled features";
 private final static String SUPPORTED_BYTES =
