@@ -27,7 +27,7 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
         {
-        // EAX, subfunction 0
+        // EBX, subfunction 0
         dr = decodeBitfields
             ( "EBX", DECODER_EBX_SUBFUNCTION_0, entries[0].ebx );
         a.addAll( dr.strings );
