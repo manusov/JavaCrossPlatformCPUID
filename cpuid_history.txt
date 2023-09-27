@@ -1,3 +1,25 @@
+CPUID v1.05.25 (September, 27, 2023)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+0000000Fh    1       EAX     9       NCPU CMT , Non-CPU agent RDT CMT.
+0000000Fh    1       EAX     10      NCPU MBM , Non-CPU agent RDT MBM.
+00000010h    1       ECX     1       NCPU CAT , Non-CPU agent L3 CAT (mismatch previous purpose?).
+00000010h    1       ECX     2       L3 CDP   , L3 Code and Data prioritization.
+00000010h    2       ECX     2       L2 CDP   , L2 Code and Data prioritization.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) 325462-sdm-vol-1-2abcd-3abcd-4.pdf
+   Intel 64 and IA-32 Architectures Software Developer's Manual
+   Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
+   Order Number: 325462-081US. September 2023.
+2) 252046-sdm-change-document.pdf
+   Intel 64 and IA-32 Architectures Software Developer's Manual
+   Documentation Changes. September 2023.
+   Document Number: 252046-073.
+
+
 CPUID v1.05.24 (July, 25, 2023)
 Added XCR0 context bit.
 ------------------------------------------------------------

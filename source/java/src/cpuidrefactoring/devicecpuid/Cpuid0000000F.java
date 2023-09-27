@@ -25,7 +25,9 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "L3 QoS" , "L3 cache quality of service monitoring" } };
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "Encode counter width in bits, offset from 24"    , 7 , 0 } ,
-      { "Bit 61 of IA32_QM_CTR MSR is overflow indicator" , 8 , 8 } };
+      { "Bit 61 of IA32_QM_CTR MSR is overflow indicator" , 8 , 8 } ,
+      { "Non-CPU agent RDT CMT" , 9 , 9 } ,
+      { "Non-CPU agent RDT MBM" , 10 , 10 } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "Conversion factor from IA32_QM_CTR to metric" , 31 , 0 } };
 private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =

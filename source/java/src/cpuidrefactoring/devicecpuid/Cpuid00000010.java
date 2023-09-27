@@ -31,8 +31,8 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "Bit-granular map of isolation/contention" , 31 , 0 } };
 private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
     { { "x"      , "Reserved" } , 
-      { "UCOS"   , "Update of COS should be infrequent" } ,
-      { "CDP"    , "Code and Data prioritization technology" } ,
+      { "UCOS"   , "Update of COS should be infrequent (NCPU CAT)" } ,
+      { "L3 CDP" , "L3 Code and Data prioritization technology" } ,
       { "NCONT"  , "Non-contiguous 1 value" } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "Highest COS number supported for this ResID" , 15 , 0 } };
@@ -45,7 +45,7 @@ private final static Object[][]
 private final static String[][] DECODER_ECX_SUBFUNCTION_2 =
     { { "x"      , "Reserved" } , 
       { "x"      , "Reserved" } , 
-      { "x"      , "Reserved" } , 
+      { "L2 CDP" , "L2 Code and Data prioritization technology" } ,
       { "NCONT"  , "Non-contiguous 1 value" } };
 private final static Object[][]
         DECODER_EDX_SUBFUNCTION_2 = DECODER_EDX_SUBFUNCTION_1;
