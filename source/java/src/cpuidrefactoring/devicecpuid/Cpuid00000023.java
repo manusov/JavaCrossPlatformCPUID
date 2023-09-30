@@ -28,6 +28,11 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "General counters bitmap"   , 31 , 0 } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "Fixed counters bitmap"   , 31 , 0 } };
+// subfunction 2
+private final static Object[][] DECODER_EAX_SUBFUNCTION_2 =
+    { { "Auto counter reload (ACR) general counters bitmap"   , 31 , 0 } };
+private final static Object[][] DECODER_EBX_SUBFUNCTION_2 =
+    { { "Auto counter reload (ACR) fixed counters bitmap"   , 31 , 0 } };
 // subfunction 3
 private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
     { { "x"            , "Core cycles monitoring event" } ,  // bit 0
@@ -42,7 +47,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
       { "x"            , "Topdown bad speculation monitoring event" } ,
       { "x"            , "Topdown frontend bound monitoring event" } ,
       { "x"            , "Topdown retiring monitoring event" } ,
-      { "x"            , "Reserved" } ,
+      { "x"            , "LBR inserts" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } };  // bit 15
@@ -75,14 +80,27 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
             dr = decodeBitfields
                 ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
             a.addAll( dr.strings );
-            if ( ( entries.length > 3 )&&( maxSubFunction > 2 )&&
-             ( entries[3].subfunction == 3 ) )
+            if ( ( entries.length > 2 )&&( maxSubFunction > 1 )&&
+                 ( entries[2].subfunction == 2 ) )
                 {
-                // EAX, subfunction 3
                 a.add( interval );
-                strings = decodeBitmap
+                // EAX, subfunction 2
+                dr = decodeBitfields
+                    ( "EAX", DECODER_EAX_SUBFUNCTION_2, entries[2].eax );
+                a.addAll( dr.strings );
+                // EBX, subfunction 2
+                dr = decodeBitfields
+                    ( "EBX", DECODER_EBX_SUBFUNCTION_2, entries[2].ebx );
+                a.addAll( dr.strings );
+                if ( ( entries.length > 3 )&&( maxSubFunction > 2 )&&
+                     ( entries[3].subfunction == 3 ) )
+                    {
+                    a.add( interval );
+                    // EAX, subfunction 3
+                    strings = decodeBitmap
                     ( "EAX", DECODER_EAX_SUBFUNCTION_3, entries[3].eax );
-                a.addAll( strings );
+                    a.addAll( strings );
+                    }
                 }
             }
         }

@@ -22,7 +22,9 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "x"      , "Reserved" } , 
       { "L3 QoS" , "L3 cache allocation technology, QoS enforcement" } ,
       { "L2 QoS" , "L2 cache allocation technology, QoS enforcement" } ,
-      { "M QoS"  , "Memory bandwidth allocation, QoS enforcement" } };
+      { "M QoS"  , "Memory bandwidth allocation, QoS enforcement"    } ,
+      { "x"      , "Reserved"                                        } ,
+      { "C QoS"  , "Cache bandwidth allocation, QoS enforcement"     } };
 // subfunction 1
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "[ L3 Cache QoS ]"
@@ -59,6 +61,17 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_3 =
       { "UCOS"   , "Update of COS should be infrequent" } };
 private final static Object[][] 
         DECODER_EDX_SUBFUNCTION_3 = DECODER_EDX_SUBFUNCTION_1;
+// subfunction 5
+private final static Object[][] DECODER_EAX_SUBFUNCTION_5 =
+    { { "Maximum core throttling level" , 7 , 0 } ,
+      { "Logical processor scope" , 11 , 8 } };
+private final static String[][] DECODER_ECX_SUBFUNCTION_5 =
+    { { "x"      , "Reserved" } , 
+      { "x"      , "Reserved" } , 
+      { "x"      , "Reserved" } , 
+      { "BW LIN" , "Response of the bandwidth control is linear" } };
+private final static Object[][]
+        DECODER_EDX_SUBFUNCTION_5 = DECODER_EDX_SUBFUNCTION_1;
 
 @Override String[][] getParametersList()
     {
@@ -116,6 +129,22 @@ private final static Object[][]
                         a.addAll( strings );
                         dr = decodeBitfields ( "EDX",
                             DECODER_EDX_SUBFUNCTION_3, entries[i].edx );
+                        a.addAll( dr.strings );
+                        break;
+                    case 4:
+                        a.add( new String[] 
+                            { "Reserved subfunction", "-", "-", "-", 
+                            String.format( "%08Xh", entries[i].subfunction ) } );
+                        break;
+                    case 5:    // subfunction 5
+                        dr = decodeBitfields( "EAX", 
+                            DECODER_EAX_SUBFUNCTION_5, entries[i].eax );
+                        a.addAll( dr.strings );
+                        strings = decodeBitmap( "ECX", 
+                            DECODER_ECX_SUBFUNCTION_5, entries[i].ecx );
+                        a.addAll( strings );
+                        dr = decodeBitfields ( "EDX",
+                            DECODER_EDX_SUBFUNCTION_5, entries[i].edx );
                         a.addAll( dr.strings );
                         break;
                     default:

@@ -1,3 +1,29 @@
+CPUID v1.05.26 (September, 30, 2023)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EDX     15      USER MSR , URDMSR and UWRMSR instructions.
+0000000Ah    -       EBX     8       Top-down backend bound not available flag.
+0000000Ah    -       EBX     9       Top-down bad speculation not available flag.
+0000000Ah    -       EBX     10      Top-down frontend bound not available flag.
+0000000Ah    -       EBX     11      Top-down retiring not available flag.
+0000000Ah    -       EBX     12      LBR inserts not available flag.
+00000010h    0       EBX     5       C QoS , Cache bandwidth allocation.
+00000010h    5       EAX     7-0     Maximum core throttling level.
+00000010h    5       EAX     11-8    Logical processor scope (0001b = IA32_QoS_Core_BW_Thrtl_n MSR).
+00000010h    5       ECX     3       BW LIN , Response of the bandwidth control is approx. linear.
+00000010h    5       EDX     15-0    Highest Class of Service (COS) number supported for this ResID.
+00000023h    2       EAX     31-0    Auto counter reload (ACR) general counters bitmap.
+00000023h    2       EBX     31-0    Auto counter reload (ACR) fixed counters bitmap.
+00000023h    3       EAX     12      LBR inserts.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) architecture-instruction-set-extensions-programming-reference.pdf
+   Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference. September 2023. Document ID: 319433-050.
+
+
 CPUID v1.05.25 (September, 27, 2023)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------

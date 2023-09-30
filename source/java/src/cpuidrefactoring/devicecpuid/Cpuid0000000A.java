@@ -31,7 +31,12 @@ private final static Object[][] DECODER_EBX =
       { "Last level cache misses event not available flag", 4, 4 } ,
       { "Branch instruction retired event not available flag", 5, 5 } ,
       { "Branch mispredict retired event not available flag", 6, 6 } ,
-      { "Top-down slots event not available flag", 7, 7 } };
+      { "Top-down slots event not available flag", 7, 7 } ,
+      { "Top-down backend bound not available flag", 8, 8 } ,
+      { "Top-down bad speculation not available flag", 9, 9 } ,
+      { "Top-down frontend bound not available flag", 10, 10 } ,
+      { "Top-down retiring not available flag", 11, 11 } ,
+      { "LBR inserts not available flag", 12, 12 } };
 private final static Object[][] DECODER_ECX =
     { { "Fixed counters bitmap" , 31, 0 } };
 private final static Object[][] DECODER_EDX =

@@ -171,7 +171,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,  // bit 14
-      { "x"            , "Reserved" } ,  // bit 15
+      { "USER MSR"     , "URDMSR and UWRMSR instructions" } ,        // bit 15
       { "x"            , "Reserved" } ,
       { "UIRET F"      , "UIRET sets UIF to stack image RFLAGS.1" } , // bit 17
       { "CET SSS"      , "Supervisor shadow stacks pushes PF condition" } ,
