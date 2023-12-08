@@ -140,7 +140,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "FRED"         , "Flexible return and event delivery" } ,
       { "LKGS"         , "Load into IA32 kernel GS base, LKGS instruction" } ,
       { "WRMSRNS"      , "Non serializing write to MSR" } ,
-      { "x"            , "Reserved" } ,
+      { "NMI SRC"      , "NMI source bitmap reporting for Intel FRED" } ,
       { "AMX FP16"     , "Advanced Matrix Extensions, operations on FP16 numbers" } ,
       { "HRESET"       , "Processor history reset CPUID leaf 20h" } ,  // bit 22
       { "AVX IFMA"     , "AVX (128/256) version for IFMA instructions" } ,

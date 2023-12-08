@@ -1,3 +1,15 @@
+CPUID v1.05.27 (December, 08, 2023)
+Added new INTEL feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EAX     20      NMI SRC, NMI source bitmap reporting for Intel FRED.
+---------------------------------------------------------------------------------------------------
+Data sources:
+Intel Flexible Return and Event Delivery (FRED) Specification. 
+December 2023. Revision 6.0. Document Number: 346446-006US.
+
+
 CPUID v1.05.26 (September, 30, 2023)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
