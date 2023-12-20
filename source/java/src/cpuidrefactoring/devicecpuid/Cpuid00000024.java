@@ -19,7 +19,10 @@ Cpuid00000024()
 
 // Control tables for results decoding, subfunction 0
 private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
-    { { "Intel AVX10 extension supported level" , 7 , 0  } };
+    { { "Intel AVX10 extension supported level" , 07 , 00  } ,
+      { "128-bit vectors for Intel AVX10"       , 16 , 16  } ,
+      { "256-bit vectors for Intel AVX10"       , 17 , 17  } ,
+      { "512-bit vectors for Intel AVX10"       , 18 , 18  } };
 
 @Override String[][] getParametersList()
     {

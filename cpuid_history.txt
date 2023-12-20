@@ -1,3 +1,17 @@
+CPUID v1.05.28 (December, 20, 2023)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000024h    0       EBX     16      VEC128 , 128-bit vectors for Intel AVX10
+00000024h    0       EBX     17      VEC256 , 256-bit vectors for Intel AVX10
+00000024h    0       EBX     18      VEC512 , 512-bit vectors for Intel AVX10
+---------------------------------------------------------------------------------------------------
+Data sources:
+Intel Advanced Vector Extensions 10. Architecture Specification.
+December 2023. Revision 2.0. Document Number: 355989-002US.
+
+
 CPUID v1.05.27 (December, 08, 2023)
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------
