@@ -1,3 +1,16 @@
+CPUID v1.05.29 (December, 23, 2023)
+Added new INTEL feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EAX     30      INVD PRV , INVD execution prevention after BIOS POST done.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) architecture-instruction-set-extensions-programming-reference.pdf
+   Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference. December 2023. Document ID: 319433-051.
+
+
 CPUID v1.05.28 (December, 20, 2023)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------

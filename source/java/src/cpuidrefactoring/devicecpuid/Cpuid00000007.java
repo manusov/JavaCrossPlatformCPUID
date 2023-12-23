@@ -150,7 +150,7 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "MSRLIST"      , "Read and write MSR by lists" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "INVD PRV"     , "INVD execution prevention after BIOS POST done" } ,
       { "x"            , "Reserved" } };  // bit 31
 private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "PPIN"         , "Protected Processor Inventory Number" } ,          // bit 0
