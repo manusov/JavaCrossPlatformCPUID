@@ -1,10 +1,15 @@
-/*
-CPUID Utility. (C)2020 IC Book Labs
-------------------------------------
-Class for support CPUID Virtual Function
-40000001h = Xen hypervisor version
-            (Xen hypervisor-specific Virtual CPUID).
-
+/* 
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+Class for support CPUID Virtual Function 40000X01h =
+Xen hypervisor version (Xen hypervisor-specific Virtual CPUID).
 Note this class must be dynamically add to functions list if hypervisor
 vendor = Xen, otherwise function number can conflict with existed.
 Note function number can be selected from base 40000001h with 100h increments,

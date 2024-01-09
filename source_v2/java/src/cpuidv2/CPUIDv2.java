@@ -1,10 +1,18 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
-------------------------------------------------------
-Java CPUID application main class.
-
-*** THIS SOURCE FILES IS UNDER REFACTORING. ***
-
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+Java CPUID application main class. Contains application vendor, version,
+name text strings and web links. Interconnects functions secnarios classes,
+service functions classes and application root menu class.
+After start, detects native platform (Win32/Win64/Linux32/Linux64), initializes
+service classes, and runs application root menu.
 */
 
 package cpuidv2;
@@ -17,14 +25,14 @@ import cpuidv2.applications.ApplicationsManager;
 
 public class CPUIDv2 
 {
-private final static String VERSION_NAME = "v2.00.00";
+private final static String VERSION_NAME = "v2.00.01.";
 private final static String VENDOR_NAME  = "(C)2024 Manusov I.V.";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;
 private final static String PROJECT_WEB =
         "https://github.com/manusov/JavaCrossPlatformCPUID";
 private final static String ALL_WEB = 
-        "https://github.com/manusov";
+        "https://github.com/manusov?tab=repositories";
 private final static String RESOURCE_PACKAGE = "/cpuidv2/resources/";
 public static String getResourcePackage() { return RESOURCE_PACKAGE; }
 public static String getVersionName() { return VERSION_NAME; }
@@ -55,10 +63,10 @@ public static ServiceJvmInfo getServiceJvmInfo()  { return serviceJvmInfo; }
 
 public static void main(String[] args) 
     {
-    detector = new Detector(getResourcePackage());
-    if(detector.platformDetect())
+    detector = new Detector( getResourcePackage() );
+    if( detector.platformDetect() )
         {
-        if(detector.platformLoad())
+        if( detector.platformLoad() )
             { 
             applicationsManager = new ApplicationsManager();
             serviceCpuid        = new ServiceCpuid();

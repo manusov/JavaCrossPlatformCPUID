@@ -1,6 +1,13 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
---------------------------------------------------------------------------
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
 Class for get (measure) CPU clock frequency. Also converts frequency 
 value to array of viewable text strings. Argument is frequency value.
 Result is array of text strings consumed by GUI and text reports.

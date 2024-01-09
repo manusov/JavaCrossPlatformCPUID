@@ -1,8 +1,17 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
----------------------------------------------------------------------------
-CPU/OS context management information application, 
-provides content for "Context" tab at tabbed pane.
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+CPU/OS context management information application, provides content for
+"Context" leaf at tabbed pane.
+Note "XCR" means Extended Control Register, declares OS capability for save
+and restore processor context during task switch.
 */
 
 package cpuidv2.applications;
@@ -13,7 +22,7 @@ import javax.swing.table.AbstractTableModel;
 import cpuidv2.CPUIDv2;
 import cpuidv2.gui.HelperTable;
 
-class InfoXcr extends Application 
+class InfoContext extends Application 
 {
 private final JPanel panel;
 private final static String TIP = 
@@ -21,7 +30,7 @@ private final static String TIP =
 private ChangeableTableModel model;
 private JTable table;
 
-InfoXcr()
+InfoContext()
     {
     panel = new JPanel();
     }

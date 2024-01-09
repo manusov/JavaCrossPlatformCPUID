@@ -1,22 +1,29 @@
 /* 
-CPUID Utility. (C)2020 IC Book Labs
-------------------------------------
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
 Parent class for elements of trees.
 */
 
 package cpuidv2.applications;
 
 /*
-strings notes:
+Strings notes:
 name1 = item name
 name2 = item value, can be visualized as bold or colored
-path = application-specific path of node, example: file path 
+path = application-specific path of node, example: file path.
 
-boolean flags notes:
+Boolean flags notes:
 handled = if true, means this entry executed, for example opened node
 leaf = true for leafs (files) , false for openable nodes (directories)
        for some applications redundant with setAllowsChildren()
-failed = true if error detected
+failed = true if error detected.
 */
 
 public class ListEntry
@@ -58,7 +65,7 @@ public int getIndex()       { return index;   }
     
 @Override public String toString()
     { 
-    if ( leaf == false )     // select variants for nodes=brief, leafs=detail 
+    if ( leaf == false )     // Select variants for nodes=brief, leafs=detail.
         { return name1; }
     else if ( failed == false ) 
         { return "<html>" + name1 + " = <b><font color=blue>" + name2; }

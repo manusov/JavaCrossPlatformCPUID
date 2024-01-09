@@ -1,8 +1,15 @@
-/*
-CPUID Utility. (C)2020 IC Book Labs
-------------------------------------
-Container class for communication between 
-CPUID functions and summary screens classes.
+/* 
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+Container class for communication between CPUID functions and summary
+screens classes.
 */
 
 package cpuidv2.cpuidfunctions;

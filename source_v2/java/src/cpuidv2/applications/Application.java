@@ -1,7 +1,15 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
----------------------------------------------------------------------------
-Parent template class for applications, provided as panels at tabbed pane.
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+Parent template class for applications. "Applications" here means functions
+of Java CPUID application, provided as leafs of tabbed pane.
 */
 
 package cpuidv2.applications;
@@ -20,7 +28,7 @@ String[] getPanelTips()     { return null; }
 AbstractTableModel[] getPanelModels()                     { return null; }
 AbstractTableModel[] getReportThisModels( int subIndex )  { return null; }
 
-void rebuildPanels() { }   // This methods pair for app. restart.
-void refreshPanels() { }   // This mrthods pair for dynamical
+void rebuildPanels() { }   // This method for application restart.
+void refreshPanels() { }   // This mrthod for dynamical revisual.
 
 }

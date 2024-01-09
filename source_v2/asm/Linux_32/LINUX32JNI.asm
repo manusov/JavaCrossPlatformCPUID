@@ -1,24 +1,32 @@
-;------------------------------------------------------------------------------;
-;                    Native Binary Library for Linux ia32                      ;
-;  JNI ELF ( Java Native Interface module in Executable Linkable Format 32 )   ;
-;                                                                              ;
-; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
-;------------------------------------------------------------------------------;
+;------------------------------------------------------------------------------
+; Native library for Java cross-platform CPUID Utility.
+; This is FASM source file.
+; This source (Java CPUID v2.xx.xx) repository: 
+; https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+; Previous source (Java CPUID v1.xx.xx) repository: 
+; https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+; All repositories: 
+; https://github.com/manusov?tab=repositories
+; (C) Manusov I.V. Refactoring at 2024.
+;------------------------------------------------------------------------------
+; Native Binary Library for Linux ia32.
+; JNI ELF ( Java Native Interface module in Executable Linkable Format 32 ).
+;------------------------------------------------------------------------------
 
 format ELF
 
 ;--- Binary services entry points ---
-
+; This path strings depends on java source path:
+; source file at package:  ...\src\cpuidv2\platforms\, 
+; class: Detector.java, 
+; native methods: checkBinary, entryBinary.
+  
 public checkBinary  as  'Java_cpuidv2_platforms_Detector_checkBinary'
 public entryBinary  as  'Java_cpuidv2_platforms_Detector_entryBinary'  
 
-; public checkBinary  as  'Java_cpuidrefactoring_system_PAL_checkBinary'
-; public entryBinary  as  'Java_cpuidrefactoring_system_PAL_entryBinary'  
-
 ;--- This simple entry point for debug native call mechanism ---
-
 checkBinary:
-mov eax,32   ; 132
+mov eax,32
 ret
 
 ;--- Entry point for binary services, Java Native Interface (JNI) -------------;

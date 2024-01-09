@@ -8,13 +8,14 @@ All repositories:
 https://github.com/manusov?tab=repositories
 (C) Manusov I.V. Refactoring at 2024.
 -------------------------------------------------------------------------------
-Class for support CPUID Extended Function 8000000Bh = Reserved function.
+Class for support CPUID Extended Function 80000025h =
+Reserved (undocumented) function.
 */
 
 package cpuidv2.cpuidfunctions;
 
-class Cpuid8000000B extends ReservedFunctionCpuid
+class Cpuid80000025 extends ReservedFunctionCpuid
 {
-Cpuid8000000B()
-    { setFunction( 0x8000000B ); }
+Cpuid80000025()
+    { setFunction( 0x80000025 ); }
 }

@@ -1,10 +1,17 @@
-;------------------------------------------------------------------------------;
-;                Native Binary Library for Windows ia32                        ;
-;     JNI DLL ( Java Native Interface module as Dynamical Load Library )       ;
-; Note. Kernel Mode Support functions removed, see previous library versions.  ;
-;                                                                              ;
-; Updated at CPUID v1.03.00 for support virtual functions 40000000h-400000xxh. ;
-;------------------------------------------------------------------------------;
+;------------------------------------------------------------------------------
+; Native library for Java cross-platform CPUID Utility.
+; This is FASM source file.
+; This source (Java CPUID v2.xx.xx) repository: 
+; https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+; Previous source (Java CPUID v1.xx.xx) repository: 
+; https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+; All repositories: 
+; https://github.com/manusov?tab=repositories
+; (C) Manusov I.V. Refactoring at 2024.
+;------------------------------------------------------------------------------
+; Native Binary Library for Windows ia32.
+; JNI DLL ( Java Native Interface module as Dynamical Load Library ).
+;------------------------------------------------------------------------------
 
 include 'win32a.inc'
 format PE GUI 4.0 DLL
@@ -18,7 +25,6 @@ mov eax,1       ; Return status to OS caller (actual when load)
 ret
 
 ;--- This simple entry point for debug native call mechanism ---
-
 checkBinary:              ; also differentiate between Win32 and Win32/WOW64
 ;--- Detect WOW64 ---
 push ebx
@@ -611,30 +617,30 @@ ret
 stc
 ret
 
-;---------- Data section -------------------------------------------------------
+;---------- Data section ------------------------------------------------------;
 section '.data' data readable writeable
 ;--- Functions pointers, for IPB absent ---
 FunctionCount      =   3
 FunctionSelector   DD  GetCPUID        ; 0 = Get CPUID dump
                    DD  GetCPUCLK       ; 1 = Measure CPU TSC Clock
                    DD  GetCPUCTX       ; 2 = Get CPU context management flags
-
 ;--- Functions pointers, for IPB present ---
 iFunctionCount     =   0
 iFunctionSelector  DD  0
-
 ;--- Data for detect WOW64 ---
 LibName  DB  'KERNEL32',0
 FncName  DB  'IsWow64Process',0
 
-;---------- Export section -----------------------------------------------------
+;---------- Export section ----------------------------------------------------;
+; This path strings depends on java source path:
+; source file at package:  ...\src\cpuidv2\platforms\, 
+; class: Detector.java, 
+; native methods: checkBinary, entryBinary.
+
 section '.edata' export data readable
 export 'WIN32JNI.dll' ,\
 checkBinary  , 'Java_cpuidv2_platforms_Detector_checkBinary', \
 entryBinary  , 'Java_cpuidv2_platforms_Detector_entryBinary'
-
-; checkBinary  , 'Java_cpuidrefactoring_system_PAL_checkBinary', \
-; entryBinary  , 'Java_cpuidrefactoring_system_PAL_entryBinary'
 
 ;---------- Import section ----------------------------------------------------;
 section '.idata' import data readable writeable
@@ -642,7 +648,7 @@ library kernel32 , 'KERNEL32.DLL' , advapi32 , 'ADVAPI32.DLL'
 include 'api\kernel32.inc'
 include 'api\advapi32.inc'
 
-;---------- Relocations section ------------------------------------------------ 
+;---------- Relocations section -----------------------------------------------; 
 data fixups
 end data
 

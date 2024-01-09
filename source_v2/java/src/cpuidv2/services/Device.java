@@ -1,6 +1,13 @@
 /* 
-CPUID Utility. (C)2020 IC Book Labs
-------------------------------------
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
 Parent class for target device, this class inherited by drivers
 for support operations: cpuid, cpu context, cpu clock, jvm info, os info.
 At CPUIDv2 yet used for CPUID dump only, 

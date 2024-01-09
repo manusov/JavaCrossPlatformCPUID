@@ -1,11 +1,17 @@
-/*
-CPUID Utility. (C)2020 IC Book Labs
-------------------------------------
-This file contains Processors and Hypervisors
-data exported from Todd Allen CPUID project.
-Some variables and functions names not compliant with java
-naming conventions, this fields using original C/C++ naming.
------------------------------------------------
+/* 
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+This file contains Processors and Hypervisors data exported from
+Todd Allen CPUID project. Some variables and functions names not compliant
+with java naming conventions, this fields using original C/C++ naming.
+-------------------------------------------------------------------------------
 Decode Intel cache descriptors and set flags, used for processor detection.
 value = cache descriptor byte, one of bytes result of CPUID function 2.
 val_2_eax, val_2_ebx, val_2_ecx, val_2_edx = registers after CPUID function 2.

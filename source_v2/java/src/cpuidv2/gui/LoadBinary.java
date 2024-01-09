@@ -1,6 +1,13 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
-----------------------------------------------------------------------------
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
 Handler for "Load binary" item at root menu.
 Legacy comments:
 Operations handlers for buttons - Load binary (this file), Save binary.

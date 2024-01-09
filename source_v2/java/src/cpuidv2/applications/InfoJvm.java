@@ -1,7 +1,15 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
----------------------------------------------------------------------------
-JVM information application, provides content for "JVM" tab at tabbed pane.
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+JVM (Java Virtual Machine) information application, provides content for
+"JVM" leaf at tabbed pane.
 */
 
 package cpuidv2.applications;

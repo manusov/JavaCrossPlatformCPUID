@@ -1,7 +1,15 @@
 /* 
-CPUID Utility. Refactoring 2024. (C)2024 Manusov I.V.
-------------------------------------------------------
-
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
+Interconnector class for applications. "Applications" here means functions
+of Java CPUID application, provided as leafs of tabbed pane.
 */
 
 package cpuidv2.applications;
@@ -14,16 +22,22 @@ import cpuidv2.CPUIDv2;
 
 public class ApplicationsManager 
 {
+// List of applications. Note some applications can has >1 leafs.
 private final Application[] applications = 
     { 
     new InfoCpuid(),
     new InfoClk(),
-    new InfoXcr(),
+    new InfoContext(),
     new InfoOs(),
     new InfoJvm()
     };
 
-private final int[][] appKeys =
+// List of application leafs. 
+// Contains pairs { application ID , application leaf ID }.
+// CPUID application (0) has 3 leafs (Summary, Dump, Details). 
+// Other applications (Clock, Context, JVM, OS) has 1 leafs.
+// Used for "Report this" button support.
+private final int[][] appLeafs =
     {
         { 0 , 0 },
         { 0 , 1 },
@@ -66,7 +80,7 @@ public Icon[] getTabIcons()
                 {
                 if( tabName != null )
                     {
-                    names.add(tabName);
+                    names.add( tabName );
                     }
                 }
             }
@@ -78,9 +92,9 @@ public Icon[] getTabIcons()
         try {
             Icon icon = new
                 javax.swing.ImageIcon(getClass().getResource( path + name ));
-            icons.add(icon);
+            icons.add( icon );
             }
-        catch (Exception e) { System.out.println(e); }
+        catch ( Exception e ) { System.out.println(e); }
         }
     return icons.isEmpty() ? null : icons.toArray( new Icon[icons.size()] );
     }
@@ -181,19 +195,19 @@ public void rebuildAfterCpuidReload( boolean getPhysical )
     JPanel[] panels = cpuidApplication.getPanels();
     for( JPanel panel : panels )
         {
-        panel.removeAll();
+        panel.removeAll();  // Remove current objects from panel.
         }
     
     if( getPhysical )
         {
-        cpuidApplication.rebuildPanels();
+        cpuidApplication.rebuildPanels();  // Re-detect CPU, rebuild panel.
         }
     else
         {
-        cpuidApplication.refreshPanels();
-        }
+        cpuidApplication.refreshPanels();  // Rebulid without re-detect CPU,
+        }                                  // used for binary and text loads.
     
-    for( JPanel panel : panels )
+    for( JPanel panel : panels )           // Refresh GUI components.
         {
         panel.revalidate();
         panel.repaint();
@@ -203,10 +217,10 @@ public void rebuildAfterCpuidReload( boolean getPhysical )
 public AbstractTableModel[] getReportThisTableModels( int index )
     {
     AbstractTableModel[] thisReportModels = null;
-    if ( index < appKeys.length )
+    if ( index < appLeafs.length )
         {
-        int appIndex = appKeys[index][0];
-        int subIndex = appKeys[index][1];
+        int appIndex = appLeafs[index][0];
+        int subIndex = appLeafs[index][1];
         Application application = applications[appIndex];
         thisReportModels = application.getReportThisModels( subIndex );
         }
