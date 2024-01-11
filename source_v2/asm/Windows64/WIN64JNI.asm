@@ -508,46 +508,127 @@ ret
 ; INPUT:   None                                                          ;
 ;                                                                        ;
 ; OUTPUT:  CF flag = Status: 0(NC)=Measured OK, 1(C)=Measurement error	 ;
-;          Output RAX,RDX valid only if CF=0(NC)                         ;
+;          Output RAX valid only if CF=0(NC)                             ;
 ;          RAX = TSC Frequency, Hz, F = Delta TSC per 1 second           ;
 ;------------------------------------------------------------------------;
+; MeasureCpuClk:
+; cld                         ; Clear direction, because STOSQ used
+; push rbx rcx rdx rsi rbp r8 r9 r10 r11 rax	 ; R8-R11 because API, RAX = Var
+; mov rbp,rsp                 ; RBP used for restore RSP and addressing variables
+; and rsp,0FFFFFFFFFFFFFFF0h  ; Align stack (16)
+; sub rsp,32                  ; Make parameters shadow
+; ;--- Start measure frequency, wait toggle ---
+; mov rcx,rbp
+; call [GetSystemTimeAsFileTime]  ; Get current count
+; mov rsi,[rbp]
+; @@:
+; mov rcx,rbp
+; call [GetSystemTimeAsFileTime]  ; Get next count for wait 100 ns
+; cmp rsi,[rbp]
+; je @b
+; ;--- Start time point ---
+; mov rsi,[rbp]
+; add rsi,10000000                ; RSI = 10^7 * 100ns = 1 second
+; rdtsc
+; shl rdx,32
+; lea rbx,[rax+rdx]               ; RBX = 64-bit TSC at operation start
+; ;--- Delay 1 second ---
+; @@:
+; mov rcx,rbp
+; call [GetSystemTimeAsFileTime]  ; Get count for wait 1 second
+; cmp rsi,[rbp]                   ; Compare target=rsi and returned=[rbp] 
+; ja @b                           ; Go wait if target > returned, must 1 second
+; ;--- Stop time point ---
+; rdtsc
+; shl rdx,32
+; or rax,rdx                      ; RAX = 64-bit TSC at operation end
+; sub rax,rbx                     ; RAX = Delta TSC = frequency (1 second)
+; ;--- Restore RSP, pop extra registers, exit ---
+; ExitCpuClk:
+; mov rsp,rbp                            ; Restore RSP after alignment and shadow
+; pop rbx r11 r10 r9 r8 rbp rsi rdx rcx rbx  ; First POP RBX for RSP + 8 only 
+; ret
+
 MeasureCpuClk:
-cld                         ; Clear direction, because STOSQ used
-push rbx rcx rdx rsi rbp r8 r9 r10 r11 rax	 ; R8-R11 because API, RAX = Var
-mov rbp,rsp                 ; RBP used for restore RSP and addressing variables
-and rsp,0FFFFFFFFFFFFFFF0h  ; Align stack (16)
-sub rsp,32                  ; Make parameters shadow
-;--- Start measure frequency, wait toggle ---
+cld
+push rbx rcx rdx rsi rbp r8 r9 r10 r11
+xor ecx,ecx
+push rcx rcx               ; 16 bytes for 2 Qword stack variables
+mov rbp,rsp                ; RBP used for restore RSP and addressing variables
+and rsp,0FFFFFFFFFFFFFFF0h
+sub rsp,32                 ; Make parameters shadow
+;---------- This branch use Performance Counter, high precision ---------------;
+;---------- Detect performance counter status and frequency -------------------;
+lea rcx,[rbp + 08]         ; RCX = Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceFrequency]  ; Qword [rbp + 08] = performance frequency
+test rax,rax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+;---------- Get current ticks counter value -----------------------------------;
+mov rcx,rbp                ; RCX = Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceCounter]  ; Qword [rbp + 00] = performance counter now
+test rax,rax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+mov rsi,[rbp]              ; RSI = Performance counter now
+;---------- Wait next tick for synchronization --------------------------------;
+@@:
+mov rcx,rbp                ; RCX = Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceCounter]
+test rax,rax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+cmp rsi,[rbp]
+je @b                      ; Go wait cycle if counter value = previous
+;---------- Start measurement -------------------------------------------------;
+mov rsi,[rbp + 00]         ; RSI = Current value of counter
+add rsi,[rbp + 08]         ; RSI = Current + Ticks per second = target value
+rdtsc                      ; Get start TSC
+shl rdx,32
+lea rbx,[rax + rdx]        ; RBX = 64-bit TSC at operation start
+@@:
+mov rcx,rbp                ; RCX = Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceCounter]
+test rax,rax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+cmp rsi,[rbp]
+jae @b                     ; Go wait cycle if target value >= current value
+rdtsc                      ; Get end TSC for calculate delta-TSC
+shl rdx,32
+or rax,rdx            ; RAX = 64-bit TSC at operation end
+sub rax,rbx           ; RAX = Delta TSC, also set CF flag for error status
+jbe .tryFileTime      ; Go File Time branch if delta TSC <= 0
+.exit:                ; Here CF = 0 (NC) if no errors
+mov rsp,rbp           ; Flags must be not changed, because here CF = status
+pop rcx rcx           ; Remove 2 qwords from stack frame 
+pop r11 r10 r9 r8 rbp rsi rdx rcx rbx
+ret
+;---------- This branch use File Time if Performance Counter failed -----------;
+.tryFileTime:
+;---------- Start measure frequency -------------------------------------------;
 mov rcx,rbp
-call [GetSystemTimeAsFileTime]  ; Get current count
+call [GetSystemTimeAsFileTime]    ; Get current count
 mov rsi,[rbp]
 @@:
 mov rcx,rbp
-call [GetSystemTimeAsFileTime]  ; Get next count for wait 100 ns
+call [GetSystemTimeAsFileTime]    ; Get next count for wait 100 ns
 cmp rsi,[rbp]
 je @b
-;--- Start time point ---
 mov rsi,[rbp]
-add rsi,10000000                ; RSI = 10^7 * 100ns = 1 second
+add rsi,10000000                  ; 10^7 * 100ns = 1 second
 rdtsc
 shl rdx,32
-lea rbx,[rax+rdx]               ; RBX = 64-bit TSC at operation start
-;--- Delay 1 second ---
+lea rbx,[rax + rdx]               ; RBX = 64-bit TSC at operation start
 @@:
 mov rcx,rbp
-call [GetSystemTimeAsFileTime]  ; Get count for wait 1 second
-cmp rsi,[rbp]                   ; Compare target=rsi and returned=[rbp] 
-ja @b                           ; Go wait if target > returned, must 1 second
-;--- Stop time point ---
+call [GetSystemTimeAsFileTime]    ; Get count for wait 1 second
+cmp rsi,[rbp]
+ja @b
 rdtsc
 shl rdx,32
-or rax,rdx                      ; RAX = 64-bit TSC at operation end
-sub rax,rbx                     ; RAX = Delta TSC = frequency (1 second)
-;--- Restore RSP, pop extra registers, exit ---
-ExitCpuClk:
-mov rsp,rbp                            ; Restore RSP after alignment and shadow
-pop rbx r11 r10 r9 r8 rbp rsi rdx rcx rbx  ; First POP RBX for RSP + 8 only 
-ret
+or rax,rdx                        ; RAX = 64-bit TSC at operation end
+sub rax,rbx                       ; RAX = Delta TSC
+ja .exit
+stc
+jmp .exit
+
 
 ;------------------------------------------------------------------------;
 ; Check CPUID instruction support.                                       ;

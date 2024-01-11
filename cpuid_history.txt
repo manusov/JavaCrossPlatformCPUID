@@ -1,3 +1,9 @@
+CPUID v2.00.02 (January, 11, 2024)
+This version is under debug, use previous version (v1.05.29) as stable.
+1) Redesign GUI.
+2) Improve TSC clock frequency measurement for Windows 32/64.
+
+
 CPUID v1.05.29 (December, 23, 2023)
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------

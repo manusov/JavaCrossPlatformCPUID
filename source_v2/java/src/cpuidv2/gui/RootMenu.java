@@ -227,8 +227,9 @@ final class SaveReportAction extends AbstractAction
         AbstractTableModel[] models = 
             CPUIDv2.getApplicationsManager().getTabModels();
         SaveReport saver = new SaveReport();
+        String nameAndPoint = CPUIDv2.getShortName() + ".";
         saver.reportFullDialogue( null, models, null,
-            CPUIDv2.getShortName() , CPUIDv2.getVendorName() );
+            nameAndPoint , CPUIDv2.getVendorName() );
         }
     }
 
@@ -411,8 +412,9 @@ final class BReportThis implements ActionListener
             oddTable = null;
             }
         SaveReport saver = new SaveReport();
+        String nameAndPoint = CPUIDv2.getShortName() + ".";
         saver.reportThisDialogue( null, evenTable, oddTable,
-                CPUIDv2.getShortName() , CPUIDv2.getVendorName() );
+            nameAndPoint , CPUIDv2.getVendorName() );
         }
     }
 

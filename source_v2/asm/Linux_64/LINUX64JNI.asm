@@ -512,7 +512,7 @@ ret
 ; INPUT:   None                                                                ;
 ;                                                                              ;
 ; OUTPUT:  CF flag = Status: 0(NC)=Measured OK, 1(C)=Measurement error	       ;
-;          Output RAX,RDX valid only if CF=0(NC)                               ;
+;          Output RAX valid only if CF=0(NC)                                   ;
 ;          RAX = TSC Frequency, Hz, F = Delta TSC per 1 second                 ;
 ;------------------------------------------------------------------------------;
 MeasureCpuClk:

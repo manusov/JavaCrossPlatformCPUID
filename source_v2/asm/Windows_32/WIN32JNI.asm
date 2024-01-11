@@ -541,48 +541,148 @@ ret
 ; INPUT:   None                                                          ;
 ;                                                                        ;
 ; OUTPUT:  CF flag = Status: 0(NC)=Measured OK, 1(C)=Measurement error	 ;
-;          Output EAX, EBX, ECX, EDX valid only if CF=0(NC)              ;
+;          Output EAX,EDX valid only if CF=0(NC)                         ;
 ;          EDX:EAX = TSC Frequency, Hz, F = Delta TSC per 1 second       ;
 ;------------------------------------------------------------------------;
+; MeasureCpuClk:
+; cld                             ; Clear direction, because STOS used
+; xor eax,eax
+; push esi edi ebp eax eax        ; Last EAX = Variable
+; ;--- Start measure frequency, wait toggle ---
+; push ebp
+; call [GetSystemTimeAsFileTime]  ; Get current count
+; mov esi,[ebp]
+; @@:
+; push ebp
+; call [GetSystemTimeAsFileTime]  ; Get next count for wait 100 ns
+; cmp esi,[ebp]
+; je @b
+; ;--- Start time point ---
+; mov esi,[ebp+0]
+; mov edi,[ebp+4]
+; add esi,10000000                
+; adc edi,0                       ; EDI:ESI = 10^7 * 100ns = 1 second
+; rdtsc
+; push eax edx                    ; Stack qword = 64-bit TSC at operation start
+; ;--- Delay 1 second ---
+; @@:
+; push ebp
+; call [GetSystemTimeAsFileTime]  ; Get count for wait 1 second
+; cmp edi,[ebp+4]                 ; Compare high: target=edi and returned=[ebp+4] 
+; ja @b                           ; Go wait if target > returned, must 1 second
+; jb @f
+; cmp esi,[ebp+0]                 ; Compare low: target=esi and returned=[ebp+0] 
+; ja @b                           ; Go wait if target > returned, must 1 second
+; @@:
+; ;--- Stop time point ---
+; rdtsc                           ; EDX:EAX = 64-bit TSC at operation end
+; pop ecx ebx
+; sub eax,ebx
+; sbb edx,ecx
+; ;--- Exit ---
+; ExitCpuClk:
+; pop ebp ebp ebp edi esi          ; First POP EBP for ESP+4 only 
+; ret
+
 MeasureCpuClk:
-cld                             ; Clear direction, because STOS used
-xor eax,eax
-push esi edi ebp eax eax        ; Last EAX = Variable
-;--- Start measure frequency, wait toggle ---
-push ebp
-call [GetSystemTimeAsFileTime]  ; Get current count
-mov esi,[ebp]
+cld
+push ebx ecx esi ebp
+xor ecx,ecx
+push ecx ecx ecx ecx       ; 16 bytes for 2 Qword stack variables
+mov ebp,esp                ; EBP = pointer to local variables
+;---------- Detect performance counter status and frequency -------------------;
+lea eax,[ebp + 08]
+push eax                   ; Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceFrequency]  ; Qword [ebp + 08] = performance frequency
+test eax,eax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+;---------- Get current ticks counter value -----------------------------------;
+push ebp                   ; Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceCounter]  ; Qword [ebp + 00] = performance counter now
+test eax,eax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+mov ebx,[ebp + 00]         ; EBX:ESI = Performance counter now
+mov esi,[ebp + 04]
+;---------- Wait next tick for synchronization --------------------------------;
 @@:
+push ebp                   ; Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceCounter]
+test eax,eax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+cmp ebx,[ebp + 00]
+jne @f
+cmp esi,[ebp + 04]
+je @b                      ; Go wait cycle if counter value = previous
+@@:
+;---------- Start measurement -------------------------------------------------;
+mov ebx,[ebp + 00]        ; EBX:ESI = Current value of counter
+mov esi,[ebp + 04]
+add ebx,[ebp + 08]        ; EBX:ESI = Current + Ticks per second = target value
+adc esi,[ebp + 12]
+rdtsc                     ; Get start TSC
+push edx eax
+@@:
+push ebp                  ; Parm#1 = pointer to output 64-bit variable
+call [QueryPerformanceCounter]
+test eax,eax
+jz .tryFileTime            ; Go File Time branch if status = FALSE
+cmp esi,[ebp + 04]
+ja @b
+jb @f
+cmp ebx,[ebp + 00]
+jae @b                    ; Go wait cycle if target value >= current value
+@@:
+rdtsc                     ; Get end TSC, calculate delta-TSC
+pop esi ebx
+sub eax,esi
+sbb edx,ebx               ; EDX:EAX = Delta TSC per 1 second = frequency, Hz
+jb .tryFileTime           ; Go File Time branch if error: frequency < 0               
+mov ecx,eax
+or ecx,edx
+jz .tryFileTime       ; Go File Time branch if error: frequency = 0
+;---------- Restore ESP, pop extra registers, exit ----------------------------;
+.exit:                    ; Here CF flag = status, NC=No errors, C=Error
+pop ecx ecx ecx ecx       ; Cannot ADD ESP,16 because CF flag 
+pop ebp esi ecx ebx
+ret
+;---------- This branch use File Time if Performance Counter failed -----------;
+.tryFileTime:
+;---------- Start measure frequency -------------------------------------------;
+push ebp                          ; Parm#1 = pointer to output 64-bit variable
+call [GetSystemTimeAsFileTime]    ; Get current count
+mov esi,[ebp]
+@@:                               ; Wait for start 1 second interval
 push ebp
-call [GetSystemTimeAsFileTime]  ; Get next count for wait 100 ns
+call [GetSystemTimeAsFileTime]    ; Get next count for wait 100 ns
 cmp esi,[ebp]
 je @b
-;--- Start time point ---
-mov esi,[ebp+0]
-mov edi,[ebp+4]
-add esi,10000000                
-adc edi,0                       ; EDI:ESI = 10^7 * 100ns = 1 second
-rdtsc
-push eax edx                    ; Stack qword = 64-bit TSC at operation start
-;--- Delay 1 second ---
-@@:
+mov esi,[ebp + 0]                 ; Set time interval = 1 second
+mov ebx,[ebp + 4]
+add esi,10000000                  ; 10^7 * 100ns = 1 second
+adc ebx,0
+rdtsc                             ; Get start TSC
+push edx eax
+@@:                               ; Wait for end 1 second interval
 push ebp
-call [GetSystemTimeAsFileTime]  ; Get count for wait 1 second
-cmp edi,[ebp+4]                 ; Compare high: target=edi and returned=[ebp+4] 
-ja @b                           ; Go wait if target > returned, must 1 second
-jb @f
-cmp esi,[ebp+0]                 ; Compare low: target=esi and returned=[ebp+0] 
-ja @b                           ; Go wait if target > returned, must 1 second
+call [GetSystemTimeAsFileTime]    ; Get count for wait 1 second
+cmp [ebp + 4],ebx
+jb @b
+ja @f
+cmp [ebp + 0],esi
+jb @b
 @@:
-;--- Stop time point ---
-rdtsc                           ; EDX:EAX = 64-bit TSC at operation end
-pop ecx ebx
-sub eax,ebx
-sbb edx,ecx
-;--- Exit ---
-ExitCpuClk:
-pop ebp ebp ebp edi esi          ; First POP EBP for ESP+4 only 
-ret
+rdtsc                ; Get end TSC, calculate delta-TSC
+pop esi ebx
+sub eax,esi
+sbb edx,ebx          ; EDX:EAX = Delta TSC per 1 second = frequency, Hz
+jb .fileTimeError    ; Go error if frequency < 0               
+mov ecx,eax
+or ecx,edx
+jnz .exit            ; Go NO error if frequency > 0
+.fileTimeError:
+stc
+jmp .exit
+
 
 ;------------------------------------------------------------------------;
 ; Check CPUID instruction support.                                       ;

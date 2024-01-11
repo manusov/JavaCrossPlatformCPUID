@@ -36,7 +36,8 @@ InfoContext()
     }
 
 @Override String[] getPanelNames() { return new String[] { "Context"     }; }
-@Override String[] getPanelIcons() { return new String[] { "tab_xcr.png" }; }
+@Override String[] getPanelIcons() 
+    { return new String[] { "tab_context.png" }; }
 @Override JPanel[] getPanels() { return new JPanel[]     { panel         }; }
 @Override boolean[] getPanelActives()
     { return new boolean[] { true }; }
