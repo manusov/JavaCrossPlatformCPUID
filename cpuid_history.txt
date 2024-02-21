@@ -1,3 +1,21 @@
+CPUID v2.00.03 (February, 21, 2024)
+This version is under debug, use previous version (v1.05.29) as stable.
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000021h    -       EAX      27     SBPB    , Selective branch predictor barrier.
+80000021h    -       EAX      28     BRTYPE  , MSR 49h bit IBPB flushes all branch type predictions.
+80000021h    -       EAX      29     SRSO NO , SRSO vulnerability absent.
+80000021h    -       EAX      30     SRSO NK , SRSO vulnerability at user/kernel boundaries absent.
+80000021h    -       EAX      31     SRSO MF , Can use MSR BP_CFG[BpSpecReduce] to mitigate SRSO.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) speculative-return-stack-overflow-whitepaper.pdf
+   Technical update regarding speculative return stack overflow.
+   Revision 2.0 February 2024.
+
+
 CPUID v2.00.02 (January, 11, 2024)
 This version is under debug, use previous version (v1.05.29) as stable.
 1) Redesign GUI.

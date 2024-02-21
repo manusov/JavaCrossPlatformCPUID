@@ -53,11 +53,11 @@ private final static String[][] DECODER_EAX =
       { "x"         , "Reserved"          } ,                        // bit 24
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } };                       // bit 31
+      { "SBPB"      , "Selective branch predictor barrier"  } ,       // bit 27
+      { "BRTYPE"    , "IBPB flushes all branch type predictions" } ,  // bit 28
+      { "SRSO NO"   , "SRSO vulnerability absent"                } ,  // bit 29
+      { "SRSO NK"   , "SRSO at user/kernel boundaries absent"    } ,  // bit 30
+      { "SRSO MF"   , "Can use MSR BP_CFG to mitigate SRSO"      } }; // bit 31
 private final static Object[][] DECODER_EBX =
     { { "Microcode patch size, 16-byte units" ,  11 ,  0 } };
 
