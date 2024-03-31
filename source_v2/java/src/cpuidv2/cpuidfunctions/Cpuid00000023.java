@@ -30,6 +30,8 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
 private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "UNITMSK2"     , "UnitMask2 field in the IA32_PERFEVTSELx MSRs" } , // bit 0
       { "ZBIT"         , "Zero-bit in the IA32_PERFEVTSELx MSRs" } };       // bit 1
+private final static Object[][] DECODER_ECX_SUBFUNCTION_0 =
+    { { "Number of TMA slots per cycle" , 7 , 0  } };
 // subfunction 1
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "General counters bitmap"   , 31 , 0 } };
@@ -40,6 +42,10 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_2 =
     { { "Auto counter reload (ACR) general counters bitmap"   , 31 , 0 } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_2 =
     { { "Auto counter reload (ACR) fixed counters bitmap"   , 31 , 0 } };
+private final static Object[][] DECODER_ECX_SUBFUNCTION_2 =
+    { { "Bitmap of ACR general counters that can cause reloads"   , 31 , 0 } };
+private final static Object[][] DECODER_EDX_SUBFUNCTION_2 =
+    { { "Bitmap of ACR fixed counters that can cause reloads"   , 31 , 0 } };
 // subfunction 3
 private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
     { { "x"            , "Core cycles monitoring event" } ,  // bit 0
@@ -54,10 +60,10 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
       { "x"            , "Topdown bad speculation monitoring event" } ,
       { "x"            , "Topdown frontend bound monitoring event" } ,
       { "x"            , "Topdown retiring monitoring event" } ,
-      { "x"            , "LBR inserts" } ,
+      { "x"            , "LBR inserts" } ,  // bit 12
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } };  // bit 15
+      { "x"            , "Reserved" } };    // bit 15
 
 @Override String[][] getParametersList()
     {
@@ -71,10 +77,13 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
         dr = decodeBitfields
             ( "EAX", DECODER_EAX_SUBFUNCTION_0, entries[0].eax );
         a.addAll( dr.strings );
+        int maxSubFunction = dr.values[0];
         strings = decodeBitmap
             ( "EBX", DECODER_EBX_SUBFUNCTION_0, entries[0].ebx );
         a.addAll( strings );
-        int maxSubFunction = dr.values[0];
+        dr = decodeBitfields
+            ( "ECX", DECODER_ECX_SUBFUNCTION_0, entries[0].ecx );
+        a.addAll( dr.strings );
         if ( ( entries.length > 1 )&&( maxSubFunction > 0 )&&
              ( entries[1].subfunction == 1 ) )
             {
@@ -98,6 +107,14 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
                 // EBX, subfunction 2
                 dr = decodeBitfields
                     ( "EBX", DECODER_EBX_SUBFUNCTION_2, entries[2].ebx );
+                a.addAll( dr.strings );
+                // ECX, subfunction 2
+                dr = decodeBitfields
+                    ( "ECX", DECODER_ECX_SUBFUNCTION_2, entries[2].ecx );
+                a.addAll( dr.strings );
+                // EDX, subfunction 2
+                dr = decodeBitfields
+                    ( "EDX", DECODER_EDX_SUBFUNCTION_2, entries[2].edx );
                 a.addAll( dr.strings );
                 if ( ( entries.length > 3 )&&( maxSubFunction > 2 )&&
                      ( entries[3].subfunction == 3 ) )

@@ -30,7 +30,8 @@ private final static Object[][] DECODER_EBX =
     { { "Largest monitor line size" , 15 , 0 } };
 private final static Object[][] DECODER_ECX =
     { { "Enumeration of MONITOR-MWAIT extensions flag"       , 0 , 0 } ,
-      { "Interrupt break event for MWAIT (even if disabled)" , 1 , 1 } };
+      { "Interrupt break event for MWAIT (even if disabled)" , 1 , 1 } ,
+      { "Monitorless MWAIT instruction feature"              , 3 , 3 } };
 private final static Object[][] DECODER_EDX =
     { { "Number of C0 sub C-states supported using MWAIT" ,  3 ,  0 } ,
       { "Number of C1 sub C-states supported using MWAIT" ,  7 ,  4 } ,

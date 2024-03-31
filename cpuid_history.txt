@@ -1,3 +1,27 @@
+CPUID v2.00.04 (March, 31, 2024)
+This version is under debug, use previous version (v1.05.29) as stable.
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000005h    -       ECX     3       ML MWAIT , Monitorless MWAIT instruction feature.
+00000007h    1       EDX     13      UTMR     , User timer events.
+00000007h    1       EDX     23      MWAIT    , MWAIT is supported even if function 1 ECX.3=0.
+00000014h    0       EBX     9       PTTT     , Processor trace trigger tracing.
+00000014h    1       EAX     10-8    Number of IA32_RTIT_TRIGGERx_CFG MSRs.
+00000014h    1       ECX     0       TAA      , Trigger action attribution.
+00000014h    1       ECX     1       TAPR     , Trigger action TRACE_PAUSE and TRACE_RESUME.
+00000014h    1       ECX     15      TIDR     , Trigger input DR match.
+00000023h    0       ECX     7-0     Number of TMA slots per cycle.
+00000023h    2       ECX     31-0    Bitmap of ACR general counters that can cause reloads.
+00000023h    2       EDX     31-0    Bitmap of ACR fixed counters that can cause reloads.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference.
+   March 2024. 319433-052.
+
+
 CPUID v2.00.03 (February, 21, 2024)
 This version is under debug, use previous version (v1.05.29) as stable.
 Added new AMD features.

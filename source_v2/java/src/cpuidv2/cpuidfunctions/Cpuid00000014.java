@@ -36,7 +36,8 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "PET"       , "Power event trace"                             } ,
       { "PSB PMI"   , "PSB and PMI preservation"                      } ,
       { "PT ET"     , "PT event trace"                                } ,
-      { "TNT DIS"   , "Disabling TNT (Taken Not Taken) packets"       } };
+      { "TNT DIS"   , "Disabling TNT (Taken Not Taken) packets"       } ,
+      { "PTTT"      , "Processor trace trigger tracing"               } }; // bit 9
 private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
     { { "TR"        , "Tracing can be enabled with IA32_RTIT_CTL.ToPA" } ,
       { "ToPA"      , "ToPA tables can hold any number of output entries" } ,
@@ -72,10 +73,28 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
       { "LIP"       , "Generated packets include CS base component" } };
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "Number of configurable address ranges for filtering" ,  2 , 0  } ,
+      { "Number of IA32_RTIT_TRIGGERx_CFG MSRs"               , 10 , 8  } ,
       { "Bitmap of supported MTC period encodings"            , 31 , 16 } };
 private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "Bitmap of supported Cycle threshold value encodings"      , 15 , 0  } ,
       { "Bitmap of supported Configurable PSB frequency encodings" , 31 , 16 } };
+private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
+    { { "TAA"       , "Trigger action attribution" } ,                  // bit 0
+      { "TAPR"      , "Trigger action TRACE_PAUSE and TRACE_RESUME" } , // bit 1
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,
+      { "x"         , "Reserved" } ,                // bit 14
+      { "TIDR"      , "Trigger input DR match" } }; // bit 15
 
 @Override String[][] getParametersList()
     {
@@ -111,6 +130,10 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
                 ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
             a.add( interval );
             a.addAll( dr.strings );
+            strings = decodeBitmap
+                ( "ECX", DECODER_ECX_SUBFUNCTION_1, entries[1].ecx );
+            a.add( interval );
+            a.addAll( strings );
             }
         }
     return a.isEmpty() ? 

@@ -176,7 +176,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "AV VNNI 16"   , "AVX VNNI INT16 instructions" } ,    // bit 10
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "UTMR"         , "User timer events" } ,
       { "PREFETCHIT"   , "Prefetch hints for instruction cache" } ,  // bit 14
       { "USER MSR"     , "URDMSR and UWRMSR instructions" } ,        // bit 15
       { "x"            , "Reserved" } ,
@@ -186,7 +186,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "APX"          , "Advanced performance extensions" } ,  // bit 21
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "MWAIT"        , "MWAIT is supported even if function 1 ECX.3=0" } ,
       { "x"            , "Reserved" } ,  // bit 24
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
