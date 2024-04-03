@@ -45,19 +45,19 @@ private final static String[][] DECODER_EAX =
       { "VTE"     , "Virtual Transparent Encryption" } ,
       { "VMGEXIT" , "VMGEXIT instruction pass parameter to hypervisor" } ,
       { "VTOMMSR" , "Virtual TOM MSR" } ,
-      { "IBSVSG"  , "IBS virtualization for SEV-ES guests" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "IBSVSG"  , "IBS virtualization for SEV-ES guests" } ,       // bit 19
+      { "PMC SEV" , "PMC virtualization for SEV-ES and SEV-SNP" } ,  // bit 20
+      { "RMPREAD" , "RMPREAD instruction" } ,
       { "x"       , "Reserved" } ,
       { "x"       , "Reserved" } ,
       { "VMSA RP" , "VM Save Area Register Protection" } ,  // bit 24
       { "SMT PT"  , "SMT protection from sibling thread side channel" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "SC AVIC" , "Secure AVIC" } ,                  // bit 26
+      { "ALW SEV" , "Allowed SEV features" } ,         // bit 27
       { "SVSM CP" , "SVSM communication page MSR" } ,  // bit 28
       { "NV SNP"  , "Nested virtualization SNP MSR" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } };  // bit 31
+      { "WR HPG"  , "Writes to hypervisor-owned pages are allowed" } ,
+      { "IBPB EN" , "IBPB on entry" } };   // bit 31
 private final static Object[][] DECODER_EBX =
     { { "Page table bit used to enable protection"    ,   5 ,  0 } ,
       { "Reduction of physical address space"         ,  11 ,  6 } ,

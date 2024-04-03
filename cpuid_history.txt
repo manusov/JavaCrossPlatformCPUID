@@ -1,3 +1,23 @@
+CPUID v2.00.05 (April, 3, 2024)
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+8000000Ah    -       EDX     8       PMC VIRT , PMC counter virtualization.
+8000000Ah    -       EDX     30      IDL HLT  , Idle HLT intercept.
+8000001Fh    -       EAX     20      PMC SEV  , PMC virtualization for SEV-ES and SEV-SNP.
+8000001Fh    -       EAX     21      RMPREAD  , RMPREAD instruction.
+8000001Fh    -       EAX     26      SC AVIC  , Secure AVIC.
+8000001Fh    -       EAX     27      ALW SEV  , Allowed SEV features.
+8000001Fh    -       EAX     30      WR HPG   , Writes to hypervisor-owned pages are allowed.
+8000001Fh    -       EAX     31      IBPB EN  , IBPB on entry.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) AMD64 Architecture Programmer's Manual.
+   Volume 3: General-Purpose and System Instructions.
+   Publication No. 24594. Revision 3.36. March 2024.
+
+
 CPUID v2.00.04 (March, 31, 2024)
 This version is under debug, use previous version (v1.05.29) as stable.
 Added new INTEL features.

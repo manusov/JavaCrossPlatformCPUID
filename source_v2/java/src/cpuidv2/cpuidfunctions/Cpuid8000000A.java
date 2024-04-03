@@ -32,16 +32,16 @@ private final static Object[][] DECODER_EBX =
     { { "NASID: number of address space identifiers (ASID)" , 31 , 0 } };
 private final static String[][] DECODER_EDX =
     { { "NP"       , "Nested paging" } ,
-      { "LBR Virt" , "Last branch record virtualization" } ,
+      { "LBR VIRT" , "Last branch record virtualization" } ,
       { "SVML"     , "SVM lock" } ,
       { "NRIPS"    , "Next RIP save" } ,
-      { "TSC Rate" , "TSC rate control MSR" } ,
+      { "TSC RATE" , "TSC rate control MSR" } ,
       { "VMCB CL"  , "VMCB clean bits" } ,
       { "FLASID"   , "TLB flush selectable by ASID" } ,
       { "DASSIST"  , "Decode assists" } ,
-      { "x"        , "Reserved" } ,  // bit 8 reserved
+      { "PMC VIRT" , "PMC counter virtualization" } ,  // bit 8
       { "SSE35D"   , "SSSE3 and SSE5A disable" } ,
-      { "PAUSE FL" , "Pause intercept filter" } ,
+      { "PAUSE FL" , "Pause intercept filter" } ,     // bit 10
       { "x"        , "Reserved" } ,  // bit 11 reserved
       { "PAUSE FT" , "Pause intercept filter threshold" } ,
       { "AVIC"     , "AMD advanced virtual interrupt controller" } ,
@@ -57,11 +57,11 @@ private final static String[][] DECODER_EDX =
       { "HMCOV"    , "Host MCE override" } ,                                   // bit 23
       { "TLBICTL"  , "TLB instruction control, broadcast synchronization" } ,  // bit 24
       { "VNMI"     , "NMI virtualization" } ,  // bit 25
-      { "IBSVIRT"  , "Instruction based sampling virtualization" } ,
+      { "IBS VIRT" , "Instruction based sampling virtualization" } ,
       { "EILVTR"   , "Extended interrupt local vector table registers" } ,
       { "SGPFIX"   , "Hypervisor spurious GP fault fixed" } ,  // bit 28
       { "LCK THR"  , "Bus lock threshold" } ,
-      { "x"        , "Reserved" } ,
+      { "IDL HLT"  , "Idle HLT intercept" } ,
       { "x"        , "Reserved" } };  // bit 31
 
 @Override String[][] getParametersList()

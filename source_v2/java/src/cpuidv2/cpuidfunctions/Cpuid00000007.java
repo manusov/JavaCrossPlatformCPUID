@@ -48,7 +48,7 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "AVX512DQ"   , "AVX512 doublewords and quadwords operations" } ,
       { "RDSEED"     , "Instruction RDSEED, alternative access to RND" } ,
       { "ADX"        , "Instruction set ADX" } ,
-      { "SMAP"       , "Supervisor mode access prevention" } ,
+      { "SMAP"       , "Supervisor mode access prevention" } ,  // bit 20
       { "AVX512IFMA" , "AVX512 integer fused multiply and add" } ,
       { "PCOMMIT"    , "Instruction PCOMMIT for cache-NVRAM coherency" } ,
       { "CLFLUSHOPT" , "Instruction CLFLUSHOPT, optimized cache flush" } ,
@@ -83,7 +83,7 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_0 =
       { "MAWAU[2]"     , "MPX address width adjust" } ,
       { "MAWAU[3]"     , "MPX address width adjust" } ,
       { "MAWAU[4]"     , "MPX address width adjust" } ,
-      { "RDPID"        , "Read processor ID" } ,
+      { "RDPID"        , "Read processor ID" } ,              // bit 22
       { "AES KL"       , "AES Key Locker instructions" } ,    // bit 23
       { "BUSLOCK"      , "Bus lock debug exception" } ,
       { "CLDEMOTE"     , "Cache line demote instruction" } ,  // bit 25 reserved
