@@ -1,3 +1,25 @@
+CPUID v2.00.06 (June, 28, 2024)
+Added new INTEL feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    2       EDX     7       MMITGNO,  MONITOR, UMONITOR not affected by tracking issue.
+---------------------------------------------------------------------------------------------------
+Data sources:
+1) 325462-sdm-vol-1-2abcd-3abcd-4.pdf
+   Intel 64 and IA-32 Architectures Software Developer's Manual
+   Combined Volumes: 1, 2A, 2B, 2C, 2D, 3A, 3B, 3C, 3D and 4.
+   Order Number: 325462-084US. June 2024.
+2) 252046-sdm-change-document
+   Intel 64 and IA-32 Architectures Software Developer's Manual
+   Documentation Changes. June 2024.
+   Document Number: 252046-076.
+3) architecture-instruction-set-extensions-programming-reference.pdf
+   Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference.
+   June 2024. 319433-053.
+
+
 CPUID v2.00.05 (April, 3, 2024)
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------

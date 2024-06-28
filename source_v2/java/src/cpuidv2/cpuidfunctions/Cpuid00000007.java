@@ -203,7 +203,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_2 =
       { "BHI"          , "Can prevent branch history injection attack"      } ,
       { "MCDT"         , "Not exhibit MXCSR configuration dependent timing" } ,
       { "UCLOCKDIS"    , "Uncacheable lock disable" } ,  // bit 6
-      { "x"            , "Reserved" } ,
+      { "MONMITGNO"    , "MONITOR, UMONITOR are not affected by tracking issue" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
