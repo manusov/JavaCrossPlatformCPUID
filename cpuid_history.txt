@@ -1,3 +1,18 @@
+CPUID v2.00.07 (September, 24, 2024)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       ECX     2       LEGACY-R ,  Legacy reduced OS instruction set architecture.
+00000007h    1       ECX     4       SIPI64   ,  64-bit start-up interprocessor interrupt.
+---------------------------------------------------------------------------------------------------
+Data source:
+x86s-eas-external-1.2.pdf
+INTEL X86S External Architectural Specification.
+Rev 1.2. June 2024.
+Document Number: 351407-002.
+
+
 CPUID v2.00.06 (June, 28, 2024)
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------

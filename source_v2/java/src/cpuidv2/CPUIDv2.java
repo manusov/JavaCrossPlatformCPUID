@@ -25,7 +25,7 @@ import cpuidv2.applications.ApplicationsManager;
 
 public class CPUIDv2 
 {
-private final static String VERSION_NAME = "v2.00.06";
+private final static String VERSION_NAME = "v2.00.07";
 private final static String VENDOR_NAME  = "(C)2024 Manusov I.V.";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;

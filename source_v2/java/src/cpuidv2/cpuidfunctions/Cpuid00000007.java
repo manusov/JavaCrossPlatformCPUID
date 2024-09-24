@@ -162,6 +162,12 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
 private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
     { { "PPIN"         , "Protected Processor Inventory Number" } ,          // bit 0
       { "TSE"          , "Total storage encryption, PBNDKB instruction" } }; // bit 1
+private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
+    { { "x"            , "Reserved" } ,                                       // bit 0
+      { "x"            , "Reserved" } ,
+      { "LEGACY-R"     , "Legacy reduced OS instruction set architecture" } , // bit 2
+      { "x"            , "Reserved" } ,
+      { "SIPI64"       , "64-bit startup interprocessor interrupt" } };       // bit 4
 private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,  // bit 0
       { "x"            , "Reserved" } ,
@@ -255,6 +261,11 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_2 =
             // EBX, subfunction 1
             strings = decodeBitmap
                 ( "EBX", DECODER_EBX_SUBFUNCTION_1, entries[1].ebx );
+            a.add( interval );
+            a.addAll( strings );
+            // ECX, subfunction 1
+            strings = decodeBitmap
+                ( "ECX", DECODER_ECX_SUBFUNCTION_1, entries[1].ecx );
             a.add( interval );
             a.addAll( strings );
             // EDX, subfunction 1
