@@ -26,7 +26,7 @@ Cpuid80000023()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "MEM-HMK" , "Secure host multi key memory encryption mode" } };   // bit 0
+    { { "MEM-HMK" , "Secure host multi key memory encryption mode" } }; // bit 0
 private final static Object[][] DECODER_EBX =
     { { "Number of simultaneously available host encryption key ID" , 15 , 0 } };
 

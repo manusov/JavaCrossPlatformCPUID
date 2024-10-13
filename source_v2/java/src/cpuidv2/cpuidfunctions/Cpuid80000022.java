@@ -33,7 +33,7 @@ private final static Object[][] DECODER_EBX =
     { { "Number of core performance monitor counters"        ,   3 ,  0 } ,
       { "Number of last branch record stack entries"         ,   9 ,  4 } ,
       { "Number of northbridge performance monitor counters" ,  15 , 10 } ,
-      { "Number of Unified Memory Controllers (UMC) PMCs"    ,  21 , 16 } };
+      { "Number of Unified Memory Controllers (UMC) PMCs"    ,  23 , 16 } };
 private final static Object[][] DECODER_ECX =
     { { "Active Unified Memory Controllers (UMC) mask"       ,  31 ,  0 } };
 

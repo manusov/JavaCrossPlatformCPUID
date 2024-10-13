@@ -1,3 +1,28 @@
+CPUID v2.00.08 (October, 13, 2024)
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000021h    -       EAX     12      PMC2LEG  , Performance Legacy CTL2 precise retire.
+80000021h    -       EAX     14      L2TX32   , L2 TLB size encoded as x32 units.
+80000021h    -       EAX     15      ERMSB    , AMD implementation of enhanced REP MOVSB/STOSB.
+80000021h    -       EAX     16      OP0F017  , AMD reservation opcodes 0F 01/7.
+80000021h    -       EAX     19      FSRSCS   , Fast short REP SCASB.
+80000021h    -       EAX     20      ICPREF   , Instruction cache prefetch.
+80000021h    -       EAX     21      FP512D   , FP512 supports downgrading to FP256.
+80000021h    -       EAX     22      WLHEUR   , Workload based heuristic to OS.
+80000021h    -       EAX     24      ERAPS    , Enhanced return address predictor security.
+80000021h    -       EBX    15-0     Microcode path size, 16-byte units (bit field width updated).
+80000021h    -       EBX    23-16    Return address predictor size (x8).
+80000022h    -       EBX    23-16    Number of UMC PMCs (bit field width updated).
+80000027h    -       EAX     3-0     Number of workload class IDs.
+---------------------------------------------------------------------------------------------------
+Data source:
+Processor Programming Reference (PPR) for AMD Family 1Ah Model 24h, Revision B0 Processors.
+Rev 3.00. September 26, 2024.
+Document Number: 57254.
+
+
 CPUID v2.00.07 (September, 24, 2024)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------

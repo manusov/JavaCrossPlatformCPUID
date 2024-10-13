@@ -26,31 +26,31 @@ Cpuid80000021()
 
 // Control tables for results decoding
 private final static String[][] DECODER_EAX =
-    { { "NNDBP"     , "Processor ignores nested data breakpoints"  } ,  // bit 0
+    { { "NNDBP"     , "Processor ignores nested data breakpoints"  } , // bit 0
       { "FSGSNS"    , "FS,GS bases MSR writes are non serializing" } ,
-      { "LAS"       , "LFENCE always serializing"    } ,            // bit 2
-      { "SPCL"      , "SMM page configuration lock"  } ,            // bit 3
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "NSCB"      , "Null selector clear base"     } ,            // bit 6
-      { "UAIGN"     , "Upper address ignore"         } ,
-      { "AIBRS"     , "Automatic IBRS"    } ,                       // bit 8
-      { "NOSCM"     , "No SMM control MSR (MSR C001_0116h is absent)" } ,
-      { "FSRS"      , "Fast short REP STOSB"  } ,
-      { "FSRC"      , "Fast short REPE CMPSB" } ,
-      { "x"         , "Reserved"          } ,
-      { "PCMSR"     , "Prefetch control MSR"  } ,                    // bit 13
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,                        // bit 16
-      { "CPUIDUD"   , "CPUID disable for non-privileged software" } ,
-      { "EPSF"      , "Enhanced predictive store forwarding"      } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,                        // bit 24
+      { "LAS"       , "LFENCE always serializing"                  } , // bit 2
+      { "SPCL"      , "SMM page configuration lock"                } , // bit 3
+      { "x"         , "Reserved"                                   } ,
+      { "x"         , "Reserved"                                   } ,
+      { "NSCB"      , "Null selector clear base"                   } , // bit 6
+      { "UAIGN"     , "Upper address ignore"                       } ,
+      { "AIBRS"     , "Automatic IBRS"                             } , // bit 8
+      { "NOSCM"     , "No SMM control MSR (MSR C001_0116h is absent)"  } ,
+      { "FSRSTS"    , "Fast short REP STOSB"                       } ,
+      { "FSRCMP"    , "Fast short REPE CMPSB"                      } ,
+      { "PMC2LEG"   , "Performance Legacy CTL2 precise retire"     } , // bit 12
+      { "PCMSR"     , "Prefetch control MSR"                       } , // bit 13
+      { "L2TX32"    , "L2 TLB size encoded as x32 units"           } , // bit 14
+      { "ERMSB"     , "AMD enhanced REP MOVSB/STOSB"               } , // bit 15
+      { "OP0F017"   , "AMD reservation opcodes 0F 01/7"            } , // bit 16
+      { "CPUIDUD"   , "CPUID disable for non-privileged software"  } ,
+      { "EPSF"      , "Enhanced predictive store forwarding"       } ,
+      { "FSRSCS"    , "Fast short REP SCASB"                       } ,
+      { "ICPREF"    , "Instruction cache prefetch"                 } , // bit 20
+      { "FP512D"    , "FP512 supports downgrading to FP256"        } ,
+      { "WLHEUR"    , "Workload based heuristic to OS"             } ,
+      { "x"         , "Reserved"                                   } ,
+      { "ERAPS"     , "Enhanced return address predictor security" } , // bit 24
       { "x"         , "Reserved"          } ,
       { "x"         , "Reserved"          } ,
       { "SBPB"      , "Selective branch predictor barrier"  } ,       // bit 27
@@ -59,7 +59,8 @@ private final static String[][] DECODER_EAX =
       { "SRSO NK"   , "SRSO at user/kernel boundaries absent"    } ,  // bit 30
       { "SRSO MF"   , "Can use MSR BP_CFG to mitigate SRSO"      } }; // bit 31
 private final static Object[][] DECODER_EBX =
-    { { "Microcode patch size, 16-byte units" ,  11 ,  0 } };
+    { { "Microcode patch size, 16-byte units" ,  15 ,   0 } ,
+      { "Return address predictor size (x8)"  ,  23 ,  16 } };
 
 @Override String[][] getParametersList()
     {
