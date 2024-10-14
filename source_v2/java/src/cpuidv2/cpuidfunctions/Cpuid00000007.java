@@ -160,8 +160,10 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "INVD PRV"     , "INVD execution prevention after BIOS POST done" } ,
       { "x"            , "Reserved" } };  // bit 31
 private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
-    { { "PPIN"         , "Protected Processor Inventory Number" } ,          // bit 0
-      { "TSE"          , "Total storage encryption, PBNDKB instruction" } }; // bit 1
+    { { "PPIN"         , "Protected Processor Inventory Number"         } ,   // bit 0
+      { "TSE"          , "Total storage encryption, PBNDKB instruction" } ,   // bit 1
+      { "x"            , "Reserved"                                     } ,
+      { "NOCPLIM"      , "CPUID maximum function limit not supported"   } };  // bit 3
 private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,                                       // bit 0
       { "x"            , "Reserved" } ,
