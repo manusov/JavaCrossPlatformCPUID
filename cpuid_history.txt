@@ -1,3 +1,21 @@
+CPUID v2.00.10 (October, 15, 2024)
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000025h    -       EAX     5-0     Minimum supported RMP segment size.
+80000025h    -       EAX    11-6     Maximum supported RMP segment size.
+80000025h    -       EBX     9-0     Number of cacheable RMP segments.
+80000025h    -       EBX     10      Flag: number of cached segments is a hard limit.
+---------------------------------------------------------------------------------------------------
+Data source:
+57238_C1_pub_1.pdf
+Processor Programming Reference (PPR) for AMD Family 1Ah Model 02h, Revision C1 Processors.
+Volume 1 of 7.
+Rev 0.24. September 29, 2024.
+Document Number: 57238.
+
+
 CPUID v2.00.09 (October, 14, 2024)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------

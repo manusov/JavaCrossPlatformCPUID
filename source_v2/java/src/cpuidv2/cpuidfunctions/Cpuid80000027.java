@@ -9,7 +9,7 @@ https://github.com/manusov?tab=repositories
 (C) Manusov I.V. Refactoring at 2024.
 -------------------------------------------------------------------------------
 Class for support CPUID Extended Function 80000027h =
-Reserved (undocumented) function.
+Hetero workload classification.
 */
 
 package cpuidv2.cpuidfunctions;
