@@ -36,8 +36,28 @@ private final static String[][] DECODER_EAX =
       { "RIP INV"     , "Invalid RIP indication" } , 
       { "OP BRN FUSE" , "Fused branch micro-op indication" } ,
       { "IBS F MSR"   , "IBS fetch control extended MSR" } ,
-      { "IBS OP D"    , "IBS op data 4 MSR" } ,                                   // bit 10
-      { "IBS L3MF"    , "L3 miss filtering for instruction based sampling" } };   // bit 11
+      { "IBS OP D"    , "IBS op data 4 MSR" } ,                                // bit 10
+      { "IBS L3MF"    , "L3 miss filtering for instruction based sampling" } , // bit 11
+      { "IBS LATF"    , "Filtering of IBS samples based on load latency" },    // bit 12
+      { "x"           , "Reserved" },    // bit 13
+      { "x"           , "Reserved" },
+      { "x"           , "Reserved" },
+      { "x"           , "Reserved" },
+      { "x"           , "Reserved" },
+      { "x"           , "Reserved" },    // bit 18
+      { "SIMP DTLB"   , "Simplified DTLB page size and miss reporting" } , // bit 19
+      { "x"           , "Reserved" } ,   // bit 20
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } ,
+      { "x"           , "Reserved" } };  // bit 31
 
 @Override String[][] getParametersList()
     {

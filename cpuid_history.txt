@@ -1,3 +1,24 @@
+CPUID v2.00.11 (October, 15, 2024)
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000008h    -       ECX    11-0     Number of threads - 1 per package (bit field width updated).
+8000000Ah    -       EDX     31      ESHDINT   , Enhanced shutdown intercept.
+8000001Ah    -       EAX     3       FP512     , Hardware AVX 512-bit instead 2 x 256 emulation.
+8000001Bh    -       EAX     12      IBS LATF  , Filtering of IBS samples based on load latency.
+8000001Bh    -       EAX     19      SIMP DTLB , Simplified DTLB page size and miss reporting.
+8000001Fh    -       EAX     22      GSTINTC   , Guest intercept control for SEV ES guests.
+8000001Fh    -       EAX     23      SEGRMP    , Segmented reverse map table.
+---------------------------------------------------------------------------------------------------
+Data source:
+57238_C1_pub_1.pdf
+Processor Programming Reference (PPR) for AMD Family 1Ah Model 02h, Revision C1 Processors.
+Volume 1 of 7.
+Rev 0.24. September 29, 2024.
+Document Number: 57238.
+
+
 CPUID v2.00.10 (October, 15, 2024)
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------

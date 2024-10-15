@@ -28,7 +28,8 @@ Cpuid8000001A()
 private final static Object[][] DECODER_EAX =
     { { "FP128, Hardware SSE 128-bit instead 2 x 64 emulation"   , 0 , 0 } ,
       { "MOVU,  Prefer unaligned 128 bit instead MOVL/MOVH"      , 1 , 1 } ,
-      { "FP256, Hardware AVX 256-bit instead 2 x 128 emulation"  , 2 , 2 } };
+      { "FP256, Hardware AVX 256-bit instead 2 x 128 emulation"  , 2 , 2 } ,
+      { "FP512, Hardware AVX 512-bit instead 2 x 256 emulation"  , 3 , 3 } };
 
 @Override String[][] getParametersList()
     {

@@ -63,7 +63,7 @@ private final static String[][] DECODER_EBX =
       { "IBPB RET"  , "Clear return address predictor by MSR"              } ,
       { "BR SAMP"   , "Branch sampling"                  } };         // bit 31
 private final static Object[][] DECODER_ECX =
-    { { "Number of threads per processor - 1" ,  7 ,  0 } ,
+    { { "Number of threads per processor - 1" , 11 ,  0 } ,
       { "APIC ID size"                        , 15 , 12 } ,
       { "Performance TSC size"                , 17 , 16 } };
 private final static Object[][] DECODER_EDX =

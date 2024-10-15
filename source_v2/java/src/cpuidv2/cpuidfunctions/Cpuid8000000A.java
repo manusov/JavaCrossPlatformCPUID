@@ -62,7 +62,7 @@ private final static String[][] DECODER_EDX =
       { "SGPFIX"   , "Hypervisor spurious GP fault fixed" } ,  // bit 28
       { "LCK THR"  , "Bus lock threshold" } ,
       { "IDL HLT"  , "Idle HLT intercept" } ,
-      { "x"        , "Reserved" } };  // bit 31
+      { "ESHDINT"  , "Enhanced shutdown intercept" } };  // bit 31
 
 @Override String[][] getParametersList()
     {

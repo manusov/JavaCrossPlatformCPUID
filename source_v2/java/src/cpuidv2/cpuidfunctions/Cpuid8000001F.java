@@ -48,8 +48,8 @@ private final static String[][] DECODER_EAX =
       { "IBSVSG"  , "IBS virtualization for SEV-ES guests" } ,       // bit 19
       { "PMC SEV" , "PMC virtualization for SEV-ES and SEV-SNP" } ,  // bit 20
       { "RMPREAD" , "RMPREAD instruction" } ,
-      { "x"       , "Reserved" } ,
-      { "x"       , "Reserved" } ,
+      { "GSTINTC" , "Guest intercept control for SEV ES guests" } ,
+      { "SEGRMP"  , "Segmented reverse map table" } ,
       { "VMSA RP" , "VM Save Area Register Protection" } ,  // bit 24
       { "SMT PT"  , "SMT protection from sibling thread side channel" } ,
       { "SC AVIC" , "Secure AVIC" } ,                  // bit 26
