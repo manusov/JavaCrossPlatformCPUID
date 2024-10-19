@@ -1,3 +1,45 @@
+CPUID v2.00.12 (October, 19, 2024)
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       EAX     31      MOVRS    , Move read-shared value instructions variants.
+00000007h    1       ECX     5       MSR-IMM  , Immediate form of RDMSR and WRMSRNS instructions.
+
+0000001Eh    1       EAX     0       AMX-INT8 , AMX computational operations for 8-bit integers.
+0000001Eh    1       EAX     1       AMX-BF16 , AMX computational operations for bfloat 16-bit.
+0000001Eh    1       EAX     2       AMX-COMP , AMX complex instructions.
+0000001Eh    1       EAX     3       AMX-FP16 , AMX computational operations for float 16-bit.
+0000001Eh    1       EAX     4       AMX-FP8  , AMX computational operations for float 8-bit.
+0000001Eh    1       EAX     5       AMX-TRAN , AMX transpose instructions.
+0000001Eh    1       EAX     6       AMX-TF32 , AMX matrix multiplication for single precision.
+0000001Eh    1       EAX     7       AMX-A512 , AMX-AVX512 TMM to ZMM moves instructions.
+0000001Eh    1       EAX     8       AMX-MVRS , AMX move read-shared instructions.
+
+00000023h    0       EAX     5-0     Intel architectural performance sub-leaves bitmap (changed).
+
+00000023h    4       EBX     3       Allow in record mode for performance counters.
+00000023h    4       EBX     7-4     CNTR , Counters group sub-groups bitmap.
+00000023h    4       EBX     9-8     LBR  , Last branch records groups code.
+00000023h    4       EBX    23-16    XER  , XSAVE enabled registers group bitmap.
+00000023h    4       EBX     29      GPR  , GPR group in PEBS.
+00000023h    4       EBX     30      AUX  , AUX group in PEBS.
+
+00000023h    5       EAX    31-0     Bitmap for GP counters with architectural PEBS.
+00000023h    5       EBX    31-0     Bitmap for GP counters PEBS+PDIST (precise distribution).
+00000023h    5       ECX    31-0     Bitmap for fixed counters with architectural PEBS.
+00000023h    5       EDX    31-0     Bitmap for fixed counters PEBS+PDIST (precise distribution).
+---------------------------------------------------------------------------------------------------
+Data source:
+1) architecture-instruction-set-extensions-programming-reference.pdf
+   Intel Architecture Instruction Set Extensions and Future Features.
+   Programming Reference.
+   October 2024.
+   Document Number: 319433-054.
+2) Additional information:
+   https://www.intel.com/content/www/us/en/developer/articles/technical/timed-process-event-based-sampling-tpebs.html
+
+
 CPUID v2.00.11 (October, 15, 2024)
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------

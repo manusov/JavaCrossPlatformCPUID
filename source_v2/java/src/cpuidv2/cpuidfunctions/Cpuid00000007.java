@@ -158,18 +158,19 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "INVD PRV"     , "INVD execution prevention after BIOS POST done" } ,
-      { "x"            , "Reserved" } };  // bit 31
+      { "MOVRS"        , "Move read-shared value instructions variants"   } };  // bit 31
 private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
-    { { "PPIN"         , "Protected Processor Inventory Number"         } ,   // bit 0
-      { "TSE"          , "Total storage encryption, PBNDKB instruction" } ,   // bit 1
-      { "x"            , "Reserved"                                     } ,
-      { "NOCPLIM"      , "CPUID maximum function limit not supported"   } };  // bit 3
+    { { "PPIN"         , "Protected Processor Inventory Number"           } ,   // bit 0
+      { "TSE"          , "Total storage encryption, PBNDKB instruction"   } ,   // bit 1
+      { "x"            , "Reserved"                                       } ,
+      { "NOCPLIM"      , "CPUID maximum function limit not supported"     } };  // bit 3
 private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
-    { { "x"            , "Reserved" } ,                                       // bit 0
+    { { "x"            , "Reserved" } ,                                         // bit 0
       { "x"            , "Reserved" } ,
-      { "LEGACY-R"     , "Legacy reduced OS instruction set architecture" } , // bit 2
+      { "LEGACY-R"     , "Legacy reduced OS instruction set architecture" } ,   // bit 2
       { "x"            , "Reserved" } ,
-      { "SIPI64"       , "64-bit startup interprocessor interrupt" } };       // bit 4
+      { "SIPI64"       , "64-bit startup interprocessor interrupt"        } ,   // bit 4
+      { "MSR-IMM"      , "Immediate form of RDMSR, WRMSRNS instructions"  } };  // bit 5
 private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,  // bit 0
       { "x"            , "Reserved" } ,
