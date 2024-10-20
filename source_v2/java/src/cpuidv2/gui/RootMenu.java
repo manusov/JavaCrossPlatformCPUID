@@ -74,7 +74,7 @@ private final static boolean[][] ITEM_ACTIVE =
       { true } };
 // Listeners (handlers) for service buttons press.
 private final AbstractAction[] listeners = 
-    { new SaveReportAction() ,
+    { new SaveReportAction(false) ,
       new LoadInstLatX64Action() ,
       new SaveBinaryAction() ,
       new LoadBinaryAction() ,
@@ -222,10 +222,15 @@ public void showGUI()
 
 final class SaveReportAction extends AbstractAction
     {
+    private final boolean reportType;
+    public SaveReportAction(boolean repType)
+    {
+        reportType = repType;
+    }
     @Override public void actionPerformed( ActionEvent e )
         {
         AbstractTableModel[] models = 
-            CPUIDv2.getApplicationsManager().getTabModels();
+            CPUIDv2.getApplicationsManager().getTabModels(reportType);
         SaveReport saver = new SaveReport();
         String nameAndPoint = CPUIDv2.getShortName() + ".";
         saver.reportFullDialogue( null, models, null,
@@ -385,7 +390,7 @@ final class BReportFull implements ActionListener
     {
     @Override public void actionPerformed ( ActionEvent e )
         {
-        SaveReportAction saveReport = new SaveReportAction();
+        SaveReportAction saveReport = new SaveReportAction(true);
         saveReport.actionPerformed( e );
         }
     }

@@ -32,6 +32,9 @@ private final Application[] applications =
     new InfoJvm()
     };
 
+private final static int CPUID_APP_INDEX = 0;
+private final int APP_COUNT = applications.length;
+
 // List of application leafs. 
 // Contains pairs { application ID , application leaf ID }.
 // CPUID application (0) has 3 leafs (Summary, Dump, Details). 
@@ -166,19 +169,23 @@ public void buildTabPanels()
         }
     }
 
-public AbstractTableModel[] getTabModels() 
+public AbstractTableModel[] getTabModels(boolean cpuidOnly) 
     { 
     ArrayList<AbstractTableModel> models = new ArrayList<>();
-    for( Application ap : applications )
+    for( int i=0; i<APP_COUNT; i++ )
         {
-        AbstractTableModel[] groupModels = ap.getPanelModels();
-        if( groupModels != null )
+        if((!cpuidOnly) || i == CPUID_APP_INDEX)
             {
-            for( AbstractTableModel tabModel : groupModels )
+            Application ap = applications[i];
+            AbstractTableModel[] groupModels = ap.getPanelModels();
+            if( groupModels != null )
                 {
-                if( tabModel != null )
+                for( AbstractTableModel tabModel : groupModels )
                     {
-                    models.add( tabModel );
+                    if( tabModel != null )
+                        {
+                        models.add( tabModel );
+                        }
                     }
                 }
             }
@@ -186,8 +193,6 @@ public AbstractTableModel[] getTabModels()
     return models.isEmpty() ? null : 
             models.toArray( new AbstractTableModel[models.size()] );
     }
-
-private final static int CPUID_APP_INDEX = 0;
 
 public void rebuildAfterCpuidReload( boolean getPhysical )
     {

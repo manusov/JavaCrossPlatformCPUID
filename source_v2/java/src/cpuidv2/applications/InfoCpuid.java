@@ -104,6 +104,7 @@ private final static int F_SCREEN_ID = 3;
 
 @Override void refreshPanels()
     {
+    previousIndex = -1;
     ServiceCpuid service = CPUIDv2.getServiceCpuid();
     Device device = service.getCpuidDevice();
     String[][] ups = device.getScreensListsUp();

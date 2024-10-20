@@ -1,3 +1,13 @@
+CPUID v2.00.13 (October, 20, 2024)
+1) GUI bug fixed at CPUID functions tree, "Details" tab. 
+   Bug is: no refresh CPUID leaf information if after dump reload or redetection click
+   same leaf at tree.
+2) Some changes for text report saving modes:
+   Root menu "File\Save report" is full system report (CPUID, Clock, Context, OS, JVM).
+   Button "Report full" report CPUID functions. Can use at dump files download scenarios.
+   Button "Report this" report data from current selected screen.
+
+
 CPUID v2.00.12 (October, 19, 2024)
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
