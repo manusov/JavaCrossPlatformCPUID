@@ -1,0 +1,26 @@
+display       = on      ; on = console output enabled, off = disabled
+report        = on      ; on = save report to file output.txt enabled, off = disabled
+waitkey       = on      ; on = wait "Press ENTER" after operation, off = no waiting
+
+reg_gpr       = off     ; on = show general purpose registers dump example. User can add code for registers values setup.
+reg_selectors = off     ; on = show segments selectors (CS, DS, ES, SS, FS, GS).
+reg_fpu       = off     ; on = show x87 FPU data registers (ST0-ST7).
+reg_mmx       = off     ; on = show MMX data registers (MM0-MM7).
+reg_sse       = off     ; on = show SSE data registers as hex (XMM0-XMM15 for x64, XMM0-XMM7 for ia32).
+reg_avx256hex = off     ; on = show AVX256 data registers as hex (YMM0-YMM15 for x64, YMM0-XMM7 for ia32).
+reg_avx256dec = off     ; on = show AVX256 data registers as doubles decimal.
+reg_avx512hex = off     ; on = show AVX512 data registers as hex. (ZMM0-ZMM31 for x64, ZMM0-ZMM7 for ia32).
+reg_avx512dec = off     ; on = show AVX512 data registers as doubles decimal.
+reg_predicate = off     ; on = show AVX512 predicates registers (K0-K7).
+memory_dump   = off     ; on = show memory dump. Region base, size and data setup by user code.
+
+wow64         = off     ; on = detect WoW64 (Windows-on-Windows, for ia32 application only), off = disabled
+cpuid         = off     ; on = get cpuid all functions data without affinization for this thread
+subfnc        = off     ; on = get cpuid data for selected function and subfunction, without affinization for this thread
+affcpuid      = on      ; on = get cpuid all functions data, with affinization for selected logical CPU
+affsubfnc     = off     ; on = get cpuid data for selected function and subfunction, with affinization for selected logical CPU
+oscontext     = on      ; on = get OS context management bitmaps: CPU-supported features and OS-enabled features
+tsc           = on      ; on = measure TSC (Time Stamp Counter) clock frequency.
+affinity      = on      ; on = get OS affinity bitmap and CPU count (simple system info variant, see also next two keys)
+topology      = off     ; on = get platform topology hierarchy (CPUs, caches, domains)
+extopology    = off     ; on = get platform topology extended hierarchy (CPUs, caches, domains)
