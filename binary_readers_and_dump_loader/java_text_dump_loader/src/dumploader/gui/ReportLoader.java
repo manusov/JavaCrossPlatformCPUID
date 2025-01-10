@@ -50,11 +50,12 @@ private FileNameExtensionFilter filter;
 /*
 Patterns for string detection.
 */
-private final static String ALL_S   =
-    "CPUID 00000000: 00000000-00000000-00000000-00000000";
-private final static String START_S  = "CPUID";
-private final static String SPLIT_S1 = ": ";
-private final static String SPLIT_S2 = "-| ";
+    private final static String ALL_S   =
+        "CPUID 00000000: 00000000-00000000-00000000-00000000";
+    private final static String START_S  = "CPUID";
+//  private final static String SPLIT_S1 = ": ";
+    private final static String SPLIT_S1 = ":|\t";  // Separate by ":" or TAB.
+    private final static String SPLIT_S2 = "-| ";
 
 /*
 Helper method for load text file, parse it and visual status
@@ -83,6 +84,11 @@ OUTPUT:  int[][] array contains data if loaded OK, otherwise null.
                     String[] words = line.split( SPLIT_S1 );
                     if ( ( words != null ) && ( words.length >= 2 ) )
                     {
+                        for( int i=0; i<words.length; i++ )
+                        {   // Reject spaces and tabs at start and at end.
+                            words[i] = words[i].replace("\t", " ").trim();
+                        }
+
                         String function = words[0];
                         String[] values = words[1].split( SPLIT_S2 );
                         if ( ( function.length() == 8 ) &&

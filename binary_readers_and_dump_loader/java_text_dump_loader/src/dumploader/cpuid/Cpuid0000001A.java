@@ -67,28 +67,43 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
     {
         HYBRID_CPU resultType = HYBRID_CPU.DEFAULT;
         String resultName = "n/a";
-        
-        EntryCpuidSubfunction[] fn4 = container.buildEntries( 0x00000004 );
-        
         boolean cacheL3present = false;
         int smtThreads = 1;
+        
+        EntryCpuidSubfunction[] fn4 = container.buildEntries( 0x00000004 );
         if( fn4 != null )
         {
-            for( int i=0; i<fn4.length; i++ )
+            for ( EntryCpuidSubfunction e : fn4 )
             {
-                if ( ( fn4[i].eax & 0xFF ) == 0x63 )
+                if ( ( e.eax & 0xFF ) == 0x63) 
                 {
                     cacheL3present = true;
                     break;
                 }
             }
             
-            for( int i=0; i<fn4.length; i++ )
+            for ( EntryCpuidSubfunction e : fn4) 
             {
-                if ( ( fn4[i].eax & 0xFF ) == 0x21 )
+                if ( ( e.eax & 0xFF) == 0x21 ) 
                 {
-                    smtThreads = ( ( fn4[i].eax >>> 14 ) & 0xFFF ) + 1;
+                    smtThreads = (( e.eax >>> 14) & 0xFFF ) + 1;
                     break;
+                }
+            }
+        }
+        
+        EntryCpuidSubfunction[] fn1F = container.buildEntries( 0x0000001F );
+        if( fn1F != null )
+        {
+            for ( EntryCpuidSubfunction e : fn1F ) 
+            {
+                if ( ( e.ecx & 0xFF00 ) == 0x0100) 
+                {
+                    int a = e.ebx & 0xFFFF;
+                    if ( a > 0 )
+                    {
+                        smtThreads = a;
+                    }
                 }
             }
         }

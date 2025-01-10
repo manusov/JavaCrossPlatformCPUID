@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/java_text_dump_loader/src/dumploader/cpuenum/CpuRootEnumerator.java</file>
+            <file>file:/E:/java_text_dump_loader/src/dumploader/DumpLoader.java</file>
+            <file>file:/E:/java_text_dump_loader/src/dumploader/cpuid/Cpuid0000001A.java</file>
+            <file>file:/E:/java_text_dump_loader/src/dumploader/gui/ReportLoader.java</file>
+        </group>
     </open-files>
 </project-private>

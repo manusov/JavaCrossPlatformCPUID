@@ -21,7 +21,7 @@ import javax.swing.SwingUtilities;
 
 public class DumpLoader 
 {
-    private final static String VERSION_NAME  = "v0.00.07";
+    private final static String VERSION_NAME  = "v0.00.08";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
             "Information belongs to Universe.";
