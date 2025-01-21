@@ -80,6 +80,11 @@ private boolean DG = false;
 private boolean iM = false;
 private boolean dU = false;
 
+private boolean Ha = false;
+private boolean Hc = false;
+private boolean Ia = false;
+private boolean Ic = false;
+
 private boolean is_vmx (int val_1_ecx )
     {
     return ( BIT_EXTRACT_LE( (val_1_ecx), 5, 6 ) ) != 0;
@@ -204,6 +209,11 @@ private boolean strsub( String st, String subst )
     dU = is_intel && ! is_mobile && stash.br.core_ultra;
     /* Montage Jintide, undocumented, only instlatx64 example */
     iM = is_intel && stash.br.montage;
+    
+    Ha = stash.smallCore;
+    Hc = stash.bigCore;
+    Ia = stash.smallCore && stash.br.core;
+    Ic = stash.bigCore && stash.br.core;
     
     final CriteriaDescriptor[] INTEL_DATA = {
 /*
@@ -1151,7 +1161,21 @@ private boolean strsub( String st, String subst )
     new FMS (    0, 6, 11,10,2,       "Intel Core i*-13xx (Raptor Lake)"),
     new FMS (    0, 6, 11,10,3,       "Intel Core i*-13xx (Raptor Lake)"),
     new FM  (    0, 6, 11,10,         "Intel (unknown type) (Raptor Lake-P)"),  // LX*; DPTF*
+//    
+    new FMSQ(    0, 6, 11,14,  0, da, "Intel Atom x7000E (Alder Lake-N A0/N0)"), // ILPMDF* 20230512
+    new FMSQ(    0, 6, 11,14,  0, Ia, "Intel Core i*-N300 N-Series E-core (Alder Lake-N A0/N0)"),
+    new FMSQ(    0, 6, 11,14,  0, Ic, "Intel Core i*-N300 N-Series P-core (Alder Lake-N A0/N0)"), // possibly no P-cores ever for this model
+    new FMSQ(    0, 6, 11,14,  0, Ha, "Intel N-Series E-core (Alder Lake-N A0/N0 / Twin Lake N0)"),
+    new FMSQ(    0, 6, 11,14,  0, Hc, "Intel N-Series P-core (Alder Lake-N A0/N0 / Twin Lake N0)"), // possibly no P-cores ever for these model
+    new FMS (    0, 6, 11,14,  0,     "Intel N-Series / Atom x7000E (Alder Lake-N A0/N0 / Twin Lake N0)"),
+    new FMQ (    0, 6, 11,14,     da, "Intel Atom x7000E (Alder Lake-N)"), // ILPMDF* 20230512
+    new FMQ (    0, 6, 11,14,     Ia, "Intel Core i*-N300 N-Series E-core (Alder Lake-N)"),
+    new FMQ (    0, 6, 11,14,     Ic, "Intel Core i*-N300 N-Series P-core (Alder Lake-N)"), // possibly no P-cores ever for this model
+    new FMQ (    0, 6, 11,14,     Ha, "Intel N-Series E-core (Alder Lake-N / Twin Lake)"),
+    new FMQ (    0, 6, 11,14,     Hc, "Intel N-Series P-core (Alder Lake-N / Twin Lake)"), // possibly no P-cores ever for this model
+    new FM  (    0, 6, 11,14,         "Intel N-Series / Atom x7000E (Alder Lake-N / Twin Lake)"),
     new FM  (    0, 6, 11,14,         "Intel (unknown type) (Alder Lake)"),     // Coreboot* (or maybe Gracemont "little" cores tied to Alder Lake?) (Alder Lake-N stepping 0=A0, when I'm sure)
+//
     new FMS (    0, 6, 11,15,2,       "Intel Core i*-13xx (Raptor Lake)"),
     new FQ  (    0, 6,            sX, "Intel Xeon (unknown model)"),
     new FQ  (    0, 6,            se, "Intel Xeon (unknown model)"),

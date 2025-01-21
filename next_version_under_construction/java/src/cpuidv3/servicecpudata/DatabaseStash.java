@@ -33,8 +33,9 @@ public boolean  saw_4  = false;    // means CPUID function 00000004h supported
 public boolean  saw_b  = false;    // means CPUID function 0000000Bh supported
 public boolean  saw_1f = false;    // means CPUID function 0000001Fh supported
 
-public boolean bigCore   = false;  // Intel Hybrid technology support
-public boolean smallCore = false;
+public boolean hybridCheck = false;   // Intel Hybrid technology support.
+public boolean bigCore     = false;
+public boolean smallCore   = false;
 
 public int    val_0_eax = 0;
 public int    val_1_eax = 0;

@@ -182,13 +182,13 @@ public class SAL
             for( int i=0; i<loadedData.length; i+=5 )
             {
                 int function = loadedData[i + 0];
-                if( function != previous )
+                if(( function != previous )||( function == 0 ))
                 {
                     previous = function;
                     subfunction = 0;
                 }
                 long f = function;
-                long s = subfunction;
+                long s = subfunction++;
                 long eax = loadedData[i + 1];
                 long ebx = loadedData[i + 2];
                 long ecx = loadedData[i + 3];

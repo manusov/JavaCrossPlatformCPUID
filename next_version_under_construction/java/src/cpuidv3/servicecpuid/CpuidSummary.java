@@ -53,7 +53,10 @@ private final static int AMD_MP_TOPOLOGY      = 0x8000001E;
 
 private final static int TRANSMETA_INFO       = 0x80860001;
 
-private final static int INTEL_HYBRID         = 0x0000001A;
+private final static int INTEL_HYBRID_CHECK   = 0x00000007;
+private final static int INTEL_HYBRID_BIT     = 15;
+
+private final static int INTEL_HYBRID_TYPE    = 0x0000001A;
 private final static int HYBRID_BIG           = 0x40;
 private final static int HYBRID_SMALL         = 0x20;
 
@@ -298,8 +301,16 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
             stash.transmeta_proc_rev = e[0].ebx;
             }
         
-        // Intel Hybrid CPU support
-        e = container.buildEntries( INTEL_HYBRID );
+        // Intel Hybrid CPU support: check hybrid technology flag.
+        e = container.buildEntries( INTEL_HYBRID_CHECK );
+        if ( ( e != null )&&( e.length >= 1 ) )
+        {
+            stash.hybridCheck = 
+                ( ( e[0].edx & ( 1 << INTEL_HYBRID_BIT ) ) != 0);
+        }        
+        
+        // Intel Hybrid CPU support: get core type, even if check = false.
+        e = container.buildEntries( INTEL_HYBRID_TYPE );
         if ( ( e != null )&&( e.length >= 1 ) )
             {
             int hybridId = e[0].eax >> 24;
@@ -391,18 +402,18 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
             else if ( uarch != null )
                 a.add( new String[] { "Microarchitecture" , uarch } );
             
-//            
             if ( synth1 != null )
                 a.add( new String[] { "Model" , synth1 } );
             if ( synth2 != null )
                 a.add( new String[] { "Model (extended)" , synth2 } );
             if ( msynth != null )
                 a.add( new String[] { "Model (reconstructed)" , msynth } );
-//
+
             if ( ( nameMP != null )&&( mpc > 0 )&&( mph > 0 ))
             { 
                 a.add( new String[]{ "", "" } );
-                if    ( !( stash.bigCore || stash.smallCore ) )
+                if ( ( !stash.hybridCheck )||
+                     ( !( stash.bigCore || stash.smallCore ) ) )
                 {
                     String sm;
                     if ( mpu > 1 )
