@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -87,6 +91,25 @@ class FM extends F
     }
 }
 
+class FMm extends FM
+{
+    @Override boolean detector( int tfms, int bi ) 
+    { 
+        return __FMm( tfms ) == _XF( extendedFamily ) + _XM( extendedModel ) +
+                               _F( family ) + _Mm( model );
+    }
+    
+    FMm( int xf, int f, int xm, int m, String name )
+    {
+        super( xf, f, xm, m, name );
+    }
+    
+    FMm( int xf, int f, int xm, int m, WriteParms writer )
+    {
+        super( xf, f, xm, m, writer );
+    }
+}
+
 class FMS extends FM
 {
     final int stepping;
@@ -125,6 +148,27 @@ class TFM extends FM
     {
         super( xf, f, xm, m, writer );
         type = t;
+    }
+}
+
+class TFMS extends TFM
+{
+    final int stepping;
+    @Override boolean detector( int tfms, int bi ) 
+    { 
+        return __TFMS( tfms ) == _T( type ) + 
+                                 _XF( extendedFamily ) + _XM( extendedModel ) +
+                                 _F( family ) + _M( model ) + _S( stepping );
+    }
+    TFMS( int t, int xf, int f, int xm, int m, int s, String name )
+    {
+        super( t, xf, f, xm, m, name );
+        stepping = s;
+    }
+    TFMS( int t, int xf, int f, int xm, int m, int s, WriteParms writer )
+    {
+        super( t, xf, f, xm, m, writer );
+        stepping = t;
     }
 }
 
@@ -169,6 +213,25 @@ class FMQ extends FM
         question = q;
     }
     FMQ( int xf, int f, int xm, int m, boolean q, WriteParms writer )
+    {
+        super( xf, f, xm, m, writer );
+        question = q;
+    }
+}
+
+class FMmQ extends FMm
+{
+    final boolean question;
+    @Override boolean detector( int tfms, int bi )
+    { 
+        return question && super.detector( tfms, bi );
+    }
+    FMmQ( int xf, int f, int xm, int m, boolean q, String name )
+    {
+        super( xf, f, xm, m, name );
+        question = q;
+    }
+    FMmQ( int xf, int f, int xm, int m, boolean q, WriteParms writer )
     {
         super( xf, f, xm, m, writer );
         question = q;

@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -29,13 +33,14 @@ HYPERVISOR_T  hypervisor = null;
 // and fields, set as dump analyzing results.
 // this public part must be actual before buildStash() method call.
 
-public boolean  saw_4  = false;    // means CPUID function 00000004h supported
-public boolean  saw_b  = false;    // means CPUID function 0000000Bh supported
-public boolean  saw_1f = false;    // means CPUID function 0000001Fh supported
+public boolean  saw_4  = false;    // Means CPUID function 00000004h supported.
+public boolean  saw_b  = false;    // Means CPUID function 0000000Bh supported.
+public boolean  saw_1f = false;    // Means CPUID function 0000001Fh supported.
 
 public boolean hybridCheck = false;   // Intel Hybrid technology support.
 public boolean bigCore     = false;
 public boolean smallCore   = false;
+public boolean zeroCore    = false;
 
 public int    val_0_eax = 0;
 public int    val_1_eax = 0;

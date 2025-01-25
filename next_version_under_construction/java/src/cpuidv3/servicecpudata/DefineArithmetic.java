@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -27,6 +31,11 @@ final static int __FMS  ( int v ) { return v & 0x0fff0fff; }  // family, model, 
 final static int __TF   ( int v ) { return v & 0x0ff03f00; }  // type, family
 final static int __TFM  ( int v ) { return v & 0x0fff3ff0; }  // type, family, model
 final static int __TFMS ( int v ) { return v & 0x0fff3fff; }  // type, family, model, stepping
+// Todd Allen note:
+// In Zen-based CPUs, the model uses only the extended model and the
+// high-order bit of the model.  The low-order 3 bits of the model are part
+// of the stepping.
+final static int __FMm  ( int v ) { return v & 0x0fff0f80; }  // family, model (model bit D3 only)
 
 // shifts counts for processor signature bitfields
 final static int _T ( int v ) { return v << 12; }  // type
@@ -35,6 +44,8 @@ final static int _M ( int v ) { return v << 4;  }  // model
 final static int _S ( int v ) { return v;       }  // stepping
 final static int _XF( int v ) { return v << 20; }  // extended family
 final static int _XM( int v ) { return v << 16; }  // extended model
+// By Todd Allen note, see above.
+final static int _Mm ( int v ) { return ( v & 8 ) << 4;  }  // model (model bit D3 only)
 
 // combinations of processor signature bitfields
 final static int _FM( int xf, int f, int xm, int m ) 

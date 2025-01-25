@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -110,6 +114,11 @@ AmdMicroarchitecture( DatabaseStash stash )
     new FM  ( 7, 15, 0, 0,     ()-> { u = "Jaguar"; p = "28nm"; } ),
     new FM  ( 7, 15, 2, 6,     ()-> { u = "Cato"; p = "28nm"; } ), // only instlatx64 example; engr sample?
     new FM  ( 7, 15, 3, 0,     ()-> { u = "Puma 2014"; p = "28nm"; } ),
+    // Todd Allen note:
+    // In Zen-based CPUs, the model uses only the extended model and the
+    // high-order bit of the model.  The low-order 3 bits of the model are part
+    // of the stepping.
+/*
     new FM  ( 8, 15, 0, 0,     ()-> { u = "Zen"; p = "14nm"; } ), // instlatx64 engr sample
     new FM  ( 8, 15, 0, 1,     ()-> { u = "Zen"; p = "14nm"; } ),
     new FM  ( 8, 15, 0, 8,     ()-> { u = "Zen+"; p = "12nm"; } ),
@@ -122,7 +131,55 @@ AmdMicroarchitecture( DatabaseStash stash )
     new FM  ( 10, 15, 1, 1,    ()-> { u = "Zen 4"; p = "5nm"; } ),
     new FM  ( 10, 15, 6, 1,    ()-> { u = "Zen 4"; p = "5nm"; } ),
     new FM  ( 10, 15, 7, 4,    ()-> { u = "Zen 4"; p = "5nm"; } ),
-    new F   ( 10, 15,          ()-> { u = "Zen 3"; p = "7nm"; } ) };  // undocumented, LX*
+*/
+    // Note FMm ignores model bits 3-0.
+    new FMm ( 8,15, 0, 0,      ()-> { u = "Zen"; p = "14nm"; } ),
+    new FMm ( 8,15, 0, 8,      ()-> { u = "Zen+"; p = "12nm"; } ),
+    new FMm ( 8,15, 1, 0,      ()-> { u = "Zen"; p = "14nm"; } ), // found only on en.wikichip.org & instlatx64 examples
+    new FMm ( 8,15, 1, 8,      ()-> { u = "Zen+"; p = "12nm"; } ),
+    new FMm ( 8,15, 2, 0,      ()-> { u = "Zen"; p = "14nm"; } ),
+    new FMm ( 8,15, 3, 0,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // found only on en.wikichip.org
+    new FMm ( 8,15, 4, 0,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // only instlatx64 example; engr sample?
+    new FMm ( 8,15, 6, 0,      ()-> { u = "Zen 2"; p = "7nm"; } ),
+    new FMm ( 8,15, 6, 8,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // undocumented, but instlatx64 samples
+    new FMm ( 8,15, 7, 0,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // undocumented, but samples from Steven Noonan
+    new FMm ( 8,15, 8, 0,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // undocumented, but sample via instlatx64
+    new FMm ( 8,15, 9, 0,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // undocumented, but sample via instlatx64 from @patrickschur_
+    new FMm ( 8,15, 9, 8,      ()-> { u = "Zen 2"; p = "7nm"; } ),  // undocumented, but sample via instlatx64 from @zimogorets
+    new FMm ( 8,15, 10, 0,     ()-> { u = "Zen 2"; p = "7nm"; } ),  // sample via instlatx64 from @ExecuFix
+    new FMm (10,15, 0, 0,      ()-> { u = "Zen 3"; p = "TSMC 7nm"; } ),
+    new FMm (10,15, 0, 8,      ()-> { u = "Zen 3"; p = "TSMC 7nm"; } ),  // undocumented, but sample via instlatx64 from @ExecuFix
+    new FMm (10,15, 1, 0,      ()-> { u = "Zen 4"; p = "TSMC N5"; } ),
+    new FMm (10,15, 1, 8,      ()-> { u = "Zen 4"; p = "TSMC 5FF"; } ),  // undocumented, but sample via instlatx64 from @patrickschur_
+    new FMm (10,15, 2, 0,      ()-> { u = "Zen 3"; p = "TSMC 7FF"; } ),
+    new FMm (10,15, 3, 0,      ()-> { u = "Zen 3"; p = "TSMC N5P"; } ),  // undocumented, but sample via instlatx64 from @patrickschur_
+    new FMm (10,15, 4, 0,      ()-> { u = "Zen 3"; p = "TSMC N6"; } ),  // undocumented, but instlatx64 sample
+    new FMm (10,15, 5, 0,      ()-> { u = "Zen 3"; p = "TSMC 7nm"; } ),
+    new FMm (10,15, 6, 0,      ()-> { u = "Zen 4"; p = "TSMC N5"; } ),  // undocumented, but instlatx64 sample
+    new FMm (10,15, 7, 0,      ()-> { u = "Zen 4"; p = "TSMC 4nm"; } ),  // undocumented, but engr sample via instlatx64 from bakerlab.org (6220795)
+    new FMm (10,15, 7, 8,      ()-> { u = "Zen 4"; p = "TSMC 4nm"; } ),  // Coreboot*
+    new FMm (10,15, 8, 0,      ()-> { u = "Zen 4"; p = "TSMC N5"; } ),  // undocumented, but LKML: https://lkml.org/lkml/2023/7/21/835 from AMD's Yazen Ghannam
+    new FMm (10,15, 9, 0,      ()-> { u = "Zen 4"; p = "TSMC N5"; } ),  // undocumented, but LKML: https://lkml.org/lkml/2023/7/21/835 from AMD's Yazen Ghannam
+    new FMm (10,15, 10, 0,     ()-> { u = "Zen 4c"; p = "TSMC N5"; } ),
+    new F   ( 10, 15,          ()-> { u = "Zen 3"; p = "7nm"; } ),  // undocumented, LX*
+    
+    new FMm (11,15, 0, 0,      ()-> { u = "Zen 5";  p = "TSMC N4P"; } ),  // LX* & tangentially documented: 58088 AMD 1Ah Models 00h-0Fh and Models 10h-1Fh ACPI v6.5 Porting Guide
+    new FMm (11,15, 0, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 1, 0,      ()-> { u = "Zen 5"; p = "TSMC N3"; } ),  // tangentially documented: 58088 AMD 1Ah Models 00h-0Fh and Models 10h-1Fh ACPI v6.5 Porting Guide
+    new FMm (11,15, 1, 8,      ()-> { u = "Zen 5"; p = "TSMC N3"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 2, 0,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but engr sample via instlatx64 from milkyway.cs.rpi.edu (996435)
+    new FMm (11,15, 2, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 3, 0,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 3, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 4, 0,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LX* & engr sample via instlatx64 from einsteinathome.org (13142934)
+    new FMm (11,15, 4, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 5, 0,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 5, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 6, 0,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but engr sample via instlatx64 from @kepler_l2
+    new FMm (11,15, 6, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    new FMm (11,15, 7, 0,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ),  // undocumented, but LX* & engr sample via instlatx64 from @kepler_l2
+    new FMm (11,15, 7, 8,      ()-> { u = "Zen 5"; p = "TSMC N4P"; } ) };  // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian
+    
     return detectorHelper( tfms, 0, AMD_MICROARCHITECTURE );
     }
 }

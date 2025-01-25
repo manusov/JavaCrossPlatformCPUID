@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -34,8 +38,11 @@ HygonSynth( DatabaseStash stash )
 @Override String[] detect( int stdTfms, int extTfms, int bi )
     {
     final CriteriaDescriptor[] HYGON_DATA = {
-    new FMS ( 9, 15,  0, 0,  1, "Hygon Dhyana (A1)" ),
-    new FMS ( 9, 15,  0, 0,  2, "Hygon Dhyana (A2)" ) };
+    new FMS ( 9, 15,  0, 0,  1,  "Hygon Dhyana (A1)" ),
+    new FMS ( 9, 15,  0, 0,  2,  "Hygon Dhyana (A2)" ), 
+    new FMS ( 9, 15,  0, 1,  1,  "Hygon Dhyana (B1)"),
+    new FMS ( 9, 15,  0, 2,  2,  "Hygon Dhyana (C2)")  };
+    
     String s1 = detectorHelper( stdTfms, bi, HYGON_DATA );
     String s2 = detectorHelper( extTfms, bi, HYGON_DATA );
     return new String[] { s1, s2 };

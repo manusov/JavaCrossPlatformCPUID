@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -49,15 +53,20 @@ void decodeBrandString( DatabaseStash stash )
     stash.br.xeon_mp   = strsub( brand, "Xeon MP" )   ||
                          strsub( brand, "Xeon(TM) MP" ) ||
                          strsub( brand, "Xeon(R)" );
-    stash.br.xeon      = strsub( brand, "Xeon" );
+    stash.br.xeon      = strsub( brand, "Xeon" ) ||
+                         strsub( brand, "XEON" );
     stash.br.pentium_m = strsub( brand, "Pentium(R) M" );
     stash.br.pentium_d = strsub( brand, "Pentium(R) D" );
     stash.br.extreme   = strreg( brand, " ?X[0-9][0-9][0-9][0-9]" );
     stash.br.generic   = strsub( brand, "Genuine Intel(R) CPU" );
-    stash.br.scalable  = strsub( brand, "Bronze" ) ||
-                         strsub( brand, "Silver")  ||
-                         strsub( brand, "Gold")    ||
-                         strsub( brand, "Platinum" );
+    stash.br.scalable  = strsub( brand, "Bronze" )  ||
+                         strsub( brand, "Silver")   ||
+                         strsub( brand, "Gold")     ||
+                         strsub( brand, "Platinum") ||
+                         strsub( brand, "BRONZE" )  ||
+                         strsub( brand, "SILVER")   ||
+                         strsub( brand, "GOLD")     ||
+                         strsub( brand, "PLATINUM");
     stash.br.u_line    = strreg( brand, "Core.* [im][3579]-[0-9]*U" ) ||
                          strreg( brand, "Pentium.* [0-9]*U" )         ||
                          strreg( brand, "Celeron.* [0-9]*U" );

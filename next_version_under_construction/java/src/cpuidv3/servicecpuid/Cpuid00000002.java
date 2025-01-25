@@ -12,6 +12,9 @@ Cache/TLB/Prefetch descriptors.
 
 package cpuidv3.servicecpuid;
 
+import cpuidv3.servicecpudata.VendorDetectPhysical.VENDOR_T;
+import static cpuidv3.servicecpudata.VendorDetectPhysical.VENDOR_T.VENDOR_CYRIX;
+import static cpuidv3.servicecpudata.VendorDetectPhysical.VENDOR_T.VENDOR_VIA;
 import java.util.ArrayList;
 
 class Cpuid00000002 extends ReservedFunctionCpuid
@@ -165,6 +168,15 @@ private final static Object[][] CACHE_DESCRIPTORS =
       { 0xFE, "TLB information: query standard level 0000_0018h instead" } ,
       { 0xFF, "cache information: query standard level 0000_0004h instead" } };
 
+private final static Object[][] CACHE_DESCRIPTORS_CYRIX_VIA =
+    { { 0x00, "null: unused descriptor"               } ,
+      { 0x70, "TLB: 4K pages, 4-way, 32 entries\n"    } ,
+      { 0x74, "Cyrix-specific: ?\n"                   } ,
+      { 0x77, "Cyrix-specific: ?\n"                   } ,
+      { 0x80, "L1 cache: 16K, 4-way, 16 byte lines\n" } ,
+      { 0x82, "Cyrix-specific: ?\n"                   } ,
+      { 0x84, "L2 cache: 1M, 8-way, 32 byte lines\n"  } };
+
 @Override String[][] getParametersList()
     {
     ArrayList<String[]> a = new ArrayList<>();
@@ -198,6 +210,15 @@ private final static Object[][] CACHE_DESCRIPTORS =
 
 private ArrayList<String[]> storeDescriptors( int data, int count )
     {
+        
+    VENDOR_T cpuVendor = container.getCpuVendor();
+    Object[][] cacheDescriptors = CACHE_DESCRIPTORS;
+//  if (( cpuVendor == VENDOR_CYRIX )||( cpuVendor == VENDOR_VIA ))
+    if ( cpuVendor == VENDOR_CYRIX )
+    {
+        cacheDescriptors = CACHE_DESCRIPTORS_CYRIX_VIA;
+    }
+       
     ArrayList<String[]> strings = new ArrayList<>();
     for( int i=0; i<count; i++ )
         {
@@ -207,7 +228,7 @@ private ArrayList<String[]> storeDescriptors( int data, int count )
             String[] s = new String[2];
             s[0] = String.format( "%02X", x );
             boolean flag = false;
-            for ( Object[] item : CACHE_DESCRIPTORS ) 
+            for ( Object[] item : cacheDescriptors ) // CACHE_DESCRIPTORS ) 
                 {
                 if (x == (int) item[0]) 
                     {

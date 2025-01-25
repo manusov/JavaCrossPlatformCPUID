@@ -59,6 +59,7 @@ private final static int INTEL_HYBRID_BIT     = 15;
 private final static int INTEL_HYBRID_TYPE    = 0x0000001A;
 private final static int HYBRID_BIG           = 0x40;
 private final static int HYBRID_SMALL         = 0x20;
+private final static int HYBRID_ZERO          = 0;
 
 private void writeMaxLevel( int x, ArrayList<String[]> a )
     {
@@ -312,11 +313,23 @@ Initializing data base for CPU/Hypervisor vendor-specific late detection.
         // Intel Hybrid CPU support: get core type, even if check = false.
         e = container.buildEntries( INTEL_HYBRID_TYPE );
         if ( ( e != null )&&( e.length >= 1 ) )
-            {
+        {
             int hybridId = e[0].eax >> 24;
-            if ( hybridId == HYBRID_BIG ) stash.bigCore = true;
-            else if ( hybridId == HYBRID_SMALL ) stash.smallCore = true;
+            switch ( hybridId ) 
+            {
+                case HYBRID_BIG:
+                    stash.bigCore = true;
+                    break;
+                case HYBRID_SMALL:
+                    stash.smallCore = true;
+                    break;
+                case HYBRID_ZERO:
+                    stash.zeroCore = true;
+                    break;
+                default:
+                    break;
             }
+        }
 
         // set model string at stash, used for parsing and keywords detection
         stash.brand = model;

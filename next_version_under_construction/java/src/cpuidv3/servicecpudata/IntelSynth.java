@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -84,6 +88,8 @@ private boolean Ha = false;
 private boolean Hc = false;
 private boolean Ia = false;
 private boolean Ic = false;
+private boolean Pa = false;
+private boolean Pc = false;
 
 private boolean is_vmx (int val_1_ecx )
     {
@@ -210,11 +216,13 @@ private boolean strsub( String st, String subst )
     /* Montage Jintide, undocumented, only instlatx64 example */
     iM = is_intel && stash.br.montage;
     
-    Ha = stash.smallCore;
-    Hc = stash.bigCore;
-    Ia = stash.smallCore && stash.br.core;
-    Ic = stash.bigCore && stash.br.core;
-    
+    Ha = is_intel && stash.smallCore;
+    Hc = is_intel && stash.bigCore;
+    Ia = is_intel && stash.smallCore && stash.br.core;
+    Ic = is_intel && stash.bigCore && stash.br.core;
+    Pa = is_intel && stash.br.pentium && stash.smallCore;
+    Pc = is_intel && stash.br.pentium && stash.bigCore;
+        
     final CriteriaDescriptor[] INTEL_DATA = {
 /*
     new FM  (    0, 4,  0, 0,         "Intel i80486DX-25/33, .18um" ), // process from sandpile.org
@@ -250,6 +258,7 @@ private boolean strsub( String st, String subst )
     new FMS (    0, 5,  0, 2, 11,     "Intel Pentium P54C 75 - 200 (cB1)" ),
     new FMS (    0, 5,  0, 2, 12,     "Intel Pentium P54C 75 - 200 (cC0)" ),
     new FM  (    0, 5,  0, 2,         "Intel Pentium P54C 75 - 200" ),
+    new TFMS(1,  0, 5,  0, 3,  2,     "Intel Pentium OverDrive for i486 (P24T C0)"), // no docs
     new TFM (1,  0, 5,  0, 3,         "Intel Pentium OverDrive for i486 (P24T)" ), // no docs
     // Intel docs (242480).
     new TFM (1,  0, 5,  0, 4,         "Intel Pentium OverDrive for P54C" ),
@@ -740,6 +749,11 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  4, 5,  0, MP, "Intel Mobile Pentium 3500U / 3600U / 3500Y (Mobile U/Y) (Haswell-ULT B0)" ),
     new FMSQ(    0, 6,  4, 5,  0, MC, "Intel Mobile Celeron 2900U (Mobile U/Y) (Haswell-ULT B0)" ),
     new FMS (    0, 6,  4, 5,  0,     "Intel Core (unknown type) (Haswell-ULT B0)" ),
+    new FMSQ(    0, 6,  4, 5,  1, dc, "Intel Core i*-4000U (Haswell-ULT C0/D0)"), // no docs, but example from Brice Goglin
+    new FMSQ(    0, 6,  4, 5,  1, Mc, "Intel Mobile Core i*-4000Y (Mobile U/Y) (Haswell-ULT C0/D0)"),
+    new FMSQ(    0, 6,  4, 5,  1, MP, "Intel Mobile Pentium 3500U / 3600U / 3500Y (Mobile U/Y) (Haswell-ULT C0/D0)"),
+    new FMSQ(    0, 6,  4, 5,  1, MC, "Intel Mobile Celeron 2900U (Mobile U/Y) (Haswell-ULT C0/D0)"),
+    new FMS (    0, 6,  4, 5,  1,     "Intel Core (unknown type) (Haswell-ULT C0/D0)"), // ILPMDF* 20190514 
     new FMQ (    0, 6,  4, 5,     dc, "Intel Core i*-4000U (Haswell-ULT)" ), // no docs, but example from Brice Goglin
     new FMQ (    0, 6,  4, 5,     Mc, "Intel Mobile Core i*-4000Y (Mobile U/Y) (Haswell-ULT)" ),
     new FMQ (    0, 6,  4, 5,     MP, "Intel Mobile Pentium 3500U / 3600U / 3500Y (Mobile U/Y) (Haswell-ULT)" ),
@@ -747,6 +761,13 @@ private boolean strsub( String st, String subst )
     new FM  (    0, 6,  4, 5,         "Intel Core (unknown type) (Haswell-ULT)" ),
     // Intel docs (328899,328903) omit the stepping numbers for (0,6),(4,6) C0 & D0.
     // MRG* mentions (0,6),(4,6),1, but doesn't specify which stepping name it is.
+    new FMSQ(    0, 6,  4, 6,  1, Mc, "Intel Mobile Core i*-4000Y (Mobile H) (Crystal Well C0)"),
+    new FMSQ(    0, 6,  4, 6,  1, dc, "Intel Core i*-4000 / Mobile Core i*-4000 (Desktop R) (Crystal Well C0)"),
+    new FMSQ(    0, 6,  4, 6,  1, MP, "Intel Mobile Pentium 3500U / 3600U / 3500Y (Mobile H) (Crystal Well C0)"),
+    new FMSQ(    0, 6,  4, 6,  1, dC, "Intel Celeron G1800 (Desktop R) (Crystal Well C0)"),
+    new FMSQ(    0, 6,  4, 6,  1, MC, "Intel Mobile Celeron 2900U (Mobile H) (Crystal Well C0)"),
+    new FMSQ(    0, 6,  4, 6,  1, dP, "Intel Pentium G3000 (Desktop R) (Crystal Well C0)"),
+    new FMS (    0, 6,  4, 6,  1,     "Intel Core (unknown type) (Crystal Well C1)"),
     new FMQ (    0, 6,  4, 6,     Mc, "Intel Mobile Core i*-4000Y (Mobile H) (Crystal Well)" ),
     new FMQ (    0, 6,  4, 6,     dc, "Intel Core i*-4000 / Mobile Core i*-4000 (Desktop R) (Crystal Well)" ),
     new FMQ (    0, 6,  4, 6,     MP, "Intel Mobile Pentium 3500U / 3600U / 3500Y (Mobile H) (Crystal Well)" ),
@@ -824,6 +845,7 @@ private boolean strsub( String st, String subst )
     // no stepping name.
     new FMSQ(    0, 6,  5, 5,  2, sS, "Intel Scalable Bronze/Silver/Gold/Platinum (Skylake B0/L0)" ),
     new FMSQ(    0, 6,  5, 5,  2, sX, "Intel Xeon W 2000 / D-2100 (Skylake B0/L0)" ),
+    new FMSQ(    0, 6,  5, 5,  3, sS, "Intel Xeon Scalable Bronze/Silver/Gold/Platinum (Skylake B1)"), // ILPMDF* 2019112
     new FMSQ(    0, 6,  5, 5,  4, sS, "Intel Scalable Bronze/Silver/Gold/Platinum (Skylake H0/M0/U0)" ),
     new FMSQ(    0, 6,  5, 5,  4, sX, "Intel Xeon W 2000 / D-2100 (Skylake H0/M0/U0)" ), // D-2100 from MRG* 2018-03-06
     new FMSQ(    0, 6,  5, 5,  4, dc, "Intel Core i9-7000X (Skylake-X H0/M0/U0)" ), // only from MRG* 2018-03-06
@@ -833,7 +855,10 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  5, 5,  7, dc, "Intel Core i*-10000X (Cascade Lake-X B1/L1/R1)" ), // no docs, but instlatx64 example
     new FMSQ(    0, 6,  5, 5,  7, sS, "Intel Scalable (2nd Gen) Bronze/Silver/Gold/Platinum (Cascade Lake B1/L1/R1)" ),
     new FMSQ(    0, 6,  5, 5,  7, sX, "Intel Xeon W 2000 (Cascade Lake-W B1/L1/R1)" ),
+    new FMSQ(    0, 6,  5, 5, 10, sS, "Intel Xeon Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Cooper Lake A0)"),
     new FMS (    0, 6,  5, 5, 10,     "Intel (unknown type) (Cooper Lake)" ),
+    new FMSQ(    0, 6,  5, 5, 11, sS, "Intel Xeon Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Cooper Lake A1)"),
+    new FMS (    0, 6,  5, 5, 11,     "Intel (unknown type) (Cooper Lake A1)"),
     new FMQ (    0, 6,  5, 5,     sS, "Intel Scalable Bronze/Silver/Gold/Platinum (Skylake / Cascade Lake)" ),
     new FMQ (    0, 6,  5, 5,     sX, "Intel Xeon W 2000 / D-2100 (Skylake / Cascade Lake)" ),
     new FMQ (    0, 6,  5, 5,     dc, "Intel Core i*-6000X / i*-7000X (Skylake-X) / i*-10000X (Cascade Lake-X)" ),
@@ -901,13 +926,19 @@ private boolean strsub( String st, String subst )
     new FMS (    0, 6,  6, 6,  3,     "Intel Core (Cannon Lake D0)" ),
     new FM  (    0, 6,  6, 6,         "Intel Core (Cannon Lake)" ),
     new FM  (    0, 6,  6, 7,         "Intel Core (Cannon Lake)"), // DPTF*
+    new FMSQ(    0, 6,  6,10,  5, sS, "Intel Xeon Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Ice Lake-SP C0)"), // ILPMDF* 20210608
+    new FMS (    0, 6,  6,10,  5,     "Intel Xeon (unknown type) (Ice Lake-SP C0)"), // ILPMDF* 20210608
     new FMSQ(    0, 6,  6,10,  6, sS, "Intel Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Ice Lake D2/M1)"),
-    new FMQ (    0, 6,  6,10,     sS, "Intel Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Ice Lake)"),
-    new FM  (    0, 6,  6,10,         "Intel (unknown type) (Ice Lake)" ),
-    new FM  (    0, 6,  6,12,         "Intel Core (Ice Lake)" ),  // no spec update; only MSR_CPUID_table* so far; DPTF* claims this is Meteor Lake S.
+    new FMS (    0, 6,  6,10,  6,     "Intel Xeon (unknown type) (Ice Lake-SP D2/M1)"),
+    new FMQ (    0, 6,  6,10,     sS, "Intel Xeon Scalable (3rd Gen) Bronze/Silver/Gold/Platinum (Ice Lake)"),
+    new FM  (    0, 6,  6,10,         "Intel Xeon (unknown type) (Ice Lake-SP)" ),
+    new FMSQ(    0, 6,  6,12,  1, sX, "Intel Xeon D-1700/2700 (Ice Lake-D U1/U2)"),
+    new FMS (    0, 6,  6,12,  1,     "Intel (unknown type) (Ice Lake-D U1/U2)"),
+    new FMQ (    0, 6,  6,12,     sX, "Intel Xeon D-1700/2700 (Ice Lake-D)"),
+    new FM  (    0, 6,  6,12,         "Intel Core (Ice Lake-D)" ),  // no spec update; only MSR_CPUID_table* so far; DPTF* claims this is Meteor Lake S.
     // No spec update; only MRG* 2018-03-06, 2019-08-31.  It is some sort of Atom,
     // but no idea which uarch or core.
-    new FM  (    0, 6,  6,14,         "Intel Puma 7" ),
+    new FM  (    0, 6,  6,14,         "Intel Puma 7 (Cougar Mountain)" ),
     // No spec update; only instlatx64 example.
     new FM  (    0, 6,  7, 5,         "Intel Spreadtrum SC9853I-IA" ),
     // Intel docs (336562).
@@ -934,12 +965,22 @@ private boolean strsub( String st, String subst )
     // seen in an instlatx64 sample.
     new FMS (    0, 6,  7,14,  0,     "Intel Core i*-10000 (Ice Lake-U/Y A0)" ),
     new FMS (    0, 6,  7,14,  1,     "Intel Core i*-10000 (Ice Lake-U/Y B0)" ),
+    new FMS (    0, 6,  7,14,  5,     "Intel Core i*-10000 (Ice Lake-U/Y D1)"),
     new FM  (    0, 6,  7,14,         "Intel Core i*-10000 (Ice Lake-U/Y)" ),
     // no spec update; only MSR_CPUID_table* so far
     // MRG* 2018-03-06 mentions stepping 0, but doesn't specify which stepping name it is.
     new FM  (    0, 6,  8, 5,         "Intel Xeon Phi (Knights Mill)" ),
+    new FMS (    0, 6,  8, 6,  4,     "Intel Atom P5900 (Snow Ridge B0)"),
+    new FMS (    0, 6,  8, 6,  5,     "Intel Atom P5900 (Snow Ridge B1)"),
+    new FMS (    0, 6,  8, 6,  7,     "Intel Atom P5300 / P5700 (Snow Ridge) / C5000 (Parker Ridge)"),
     new FM  (    0, 6,  8, 6,         "Intel Atom (Elkhart Lake)" ),
-    new FM  (    0, 6,  8,10,         "Intel Atom (Lakefield)" ), // no spec update; LX*
+//  new FM  (    0, 6,  8,10,         "Intel Atom (Lakefield)" ), // no spec update; LX*
+    new FMSQ(    0, 6,  8,10,  1, Ha, "Intel Core i*-L1000 E-core (Lakefield B2/B3)"), // instlatx64 sample
+    new FMSQ(    0, 6,  8,10,  1, Hc, "Intel Core i*-L1000 P-core (Lakefield B2/B3)"), // instlatx64 sample
+    new FMS (    0, 6,  8,10,  1,     "Intel Core i*-L1000 (Lakefield B2/B3)"),
+    new FMQ (    0, 6,  8,10,     Ha, "Intel Core i*-L1000 E-core (Lakefield)"),
+    new FMQ (    0, 6,  8,10,     Hc, "Intel Core i*-L1000 P-core (Lakefield)"),
+    new FM  (    0, 6,  8,10,         "Intel Core i*-L1000 (Lakefield)"),
     // changed
     // Coreboot* provides steppings.
     // new FMS (    0, 6,  8,12,  0,     "Intel Core (Tiger Lake-U A0)" ),
@@ -952,12 +993,15 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  8,12,  1, dP, "Intel Pentium Gold 7505 (Tiger Lake-U B0)"),
     new FMSQ(    0, 6,  8,12,  1, dc, "Intel Core i*-11000 / i*-1100G* (Tiger Lake-U B0)"),
     new FMS (    0, 6,  8,12,  1,     "Intel (unknown type) (Tiger Lake-U B0)"),
+    new FMSQ(    0, 6,  8,12,  2, dc, "Intel Core i*-11000 / i*-1100G* (Tiger Lake-U C0)"),
+    new FMS (    0, 6,  8,12,  2,     "Intel (unknown type) (Tiger Lake-U C0)"),
     new FMQ (    0, 6,  8,12,     dC, "Intel Celeron (Tiger Lake-U)"),
     new FMQ (    0, 6,  8,12,     dP, "Intel Pentium (Tiger Lake-U)"),
     new FMQ (    0, 6,  8,12,     dc, "Intel Core (Tiger Lake-U)"),
     new FM  (    0, 6,  8,12,         "Intel (unknown type) (Tiger Lake-U)"),
     // no spec update; only MSR_CPUID_table* so far
     // Coreboot* provides stepping.
+    new FMS (    0, 6,  8,13,  0,     "Intel Core (Tiger Lake-H P0)"), // LX*
     new FMS (    0, 6,  8,13,  1,     "Intel Core (Tiger Lake R0)"),
     new FM  (    0, 6,  8,13,         "Intel Core (Tiger Lake)"),
     // end of changed
@@ -983,9 +1027,35 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  8,14, 12, dP, "Intel Pentium 6000U (Comet Lake-U V1)" ), // MRG* 2019-08-31 pinned down stepping
     new FMSQ(    0, 6,  8,14, 12, dC, "Intel Celeron 5000U (Comet Lake-U V1)" ), // MRG* 2019-08-31 pinned down stepping
     new FMS (    0, 6,  8,14, 12,     "Intel (unknown type) (Whiskey Lake-U V0 / Comet Lake-U V1)" ),
+    new FMS (    0, 6,  8,14, 13,     "Intel (unknown type) (Whiskey Lake-U V0)"), // ILPMDF* 20190312
     new FM  (    0, 6,  8,14,         "Intel Core (unknown type) (Kaby Lake / Amber Lake-Y / Whiskey Lake-U / Comet Lake-U)" ),
-    new FMS (    0, 6,  8,15, 8,      "Intel Xeon (Sapphire Rapids)" ),
-    new FM  (    0, 6,  8,15,         "Intel Xeon (unknown type) (Sapphire Rapids)" ), // LX*
+    
+    new FMSQ(    0, 6,  8,15,  3, sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids D)"),
+    new FMSQ(    0, 6,  8,15,  3, sX, "Intel Xeon W 2400/3400 (Sapphire Rapids D)"),
+    new FMS (    0, 6,  8,15,  3,     "Intel Xeon (unknown type) (Sapphire Rapids D)"),
+    new FMSQ(    0, 6,  8,15,  4, sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E0)"),
+    new FMSQ(    0, 6,  8,15,  4, sX, "Intel Xeon W 2400/3400 (Sapphire Rapids E0)"),
+    new FMS (    0, 6,  8,15,  4,     "Intel Xeon (unknown type) (Sapphire Rapids E0)"),
+    new FMSQ(    0, 6,  8,15,  5, sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E2)"),
+    new FMSQ(    0, 6,  8,15,  5, sX, "Intel Xeon W 2400/3400 (Sapphire Rapids E2)"),
+    new FMS (    0, 6,  8,15,  5,     "Intel Xeon (unknown type) (Sapphire Rapids E2)"),
+    new FMSQ(    0, 6,  8,15,  6, sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E3)"),
+    new FMSQ(    0, 6,  8,15,  6, sX, "Intel Xeon W 2400/3400 (Sapphire Rapids E3)"),
+    new FMS (    0, 6,  8,15,  6,     "Intel Xeon (unknown type) (Sapphire Rapids E3)"),
+    new FMSQ(    0, 6,  8,15,  7, sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E4/S2)"),
+    new FMSQ(    0, 6,  8,15,  7, sX, "Intel Xeon W 2400/3400 (Sapphire Rapids E4/S2)"),
+    new FMS (    0, 6,  8,15,  7,     "Intel Xeon (unknown type) (Sapphire Rapids E4/S2)"),
+    
+//  new FMS (    0, 6,  8,15, 8,      "Intel Xeon (Sapphire Rapids)" ),
+//  new FM  (    0, 6,  8,15,         "Intel Xeon (unknown type) (Sapphire Rapids)" ), // LX*
+    new FMSQ(    0, 6,  8,15,  8, sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E5/B3/S3) / Xeon Scalable (5th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids U1)"),
+    new FMSQ(    0, 6,  8,15,  8, sX, "Intel Xeon W 2400/3400 (Sapphire Rapids E5/B3/S3)"),
+    new FMS (    0, 6,  8,15,  8,     "Intel Xeon (unknown type) (Sapphire Rapids E5/B3/S3)"),
+    new FMQ (    0, 6,  8,15,     sS, "Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids)"),
+    new FMQ (    0, 6,  8,15,     sX, "Intel Xeon W 2400/3400 (Sapphire Rapids)"),
+    new FM  (    0, 6,  8,15,         "Intel Xeon (unknown type) (Sapphire Rapids)"),
+    new FM  (    0, 6,  9, 5,         "Intel (unknown type) (Sapphire Rapids)"), // Intel SDE 9.24.0 misc/cpuid/spr/cpuid.def
+
     // changed
     // LX*.  Coreboot* provides stepping.
     // new FMS (    0, 6,  9, 6,  0,     "Intel Atom (Elkhart Lake A0)" ),
@@ -1016,16 +1086,75 @@ private boolean strsub( String st, String subst )
     new FM  (    0, 6,  9, 6,         "Intel (unknown type) (Elkhart Lake)"),
     // Coreboot* provides A0 stepping.
     // Intel docs (682436) mention Core stepping value 2, but omit stepping name.
+    new FMSQ(    0, 6,  9, 7,  0, Ha, "Intel Core i*-12000 E-core (Alder Lake-S A0)"),
+    new FMSQ(    0, 6,  9, 7,  0, Hc, "Intel Core i*-12000 P-core (Alder Lake-S A0)"),
     new FMSQ(    0, 6,  9, 7,  0, dc, "Intel Core (Alder Lake-S A0)"),
     new FMS (    0, 6,  9, 7,  0,     "Intel (unknown type) (Alder Lake-S A0)"),
+    
+    new FMSQ(    0, 6,  9, 7,  1, Ha, "Intel Core i*-12000 E-core (Alder Lake-S B0)"),
+    new FMSQ(    0, 6,  9, 7,  1, Hc, "Intel Core i*-12000 P-core (Alder Lake-S B0)"),
+    new FMSQ(    0, 6,  9, 7,  1, dc, "Intel Core i*-12000 (Alder Lake-S B0)"),
+    new FMS (    0, 6,  9, 7,  1,     "Intel (unknown type) (Alder Lake-S B0)"),
+    new FMSQ(    0, 6,  9, 7,  2, Ha, "Intel Core i*-12000 E-core (Alder Lake-S/HX C0)"),
+    new FMSQ(    0, 6,  9, 7,  2, Hc, "Intel Core i*-12000 P-core (Alder Lake-S/HX C0)"),
+    new FMSQ(    0, 6,  9, 7,  2, dc, "Intel Core i*-12000 (Alder Lake-S/HX C0)"),
+    new FMS (    0, 6,  9, 7,  2,     "Intel (unknown type) (Alder Lake-S/HX C0)"),
+    new FMSQ(    0, 6,  9, 7,  3, Ha, "Intel Core i*-12000 / i*-1200P E-core (Alder Lake-P/H)"),
+    new FMSQ(    0, 6,  9, 7,  3, Hc, "Intel Core i*-12000 / i*-1200P P-core (Alder Lake-P/H)"),
+    new FMSQ(    0, 6,  9, 7,  3, dc, "Intel Core i*-12000 / i*-1200P (Alder Lake-P/H)"),
+    new FMS (    0, 6,  9, 7,  3,     "Intel (unknown type) (Alder Lake-P/H)"),
+    new FMSQ(    0, 6,  9, 7,  4, Ha, "Intel Core i*-1200U E-core (Alder Lake-U G0)"),
+    new FMSQ(    0, 6,  9, 7,  4, Hc, "Intel Core i*-1200U P-core (Alder Lake-U G0)"),
+    new FMSQ(    0, 6,  9, 7,  4, dc, "Intel Core i*-1200U (Alder Lake-U G0)"),
+    new FMS (    0, 6,  9, 7,  4,     "Intel (unknown type) (Alder Lake-U G0)"),
+    new FMSQ(    0, 6,  9, 7,  5, Ha, "Intel Core i*-12000 E-core (Alder Lake-S H0)"),
+    new FMSQ(    0, 6,  9, 7,  5, Hc, "Intel Core i*-12000 P-core (Alder Lake-S H0)"),
+    new FMSQ(    0, 6,  9, 7,  5, dc, "Intel Core i*-12000 (Alder Lake-S H0)"),
+    new FMSQ(    0, 6,  9, 7,  5, dP, "Intel Pentium Gold G7400 (Alder Lake-S H0)"),
+    new FMS (    0, 6,  9, 7,  5,     "Intel (unknown type) (Alder Lake-S H0)"),
+    new FMQ (    0, 6,  9, 7,     Ha, "Intel Core i*-12000 E-core (Alder Lake-S/P/H/U)"),
+    new FMQ (    0, 6,  9, 7,     Hc, "Intel Core i*-12000 P-core (Alder Lake-S/P/H/U)"),
     new FMQ (    0, 6,  9, 7,     dc, "Intel Core i*-12000K / i*-12000KF (Alder Lake-S)"),
+    new FMQ (    0, 6,  9, 7,     dP, "Intel Pentium Gold G7400 (Alder Lake-S)"), // no docs on Pentium Gold version; instlatx64 sample
     new FM  (    0, 6,  9, 7,         "Intel (unknown type) (Alder Lake-S)"),
     // Coreboot*.  Coreboot* provides stepping.
-    new FMS (    0, 6,  9,10,  0,     "Intel Atom (Alder Lake A0)"),
-    new FMS (    0, 6,  9,10,  1,     "Intel Atom (Alder Lake A1)"),
-    new FMS (    0, 6,  9,10,  2,     "Intel Atom (Alder Lake A2)"),
-    new FMS (    0, 6,  9,10,  4,     "Intel Atom (Alder Lake A3)"),
-    new FM  (    0, 6,  9,10,         "Intel Atom (Alder Lake)"),
+//  new FMS (    0, 6,  9,10,  0,     "Intel Atom (Alder Lake A0)"),
+//  new FMS (    0, 6,  9,10,  1,     "Intel Atom (Alder Lake A1)"),
+//  new FMS (    0, 6,  9,10,  2,     "Intel Atom (Alder Lake A2)"),
+//  new FMS (    0, 6,  9,10,  4,     "Intel Atom (Alder Lake A3)"),
+//  new FM  (    0, 6,  9,10,         "Intel Atom (Alder Lake)"),
+    new FMSQ(    0, 6,  9,10,  0, Ha, "Intel Core i*-12000 E-core (Alder Lake J0)"),
+    new FMSQ(    0, 6,  9,10,  0, Hc, "Intel Core i*-12000 P-core (Alder Lake J0)"),
+    new FMSQ(    0, 6,  9,10,  0, dc, "Intel Core i*-12000 (Alder Lake J0)"),
+    new FMS (    0, 6,  9,10,  0,     "Intel (unknown type) (Alder Lake J0)"),
+    new FMSQ(    0, 6,  9,10,  1, Ha, "Intel Core i*-12000 E-core (Alder Lake Q0)"),
+    new FMSQ(    0, 6,  9,10,  1, Hc, "Intel Core i*-12000 P-core (Alder Lake Q0)"),
+    new FMSQ(    0, 6,  9,10,  1, dc, "Intel Core i*-12000 (Alder Lake Q0)"),
+    new FMS (    0, 6,  9,10,  1,     "Intel (unknown type) (Alder Lake Q0)"),
+    new FMSQ(    0, 6,  9,10,  2, Ha, "Intel Core i*-12000 E-core (Alder Lake K0)"),
+    new FMSQ(    0, 6,  9,10,  2, Hc, "Intel Core i*-12000 P-core (Alder Lake K0)"),
+    new FMSQ(    0, 6,  9,10,  2, dc, "Intel Core i*-12000 (Alder Lake K0)"),
+    new FMS (    0, 6,  9,10,  2,     "Intel (unknown type) (Alder Lake K0)"),
+    new FMSQ(    0, 6,  9,10,  3, Ha, "Intel Core i*-12000 E-core (Alder Lake L0)"),
+    new FMSQ(    0, 6,  9,10,  3, Hc, "Intel Core i*-12000 P-core (Alder Lake L0)"),
+    new FMSQ(    0, 6,  9,10,  3, dc, "Intel Core i*-12000 (Alder Lake L0)"),
+    new FMS (    0, 6,  9,10,  3,     "Intel (unknown type) (Alder Lake L0)"),
+    new FMSQ(    0, 6,  9,10,  4, da, "Intel Atom C1100 (Arizona Beach A0/R0)"),
+    new FMSQ(    0, 6,  9,10,  4, Pa, "Intel Pentium Gold 8500 E-core (Alder Lake R0)"), // no docs on Pentium Gold version; only instlatx64 sample
+    new FMSQ(    0, 6,  9,10,  4, Pc, "Intel Pentium Gold 8500 P-core (Alder Lake R0)"), // no docs on Pentium Gold version; only instlatx64 sample
+    new FMSQ(    0, 6,  9,10,  4, dP, "Intel Pentium Gold 8500 (Alder Lake R0)"), // no docs on Pentium Gold version; only instlatx64 sample
+    new FMSQ(    0, 6,  9,10,  4, Ha, "Intel Core i*-12000 E-core (Alder Lake R0)"),
+    new FMSQ(    0, 6,  9,10,  4, Hc, "Intel Core i*-12000 P-core (Alder Lake R0)"),
+    new FMSQ(    0, 6,  9,10,  4, dc, "Intel Core i*-12000 (Alder Lake R0)"),
+    new FMS (    0, 6,  9,10,  4,     "Intel (unknown type) (Alder Lake R0 / Arizona Beach A0/R0)"),
+    new FMQ (    0, 6,  9,10,     da, "Intel Atom C1100 (Arizona Beach)"),
+    new FMQ (    0, 6,  9,10,     Pa, "Intel Pentium Gold 8500 E-core (Alder Lake)"),
+    new FMQ (    0, 6,  9,10,     Pc, "Intel Pentium Gold 8500 P-core (Alder Lake)"),
+    new FMQ (    0, 6,  9,10,     dP, "Intel Pentium Gold 8500 (Alder Lake)"),
+    new FMQ (    0, 6,  9,10,     Ha, "Intel Core i*-12000 E-core (Alder Lake)"),
+    new FMQ (    0, 6,  9,10,     Hc, "Intel Core i*-12000 P-core (Alder Lake)"),
+    new FMQ (    0, 6,  9,10,     dc, "Intel Core i*-12000 (Alder Lake)"),
+    new FM  (    0, 6,  9,10,         "Intel (unknown type) (Alder Lake / Arizona Beach)"),
     // LX*.  Coreboot* provides stepping.
     new FMSQ(    0, 6,  9,12,  0, dC, "Intel Celeron N4500 / N5100 (Jasper Lake A0)"),
     new FMSQ(    0, 6,  9,12,  0, dP, "Intel Pentium N6000 (Jasper Lake A0)"),
@@ -1044,6 +1173,7 @@ private boolean strsub( String st, String subst )
     new FMSQ(    0, 6,  9,14,  9, sX, "Intel Xeon E3-1200 v6 (Kaby Lake-H B0)" ), // no docs on stepping; only MRG* 2018-03-06
     new FMSQ(    0, 6,  9,14,  9, dC, "Intel Celeron G3930 (Kaby Lake-H B0)" ), // MRG* 2020-01-27 pinned down stepping
     new FMSQ(    0, 6,  9,14, 10, LU, "Intel Core i*-8000 U Line (Coffee Lake D0)" ),
+    new FMSQ(    0, 6,  9,14, 10, dP, "Intel Pentium Gold G5000 (Coffee Lake U0)"), // no docs; only Andrey Rahmatullin sample
     new FMSQ(    0, 6,  9,14, 10, dc, "Intel Core i*-8000 S/H Line (Coffee Lake U0)" ),
     new FMSQ(    0, 6,  9,14, 10, sX, "Intel Xeon E-2100 (Coffee Lake U0)" ), // MRG* 2019-08-31
     new FMSQ(    0, 6,  9,14, 11, dc, "Intel Core i*-8000 S Line (Coffee Lake B0)" ),
@@ -1144,24 +1274,61 @@ private boolean strsub( String st, String subst )
     new FMS (    0, 6, 10, 6,  3,     "Intel Core i*-10000 (Comet Lake-S G1)"),
     new FMS (    0, 6, 10, 6,  5,     "Intel Core i*-10000 (Comet Lake-S Q0)"),
     new FM  (    0, 6, 10, 6,         "Intel Core i*-10000 (Comet Lake)"),
+    new FMSQ(    0, 6, 10, 7,  1, dc, "Intel Core i*-11000 (Rocket Lake B0)"),
+    new FMSQ(    0, 6, 10, 7,  1, sX, "Intel Xeon E-1300 / E-2300G (Rocket Lake B0)"),
+    new FMS (    0, 6, 10, 7,  1,     "Intel (unknown type) (Rocket Lake B0)"),
     new FMQ (    0, 6, 10, 7,     dc, "Intel Core i*-11000 (Rocket Lake)"),
     new FMQ (    0, 6, 10, 7,     sX, "Intel Xeon E-1300 / E-2300G (Rocket Lake)"),
     new FM  (    0, 6, 10, 7,         "Intel (unknown type) (Rocket Lake)"),
     new FM  (    0, 6, 10, 8,         "Intel (unknown type) (Rocket Lake)"),    // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
-    new FMSQ  (  0, 6, 10,10, 4, dU,  "Intel Core Ultra 1xxH (Meteor Lake-M C0)"),
-    new FMS   (  0, 6, 10,10, 4,      "Intel (unknown type) (Meteor Lake-M C0)"),
-    new FMQ   (  0, 6, 10,10,    dU,  "Intel Core Ultra 1xxH (Meteor Lake-M)"),
+    new FMS (    0, 6, 10,10,  0,     "Intel (unknown type) (Meteor Lake-M A0)"), // DPTF*; undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA; Coreboot* provides steppings.
+    new FMS (    0, 6, 10,10,  1,     "Intel (unknown type) (Meteor Lake-M A0)"), // DPTF*; undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA; Coreboot* provides steppings.
+    new FMS (    0, 6, 10,10,  2,     "Intel (unknown type) (Meteor Lake-M B0)"), // DPTF*; Coreboot* provides steppings
+    new FMSQ  (  0, 6, 10,10,  4, dU, "Intel Core Ultra 1xxH (Meteor Lake-M C0)"),
+    new FMS   (  0, 6, 10,10,  4,     "Intel (unknown type) (Meteor Lake-M C0)"),
+    new FMQ   (  0, 6, 10,10,     dU, "Intel Core Ultra 1xxH (Meteor Lake-M)"),
     new FM    (  0, 6, 10,10,         "Intel (unknown type) (Meteor Lake-M)"),  // DPTF*; undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
     new FM  (    0, 6, 10,11,         "Intel (unknown type) (Meteor Lake-N)"),  // DPTF*
     new FM  (    0, 6, 10,12,         "Intel (unknown type) (Meteor Lake-S)"),  // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
     new FM  (    0, 6, 10,13,         "Intel (unknown type) (Granite Rapids)"), // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
+    new FM  (    0, 6, 10,14,         "Intel (unknown type) (Granite Rapids)"), // MSR_CPUID_table*
+    new FMQ (    0, 6, 10,15,     sX, "Intel Xeon 6 (Sierra Forest)"), // MSR_CPUID_table*; sample from CCRT
     new FM  (    0, 6, 10,15,         "Intel (unknown type) (Sierra Forest)"),  // undocumented, but (engr?) sample via instlatx64 from Komachi_ENSAKA
-    new FMS (    0, 6, 11, 7, 1,      "Intel Core i*-13000 (Raptor Lake)"),
+    new FM  (    0, 6, 11, 5,         "Intel (unknown type) (Arrow Lake-U)"), // MSR_CPUID_table*; Intel SDE 9.33.0 misc/cpuid/arl/cpuid.def
+    new FM  (    0, 6, 11, 6,         "Intel Atom (Grand Ridge)"), // MSR_CPUID_table*
+//  new FMS (    0, 6, 11, 7, 1,      "Intel Core i*-13000 (Raptor Lake)"),
+    new FMSQ(    0, 6, 11, 7,  0, Ha, "Intel Core i*-13000 / i*-14000 E-core (Raptor Lake-S/HX A0)"), // Coreboot*
+    new FMSQ(    0, 6, 11, 7,  0, Hc, "Intel Core i*-13000 / i*-14000 P-core (Raptor Lake-S/HX A0)"), // Coreboot*
+    new FMSQ(    0, 6, 11, 7,  0, dc, "Intel Core i*-13000 / i*-14000 (Raptor Lake-S/HX A0)"), // Coreboot*
+    new FMS (    0, 6, 11, 7,  0,     "Intel (unknown type) (Raptor Lake-S/HX A0)"), // Coreboot*
+    new FMSQ(    0, 6, 11, 7,  1, Ha, "Intel Core i*-13000 / i*-14000 E-core (Raptor Lake-S/HX B0)"),
+    new FMSQ(    0, 6, 11, 7,  1, Hc, "Intel Core i*-13000 / i*-14000 P-core (Raptor Lake-S/HX B0)"),
+    new FMSQ(    0, 6, 11, 7,  1, dc, "Intel Core i*-13000 / i*-14000 (Raptor Lake-S/HX B0)"),
+    new FMS (    0, 6, 11, 7,  1,     "Intel (unknown type) (Raptor Lake-S/HX B0)"),
+    new FMQ (    0, 6, 11, 7,     Ha, "Intel Core i*-13000 / i*-14000 E-core (Raptor Lake-S/HX)"),
+    new FMQ (    0, 6, 11, 7,     Hc, "Intel Core i*-13000 / i*-14000 P-core (Raptor Lake-S/HX)"),
+    new FMQ (    0, 6, 11, 7,     dc, "Intel Core i*-13000 / i*-14000 (Raptor Lake-S/HX)"),
     new FM  (    0, 6, 11, 7,         "Intel (unknown type) (Raptor Lake)"),    // LX*; DPTF* (which also says Raptor Lake-S)
-    new FMS (    0, 6, 11,10,2,       "Intel Core i*-13xx (Raptor Lake)"),
-    new FMS (    0, 6, 11,10,3,       "Intel Core i*-13xx (Raptor Lake)"),
+//  new FMS (    0, 6, 11,10,2,       "Intel Core i*-13xx (Raptor Lake)"),
+//  new FMS (    0, 6, 11,10,3,       "Intel Core i*-13xx (Raptor Lake)"),
+    new FMSQ(    0, 6, 11,10,  2, Ha, "Intel Core i*-13000 E-core (Raptor Lake-H/U/P J0)"),
+    new FMSQ(    0, 6, 11,10,  2, Hc, "Intel Core i*-13000 P-core (Raptor Lake-H/U/P J0)"),
+    new FMSQ(    0, 6, 11,10,  2, dc, "Intel Core i*-13000 (Raptor Lake-H/U/P J0)"),
+    new FMS (    0, 6, 11,10,  2,     "Intel (unknown type) (Raptor Lake-H/U/P J0)"),
+    new FMSQ(    0, 6, 11,10,  3, Ha, "Intel Core i*-13000 E-core (Raptor Lake-P Q0)"),
+    new FMSQ(    0, 6, 11,10,  3, Hc, "Intel Core i*-13000 P-core (Raptor Lake-P Q0)"),
+    new FMSQ(    0, 6, 11,10,  3, dc, "Intel Core i*-13000 (Raptor Lake-P Q0)"),
+    new FMS (    0, 6, 11,10,  3,     "Intel (unknown type) (Raptor Lake-P Q0)"),
     new FM  (    0, 6, 11,10,         "Intel (unknown type) (Raptor Lake-P)"),  // LX*; DPTF*
-//    
+    new FM  (    0, 6, 11,12,         "Intel (unknown type) (Lunar Lake)"), // Intel SDE 9.24.0 misc/cpuid/lnl/cpuid.def
+//
+    new FMSQ(    0, 6, 11,13,  0, dU, "Intel Core Ultra 2xxV (Lunar Lake A0)"),
+    new FMS (    0, 6, 11,13,  0,     "Intel (unknown type) (Lunar Lake A0)"),
+    new FMSQ(    0, 6, 11,13,  1, dU, "Intel Core Ultra 2xxV (Lunar Lake B0)"),
+    new FMS (    0, 6, 11,13,  1,     "Intel (unknown type) (Lunar Lake B0)"),
+    new FMQ (    0, 6, 11,13,     dU, "Intel Core Ultra 2xxV (Lunar Lake)"),
+    new FM  (    0, 6, 11,13,         "Intel (unknown type) (Lunar Lake)"),
+//
     new FMSQ(    0, 6, 11,14,  0, da, "Intel Atom x7000E (Alder Lake-N A0/N0)"), // ILPMDF* 20230512
     new FMSQ(    0, 6, 11,14,  0, Ia, "Intel Core i*-N300 N-Series E-core (Alder Lake-N A0/N0)"),
     new FMSQ(    0, 6, 11,14,  0, Ic, "Intel Core i*-N300 N-Series P-core (Alder Lake-N A0/N0)"), // possibly no P-cores ever for this model
@@ -1174,9 +1341,37 @@ private boolean strsub( String st, String subst )
     new FMQ (    0, 6, 11,14,     Ha, "Intel N-Series E-core (Alder Lake-N / Twin Lake)"),
     new FMQ (    0, 6, 11,14,     Hc, "Intel N-Series P-core (Alder Lake-N / Twin Lake)"), // possibly no P-cores ever for this model
     new FM  (    0, 6, 11,14,         "Intel N-Series / Atom x7000E (Alder Lake-N / Twin Lake)"),
-    new FM  (    0, 6, 11,14,         "Intel (unknown type) (Alder Lake)"),     // Coreboot* (or maybe Gracemont "little" cores tied to Alder Lake?) (Alder Lake-N stepping 0=A0, when I'm sure)
+//  new FM  (    0, 6, 11,14,         "Intel (unknown type) (Alder Lake)"),     // Coreboot* (or maybe Gracemont "little" cores tied to Alder Lake?) (Alder Lake-N stepping 0=A0, when I'm sure)
 //
-    new FMS (    0, 6, 11,15,2,       "Intel Core i*-13xx (Raptor Lake)"),
+//  new FMS (    0, 6, 11,15,2,       "Intel Core i*-13xx (Raptor Lake)"),
+    new FMSQ(    0, 6, 11,15,  2, Ha, "Intel Core i*-13000 E-core (Raptor Lake-S/HX C0)"),
+    new FMSQ(    0, 6, 11,15,  2, Hc, "Intel Core i*-13000 P-core (Raptor Lake-S/HX C0)"),
+    new FMSQ(    0, 6, 11,15,  2, dc, "Intel Core i*-13000 (Raptor Lake-S/HX C0)"),
+    new FMS (    0, 6, 11,15,  2,     "Intel (unknown type) (Raptor Lake-S/HX C0)"),
+    new FMSQ(    0, 6, 11,15,  5, Ha, "Intel Core i*-13000 E-core (Raptor Lake-S/HX/P H0)"),
+    new FMSQ(    0, 6, 11,15,  5, Hc, "Intel Core i*-13000 P-core (Raptor Lake-S/HX/P H0)"),
+    new FMSQ(    0, 6, 11,15,  5, dc, "Intel Core i*-13000 (Raptor Lake-S/HX/P H0)"),
+    new FMS (    0, 6, 11,15,  5,     "Intel (unknown type) (Raptor Lake-S/HX/P H0)"),
+    new FMQ (    0, 6, 11,15,     Ha, "Intel Core i*-13000 E-core (Raptor Lake-S/HX/P)"),
+    new FMQ (    0, 6, 11,15,     Hc, "Intel Core i*-13000 P-core (Raptor Lake-S/HX/P)"),
+    new FMQ (    0, 6, 11,15,     dc, "Intel Core i*-13000 (Raptor Lake-S/HX/P)"),
+    new FM  (    0, 6, 11,15,         "Intel (unknown type) (Raptor Lake-S/HX/P)"),
+    new FM  (    0, 6, 12, 5,         "Intel (unknown type) (Arrow Lake)"),
+//    
+    new FMSQ(    0, 6, 12, 6,  2, dU, "Intel Core Ultra 2xxS (Arrow Lake-S B0)"),
+    new FMS (    0, 6, 12, 6,  2,     "Intel (unknown type) (Arrow Lake-S B0)"),
+    new FMQ (    0, 6, 12, 6,     dU, "Intel Core Ultra 2xxS (Arrow Lake-S)"),
+    new FM  (    0, 6, 12, 6,         "Intel (unknown type) (Arrow Lake-S)"),
+    new FM  (    0, 6, 12,12,         "Intel (unknown type) (Panther Lake)"), // MSR_CPUID_table*, LX*
+//
+    new FMSQ(    0, 6, 12,15,  1, sS, "Intel Xeon Scalable (5th Gen) Bronze/Silver/Gold/Platinum (Emerald Rapids A0)"),
+    new FMS (    0, 6, 12,15,  1,     "Intel Xeon (unknown type) (Emerald Rapids A0)"),
+    new FMSQ(    0, 6, 12,15,  2, sS, "Intel Xeon Scalable (5th Gen) Bronze/Silver/Gold/Platinum (Emerald Rapids A1/R1)"),
+    new FMS (    0, 6, 12,15,  2,     "Intel Xeon (unknown type) (Emerald Rapids A1/R1)"),
+    new FMQ (    0, 6, 12,15,     sS, "Intel Xeon Scalable (5th Gen) Bronze/Silver/Gold/Platinum (Emerald Rapids)"),
+    new FM  (    0, 6, 12,15,         "Intel Xeon (unknown type) (Emerald Rapids)"),
+    new FM  (    0, 6, 13,13,         "Intel (unknown type) (Clearwater Forest)"), // MSR_CPUID_table*
+//    
     new FQ  (    0, 6,            sX, "Intel Xeon (unknown model)"),
     new FQ  (    0, 6,            se, "Intel Xeon (unknown model)"),
     new FQ  (    0, 6,            MC, "Intel Mobile Celeron (unknown model)"),
@@ -1359,8 +1554,11 @@ private boolean strsub( String st, String subst )
     new FMS (    2, 1,  0, 0,  4,     "Intel Itanium2 Processor 9500 (Poulson D0), 32nm" ),
     new FMS (    2, 1,  0, 0,  5,     "Intel Itanium2 Processor 9700 (Kittson E0), 22nm" ),
     new FM  (    2, 1,  0, 0,         "Intel Itanium2 (unknown model) (Poulson/Kittson)" ),
-    new F   (    2, 1,                "Intel Itanium2 (unknown model)" ) };
-    
+    new F   (    2, 1,                "Intel Itanium2 (unknown model)" ),
+//    
+    new FM  (    4,15,  0, 0,         "Intel (unknown type) (Diamond Rapids)"), // MSR_CPUID_table* (-054, quickly retracted in -055), LX*
+    new FM  (    4,15,  0, 1,         "Intel (unknown type) (Diamond Rapids)") }; // MSR_CPUID_table*, LX*
+
     String s1 = detectorHelper( stdTfms, bi, INTEL_DATA );
     return new String[] { s1, null };
     }

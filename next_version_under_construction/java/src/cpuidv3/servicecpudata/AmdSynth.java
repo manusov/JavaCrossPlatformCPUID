@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -293,6 +297,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  ( 0, 5,  0,13,         "AMD K6-2+, K6-III+" ),
     new F   ( 0, 5,                "AMD 5k86 / K6 / Geode (unknown model)" ),
     new FM  ( 0, 6,  0, 1,         "AMD Athlon (Argon)" ),
+    new FMS ( 0, 6,  0, 2,  2,     "AMD Athlon (K75 / Pluto / Orion A2)"),
     new FM  ( 0, 6,  0, 2,         "AMD Athlon (K75 / Pluto / Orion)" ),
     new FMS ( 0, 6,  0, 3,  0,     "AMD Duron / mobile Duron (Spitfire A0)" ),
     new FMS ( 0, 6,  0, 3,  1,     "AMD Duron / mobile Duron (Spitfire A2)" ),
@@ -996,6 +1001,15 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMS (10,15,  0, 1,  1,     "AMD EPYC (Milan)"),
     */
     new F   ( 7,15,                "AMD (unknown model)"),
+    // Todd Allen comment:
+   // In Zen-based CPUs, the model uses only the extended model and the
+   // high-order bit of the model.  Meanwhile, the stepping name (revision) is
+   // determinable mechanically from the low order 3 bits of the model,
+   // converted to alphabetic characters, 0=A, 1=B, 2=C, etc.; and the stepping
+   // number.  This is mentioned in each of individual the Processor Programming
+   // Reference manuals under CPUID_FN00000001_EAX.
+   // PPR 54945
+/*  
     new FMS ( 8,15,  0, 0,  1,     "AMD (unknown type) (Summit Ridge/Naples ZP-A1)"), // sandpile.org
     new FMSQ( 8,15,  0, 1,  0, EE, "AMD EPYC (1st Gen) (Snowy Owl ZP-B0)"),
     new FMSQ( 8,15,  0, 1,  0, sE, "AMD EPYC (1st Gen) (Naples ZP-B0)"),
@@ -1023,6 +1037,17 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMQ ( 8,15,  0, 8,     dH, "AMD Ryzen Threadripper 2000 (Colfax)"),
     new FMQ ( 8,15,  0, 8,     dR, "AMD Ryzen 2000 (Pinnacle Ridge)"),
     new FM  ( 8,15,  0, 8,         "AMD Ryzen (unknown type) (Pinnacle Ridge)"),
+*/
+    new FMmQ( 8,15,  0, 0,     EE, "AMD EPYC (1st Gen) (Snowy Owl ZP)"),               // TODO:  "AMD EPYC (1st Gen) (Snowy Owl ZP-%c%u)"
+    new FMmQ( 8,15,  0, 0,     sE, "AMD EPYC (1st Gen) (Naples ZP)"),                  // TODO:  "AMD EPYC (1st Gen) (Naples ZP-%c%u)"
+    new FMmQ( 8,15,  0, 0,     dH, "AMD Ryzen Threadripper 1000 (Whitehaven)"),        // TODO:  "AMD Ryzen Threadripper 1000 (Whitehaven %c%u)"
+    new FMmQ( 8,15,  0, 0,     dR, "AMD Ryzen 1000 (Summit Ridge ZP)"),                // TODO:  "AMD Ryzen 1000 (Summit Ridge ZP-%c%u)"
+    new FMm ( 8,15,  0, 0,         "AMD (unknown type) (Summit Ridge/Naples ZP)"),     // TODO:  "AMD (unknown type) (Summit Ridge/Naples ZP-%c%u)"
+    new FMmQ( 8,15,  0, 8,     dH, "AMD Ryzen Threadripper 2000 (Colfax)"),            // TODO:  "AMD Ryzen Threadripper 2000 (Colfax %c%u)"
+    new FMmQ( 8,15,  0, 8,     dR, "AMD Ryzen 2000 (Pinnacle Ridge PiR)"),             // TODO:  "AMD Ryzen 2000 (Pinnacle Ridge PiR-%c%u)"
+    new FMm ( 8,15,  0, 8,         "AMD Ryzen (unknown type) (Pinnacle Ridge PiR)"),   // TODO:  "AMD Ryzen (unknown type) (Pinnacle Ridge PiR-%c%u)"
+//
+/*
     new FMS ( 8,15,  1, 0,  1,     "AMD Ryzen (unknown type) (Raven Ridge/Great Horned Owl/Banded Kestrel RV-A1)"), // found only on en.wikichip.org & instlatx64 examples; sandpile.org
     new FMSQ( 8,15,  1, 1,  0, dA, "AMD Athlon Pro 200 (Raven Ridge RV-A1)"),
     new FMSQ( 8,15,  1, 1,  0, VR, "AMD Ryzen Embedded V1000 (Great Horned Owl RV-B0)"), // only instlatx64 example; stepping from usual pattern
@@ -1067,6 +1092,38 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  ( 8,15,  9, 8,         "AMD Ryzen (Mero)"), // undocumented, but (engr?) sample via instlatx64 from @zimogorets
     new FM  ( 8,15, 10, 0,         "AMD Ryzen (Mendocino)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
     new F   ( 8,15,                "AMD (unknown model)"),
+*/
+    // PPR 55449
+    new FMmQ( 8,15,  1, 0,     dA, "AMD Athlon Pro 200 (Raven Ridge RV)"),  // TODO:  "AMD Athlon Pro 200 (Raven Ridge RV-%c%u)"
+    new FMmQ( 8,15,  1, 0,     VR, "AMD Ryzen Embedded V1000 (Great Horned Owl RV)"), // only instlatx64 example   // TODO:  "AMD Ryzen Embedded V1000 (Great Horned Owl RV-%c%u)"
+    new FMmQ( 8,15,  1, 0,     RR, "AMD Ryzen Embedded R1000 (Banded Kestrel RV)"), // guess based on Great Horned Owl pattern   // TODO:  "AMD Ryzen Embedded R1000 (Banded Kestrel RV-%c%u)"
+    new FMmQ( 8,15,  1, 0,     AR, "AMD Ryzen 2000 (Raven Ridge RV)"), // found only on en.wikichip.org & instlatx64 examples   // TODO:  "AMD Ryzen 2000 (Raven Ridge RV-%c%u)"
+    new FMm ( 8,15,  1, 0,         "AMD Ryzen (unknown type) (Raven Ridge/Great Horned Owl/Banded Kestrel RV)"), // found only on en.wikichip.org & instlatx64 examples   // TODO:  "AMD Ryzen (unknown type) (Raven Ridge/Great Horned Owl/Banded Kestrel RV-%c%u)"
+    // PPR 55570, PPR 55449
+    new FMmQ( 8,15,  1, 8,     dA, "AMD Athlon Pro 300 (Picasso)"),   // TODO:  "AMD Athlon Pro 300 (Picasso %c%u)"
+    new FMmQ( 8,15,  1, 8,     AR, "AMD Ryzen 3000 (Picasso)"),       // TODO:  "AMD Ryzen 3000 (Picasso %c%u)"
+    new FMm ( 8,15,  1, 8,         "AMD (unknown type) (Picasso)"),   // TODO:  "AMD (unknown type) (Picasso %c%u)"
+    // PPR 55772
+    new FMmQ( 8,15,  2, 0,     dR, "AMD Ryzen 1000 (Dali)"),        // TODO:  "AMD Ryzen 1000 (Dali %c%u)"
+    new FMm ( 8,15,  2, 0,         "AMD (unknown type) (Dali)"),    // TODO:  "AMD (unknown type) (Dali %c%u)"
+    // PPR 56323, PPR 55803
+    new FMmQ( 8,15,  3, 0,     dR, "AMD Ryzen Threadripper 3000 (Castle Peak)"),   // TODO:  "AMD Ryzen Threadripper 3000 (Castle Peak %c%u)"
+    new FMmQ( 8,15,  3, 0,     sE, "AMD EPYC (2nd Gen) (Rome)"),   // TODO:  "AMD EPYC (2nd Gen) (Rome %c%u)"
+    new FMm ( 8,15,  3, 0,         "AMD (unknown type) (Castle Peak/Rome)"),   // TODO:  "AMD (unknown type) (Castle Peak/Rome %c%u)"
+    new FM  ( 8,15,  4, 7,         "AMD 4700S Desktop Kit (Cardinal)"), // undocumented; instlatx64 sample; engr sample?
+    new FM  ( 8,15,  5, 0,         "AMD DG02SRTBP4MFA (Fenghuang 15FF)"), // internal model, only instlatx64 example
+    // PPR 55922
+    new FMmQ( 8,15,  6, 0,     ER, "AMD Ryzen Embedded V2000 (Grey Hawk)"), // found only on en.wikichip.org   // TODO:  "AMD Ryzen Embedded V2000 (Grey Hawk %c%u)"
+    new FMmQ( 8,15,  6, 0,     dR, "AMD Ryzen 4000 (Renoir)"),   // TODO:  "AMD Ryzen 4000 (Renoir %c%u)"
+    new FMm ( 8,15,  6, 0,         "AMD (unknown type) (Renoir/Grey Hawk)"),   // TODO:  "AMD (unknown type) (Renoir/Grey Hawk %c%u)"
+    new FMm ( 8,15,  6, 8,         "AMD Ryzen 5000 (Lucienne)"), // undocumented, but instlatx64 samples   // TODO:  "AMD Ryzen 5000 (Lucienne %c%u)"
+    new FMm ( 8,15,  7, 0,         "AMD Ryzen 3000 (Matisse)"), // PPR 56176, but samples from Steven Noonan   // TODO:  "AMD Ryzen 3000 (Matisse %c%u)"
+    new FM  ( 8,15,  8, 4,         "AMD 4800S Desktop Kit (ProjectX)"), // undocumented, but sample via instlatx64
+    new FMm ( 8,15,  9, 0,         "AMD Ryzen (Van Gogh)"), // undocumented, but samples from instlatx64   // TODO:  "AMD Ryzen (Van Gogh %c%u)"
+    new FMm ( 8,15,  9, 8,         "AMD Ryzen (Mero)"), // undocumented, but (engr?) sample via instlatx64 from @zimogorets   // TODO:  "AMD Ryzen (Mero %c%u)"
+    new FMm ( 8,15, 10, 0,         "AMD Ryzen 7000 (Mendocino)"), // PPR 57243   // TODO:  "AMD Ryzen 7000 (Mendocino %c%u)"
+    new F   ( 8,15,                "AMD (unknown model)"),
+/*
     new FMS (10,15,  0, 1,  1,     "AMD EPYC (3rd Gen) (Milan B1)"),
     new FM  (10,15,  0, 1,         "AMD EPYC (3rd Gen) (Milan)"),
     new FMS (10,15,  0, 8,  0,     "AMD Ryzen Threadripper 5000 (Chagall A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
@@ -1096,9 +1153,44 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  (10,15,  7, 0,         "AMD Ryzen (Phoenix)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_
     new FMS (10,15, 10, 0,  0,     "AMD Ryzen (Bergamo A0)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
     new FM  (10,15, 10, 0,         "AMD Ryzen (Bergamo)"), // undocumented, but (engr?) sample via instlatx64 from @ExecuFix
-    // end of changed
     new F   (10,15,                "AMD (unknown model)") }; // undocumented, but samples from Steven Noonan
-    
+*/
+    new FMm (10,15,  0, 0,         "AMD EPYC (3rd Gen) (Milan)"), // 56683   // TODO:  "AMD EPYC (3rd Gen) (Milan %c%u)"
+    new FMm (10,15,  0, 8,         "AMD Ryzen Threadripper 5000 (Chagall)"), // undocumented, but sample from CCRT   // TODO:  "AMD Ryzen Threadripper 5000 (Chagall %c%u)"
+    new FMm (10,15,  1, 0,         "AMD EPYC (4th Gen) (Genoa)"), // PPR 57095, PPR 55901   // TODO:  "AMD EPYC (4th Gen) (Genoa %c%u)"
+    new FMm (10,15,  1, 8,         "AMD Ryzen Threadripper 7000 (Storm Peak)"), // undocumented, but samples from instlatx64   // TODO:  "AMD Ryzen Threadripper 7000 (Storm Peak %c%u)"
+    new FMm (10,15,  2, 0,         "AMD Ryzen 5000 (Vermeer)"), // PPR 56214   // TODO:  "AMD Ryzen 5000 (Vermeer %c%u)"
+    new FMm (10,15,  3, 0,         "AMD Ryzen (Badami)"), // undocumented, but (engr?) sample via instlatx64 from @patrickschur_   // TODO:  "AMD Ryzen (Badami %c%u)"
+    new FMm (10,15,  4, 0,         "AMD Ryzen 6000/7000 (Rembrandt)"), // undocumented, but instlatx64 samples   // TODO:  "AMD Ryzen 6000/7000 (Rembrandt %c%u)"
+    new FMm (10,15,  5, 0,         "AMD Ryzen 5000 (Cezanne/Barcelo)"), // PPR 56569   // TODO:  "AMD Ryzen 5000 (Cezanne/Barcelo %c%u)"
+    new FMm (10,15,  6, 0,         "AMD Ryzen 7000 (Raphael)"), // PPR 56713   // TODO:  "AMD Ryzen 7000 (Raphael %c%u)")
+    new FMm (10,15,  7, 0,         "AMD Ryzen 7000/8000 (Phoenix)"), // PPR 57019   // TODO:  "AMD Ryzen 7000/8000 (Phoenix %c%u)"
+    new FM  (10,15,  7,12,         "AMD Ryzen (Hawk Point)"), // sample via instlatx64 from geekbench.com (special case only for model 12?)   // TODO:  "AMD Ryzen (Hawk Point %c%u)"
+    new FMm (10,15,  7, 8,         "AMD Ryzen (Phoenix 2)"), // Coreboot*   // TODO:  "AMD Ryzen (Phoenix 2 %c%u)"
+    new FMm (10,15,  8, 0,         "AMD Instinct MI300C"), // undocumented, but LKML: https://lkml.org/lkml/2023/7/21/835 from AMD's Yazen Ghannam
+    new FMm (10,15,  9, 0,         "AMD Instinct MI300A"), // undocumented, but LKML: https://lkml.org/lkml/2023/7/21/835 from AMD's Yazen Ghannam
+    new FMm (10,15, 10, 0,         "AMD EPYC (4th Gen) (Bergamo/Siena)"), // PPR 57228   // TODO:  "AMD EPYC (4th Gen) (Bergamo/Siena %c%u)"
+    new F   (10,15,                "AMD (unknown model)"),
+    new FMm (11,15,  0, 0,         "AMD EPYC (5th Gen) (Turin)"), // PPR 57238   // TODO:  "AMD EPYC (5th Gen) (Turin %c%u)"
+    new FMm (11,15,  0, 8,         "AMD EPYC (5th Gen) (Turin)"), // PPR 57238   // TODO:  "AMD EPYC (5th Gen) (Turin %c%u)"
+    new FMm (11,15,  1, 0,         "AMD EPYC (unknown type) (Sorano)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Sorano %c%u)"
+    new FMm (11,15,  1, 8,         "AMD EPYC (unknown type) (Sorano)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Sorano %c%u)"
+    // Are all these Strix Point's Ryzen AI 300 CPU's?
+    // I suspect the latter ones are not.
+    new FMm (11,15,  2, 0,         "AMD Ryzen AI 300 (Strix Point)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen AI 300 (Strix Point %c%u)"
+    new FMm (11,15,  2, 8,         "AMD Ryzen AI 300 (Strix Point)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen AI 300 (Strix Point %c%u)"
+    new FMm (11,15,  3, 0,         "AMD Ryzen (Strix Point)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen (Strix Point %c%u)"
+    new FMm (11,15,  3, 8,         "AMD Ryzen (Strix Point)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen (Strix Point %c%u)"
+    new FMm (11,15,  4, 0,         "AMD Ryzen 9000 (Granite Ridge)"), // undocumented, but LX*, sample from Chan Edison & engr sample via instlatx64 from einsteinathome.org (13142934)   // TODO:  "AMD Ryzen 9000 (Granite Ridge %c%u)"
+    new FMm (11,15,  4, 8,         "AMD Ryzen 9000 (Granite Ridge)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen 9000 (Granite Ridge %c%u)"
+    new FMm (11,15,  5, 0,         "AMD EPYC (unknown type) (Venice)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Venice %c%u)"
+    new FMm (11,15,  5, 8,         "AMD EPYC (unknown type) (Venice)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Venice %c%u)"
+    new FMm (11,15,  6, 0,         "AMD Ryzen (Krackan Point)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen (Krackan Point %c%u)"
+    new FMm (11,15,  6, 8,         "AMD Ryzen (Krackan Point)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen (Krackan Point %c%u)"
+    new FMm (11,15,  7, 0,         "AMD Ryzen (Strix Halo)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen (Strix Halo %c%u)"
+    new FMm (11,15,  7, 8,         "AMD Ryzen (Strix Halo)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD Ryzen (Strix Halo %c%u)"
+    new F   (11,15,                "AMD (unknown model)") };
+//
     final CriteriaDescriptor[] AMD_X_DATA = {
     new FM  ( 0, 5,  0, 0,     "AMD SSA5 (PR75, PR90, PR100)" ),
     new FM  ( 0, 5,  0, 1,     "AMD 5k86 (PR120, PR133)" ),

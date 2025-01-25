@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -60,6 +64,7 @@ ViaSynth( DatabaseStash stash )
     final CriteriaDescriptor[] VIA_DATA = {
     new FM  (0, 5,  0, 4,         "VIA WinChip (C6)" ),
     new FM  (0, 5,  0, 8,         "VIA WinChip 2 (C6-2)" ),
+    new FM  (0, 5,  0, 9,         "VIA WinChip 3 (C6-3)"),
     new FM  (0, 6,  0, 6,         "VIA C3 (Samuel C5A)" ),
     new FMS (0, 6,  0, 7,  0,     "VIA C3 (Samuel 2 C5B) / Eden ESP 4000/5000/6000, .15um" ),
     new FMS (0, 6,  0, 7,  1,     "VIA C3 (Samuel 2 C5B) / Eden ESP 4000/5000/6000, .15um" ),
@@ -111,9 +116,15 @@ ViaSynth( DatabaseStash stash )
     new FMSQ(0, 6,  0,15, 14, vZ, "Zhaoxin KaiXian/Kaisheng ZX-C/ZX-C+" ),
     new FMS (0, 6,  0,15, 14,     "VIA Eden X4 4000 (Isaiah CNR)" ),
     new FM  (0, 6,  0,15,         "VIA Nano / Eden (unknown type) (Isaiah)" ),
+    new FMQ (0, 6,  1, 9,     vZ, "Zhaoxin KaiXian/Kaisheng ZX-C/ZX-C+"), // Google_cpu_features*
+    // Lots of examples with stepping 1, but no indication of the stepping name.
+    new FMS (0, 6,  4, 7,  1,     "VIA (CHA)"),
+    new FM  (0, 6,  4, 7,         "VIA (CHA)"),
     new F   (0, 6,                "VIA C3 / C3-M / C7 / C7-M / Eden / Eden ESP 7000/8000/10000 / Nano (unknown model)" ),
     new FM  (0, 7,  0,11,         "Zhaoxin KaiXian KX-5000 / Kaisheng KH-20000 (WuDaoKou)" ),   // geekbench.com example
-    new FMQ (0, 7,  3,11,     vZ, "Zhaoxin KaiXian KX-6000 / Kaisheng KH-30000 (LuJiaZui)") }; // instlatx64 example with CentaurHauls vendor!
+    new FM  (0, 7,  1,11,         "Zhaoxin KaiXian KX-5000 / Kaisheng KH-20000"), // Google_cpu_features*
+    new FMQ (0, 7,  3,11,     vZ, "Zhaoxin KaiXian KX-6000 / Kaisheng KH-30000 (LuJiaZui)"),       // instlatx64 example with CentaurHauls vendor!
+    new FMQ (0, 7,  5,11,     vZ, "Zhaoxin Kaisheng KH-40000") };// Google_cpu_features*
     
     final CriteriaDescriptor[] VIA_X_DATA = {
     new FM (0,6,  0,6,     "VIA C3 (WinChip C5A)" ),

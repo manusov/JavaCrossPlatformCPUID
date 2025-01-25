@@ -5,6 +5,10 @@ https://github.com/manusov/JavaCrossPlatformCPUID/tree/master
 https://github.com/manusov?tab=repositories
 No copyright. Information belongs to Universe.
 
+Special thanks to Todd Allen CPUID project
+https://etallen.com/cpuid.html
+http://www.etallen.com/
+
 This file contains Processors and Hypervisors data exported from
 Todd Allen CPUID project. Some variables and functions names not compliant
 with java naming conventions, this fields using original C/C++ naming.
@@ -56,7 +60,12 @@ ViaMicroarchitecture( DatabaseStash stash )
     new FM   ( 0, 6, 0, 13,         ()-> { u = "C7"; p = "90nm"; } ),
     new FMSQ ( 0, 6, 0, 15, 14, vZ, ()-> { u = "ZhangJiang"; p = "28nm"; } ),
     new FM   ( 0, 6, 0, 15,         ()-> { u = "C7"; } ),                      // *p depends on core
-    new FM   ( 0, 7, 0, 11,         ()-> { u = "ZhangJiang"; p = "28nm"; } ) };
+    new FMQ  ( 0, 6,  1, 9,     vZ, ()-> { u = "ZhangJiang"; f = "VIA C7"; p = "28nm"; } ), // Google_cpu_features*
+    new FM   ( 0, 6,  4, 7,         ()-> { u = "CNS"; p = "16nm"; } ),
+    new FM   ( 0, 7, 0, 11,         ()-> { u = "ZhangJiang"; p = "28nm"; } ),
+    new FM   ( 0, 7,  1,11,         ()-> { u = "WuDaoKou"; p = "28nm"; } ), // Google_cpu_features*
+    new FM   ( 0, 7,  3,11,         ()-> { u = "LuJiaZui"; p = "16nm"; } ), // Google_cpu_features*
+    new FM   ( 0, 7,  5,11,         ()-> { u = "YongFeng"; p = "7nm"; } ) }; // Google_cpu_features* (speculative?)
     return detectorHelper( tfms, bi, VIA_MICROARCHITECTURE );
     }
 }
