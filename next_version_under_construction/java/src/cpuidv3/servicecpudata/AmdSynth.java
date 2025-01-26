@@ -1196,6 +1196,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FM  ( 0, 5,  0, 1,     "AMD 5k86 (PR120, PR133)" ),
     new FM  ( 0, 5,  0, 2,     "AMD 5k86 (PR166)" ),
     new FM  ( 0, 5,  0, 3,     "AMD 5k86 (PR200)" ),
+    new FMQ ( 0, 5, 0, 10, MG, "AMD Geode" ),
     new F   ( 0, 5,            "AMD 5k86 (unknown model)" ),
     new FM  ( 0, 6,  0, 6,     "AMD K6, .30um" ),
     new FM  ( 0, 6,  0, 7,     "AMD K6 (Little Foot), .25um" ),

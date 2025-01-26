@@ -36,7 +36,7 @@ public class PanelDetails extends ApplicationPanel
     private final static int H_DIVIDER_SIZE = 9;
     private final static int V_DIVIDER_SIZE = 11;
     private final static int H_DIVIDER_LOCATION = 420;
-    private final static int V_DIVIDER_LOCATION = 510;
+    private final static int V_DIVIDER_LOCATION = 480;
 
     private final JPanel detailsPanel;
     private JTree detailsTree;

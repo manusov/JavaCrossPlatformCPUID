@@ -249,14 +249,7 @@ public class SAL
     {
         decoderCpuid.setEntriesDump( entries );
         int detectedFunctionsCount = decoderCpuid.parseEntriesDump();
-        if ( detectedFunctionsCount > 0 )
-        {
-            decoderCpuidStatus = true;
-        }
-        else
-        {
-            decoderCpuidStatus = false;
-        }
+        decoderCpuidStatus = ( detectedFunctionsCount > 0 );
         return detectedFunctionsCount;
     }
 

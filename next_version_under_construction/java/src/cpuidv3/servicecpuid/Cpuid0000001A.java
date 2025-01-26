@@ -86,7 +86,7 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
             {
                 if ( ( e.eax & 0xFF) == 0x21 ) 
                 {
-                    smtThreads = (( e.eax >>> 14) & 0xFFF ) + 1;
+        //          smtThreads = (( e.eax >>> 14) & 0xFFF ) + 1;
                     break;
                 }
             }

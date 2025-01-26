@@ -42,8 +42,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class RootMenu extends JFrame
 {
-    private final static int APP_X = 1024 - 8;
-    private final static int APP_Y = 768 - 8;
+    private final static int APP_X = 1024 - 68;
+    private final static int APP_Y = 768 - 50;
     private final JFrame thisFrame;
     private final JMenuBar rootMenu;
     private final JTabbedPane tabbedPane;
