@@ -53,7 +53,7 @@ push ebp
 xor eax,eax
 push eax eax eax eax eax eax
 mov ebp,esp
-
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push edi
 stosd          ; Return size = 0, no entries returned yet.
@@ -63,10 +63,10 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop edi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
+;--- Get CPUID one function and subfunction (optional) per selected CPU. ------;
 push ebx esi edi
 add esi,8
 add edi,32
@@ -80,7 +80,7 @@ mov temp_ebp,0     ; EBP  = Entries counter (redundant here).
 mov temp_r15d,1    ; R15D = Entries count limit (redundant here). 
 call StoreCpuid
 pop edi esi ebx 
-
+;---------- Done. -------------------------------------------------------------;
 mov eax,temp_ebp
 mov dword [edi + 00],eax
 mov dword [edi + 04],0

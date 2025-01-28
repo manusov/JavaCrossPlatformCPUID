@@ -50,6 +50,7 @@
 ;------------------------------------------------------------------------------;
 
 GetCpuid:
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push edi
 xor eax,eax
@@ -60,10 +61,10 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop edi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
+;---------- Get CPUID dump, all functions/subfunctions per selected CPU. ------;
 mov dword [edi + 04],2      ; Status = 2 means insufficient output buffer size.
 mov eax,[esi + 08]
 cmp eax,32 + 32
@@ -74,7 +75,7 @@ push edi
 add edi,32
 call HelperGetCpuid         ; EDI = Buffer pointer, EAX = Entries count limit.
 pop edi
-
+;---------- Done. -------------------------------------------------------------;
 mov dword [edi + 00],eax    ; Return size = eax 
 mov dword [edi + 04],3      ; Status = 3 means output buffer overflow. 
 jc .exit

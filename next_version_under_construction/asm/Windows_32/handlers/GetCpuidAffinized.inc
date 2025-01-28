@@ -58,7 +58,7 @@ push ebx ebp
 mov ebp,esp
 xor eax,eax
 push eax eax
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push edi
 stosd          ; Return size = 0, no entries returned yet.
@@ -68,10 +68,10 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop edi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
+;---------- Check output buffer size. -----------------------------------------;
 mov dword [edi + 04],2      ; Status = 2 means insufficient output buffer size.
 mov eax,[esi + 08]
 cmp eax,32 + 32

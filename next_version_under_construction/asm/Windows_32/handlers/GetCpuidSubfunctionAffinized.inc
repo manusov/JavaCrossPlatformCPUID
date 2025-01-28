@@ -52,7 +52,7 @@
 ;                                                                              ;
 ;------------------------------------------------------------------------------;
 
-temp_handle  EQU  dword [ebp + 24]
+temp_handle  EQU  dword [ebp + 24]  ; Not used here, replaced to EBX.
 temp_mask    EQU  dword [ebp + 28]
 
 GetCpuidSubfunctionAffinized:
@@ -60,8 +60,7 @@ push ebp
 xor eax,eax
 push eax eax eax eax eax eax eax eax
 mov ebp,esp
-
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push edi
 stosd          ; Return size = 0, no entries returned yet.
@@ -71,16 +70,15 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop edi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
 ;---------- Set thread affinity mask. -----------------------------------------;
 call [GetCurrentThread]
 mov dword [edi + 04],4
 test eax,eax
 jz .exit
-mov temp_handle,eax     ; Save thread handle, used for affinization functions.
+xchg ebx,eax           ; Save thread handle, used for affinization functions.
 mov dword [edi + 04],5
 cmp [_SetThreadAffinityMask],0   ; Check pointer to affinization function.
 jz .exit
@@ -93,7 +91,6 @@ call [_SetThreadAffinityMask]
 test eax,eax
 jz .exit
 mov temp_mask,eax         ; Save original affinity mask.
-
 ;--- Get CPUID one function and subfunction (optional) per selected CPU. ------;
 push ebx esi edi
 add esi,8
@@ -110,7 +107,7 @@ call StoreCpuid
 pop edi esi ebx 
 ;---------- Restore thread affinity mask. -------------------------------------;
 push temp_mask            ; Parm#2 = mask.
-push temp_handle          ; Parm#1 = handle.
+push ebx                  ; Parm#1 = handle.
 call [_SetThreadAffinityMask]
 test eax,eax
 mov dword [edi + 04],5
@@ -118,7 +115,6 @@ jz .exit
 mov eax,temp_ebp
 mov dword [edi + 00],eax
 mov dword [edi + 04],0
-
 ;---------- Done. -------------------------------------------------------------;
 .exit:
 add esp,32

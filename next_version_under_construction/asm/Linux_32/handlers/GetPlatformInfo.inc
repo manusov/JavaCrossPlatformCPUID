@@ -40,7 +40,7 @@ GetPlatformInfo:
 push esi edi ebx ebp
 ;---------- Pre-blank results. ------------------------------------------------;
 xor eax,eax
-mov dword [edi + 00],eax
+mov dword [edi + 00],5
 mov dword [edi + 04],eax
 mov dword [edi + 08],eax
 mov dword [edi + 16],1
@@ -49,26 +49,30 @@ mov dword [edi + 20],eax
 mov eax,SYS_GETPID
 int 80h
 ;---------- Get affinity mask. ------------------------------------------------;
-; TODO. Error check required after system calls.
 mov ebx,eax                ; Parm#1 = EBX = PID.
 mov ecx,8                  ; Parm#2 = ESI = Mask size.
 lea edx,[edi + 24]         ; Parm#3 = EDX = Pointer for store mask.
 mov eax,SYS_GETAFFINITY    ; System call code = EAX.
 int 80h
+test eax,eax               ; Error check after system call.
+js .exit                   ; Go if error. Output < 0 error, byte count if OK ? 
 ;---------- Logical CPUs count = F(affinity mask). ----------------------------;
-; TODO. Required support >32 (>64) logical processors.
+; TODO. Required support >64 logical processors.
 xor eax,eax
-mov ecx,32          ; Yet limit = 32 processors (ECX=32).
-mov esi,[edi + 24]  ; Yet limit = 32 processors (ESI=mask).
-.L0:
-shr esi,1
-jnc .L1
+mov ecx,64          ; Yet limit = 64 processors
+mov ebx,[edi + 24]
+mov edx,[edi + 28]
+.count:
+shr edx,1
+rcr ebx,1
+jnc .noCount
 inc eax
-.L1:
-loop .L0
+.noCount:
+loop .count
 mov dword [edi + 12],eax
-mov dword [edi + 00],0
 ;---------- Done. -------------------------------------------------------------;
+mov dword [edi + 00],0     ; Status = 0 if no errors.
+.exit:
 pop ebp ebx edi esi
 ret
 

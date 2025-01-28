@@ -49,6 +49,7 @@
 ;------------------------------------------------------------------------------;
 
 GetCpuidSubfunction:
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push rdi
 xor eax,eax
@@ -59,10 +60,10 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop rdi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
+;--- Get CPUID one function and subfunction (optional) per selected CPU. ------;
 push rbx rbp rsi rdi
 add rsi,8
 add rdi,32

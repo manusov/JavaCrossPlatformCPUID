@@ -53,6 +53,11 @@
 ;------------------------------------------------------------------------------;
 
 GetCpuidSubfunctionAffinized:
+push rbx rbp
+mov rbp,rsp 
+and rsp,0FFFFFFFFFFFFFFF0h
+sub rsp,32
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push rdi
 xor eax,eax
@@ -63,32 +68,33 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop rdi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
 ;---------- Set thread affinity mask. -----------------------------------------;
-; TODO. Error check required after system calls.
-; push rsi rdi 0 0
-; mov ecx,[rsi + 0]
-; mov rdx,1
-; rol rdx,cl
-; mov [rsp + 0],rdx
-; mov eax,SYS_GETPID
-; syscall
-; mov r12d,eax
-; mov edi,eax                ; Parm#1 = RDI = PID.
-; mov esi,8                  ; Parm#2 = RSI = Mask size.
-; lea rdx,[rsp + 8]          ; Parm#3 = RDX = Pointer for store mask.
-; mov eax,SYS_GETAFFINITY    ; System call code = RAX.
-; syscall
-; mov edi,r12d               ; Parm#1 = RDI = PID.
-; mov esi,8                  ; Parm#2 = RSI = Mask size.
-; mov rdx,rsp                ; Parm#3 = RDX = Pointer for store mask.
-; mov eax,SYS_SETAFFINITY    ; System call code = RAX.
-; syscall
-; pop rdi r13 rdi rsi        ; Make R12 = still PID, R13 = Original mask.
-
+mov dword [rdi + 04],5     ; Error code for affinization API errors.
+push rsi rdi 0 0
+mov ecx,[rsi + 16]
+mov rdx,1
+rol rdx,cl
+mov [rsp + 0],rdx
+xor edi,edi                ; Parm#1 = RDI = PID (Old variant = GET_SYSPID).
+mov esi,8                  ; Parm#2 = RSI = Mask size.
+lea rdx,[rsp + 8]          ; Parm#3 = RDX = Pointer for store affinity mask.
+mov eax,SYS_GETAFFINITY    ; System call code = RAX.
+syscall
+test eax,eax               ; Error check after system call.
+js .skip
+xor edi,edi                ; Parm#1 = RDI = PID (Old variant = GET_SYSPID).
+mov esi,8                  ; Parm#2 = RSI = Mask size.
+mov rdx,rsp                ; Parm#3 = RDX = Pointer for load affinity mask.
+mov eax,SYS_SETAFFINITY    ; System call code = RAX.
+syscall
+test eax,eax               ; Error check after system call.
+.skip:
+pop rdi rbx rdi rsi        ; Make RBX = Original mask.
+js .exit
+;--- Get CPUID one function and subfunction (optional) per selected CPU. ------;
 push rbx rbp rsi rdi
 add rsi,8
 add rdi,32
@@ -103,20 +109,22 @@ mov r15d,1       ; R15D = Entries count limit (redundant here).
 call StoreCpuid
 pop rdi 
 mov dword [rdi + 00],ebp
-mov dword [rdi + 04],0
 pop rsi rbp rbx
-
 ;---------- Restore thread affinity mask. -------------------------------------;
-; TODO. Error check required after system calls.
-; push rsi rdi 0 r13
-; mov edi,r12d               ; Parm#1 = RDI = PID.
-; mov esi,8                  ; Parm#2 = RSI = Mask size.
-; mov rdx,rsp                ; Parm#3 = RDX = Pointer for store mask.
-; mov eax,SYS_SETAFFINITY    ; System call code = RAX.
-; syscall
-; pop rdi rdi rdi rsi
-
+push rsi rdi 0 rbx
+xor edi,edi                ; Parm#1 = RDI = PID (Old variant = GET_SYSPID).
+mov esi,8                  ; Parm#2 = RSI = Mask size.
+mov rdx,rsp                ; Parm#3 = RDX = Pointer for store mask.
+mov eax,SYS_SETAFFINITY    ; System call code = RAX.
+syscall
+pop rdi rdi rdi rsi
+;---------- Done. -------------------------------------------------------------;
+test eax,eax               ; Error check after system call.
+js .exit
+mov dword [rdi + 04],0
 .exit:
+leave
+pop rbx
 ret
 
 

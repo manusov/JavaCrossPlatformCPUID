@@ -57,7 +57,7 @@ push r13 rbx rbp
 mov rbp,rsp 
 and rsp,0FFFFFFFFFFFFFFF0h
 sub rsp,32
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push rdi
 xor eax,eax
@@ -68,10 +68,9 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop rdi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
 ;---------- Set thread affinity mask. -----------------------------------------;
 call [GetCurrentThread]
 mov dword [rdi + 04],4
@@ -105,14 +104,14 @@ mov r15d,1       ; R15D = Entries count limit (redundant here).
 call StoreCpuid
 pop rdi 
 mov dword [rdi + 00],ebp
-mov dword [rdi + 04],0
 pop rsi rbp rbx
 ;---------- Restore thread affinity mask. -------------------------------------;
 mov rcx,rbx
 mov rdx,r14
-call r13         ; This means call [SetThreadAffinityMask].
+call r13                ; This means call [SetThreadAffinityMask].
 test rax,rax
-jz .exit
+jz .exit                ; Go if error.
+mov dword [rdi + 04],0  ; Status = 0 if no errors.
 ;---------- Done. -------------------------------------------------------------;
 .exit:
 leave

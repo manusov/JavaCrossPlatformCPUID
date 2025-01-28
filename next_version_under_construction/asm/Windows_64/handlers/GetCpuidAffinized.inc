@@ -58,7 +58,7 @@ push r13 rbx rbp
 mov rbp,rsp 
 and rsp,0FFFFFFFFFFFFFFF0h
 sub rsp,32
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push rdi
 xor eax,eax
@@ -69,10 +69,10 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop rdi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
+;---------- Check output buffer size. -----------------------------------------;
 mov dword [rdi + 04],2      ; Status = 2 means insufficient output buffer size.
 mov eax,[rsi + 08]
 cmp eax,32 + 32
@@ -111,11 +111,11 @@ mov dword [rdi + 04],0      ; Status = 0 means no errors.
 ;---------- Restore thread affinity mask. -------------------------------------;
 mov rcx,rbx
 mov rdx,r14
-call r13                ; This means call [SetThreadAffinityMask].
+call r13                 ; This means call [SetThreadAffinityMask].
 test rax,rax
-mov dword [rdi + 04],5
-jz .exit
-mov dword [rdi + 04],0
+mov dword [rdi + 04],5   ; Status = 5 if this WinAPI returns error. 
+jz .exit                 ; Go if error.
+mov dword [rdi + 04],0   ; Status = 0 if no errors.
 ;---------- Done. -------------------------------------------------------------;
 .exit:
 leave

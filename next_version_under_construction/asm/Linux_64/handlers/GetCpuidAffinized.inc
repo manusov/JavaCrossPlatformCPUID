@@ -58,8 +58,7 @@ push rbx rbp
 mov rbp,rsp 
 and rsp,0FFFFFFFFFFFFFFF0h
 sub rsp,32
-
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push rdi
 xor eax,eax
@@ -70,9 +69,9 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop rdi
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
 ;---------- Verify output buffer size. ----------------------------------------;
 mov dword [rdi + 04],2      ; Status = 2 means insufficient output buffer size.
 mov eax,[rsi + 08]
@@ -81,9 +80,7 @@ jb .exit
 sub eax,32
 shr eax,5
 xchg r15d,eax               ; R15 = Limit for output entries count.
-
 ;---------- Set thread affinity mask. -----------------------------------------;
-; TODO. Error check required after system calls.
 push rsi rdi 0 0
 mov ecx,[rsi + 16]
 mov rdx,1
@@ -94,13 +91,17 @@ mov esi,8                  ; Parm#2 = RSI = Mask size.
 lea rdx,[rsp + 8]          ; Parm#3 = RDX = Pointer for store mask.
 mov eax,SYS_GETAFFINITY    ; System call code = RAX.
 syscall
+test eax,eax               ; Error check after system call.
+js .skip
 xor edi,edi                ; Parm#1 = RDI = PID (Old variant = GET_SYSPID).
 mov esi,8                  ; Parm#2 = RSI = Mask size.
 mov rdx,rsp                ; Parm#3 = RDX = Pointer for store mask.
 mov eax,SYS_SETAFFINITY    ; System call code = RAX.
 syscall
+test eax,eax               ; Error check after system call.
+.skip:
 pop rdi rbx rdi rsi        ; Make RBX = Original mask.
-
+js .exit
 ;---------- Get CPUID dump, all functions/subfunctions per selected CPU. ------;
 push rdi
 add rdi,32
@@ -109,20 +110,19 @@ pop rdi
 mov dword [rdi + 00],eax    ; Return size = eax 
 mov dword [rdi + 04],3      ; Status = 3 means output buffer overflow. 
 jc .bufferOverflow
-mov dword [rdi + 04],0      ; Status = 0 means no errors.
 .bufferOverflow:
-
 ;---------- Restore thread affinity mask. -------------------------------------;
-; TODO. Error check required after system calls.
 push rsi rdi 0 rbx
 xor edi,edi                ; Parm#1 = RDI = PID (Old variant = GET_SYSPID).
 mov esi,8                  ; Parm#2 = RSI = Mask size.
 mov rdx,rsp                ; Parm#3 = RDX = Pointer for store mask.
 mov eax,SYS_SETAFFINITY    ; System call code = RAX.
 syscall
+test eax,eax               ; Error check after system call.
 pop rdi rdi rdi rsi
-
 ;---------- Done. -------------------------------------------------------------;
+js .exit
+mov dword [rdi + 04],0      ; Status = 0 means no errors.
 .exit:
 leave
 pop rbx

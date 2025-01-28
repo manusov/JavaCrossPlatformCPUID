@@ -58,8 +58,7 @@ push ebx ebp
 mov ebp,esp
 xor eax,eax
 push eax eax
-
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push edi
 stosd          ; Return size = 0, no entries returned yet.
@@ -69,9 +68,9 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop edi
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
 ;---------- Verify output buffer size. ----------------------------------------;
 mov dword [edi + 04],2      ; Status = 2 means insufficient output buffer size.
 mov eax,[esi + 08]
@@ -80,50 +79,62 @@ jb .exit
 sub eax,32
 shr eax,5
 mov [ebp - 4],eax     ; DWORD [EBP - 4] = Limit for output entries count.
-
 ;---------- Set thread affinity mask. -----------------------------------------;
-; TODO. Error check required after system calls.
+mov dword [edi + 04],5     ; Error code for affinization API errors.
 push esi edi 0 0 0 0
+
 mov ecx,[esi + 16]
-mov edx,1
-rol edx,cl
-mov [esp + 0],edx
-mov dword [esp + 4],0
+mov eax,1
+cdq
+jecxz .noShifts
+.shift:
+shl eax,1
+rcl edx,1
+loop .shift
+.noShifts:
+mov [esp + 0],eax
+mov [esp + 4],edx
+
 xor ebx,ebx               ; Parm#1 = EBX = PID (Old variant = GET_SYSPID).
 mov ecx,8                 ; Parm#2 = ECX = Mask size.
 lea edx,[esp + 8]         ; Parm#3 = EDX = Pointer for store mask.
 mov eax,SYS_GETAFFINITY   ; System call code = EAX.
 int 80h
-                          ; Parm#1 = EBX = PID (Old variant = GET_SYSPID).
+test eax,eax              ; Error check after system call.
+js .skip
+xor ebx,ebx               ; Parm#1 = EBX = PID (Old variant = GET_SYSPID).
 mov ecx,8                 ; Parm#2 = ECX = Mask size.
 mov edx,esp               ; Parm#3 = EDX = Pointer for store mask.
 mov eax,SYS_SETAFFINITY   ; System call code = EAX.
 int 80h
-pop eax eax ebx eax edi esi   ; Make EBX = Original mask. TODO. Yet 32-bit (32 CPU) only.
-
+test eax,eax              ; Error check after system call.
+.skip:
+pop eax eax ecx ebx edi esi   ; Make EBX:ECX = Original mask.
+js .exit
 ;---------- Get CPUID dump, all functions/subfunctions per selected CPU. ------;
-push edi
+push ebx ecx edi
 add edi,32
 mov eax,[ebp - 4]
 call HelperGetCpuid
-pop edi
+pop edi ecx ebx
 mov dword [edi + 00],eax  ; Return size = eax 
-mov dword [edi + 04],3    ; Status = 3 means output buffer overflow. 
-jc .bufferOverflow
-mov dword [edi + 04],0    ; Status = 0 means no errors.
-.bufferOverflow:
-
+jnc .bufferNotOverflow
+mov dword [edi + 04],3    ; Status = 3 means output buffer overflow.
+.bufferNotOverflow:
 ;---------- Restore thread affinity mask. -------------------------------------;
-; TODO. Error check required after system calls.
-push 0 ebx
-xor ebx,ebx               ; Parm#1 = EBX = PID (Old variant = GET_SYSPID)..
+push ebx ecx
+xor ebx,ebx               ; Parm#1 = EBX = PID (Old variant = GET_SYSPID).
 mov ecx,8                 ; Parm#2 = ECX = Mask size.
 mov edx,esp               ; Parm#3 = EDX = Pointer for store mask.
 mov eax,SYS_SETAFFINITY   ; System call code = EAX.
 int 80h
+test eax,eax              ; Error check after system call.
 pop eax eax
-
 ;---------- Done. -------------------------------------------------------------;
+js .exit
+cmp dword [edi + 04],3    ; Save buffer overflow error.
+je .exit
+mov dword [edi + 04],0    ; Status = 0 means no errors.
 .exit:
 leave
 pop ebx

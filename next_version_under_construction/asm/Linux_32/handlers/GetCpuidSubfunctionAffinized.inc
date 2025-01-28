@@ -52,16 +52,12 @@
 ;                                                                              ;
 ;------------------------------------------------------------------------------;
 
-temp_handle  EQU  dword [ebp + 24]
-temp_mask    EQU  dword [ebp + 28]
-
 GetCpuidSubfunctionAffinized:
 push ebp
 xor eax,eax
 push eax eax eax eax eax eax eax eax
 mov ebp,esp
-
-;---------- Verify CPUID instruction supported and non-locked. ----------------;
+;---------- Clear output buffer, pre-set error status. ------------------------;
 cld
 push edi
 stosd          ; Return size = 0, no entries returned yet.
@@ -71,52 +67,43 @@ mov ecx,6
 xor eax,eax
 rep stosd
 pop edi
-
+;---------- Verify CPUID instruction supported and non-locked. ----------------;
 call CheckCpuid
 jc .exit
-
 ;---------- Set thread affinity mask. -----------------------------------------;
-; call [GetCurrentThread]
-; mov dword [edi + 04],4
-; test eax,eax
-; jz .exit
-; mov temp_handle,eax     ; Save thread handle, used for affinization functions.
-; mov dword [edi + 04],5
-; cmp [_SetThreadAffinityMask],0   ; Check pointer to affinization function.
-; jz .exit
-; mov ecx,[esi + 16]
-; mov edx,1
-; rol edx,cl
-; push edx                  ; Parm#2 = mask.
-; push ebx                  ; Parm#1 = handle.
-; call [_SetThreadAffinityMask]
-; test eax,eax
-; jz .exit
-; mov temp_mask,eax         ; Save original affinity mask.
+mov dword [edi + 04],5     ; Error code for affinization API errors.
+push esi edi 0 0 0 0
 
-; TODO. Error check required after system calls.
-; push esi edi 0 0 0 0
-; mov ecx,[esi + 0]
-; mov edx,1
-; rol edx,cl
-; mov [esp + 0],edx
-; mov dword [esp + 4],0
-; mov eax,SYS_GETPID
-; int 80h
-; mov ebx,eax               ; Parm#1 = EBX = PID.
-; mov ecx,8                 ; Parm#2 = ECX = Mask size.
-; lea edx,[esp + 8]         ; Parm#3 = EDX = Pointer for store mask.
-; mov eax,SYS_GETAFFINITY   ; System call code = EAX.
-; int 80h
-;                           ; Parm#1 = EBX = PID.
-; mov ecx,8                 ; Parm#2 = ECX = Mask size.
-; mov edx,esp               ; Parm#3 = EDX = Pointer for store mask.
-; mov eax,SYS_SETAFFINITY   ; System call code = EAX.
-; int 80h
-; pop eax eax ebp eax edi esi   ; Make R12 = still PID, R13 = Original mask.
+mov ecx,[esi + 16]
+mov eax,1
+cdq
+jecxz .noShifts
+.shift:
+shl eax,1
+rcl edx,1
+loop .shift
+.noShifts:
+mov [esp + 0],eax
+mov [esp + 4],edx
 
+xor ebx,ebx               ; Parm#1 = EBX = PID = 0 (Old variant = GET_SYSPID).
+mov ecx,8                 ; Parm#2 = ECX = Mask size.
+lea edx,[esp + 8]         ; Parm#3 = EDX = Pointer for store mask.
+mov eax,SYS_GETAFFINITY   ; System call code = EAX.
+int 80h
+test eax,eax              ; Error check after system call.
+js .skip
+xor ebx,ebx               ; Parm#1 = EBX = PID = 0 (Old variant = GET_SYSPID).
+mov ecx,8                 ; Parm#2 = ECX = Mask size.
+mov edx,esp               ; Parm#3 = EDX = Pointer for store mask.
+mov eax,SYS_SETAFFINITY   ; System call code = EAX.
+int 80h
+test eax,eax                  ; Error check after system call.
+.skip:
+pop eax eax ecx ebx edi esi   ; Make EBX:ECX = Original mask.
+js .exit
 ;--- Get CPUID one function and subfunction (optional) per selected CPU. ------;
-push ebx esi edi
+push ebx ecx esi edi
 cld
 add esi,8
 add edi,32
@@ -129,29 +116,21 @@ mov esi,ecx        ; ECX  = ESI = Sub-function, select by this line.
 mov temp_ebp,0     ; EBP  = Entries counter (redundant here).
 mov temp_r15d,1    ; R15D = Entries count limit (redundant here). 
 call StoreCpuid
-pop edi esi ebx 
-
+mov eax,temp_ebp
+pop edi esi ecx ebx 
+mov [edi + 00],eax
 ;---------- Restore thread affinity mask. -------------------------------------;
-; push temp_mask            ; Parm#2 = mask.
-; push temp_handle          ; Parm#1 = handle.
-; call [_SetThreadAffinityMask]
-; test eax,eax
-; mov dword [edi + 04],5
-; jz .exit
-; mov eax,temp_ebp
-; mov dword [edi + 00],eax
-; mov dword [edi + 04],0
-
-; TODO. Error check required after system calls.
-; push 0 ebp
-;                           ; Parm#1 = EBX = PID.
-; mov ecx,8                 ; Parm#2 = ECX = Mask size.
-; mov edx,esp               ; Parm#3 = EDX = Pointer for store mask.
-; mov eax,SYS_SETAFFINITY   ; System call code = EAX.
-; int 80h
-; pop eax eax
-
+push ebx ecx
+xor ebx,ebx               ; Parm#1 = EBX = PID = 0 (Old variant = GET_SYSPID).
+mov ecx,8                 ; Parm#2 = ECX = Mask size.
+mov edx,esp               ; Parm#3 = EDX = Pointer for store mask.
+mov eax,SYS_SETAFFINITY   ; System call code = EAX.
+int 80h
+test eax,eax              ; Error check after system call.
+pop eax eax
 ;---------- Done. -------------------------------------------------------------;
+js .exit
+mov dword [edi + 04],0
 .exit:
 add esp,32
 pop ebp

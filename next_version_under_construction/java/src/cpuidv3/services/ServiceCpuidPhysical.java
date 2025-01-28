@@ -157,7 +157,7 @@ class ServiceCpuidPhysical extends Service
             for( int i=0; i<dumpAll.length; i++ )
             {
                 long[] dumpOne = dumpAll[i];
-                for( int j=0; j<dumpOne.length; j+=4 )
+                for( int j=0; ( dumpOne != null )&&( j<dumpOne.length ); j+=4 )
                 {
                     int function = (int)( dumpOne[j] >>> 32 );
                     int subfunction = (int)( dumpOne[j+1] & 0xFFFFFFFFL );

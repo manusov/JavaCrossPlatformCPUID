@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 public class CPUIDv3 
 {
-    private final static String VERSION_NAME  = "v3.01.11";
+    private final static String VERSION_NAME  = "v3.01.12";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
         "Information belongs to Universe.";
@@ -63,6 +63,10 @@ public class CPUIDv3
         
     CPUIDv3()
     {
+//        
+//      sal.debugHandler1();  // DEBUG.
+//      sal.debugHandler2();  // DEBUG.
+//        
         RootMenu rootMenu = new RootMenu();
         rootMenu.showGui();
     }

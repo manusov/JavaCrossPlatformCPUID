@@ -40,22 +40,24 @@ GetPlatformInfo:
 push rsi rdi rbx rbp
 mov rbp,rsp 
 and rsp,0FFFFFFFFFFFFFFF0h
-;---------- Pre-blank results. ------------------------------------------------;
-xor eax,eax
-mov qword [rdi + 00],rax
-mov qword [rdi + 08],rax
+;---------- Pre-blank results, pre-set error status. --------------------------;
+mov qword [rdi + 00],5
+mov qword [rdi + 08],0
 mov qword [rdi + 16],1
 mov rbx,rdi
 ;---------- Get PID. ----------------------------------------------------------;
 mov eax,SYS_GETPID
 syscall
 ;---------- Get affinity mask. ------------------------------------------------;
-; TODO. Error check required after system calls.
 mov edi,eax                ; Parm#1 = RDI = PID.
 mov esi,8                  ; Parm#2 = RSI = Mask size.
 lea rdx,[rbx + 24]         ; Parm#3 = RDX = Pointer for store mask.
 mov eax,SYS_GETAFFINITY    ; System call code = RAX.
 syscall
+;---------- Error check after system call. ------------------------------------;
+test eax,eax
+js .exit                   ; Go if error. Output < 0 error, byte count if OK ? 
+mov dword [rbx + 00],0     ; Status = 0 if no errors.
 ;---------- Logical CPUs count = F(affinity mask). ----------------------------;
 ; TODO. Required support >64 logical processors, means mask size >8 bytes.
 xor eax,eax
@@ -69,6 +71,7 @@ inc eax
 loop .L0
 mov [rbx + 12],eax
 ;---------- Done. -------------------------------------------------------------;
+.exit:
 mov rsp,rbp
 pop rbp rbx rdi rsi
 ret

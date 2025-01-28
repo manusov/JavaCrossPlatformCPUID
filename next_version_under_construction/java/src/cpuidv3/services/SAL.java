@@ -18,6 +18,8 @@ import static cpuidv3.serviceosmp.DecoderOsMp.SN_NUMA_NODE;
 import static cpuidv3.serviceosmp.DecoderOsMp.SN_PROCESSOR_CORE;
 import static cpuidv3.serviceosmp.DecoderOsMp.SN_PROCESSOR_GROUP;
 import static cpuidv3.serviceosmp.DecoderOsMp.SN_PROCESSOR_PACKAGE;
+// import static cpuidv3.services.PAL.REQUEST_GET_CPUID_SUBFUNCTION_AFFINIZED;
+// import static cpuidv3.services.PAL.REQUEST_GET_PLATFORM_INFO;
 import cpuidv3.CPUIDv3;
 import cpuidv3.servicecpuid.DecoderCpuid;
 import cpuidv3.servicecpuid.HybridReturn;
@@ -348,7 +350,8 @@ public class SAL
         int hybridEthreads = 0;
         int hybridLpeThreads = 0;
 
-        if (( processorsList != null )&&( processorsList.length > 0 ))
+        if (( processorsList != null )&&( processorsList.length > 0 )&&
+            ( processorsList[0] != null ))
         {
             setAndParsePerCpuEntriesDump( processorsList[0].sunfunctionsList );
     // This also required for initualization summary screen for hybrid topology.
@@ -395,6 +398,10 @@ public class SAL
                     break;
                 }
             }
+        }
+        else
+        {
+            return null;  // TODO. Partial info possible instean return null.
         }
         
         String[] tableUp = decoderCpuid.getSummaryTableUp();
@@ -755,4 +762,72 @@ Note about ranges reduced by this check algorithm:
             service.printSummaryReport();
         }
     }
+
+// THIS FOR DEBUG.
+/*    
+    public void debugHandler1()
+    {
+        System.out.println( "Running debug handler(1)..." );
+        final int NIPB = 2;
+        final int NOPB = 16;
+        final long[] ipb = new long[NIPB];
+        final long[] opb = new long[NOPB];
+        ipb[0] = REQUEST_GET_PLATFORM_INFO;
+        ipb[1] = NOPB * 8;
+        
+        pal.platformRequest( ipb, opb, NIPB, NOPB );
+        
+        int retStatus = (int)( opb[0] & 0xFFFFFFFFL );
+        int retCount = (int)( opb[2] & 0xFFFFFFFFL );
+        System.out.println( String.format
+            ( "Return status=%08Xh, count=%08Xh.", retStatus, retCount ) );
+        
+        if ( ( retStatus == 0 )&&( retCount == 1 ) )
+        {
+            int cpuCount = (int)( opb[1] >> 32 );
+            long cpuMask = opb[3];
+            System.out.println( String.format
+                ( "CPU count=%d, affinity mask=%016Xh.", cpuCount, cpuMask ) );
+        }
+    }
+    
+    
+    public void debugHandler2()
+    {
+        System.out.println( "Running debug handler(2)..." );
+        final int NIPB = 3;
+        final int NOPB = 8;
+        final long[] ipb = new long[NIPB];
+        final long[] opb = new long[NOPB];
+        ipb[0] = REQUEST_GET_CPUID_SUBFUNCTION_AFFINIZED;
+        final long FUNCTION = 1;
+        final long SUB_FUNCTION = 0;
+        final long REQUEST_PARAMETER = ( SUB_FUNCTION << 32 ) + FUNCTION;
+        ipb[1] = REQUEST_PARAMETER;
+        long REQUEST_PROCESSOR_NUMBER = 3 + 0; // 15 + 0;
+        ipb[2] = REQUEST_PROCESSOR_NUMBER;
+        
+        pal.platformRequest( ipb, opb, NIPB, NOPB );
+        
+        int retStatus = (int)( opb[0] >>> 32 );
+        int retCount = (int)( opb[0] & 0xFFFFFFFFL );
+        System.out.println( String.format
+            ( "Return status=%08Xh, count=%08Xh.", retStatus, retCount ) );
+        
+        if ( ( retStatus == 0 )&&( retCount == 1 ) )
+        {
+            int f = (int)( opb[4] >> 32 );
+            int s = (int)( opb[5] & 0xFFFFFFFFL );
+            int eax = (int)( opb[6] & 0xFFFFFFFFL );
+            int ebx = (int)( opb[6] >>> 32 );
+            int ecx = (int)( opb[7] & 0xFFFFFFFFL );
+            int edx = (int)( opb[7] >>> 32 );
+            System.out.println( String.format
+                ( "CPUID function=%08Xh, subfunction=%08Xh, eax=%08Xh, ebx=%08Xh, ecx=%08Xh, edx=%08Xh.",
+                  f, s, eax, ebx, ecx, edx ) );
+        }
+    }
+*/
+// END OF FRAGMENT FOR DEBUG.
+    
 }
