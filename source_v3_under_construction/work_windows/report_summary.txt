@@ -1,0 +1,32 @@
+Java CPUID v3.03.06. Win64 JRE64.
+https://github.com/manusov/JavaCrossPlatformCPUID
+https://github.com/manusov?tab=repositories
+No copyright. Information belongs to Universe.
+Current screen report.
+
+[ Summary ]
+
+[ Platform and CPUID instruction summary info. ]
+
+  Parameter                            Value                                           
+----------------------------------------------------------------------------------------
+  CPU name string                      11th Gen Intel(R) Core(TM) i7-11700F @ 2.50GHz  
+  CPU vendor string                    GenuineIntel                                    
+  Maximum standard CPUID level         0000001Bh                                       
+  Maximum extended CPUID level         80000008h                                       
+                                                                                       
+  Processor vendor                     Intel                                           
+  Family and physical                  backport of Sunny Cove ( 14nm+++ )              
+  Microarchitecture                    Cypress Cove                                    
+  Model                                Intel Core i*-11000 (Rocket Lake B0)            
+                                                                                       
+  MP enumeration method                Intel leaf 0Bh ( 8 cores, 16 threads )          
+                                                                                       
+  Operating system and java runtime    Win64 JRE64                                     
+  Platform enumeration method          GetLogicalProcessorInformationEx()              
+  Cores and threads by OS API          8 cores, 16 threads                             
+  NUMA domains                         1                                               
+  Processor groups                     1                                               
+  Processor packages                   1                                               
+----------------------------------------------------------------------------------------
+

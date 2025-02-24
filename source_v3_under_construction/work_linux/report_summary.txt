@@ -1,0 +1,34 @@
+Java CPUID v3.03.06. Linux32 JRE32.
+https://github.com/manusov/JavaCrossPlatformCPUID
+https://github.com/manusov?tab=repositories
+No copyright. Information belongs to Universe.
+Current screen report.
+
+[ Summary ]
+
+[ Platform and CPUID instruction summary info. ]
+
+  Parameter                            Value                                           
+----------------------------------------------------------------------------------------
+  CPU name string                      11th Gen Intel(R) Core(TM) i7-11700F @ 2.50GHz  
+  CPU vendor string                    GenuineIntel                                    
+  Virtual CPU vendor string            KVMKVMKVM                                       
+  Maximum standard CPUID level         00000016h                                       
+  Maximum extended CPUID level         80000008h                                       
+  Maximum virtual CPUID level          40000001h                                       
+                                                                                       
+  Processor vendor                     Intel                                           
+  Hypervisor vendor                    KVM                                             
+  Family and physical                  backport of Sunny Cove ( 14nm+++ )              
+  Microarchitecture                    Cypress Cove                                    
+  Model                                Intel Core i*-11000 (Rocket Lake B0)            
+                                                                                       
+  MP enumeration method                Intel leaf 0Bh ( 4 cores, 4 threads )           
+                                                                                       
+  Operating system and java runtime    Linux32 JRE32                                   
+  Platform enumeration method          /sysfs virtual file system + SYS_GETAFFINITY    
+  Cores and threads by OS API          4 cores, 4 threads                              
+  NUMA domains                         1                                               
+  Processor packages                   1                                               
+----------------------------------------------------------------------------------------
+
