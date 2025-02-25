@@ -78,7 +78,12 @@ private int summarySmt = 0;
 
 public int getSummarySmt()
     {
-        return summarySmt;
+        int result = summarySmt;
+        if ( result <= 0)
+        {
+            result = 1;
+        }
+        return result;
     }
 
 @Override String[][] getParametersList()

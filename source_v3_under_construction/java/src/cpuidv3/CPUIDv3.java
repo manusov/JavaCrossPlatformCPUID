@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 public class CPUIDv3 
 {
-    private final static String VERSION_NAME  = "v3.03.06";
+    private final static String VERSION_NAME  = "v3.03.07";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
         "Information belongs to Universe.";
@@ -57,10 +57,8 @@ public class CPUIDv3
         "Loading native library failed.";
     private final static String MSG_UNKNOWN_OS = 
         "Unknown operating system.";
-
-    private static SAL sal;
     
-    CPUIDv3()
+    CPUIDv3( SAL sal )
     {
         RootMenu rootMenu = new RootMenu( sal );
         rootMenu.showGui();
@@ -74,7 +72,7 @@ public class CPUIDv3
             consoleMode = true;
         }
         
-        sal = SAL.getInstance( getResourcePackage() );
+        SAL sal = SAL.getInstance( getResourcePackage() );
         PAL_STATUS palStatus = sal.getPalStatus();
         String statusName = MSG_INIT_FAILED;
         if ( palStatus != null )
@@ -119,7 +117,7 @@ public class CPUIDv3
         }
         else if ( !consoleMode && ( palStatus == PAL_STATUS.SUCCESS ) )
         {   // GUI mode, successfully start.
-            SwingUtilities.invokeLater( () -> { new CPUIDv3(); } );
+            SwingUtilities.invokeLater( () -> { new CPUIDv3( sal ); } );
         }
         else
         {   // GUI mode, start failed.
