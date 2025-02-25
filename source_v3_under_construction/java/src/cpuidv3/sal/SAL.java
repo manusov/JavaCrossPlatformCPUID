@@ -745,6 +745,7 @@ public class SAL
                 new DefaultMutableTreeNode( entryPackages, true );
             dmtnRootPlatform.add( dmtnPackages );
 
+            int coreIndex = 0;
             for ( int i=0; i<count; i++ )
             {
                 TreeEntry entry = new TreeEntry
@@ -761,7 +762,8 @@ public class SAL
                         TreeEntry entryThread = new TreeEntry
                               ( j, sNames[j], "", false, false );
                         
-                        if ( sNames[j].startsWith( SN_PROCESSOR_THREAD + i ) )
+                        if ( sNames[j].startsWith
+                                ( SN_PROCESSOR_THREAD + coreIndex ) )
                         {
                             DefaultMutableTreeNode nodeThread = new 
                                 DefaultMutableTreeNode( entryThread , false );
@@ -770,6 +772,7 @@ public class SAL
                     }
                     
                     dmtnCores.add( node );
+                    coreIndex++;
                 }
                 else if ( sNames[i].startsWith( SN_CACHE ) )
                 {

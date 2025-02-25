@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 public class CPUIDv3 
 {
-    private final static String VERSION_NAME  = "v3.03.07";
+    private final static String VERSION_NAME  = "v3.03.08";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
         "Information belongs to Universe.";
