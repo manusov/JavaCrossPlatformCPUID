@@ -12,6 +12,8 @@ Extended multiprocessing topology information.
 
 package cpuidv3.servicecpuid;
 
+import cpuidv3.sal.EntryCpuidSubfunction;
+
 class Cpuid0000000B extends ReservedFunctionCpuid  implements IX2ApicId
 {
 Cpuid0000000B()
@@ -64,11 +66,20 @@ private final static String[] SMT_PARMS =
 
     @Override public String getX2ApicId()
     {
+        final int CPU_FEATURES_FUNCTION = 0x00000001;  // CPUID function 1.
+        final int X2APIC_SUPPORT_MASK   = 0x200000;    // Bit ECX.21 = X2APIC.
         String result = "n/a";
         if ( ( entries != null )&&( entries.length > 0 ) )
         {
-            int x2ApicId = ( entries[0].edx );
-            result = String.format( "%08Xh", x2ApicId );
+            result = "x2APIC not supported or disabled";
+            EntryCpuidSubfunction[] entries1 = 
+                container.buildEntries( CPU_FEATURES_FUNCTION );
+            if ( ( entries1 != null )&&( entries1.length > 0 )&&
+               ( ( entries1[0].ecx & X2APIC_SUPPORT_MASK ) != 0 ) )
+            {
+                int x2ApicId = ( entries[0].edx );
+                result = String.format( "%08Xh", x2ApicId );
+            }
         }
         return result;
     }

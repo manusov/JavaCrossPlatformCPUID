@@ -170,11 +170,12 @@ private final static String[][] DECODER_EDX =
 
     @Override public String getApicId()
     {
+        final int APIC_SUPPORT_MASK = 0x200;  // Bit EDX.9 = APIC.
         String result = "n/a";
         if ( ( entries != null )&&( entries.length > 0 ) )
         {
             result = "Local APIC not supported or disabled";
-            if ( ( entries[0].edx & 0x200 ) != 0 )
+            if ( ( entries[0].edx & APIC_SUPPORT_MASK ) != 0 )
             {
                 int apicId = ( entries[0].ebx ) >>> 24;
                 result = String.format( "%02Xh", apicId );
