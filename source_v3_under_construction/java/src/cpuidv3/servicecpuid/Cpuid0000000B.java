@@ -67,7 +67,7 @@ private final static String[] SMT_PARMS =
     @Override public String getX2ApicId()
     {
         final int CPU_FEATURES_FUNCTION = 0x00000001;  // CPUID function 1.
-        final int X2APIC_SUPPORT_MASK   = 0x200000;    // Bit ECX.21 = X2APIC.
+        final int X2APIC_SUPPORT_MASK   = 0x00200000;  // Bit ECX.21 = X2APIC.
         String result = "n/a";
         if ( ( entries != null )&&( entries.length > 0 ) )
         {
@@ -77,7 +77,7 @@ private final static String[] SMT_PARMS =
             if ( ( entries1 != null )&&( entries1.length > 0 )&&
                ( ( entries1[0].ecx & X2APIC_SUPPORT_MASK ) != 0 ) )
             {
-                int x2ApicId = ( entries[0].edx );
+                int x2ApicId = entries[0].edx;
                 result = String.format( "%08Xh", x2ApicId );
             }
         }

@@ -474,7 +474,7 @@ public class RootMenu extends JFrame
                 enumerator.rebuildAfterCpuidReload( tabbedPane, true );
                 JOptionPane.showMessageDialog( thisFrame, 
                     "Processor(s) redetected.",
-                    "Redetect processor", JOptionPane.WARNING_MESSAGE );
+                    "Redetect processor", JOptionPane.INFORMATION_MESSAGE );
             }
             else
             {
@@ -557,7 +557,7 @@ public class RootMenu extends JFrame
                             enumerator.rebuildAfterCpuidReload
                                 ( tabbedPane, true );
                             JOptionPane.showMessageDialog( thisFrame,
-                                "Processor redetected without affinization",
+                                "Processor redetected without affinization.",
                                 getShortName() + "- Redetect processor",
                                 JOptionPane.INFORMATION_MESSAGE );
                         }
@@ -592,8 +592,8 @@ public class RootMenu extends JFrame
                 salRef.restartOverride( false );
                 enumerator.rebuildAfterCpuidReload( tabbedPane, true );
                 JOptionPane.showMessageDialog( thisFrame, 
-                    "Processor redetected (non affinized mode)",
-                    "Redetect processor", JOptionPane.WARNING_MESSAGE );
+                    "Processor redetected (non affinized mode).",
+                    "Redetect processor", JOptionPane.INFORMATION_MESSAGE );
             }
             else
             {

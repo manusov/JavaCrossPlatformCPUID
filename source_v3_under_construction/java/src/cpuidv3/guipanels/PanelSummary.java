@@ -12,8 +12,6 @@ provides content for "Summary" leaf at tabbed pane.
 
 package cpuidv3.guipanels;
 
-
-import cpuidv3.CPUIDv3;
 import cpuidv3.gui.HelperTable;
 import cpuidv3.sal.ChangeableTableModel;
 import cpuidv3.sal.ReportData;

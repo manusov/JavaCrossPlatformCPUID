@@ -1001,7 +1001,7 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new FMS (10,15,  0, 1,  1,     "AMD EPYC (Milan)"),
     */
     new F   ( 7,15,                "AMD (unknown model)"),
-    // Todd Allen comment:
+   // Todd Allen comment:
    // In Zen-based CPUs, the model uses only the extended model and the
    // high-order bit of the model.  Meanwhile, the stepping name (revision) is
    // determinable mechanically from the low order 3 bits of the model,
@@ -1173,7 +1173,8 @@ private boolean is_amd_egypt_athens_8xx( DatabaseStash stash )
     new F   (10,15,                "AMD (unknown model)"),
     new FMm (11,15,  0, 0,         "AMD EPYC (5th Gen) (Turin)"), // PPR 57238   // TODO:  "AMD EPYC (5th Gen) (Turin %c%u)"
     new FMm (11,15,  0, 8,         "AMD EPYC (5th Gen) (Turin)"), // PPR 57238   // TODO:  "AMD EPYC (5th Gen) (Turin %c%u)"
-    new FMm (11,15,  1, 0,         "AMD EPYC (unknown type) (Sorano)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Sorano %c%u)"
+    // (unknown type) changed to Zen5c. (Sorano) changed to (Turin-D).
+    new FMm (11,15,  1, 0,         "AMD EPYC (Zen5c) (Turin-D)"),        // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Sorano %c%u)"
     new FMm (11,15,  1, 8,         "AMD EPYC (unknown type) (Sorano)"), // undocumented, but LLVM patch from AMD's Ganesh Gopalasubramanian   // TODO:  "AMD EPYC (unknown type) (Sorano %c%u)"
     // Are all these Strix Point's Ryzen AI 300 CPU's?
     // I suspect the latter ones are not.
