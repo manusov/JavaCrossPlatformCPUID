@@ -56,6 +56,10 @@ private final static int L3_UNIFIED = 0x63;
         for( int i=0; i<rowsCount; i++ )
             {
             s[i][0] = CACHE_PARMS[i];
+            for( int j=1; j<columnsCount; j++ )
+                {
+                s[i][j] = "";
+                }
             }
         for( int i=0; i<cacheCount; i++ )
             {

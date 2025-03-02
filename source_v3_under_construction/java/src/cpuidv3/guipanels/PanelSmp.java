@@ -40,8 +40,8 @@ public class PanelSmp extends ApplicationPanel
 
     private final JPanel smpPanel;
     private JTree topologyTree;
-    private JTable[] topologyListTables;
-    private JTable[] topologyDumpTables;
+//  private JTable[] topologyListTables;
+//  private JTable[] topologyDumpTables;
     private JSplitPane dualPanelH;
     private JSplitPane dualPanelV;
     
@@ -67,15 +67,21 @@ public class PanelSmp extends ApplicationPanel
         treeScreenModel = salRef.getSmpTree();
         if ( treeScreenModel == null ) return;
         
-        int count = treeScreenModel.upTables.length;
-        topologyListTables = new JTable[count];
-        topologyDumpTables = new JTable[count];
-        for( int i=0; i<count; i++ )
-        {
-            topologyListTables[i] = new JTable( treeScreenModel.upTables[i] );
-            topologyDumpTables[i] = new JTable( treeScreenModel.downTables[i] );
-        }
-        
+// Memory load optimization. See alternative at v3.03.11.
+// Replace variant with pre-build all tables to variant with dynamically create
+// required JTable(table model) when click associated node of tree.
+// See alternative at v3.03.11 ( use HashMap, cache and not replicate equal
+// tables ).
+//        
+//      int count = treeScreenModel.upTables.length;
+//      topologyListTables = new JTable[count];
+//      topologyDumpTables = new JTable[count];
+//      for( int i=0; i<count; i++ )
+//      {
+//          topologyListTables[i] = new JTable( treeScreenModel.upTables[i] );
+//          topologyDumpTables[i] = new JTable( treeScreenModel.downTables[i] );
+//      }
+//        
         topologyTree = new JTree( treeScreenModel.treeModel );
         topologyTree.addTreeSelectionListener( new SelectionListener() );
         JScrollPane leftPanel = new JScrollPane( topologyTree );
@@ -128,8 +134,11 @@ public class PanelSmp extends ApplicationPanel
     // topology object table + dump table.
     private JPanel helperNodeSelection( int index )
     {
-        JTable fncListTable = topologyListTables[index];
-        JTable fncDumpTable = topologyDumpTables[index];
+//      JTable fncListTable = topologyListTables[index];
+//      JTable fncDumpTable = topologyDumpTables[index];
+        JTable fncListTable = new JTable( treeScreenModel.upTables[index] );
+        JTable fncDumpTable = new JTable( treeScreenModel.downTables[index] );
+//        
         // Create right component of dual panel: funct. + dump tables pair.
         JPanel rightPanel = new JPanel();
         HelperTable.optimizeColumnsWidths( fncListTable, 500 );

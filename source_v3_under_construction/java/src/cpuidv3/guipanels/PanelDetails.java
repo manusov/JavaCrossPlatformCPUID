@@ -40,8 +40,8 @@ public class PanelDetails extends ApplicationPanel
 
     private final JPanel detailsPanel;
     private JTree detailsTree;
-    private JTable[] fncListTables;
-    private JTable[] fncDumpTables;
+//  private JTable[] fncListTables;
+//  private JTable[] fncDumpTables;
     private JSplitPane dualPanelH;
     private JSplitPane dualPanelV;
     
@@ -67,15 +67,21 @@ public class PanelDetails extends ApplicationPanel
         treeScreenModel = salRef.getDetailsTree();
         if ( treeScreenModel == null ) return;
         
-        int count = treeScreenModel.upTables.length;
-        fncListTables = new JTable[count];
-        fncDumpTables = new JTable[count];
-        for( int i=0; i<count; i++ )
-        {
-            fncListTables[i] = new JTable( treeScreenModel.upTables[i] );
-            fncDumpTables[i] = new JTable( treeScreenModel.downTables[i] );
-        }
-        
+// Memory load optimization. See alternative at v3.03.11.
+// Replace variant with pre-build all tables to variant with dynamically create
+// required JTable(table model) when click associated node of tree.
+// See alternative at v3.03.11 ( use HashMap, cache and not replicate equal
+// tables ).
+//
+//      int count = treeScreenModel.upTables.length;
+//      fncListTables = new JTable[count];
+//      fncDumpTables = new JTable[count];
+//      for( int i=0; i<count; i++ )
+//      {
+//          fncListTables[i] = new JTable( treeScreenModel.upTables[i] );
+//          fncDumpTables[i] = new JTable( treeScreenModel.downTables[i] );
+//      }
+//        
         detailsTree = new JTree( treeScreenModel.treeModel );
         detailsTree.addTreeSelectionListener( new SelectionListener() );
         JScrollPane leftPanel = new JScrollPane( detailsTree );
@@ -128,8 +134,11 @@ public class PanelDetails extends ApplicationPanel
     // topology object table + dump table.
     private JPanel helperNodeSelection( int index )
     {
-        JTable fncListTable = fncListTables[index];
-        JTable fncDumpTable = fncDumpTables[index];
+//      JTable fncListTable = fncListTables[index];
+//      JTable fncDumpTable = fncDumpTables[index];
+        JTable fncListTable = new JTable( treeScreenModel.upTables[index] );
+        JTable fncDumpTable = new JTable( treeScreenModel.downTables[index] );
+//        
         // Create right component of dual panel: funct. + dump tables pair.
         JPanel rightPanel = new JPanel();
         HelperTable.optimizeColumnsWidths( fncListTable, 500 );
