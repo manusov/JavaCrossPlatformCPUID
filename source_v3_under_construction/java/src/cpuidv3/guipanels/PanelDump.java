@@ -41,9 +41,12 @@ public class PanelDump extends ApplicationPanel
     @Override void rebuildPanel(  boolean physical )
     {
         model = salRef.getDumpTable();
-        table = new JTable( model );
-        final int X_SCALE = 200;
-        HelperTable.optimizeSingleTable( panel, table, X_SCALE, true );
+        if ( model != null )
+        {
+            table = new JTable( model );
+            final int X_SCALE = 200;
+            HelperTable.optimizeSingleTable( panel, table, X_SCALE, true );
+        }
     }
 
     @Override ReportData getReportThis()

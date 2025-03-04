@@ -43,9 +43,12 @@ public class PanelContext extends ApplicationPanel
     @Override void rebuildPanel( boolean physical )
     {
         model = salRef.getContextTable();
-        table = new JTable( model );
-        final int X_SCALE = 600;
-        HelperTable.optimizeSingleTable( panel, table, X_SCALE, true );
+        if ( model != null )
+        {
+            table = new JTable( model );
+            final int X_SCALE = 600;
+            HelperTable.optimizeSingleTable( panel, table, X_SCALE, true );
+        }
     }
 
     @Override ReportData getReportThis()

@@ -10,6 +10,7 @@ package cpuidv3.sal;
 
 import static cpuidv3.CPUIDv3.getResourcePackage;
 import static cpuidv3.sal.HelperTableToReport.tableReport;
+import cpuidv3.sal.SAL.SERVICE_ID;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class ServiceCpuidPhysicalTest
     @Before public void setUp() 
     {
         String libPath = getResourcePackage();
-        sal = SAL.getInstance( libPath );
+        sal = SALHW.getInstance( libPath );
         System.out.println( "SAL initialized." );
     }
     
@@ -37,7 +38,7 @@ public class ServiceCpuidPhysicalTest
     @Test public void testGetTable()
     {
         System.out.println( "Test strings get and table build." );
-        Service service = sal.getService( SAL.SERVICE_ID.CPUID_PHYSICAL );
+        Service service = sal.getService( SERVICE_ID.CPUID_PHYSICAL );
         if ( service == null )
         {
             fail( "Service object is null." );
@@ -59,5 +60,4 @@ public class ServiceCpuidPhysicalTest
         String tableData = tableReport( tableModel );
         System.out.println( tableData );
     }
-    
 }

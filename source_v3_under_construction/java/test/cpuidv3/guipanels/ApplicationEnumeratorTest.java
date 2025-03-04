@@ -8,6 +8,7 @@ package cpuidv3.guipanels;
 
 import static cpuidv3.CPUIDv3.getResourcePackage;
 import cpuidv3.sal.SAL;
+import cpuidv3.sal.SALHW;
 import javax.swing.Icon;
 import javax.swing.JPanel;
 import org.junit.After;
@@ -24,7 +25,7 @@ public class ApplicationEnumeratorTest
     {  
         System.out.println
             ( "[ Start test: class ApplicationEnumerator.java. ]" );
-        SAL sal = SAL.getInstance( getResourcePackage() );
+        SAL sal = SALHW.getInstance( getResourcePackage() );
         apenum = new ApplicationEnumerator( sal );
     }
     

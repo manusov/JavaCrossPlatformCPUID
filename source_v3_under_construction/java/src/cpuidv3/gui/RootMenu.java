@@ -51,6 +51,7 @@ public class RootMenu extends JFrame
     private final ApplicationEnumerator enumerator;
     private final static String[] NAMES_M1 = { "File" , "Platform" , "Help" };
     private final static char[] MNEMONICS_M1 =  { 'F' , 'P' , 'H' };
+
     private final static String[][] NAMES_M2 = 
     { 
         { "Save system report" , "Save one cpu report" , "Save screen report" ,
@@ -61,12 +62,14 @@ public class RootMenu extends JFrame
           "Redetect selected CPU", "Redetect any CPU" } ,
         { "About" } 
     };
+
     private final static char[][] MNEMONICS_M2 =
     {   // Usage: KEY at opened menu.
         { 'S' , 'O' , 'C' , 'E' , 'O' , 'L' , 'B' , 'I' , 'X' } , 
         { 'R' , 'S' , 'A' } , { 'A' } 
     };
-        private final static KeyStroke[][] ACCELERATORS_M2 =
+
+    private final static KeyStroke[][] ACCELERATORS_M2 =
     {   // Usage: ALT-KEY at any context.
         { KeyStroke.getKeyStroke( 'S' , KeyEvent.ALT_DOWN_MASK ) ,
           null , null ,
@@ -79,14 +82,22 @@ public class RootMenu extends JFrame
           null , null } , 
         { null } 
     };
+
     private final static boolean[][] SEPARATORS_M2 =
     { { false , false , true , false , false , true , false , true , false },
       { false , false , false } ,
       { false } };
-    private final static boolean[][] ITEM_ACTIVE =
+
+    private final static boolean[][] ITEM_ACTIVE_HW =  // For "Hardware" build.
     { { true , true , true , true , true , true , true , true , true } ,
       { true , true , true } , 
       { true } };
+
+    private final static boolean[][] ITEM_ACTIVE_DL =  // For "Dump load" build.
+    { { false , true , true , false , false , true , false , false , true } ,
+      { false , false , false } , 
+      { true } };
+
     private final AbstractAction[] listeners = 
     { new SaveSystemReportAction()    ,
       new SaveOneCpuReportAction()    ,
@@ -131,6 +142,17 @@ public class RootMenu extends JFrame
         }
         int k = 0;
         int nm1 = NAMES_M1.length;
+        
+        boolean[][] itemActiveSelected;
+        if ( salRef.getDumpLoaderBuild() )
+        {
+            itemActiveSelected = ITEM_ACTIVE_DL;
+        }
+        else
+        {
+            itemActiveSelected = ITEM_ACTIVE_HW;
+        }
+        
         m:
         for ( int i=0; i<nm1; i++ )
         {   // Root menu: cycle for set activity and add listeners.
@@ -140,7 +162,7 @@ public class RootMenu extends JFrame
                 if (( listeners == null ) || ( k >= listeners.length )) break m;
                 if ( listeners[k] != null )
                 {
-                    m2[i][j].setEnabled( ITEM_ACTIVE[i][j] );
+                    m2[i][j].setEnabled( itemActiveSelected[i][j] );
                     m2[i][j].addActionListener( listeners[k++] );
                 }
             }
@@ -164,7 +186,15 @@ public class RootMenu extends JFrame
                 tabbedPane.addTab( names[i], icons[i], panels[i], tips[i] );
                 tabbedPane.setEnabledAt( i, actives[i] );
             }
-            enumerator.buildTabPanels( true );
+            
+            if ( salRef.getDumpLoaderBuild() )
+            {
+                enumerator.buildCpuidPanelsOnly( tabbedPane, false );
+            }
+            else
+            {
+                enumerator.buildTabPanels( true );
+            }
         }
     }
     
@@ -176,12 +206,14 @@ public class RootMenu extends JFrame
     private final static int T_DOWN = B_DOWN - DB.height - 5;
     private final static int T_LEFT = 2;
     private final static int T_RIGHT = -2;
+
     private final static String[] BUTTONS_NAMES = 
     { "Redetect"    , 
       "Save hex"    , "Load hex"    , 
       "Save binary" , "Load binary" ,
       "Report all"  , "Report CPU"  , "Report this" , 
       "Exit"        };
+
     private final static String[] BUTTONS_TIPS =
     { "Refresh CPUID information from the physical platform."           ,
       "Save hex dump file at InstLatX64 format, can be loaded later."   ,
@@ -192,8 +224,15 @@ public class RootMenu extends JFrame
       "Save text report with CPUID information for one CPU."            ,
       "Save text report for current visualized screen."                 ,  
       "Exit application."                                              };
+
     private final static int[] BUTTONS_KEYS = 
         { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+    
+    private final static boolean[] BUTTON_ACTIVE_HW =
+        { true , true , true , true , true , true , true , true , true };
+
+    private final static boolean[] BUTTON_ACTIVE_DL =
+        { false , false , true , false , false , false , true , true , true };
 
     public void showGui()
     {
@@ -205,7 +244,7 @@ public class RootMenu extends JFrame
         HelperLayout.springCenter
             ( layout, panel, tabbedPane, T_UP, T_DOWN, T_LEFT, T_RIGHT );
         
-        JButton[] buttons = new JButton[BUTTONS_NAMES.length];
+        JButton[] buttons = new JButton[ BUTTONS_NAMES.length ];
         ActionListener[] actionsListeners = new ActionListener[]
         {
             new BRedetect()   ,
@@ -217,12 +256,26 @@ public class RootMenu extends JFrame
         HelperButton.downButtons( panel, buttons, 
             BUTTONS_NAMES, BUTTONS_TIPS, BUTTONS_KEYS,  BUTTONS_NAMES.length, 
             actionsListeners, layout, B_DOWN, B_RIGHT, B_INTERVAL, DB );
+        
+        boolean[] buttonActiveSelected;
+        if ( salRef.getDumpLoaderBuild() )
+        {
+            buttonActiveSelected = BUTTON_ACTIVE_DL;
+        }
+        else
+        {
+            buttonActiveSelected = BUTTON_ACTIVE_HW;
+        }
+        for( int i=0; i< buttons.length; i++ )
+        {
+            buttons[i].setEnabled( buttonActiveSelected[i] );
+        }
 
         setDefaultCloseOperation( EXIT_ON_CLOSE );
         setSize( APP_X, APP_Y );
         String titleString = getLongName();
         String addString = salRef.getRuntimeName();
-        if( ( addString != null )&&( !addString.equals("") ) )
+        if( ( addString != null )&&( !addString.equals( "" ) ) )
         {
             titleString = String.format( "%s  ( %s )", titleString, addString );
         }
@@ -393,7 +446,7 @@ public class RootMenu extends JFrame
                     salRef.restartOverride( true );
                     // Clear all panels at JTabbedPane and 
                     // rebuild CPUID-depend panels at JTabbedPane.
-                    enumerator.rebuildAfterCpuidReload( tabbedPane, false );
+                    enumerator.buildCpuidPanelsOnly( tabbedPane, false );
                 }
                 else
                 {
@@ -441,7 +494,7 @@ public class RootMenu extends JFrame
                     salRef.restartOverride( true );
                     // Clear all panels at JTabbedPane and 
                     // rebuild CPUID-depend panels at JTabbedPane.
-                    enumerator.rebuildAfterCpuidReload( tabbedPane, false );
+                    enumerator.buildCpuidPanelsOnly( tabbedPane, false );
                 }
                 else
                 {
@@ -471,7 +524,7 @@ public class RootMenu extends JFrame
             if( operationStatus )
             {
                 salRef.restartOverride( false );
-                enumerator.rebuildAfterCpuidReload( tabbedPane, true );
+                enumerator.buildCpuidPanelsOnly( tabbedPane, true );
                 JOptionPane.showMessageDialog( thisFrame, 
                     "Processor(s) redetected.",
                     "Redetect processor", JOptionPane.INFORMATION_MESSAGE );
@@ -530,7 +583,7 @@ public class RootMenu extends JFrame
                             
                         if ( operationStatus )
                         {
-                            enumerator.rebuildAfterCpuidReload
+                            enumerator.buildCpuidPanelsOnly
                                 ( tabbedPane, true );
                             String statusString = String.format
                                 ( "Processor redetected, affinity = %d.",
@@ -554,7 +607,7 @@ public class RootMenu extends JFrame
                             salRef.internalLoadNonAffinizedCpuid();
                         if ( operationStatus )
                         {
-                            enumerator.rebuildAfterCpuidReload
+                            enumerator.buildCpuidPanelsOnly
                                 ( tabbedPane, true );
                             JOptionPane.showMessageDialog( thisFrame,
                                 "Processor redetected without affinization.",
@@ -590,7 +643,7 @@ public class RootMenu extends JFrame
             if( operationStatus )
             {
                 salRef.restartOverride( false );
-                enumerator.rebuildAfterCpuidReload( tabbedPane, true );
+                enumerator.buildCpuidPanelsOnly( tabbedPane, true );
                 JOptionPane.showMessageDialog( thisFrame, 
                     "Processor redetected (non affinized mode).",
                     "Redetect processor", JOptionPane.INFORMATION_MESSAGE );

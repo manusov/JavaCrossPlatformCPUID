@@ -33,10 +33,10 @@ package cpuidv3.pal;
 public final class PAL
 {
     public static enum PAL_STATUS 
-        { SUCCESS, OS_DETECT_FAILED, LIBRARY_LOAD_FAILED }
+        { SUCCESS, NOT_REQUIRED, OS_DETECT_FAILED, LIBRARY_LOAD_FAILED }
 
     public static enum  OS_TYPE 
-        { WIN32, WIN64, LINUX32, LINUX64, UNKNOWN };
+        { WIN32, WIN64, LINUX32, LINUX64, UNKNOWN, NOT_USED };
     
     final static int REQUEST_GET_CPUID                       = 0;
     final static int REQUEST_GET_CPUID_SUBFUNCTION           = 1;

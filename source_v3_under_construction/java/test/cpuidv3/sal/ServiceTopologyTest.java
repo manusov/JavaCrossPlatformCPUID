@@ -10,6 +10,7 @@ package cpuidv3.sal;
 
 import static cpuidv3.CPUIDv3.getResourcePackage;
 import static cpuidv3.sal.HelperTableToReport.tableReport;
+import cpuidv3.sal.SAL.SERVICE_ID;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class ServiceTopologyTest
     @Before public void setUp() 
     {
         String libPath = getResourcePackage();
-        sal = SAL.getInstance( libPath );
+        sal = SALHW.getInstance( libPath );
         System.out.println( "SAL initialized." );
     }
     
@@ -37,7 +38,7 @@ public class ServiceTopologyTest
     @Test public void testGetTable()
     {
         System.out.println( "Test strings get and table build." );
-        Service service = sal.getService( SAL.SERVICE_ID.TOPOLOGY );
+        Service service = sal.getService( SERVICE_ID.TOPOLOGY );
         if ( service == null )
         {
             fail( "Service object is null." );
@@ -59,7 +60,4 @@ public class ServiceTopologyTest
         String tableData = tableReport( tableModel );
         System.out.println( tableData );
     }
-
-
-    
 }

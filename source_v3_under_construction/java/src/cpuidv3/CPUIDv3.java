@@ -18,12 +18,19 @@ package cpuidv3;
 import cpuidv3.gui.RootMenu;
 import cpuidv3.pal.PAL.PAL_STATUS;
 import cpuidv3.sal.SAL;
+import cpuidv3.sal.SALDL;
+import cpuidv3.sal.SALHW;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class CPUIDv3 
 {
-    private final static String VERSION_NAME  = "v3.03.12";
+    private final static boolean BUILD_DECORATED = false;
+    private final static boolean BUILD_LOADER = false;
+    
+    private final static String VERSION_NAME  = "v3.03.13";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
         "Information belongs to Universe.";
@@ -60,6 +67,18 @@ public class CPUIDv3
     
     CPUIDv3( SAL sal )
     {
+        if ( BUILD_DECORATED )
+        {
+            JFrame.setDefaultLookAndFeelDecorated( true );
+            JDialog.setDefaultLookAndFeelDecorated( true );
+        }
+        if ( BUILD_LOADER )
+        {
+            JOptionPane.showMessageDialog( null, 
+                getLongName() + ".\r\n" + 
+                "Application builded as Dump Loader only.",
+                getShortName(), JOptionPane.WARNING_MESSAGE );
+        }
         RootMenu rootMenu = new RootMenu( sal );
         rootMenu.showGui();
     }
@@ -72,7 +91,16 @@ public class CPUIDv3
             consoleMode = true;
         }
         
-        SAL sal = SAL.getInstance( getResourcePackage() );
+        SAL sal;
+        if( BUILD_LOADER )
+        {   // Use Service Abstraction Layer (SAL) for Dump Loader (DL) build.
+            sal = SALDL.getInstance();
+        }
+        else
+        {   // Use Service Abstraction Layer (SAL) for Hardware (HW) build.
+            sal = SALHW.getInstance( getResourcePackage() );            
+        }
+        
         PAL_STATUS palStatus = sal.getPalStatus();
         String statusName = MSG_INIT_FAILED;
         if ( palStatus != null )
@@ -80,6 +108,7 @@ public class CPUIDv3
             switch ( palStatus )
             {
                 case SUCCESS:
+                case NOT_REQUIRED:
                     statusName = MSG_SAL_OK;
                     break;
                 case OS_DETECT_FAILED:
@@ -95,7 +124,7 @@ public class CPUIDv3
         if( consoleMode && ( palStatus == PAL_STATUS.SUCCESS ) )
         {   // Console mode, successfully start.
             String runtimeName = sal.getRuntimeName();
-            if( runtimeName != null )
+            if( ( runtimeName != null )&&( !runtimeName.equals( "" ) ) )
             {
                 System.out.println( "\r\n[ " + getLongName() + ". ][ "
                         + runtimeName + ". ]"   );
@@ -115,7 +144,9 @@ public class CPUIDv3
         {   // Console mode, start failed.
             System.out.println( getShortName() + ": " + statusName );
         }
-        else if ( !consoleMode && ( palStatus == PAL_STATUS.SUCCESS ) )
+        else if ( !consoleMode && 
+                ( ( palStatus == PAL_STATUS.SUCCESS )||
+                (   palStatus == PAL_STATUS.NOT_REQUIRED ) ) )
         {   // GUI mode, successfully start.
             SwingUtilities.invokeLater( () -> { new CPUIDv3( sal ); } );
         }

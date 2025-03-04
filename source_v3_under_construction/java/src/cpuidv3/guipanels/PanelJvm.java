@@ -41,9 +41,12 @@ public class PanelJvm extends ApplicationPanel
     @Override void rebuildPanel(  boolean physical )
     {
         model = salRef.getJvmTable();
-        table = new JTable( model );
-        final int X_SCALE = 700;
-        HelperTable.optimizeSingleTable( panel, table, X_SCALE, false );
+        if ( model != null )
+        {
+            table = new JTable( model );
+            final int X_SCALE = 700;
+            HelperTable.optimizeSingleTable( panel, table, X_SCALE, false );
+        }
     }
 
     @Override ReportData getReportThis()

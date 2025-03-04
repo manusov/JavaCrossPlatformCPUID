@@ -17,20 +17,30 @@ public class ServiceCpuidFile extends ServiceCpuidPhysical
     ServiceCpuidFile( SAL s ) { super( s ); }
     
     private long[][] binaryData = null;
+    
+    @Override boolean internalLoadBinaryData()
+    {
+        return true;
+    }
+    
+    @Override boolean internalLoadNonAffinized()
+    {
+        return true;
+    }
 
     @Override void clearBinaryData()
     {
         binaryData = null;
     }
     
-    @Override void setBinaryData( long[][] data )
-    {
-        binaryData = data;
-    }
-    
     @Override long[][] getBinaryData()
     {
         return binaryData;
+    }
+
+    @Override void setBinaryData( long[][] data )
+    {
+        binaryData = data;
     }
 
     @Override void printSummaryReport()

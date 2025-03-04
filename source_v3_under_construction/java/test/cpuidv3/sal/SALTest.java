@@ -20,12 +20,12 @@ public class SALTest
 {
     public SALTest() {  }
     
-    SAL sal = null;
+    SALHW sal = null;
     
     @Before public void setUp() 
     {
         String libPath = getResourcePackage();
-        sal = SAL.getInstance( libPath );
+        sal = SALHW.getInstance( libPath );
         System.out.println( "SAL initialized." );
     }
     
@@ -77,7 +77,7 @@ public class SALTest
     public void testGetService() 
     {
         System.out.println( "Test sal.getService()." );
-        Service service = sal.getService( SAL.SERVICE_ID.CLOCKS );
+        Service service = sal.getService( SALHW.SERVICE_ID.CLOCKS );
         if ( service == null )
         {
             fail( "Service object is null." );

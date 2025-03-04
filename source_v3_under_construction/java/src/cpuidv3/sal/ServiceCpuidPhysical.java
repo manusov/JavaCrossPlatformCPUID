@@ -35,25 +35,28 @@ class ServiceCpuidPhysical extends Service
             status = true;
         }
         else
-        {   // Create new binary data if yet not loaded or cleared.
+        {
             PAL pal = sal.getPal();
-            long[] platformArray = pal.getPlatformInfo();
-            if (( platformArray != null )&&( platformArray.length > 0 ))
+            if ( pal != null )
             {
-                int cpuCount = (int)( platformArray[0] & 0xFFFFFFFFL );
-                if( cpuCount > 0 )
+                long[] platformArray = pal.getPlatformInfo();
+                if (( platformArray != null )&&( platformArray.length > 0 ))
                 {
-                    if( cpuCount > MP_LIMIT )
+                    int cpuCount = (int)( platformArray[0] & 0xFFFFFFFFL );
+                    if( cpuCount > 0 )
                     {
-                        cpuCount = MP_LIMIT;
+                        if( cpuCount > MP_LIMIT )
+                        {
+                            cpuCount = MP_LIMIT;
+                        }
+                        long[][] tempData = new long[cpuCount][];
+                        for( int cpuIndex=0; cpuIndex<cpuCount; cpuIndex++ )
+                        {
+                            tempData[cpuIndex] = pal.getCpuidAffinized( cpuIndex );
+                        }
+                        binaryData = tempData;
+                        status = true;
                     }
-                    long[][] tempData = new long[cpuCount][];
-                    for( int cpuIndex=0; cpuIndex<cpuCount; cpuIndex++ )
-                    {
-                        tempData[cpuIndex] = pal.getCpuidAffinized( cpuIndex );
-                    }
-                    binaryData = tempData;
-                    status = true;
                 }
             }
         }
@@ -65,11 +68,14 @@ class ServiceCpuidPhysical extends Service
         boolean status = false;
         binaryData = null;
         PAL pal = sal.getPal();
-        long[] tempData = pal.getCpuid();
-        if (( tempData != null )&&( tempData.length > 0 ))
+        if ( pal != null )
         {
-            binaryData = new long[][]{ tempData };
-            status = true;
+            long[] tempData = pal.getCpuid();
+            if (( tempData != null )&&( tempData.length > 0 ))
+            {
+                binaryData = new long[][]{ tempData };
+                status = true;
+            }
         }
         return status;
     }

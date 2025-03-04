@@ -9,6 +9,7 @@ package cpuidv3.guipanels;
 
 import static cpuidv3.CPUIDv3.getResourcePackage;
 import cpuidv3.sal.SAL;
+import cpuidv3.sal.SALHW;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -32,7 +33,7 @@ public class PanelClockTest
 
     @Before public void setUp() throws Exception 
     {
-        SAL localSAL = SAL.getInstance( getResourcePackage() );
+        SAL localSAL = SALHW.getInstance( getResourcePackage() );
         testedPanel = new PanelClock( localSAL );
     }
 

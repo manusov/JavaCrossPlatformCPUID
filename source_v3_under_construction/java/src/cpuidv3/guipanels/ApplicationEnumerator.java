@@ -165,7 +165,7 @@ public class ApplicationEnumerator
             reports.toArray( new ReportData[reports.size()] );
     }
     
-    public void rebuildAfterCpuidReload
+    public void buildCpuidPanelsOnly
         ( JTabbedPane tabbedPane, boolean physicalMode )
     {
         JPanel[] panels = getTabPanels();
