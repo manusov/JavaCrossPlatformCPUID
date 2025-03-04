@@ -1,0 +1,14 @@
+Dump loader v3.03.14 source:
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v3_under_construction
+
+Compile Java CPUID utility: 
+ boolean BUILD_LOADER = false 
+
+Compile Java Dump Loader only utility: 
+ boolean BUILD_LOADER = true
+
+Project is UNDER DEBUG.
+
+
+
+ 
