@@ -41,7 +41,7 @@ Current screen report.
 
 */
 
-package cpuidv3.sal;
+package cpuidv3.servicempwindows;
 
 public class TopologyEmulator 
 {
@@ -60,7 +60,6 @@ public class TopologyEmulator
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00                                                  
     };
 
-    
     public static long[] getEmulateData()
     {
         long[] result = new long[ EMULATE_DATA.length / 8 + 2];
