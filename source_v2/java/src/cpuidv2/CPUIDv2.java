@@ -6,7 +6,7 @@ Previous source (Java CPUID v1.xx.xx) repository:
 https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
 All repositories: 
 https://github.com/manusov?tab=repositories
-(C) Manusov I.V. Refactoring at 2024.
+(C) Manusov I.V. Refactoring at 2025.
 -------------------------------------------------------------------------------
 Java CPUID application main class. Contains application vendor, version,
 name text strings and web links. Interconnects functions secnarios classes,
@@ -25,8 +25,8 @@ import cpuidv2.applications.ApplicationsManager;
 
 public class CPUIDv2 
 {
-private final static String VERSION_NAME = "v2.00.13";
-private final static String VENDOR_NAME  = "(C)2024 Manusov I.V.";
+private final static String VERSION_NAME = "v2.00.14";
+private final static String VENDOR_NAME  = "(C)2025 Manusov I.V.";
 private final static String SHORT_NAME   = "CPUID " + VERSION_NAME;
 private final static String LONG_NAME    = "Java " + SHORT_NAME;
 private final static String PROJECT_WEB =

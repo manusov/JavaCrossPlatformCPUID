@@ -1,4 +1,35 @@
-CPUID v2.00.13 (October, 20, 2024)
+CPUID v2.00.14 (May, 28, 2025).
+Same updates for engineering sample CPUID v3.03.16.
+
+Added new INTEL features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000024h    1       ECX     0       VPMM     , Vector extension packed matrix multiplication.
+00000024h    1       ECX     2       A10-VNNI , AVX10_VNNI_INT neural network instructions.
+---------------------------------------------------------------------------------------------------
+
+Data sources:
+
+1) Information about VPMM (Vector extension packed matrix multiplication).
+   Feature emulated by host VMM (Virtual Machine Monitor) for guest VM (Virtual Machines),
+   at context of Intel TDX (Trust Domain Extensions).
+   Document:
+     Intel Trust Domain Extensions (Intel TDX) Module Base Architecture Specification.
+     Document Number: 348549-006US. April 2025.
+   See document page 116-of-193, item 11.8.4 (Converged Vector ISA).
+
+2) Information about AVX10_VNNI_INT neural network instructions.
+   Vector neural network instructions for integers, as part of AVX10 extension.
+   Document:
+     Intel Advanced Vector Extensions 10.2 Architecture Specification.
+     May 2025. Revision 4.0.
+     Document Number: 361050-004US.
+   See document page 16-of-241, CPUID table and AVX10_VNNI_INT instructions description.
+
+
+
+CPUID v2.00.13 (October, 20, 2024).
 1) GUI bug fixed at CPUID functions tree, "Details" tab. 
    Bug is: no refresh CPUID leaf information if after dump reload or redetection click
    same leaf at tree.
@@ -8,7 +39,7 @@ CPUID v2.00.13 (October, 20, 2024)
    Button "Report this" report data from current selected screen.
 
 
-CPUID v2.00.12 (October, 19, 2024)
+CPUID v2.00.12 (October, 19, 2024).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -50,7 +81,7 @@ Data source:
    https://www.intel.com/content/www/us/en/developer/articles/technical/timed-process-event-based-sampling-tpebs.html
 
 
-CPUID v2.00.11 (October, 15, 2024)
+CPUID v2.00.11 (October, 15, 2024).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -71,7 +102,7 @@ Rev 0.24. September 29, 2024.
 Document Number: 57238.
 
 
-CPUID v2.00.10 (October, 15, 2024)
+CPUID v2.00.10 (October, 15, 2024).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -89,7 +120,7 @@ Rev 0.24. September 29, 2024.
 Document Number: 57238.
 
 
-CPUID v2.00.09 (October, 14, 2024)
+CPUID v2.00.09 (October, 14, 2024).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -107,7 +138,7 @@ Data sources:
    Document Number: 252046-077. October 2024.
 
 
-CPUID v2.00.08 (October, 13, 2024)
+CPUID v2.00.08 (October, 13, 2024).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -133,7 +164,7 @@ Rev 3.00. September 26, 2024.
 Document Number: 57254.
 
 
-CPUID v2.00.07 (September, 24, 2024)
+CPUID v2.00.07 (September, 24, 2024).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -148,7 +179,7 @@ Rev 1.2. June 2024.
 Document Number: 351407-002.
 
 
-CPUID v2.00.06 (June, 28, 2024)
+CPUID v2.00.06 (June, 28, 2024).
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -170,7 +201,7 @@ Data sources:
    June 2024. 319433-053.
 
 
-CPUID v2.00.05 (April, 3, 2024)
+CPUID v2.00.05 (April, 3, 2024).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -190,7 +221,7 @@ Data sources:
    Publication No. 24594. Revision 3.36. March 2024.
 
 
-CPUID v2.00.04 (March, 31, 2024)
+CPUID v2.00.04 (March, 31, 2024).
 This version is under debug, use previous version (v1.05.29) as stable.
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
@@ -214,7 +245,7 @@ Data sources:
    March 2024. 319433-052.
 
 
-CPUID v2.00.03 (February, 21, 2024)
+CPUID v2.00.03 (February, 21, 2024).
 This version is under debug, use previous version (v1.05.29) as stable.
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
@@ -232,13 +263,13 @@ Data sources:
    Revision 2.0 February 2024.
 
 
-CPUID v2.00.02 (January, 11, 2024)
+CPUID v2.00.02 (January, 11, 2024).
 This version is under debug, use previous version (v1.05.29) as stable.
 1) Redesign GUI.
 2) Improve TSC clock frequency measurement for Windows 32/64.
 
 
-CPUID v1.05.29 (December, 23, 2023)
+CPUID v1.05.29 (December, 23, 2023).
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -251,7 +282,7 @@ Data sources:
    Programming Reference. December 2023. Document ID: 319433-051.
 
 
-CPUID v1.05.28 (December, 20, 2023)
+CPUID v1.05.28 (December, 20, 2023).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -265,7 +296,7 @@ Intel Advanced Vector Extensions 10. Architecture Specification.
 December 2023. Revision 2.0. Document Number: 355989-002US.
 
 
-CPUID v1.05.27 (December, 08, 2023)
+CPUID v1.05.27 (December, 08, 2023).
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -277,7 +308,7 @@ Intel Flexible Return and Event Delivery (FRED) Specification.
 December 2023. Revision 6.0. Document Number: 346446-006US.
 
 
-CPUID v1.05.26 (September, 30, 2023)
+CPUID v1.05.26 (September, 30, 2023).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -303,7 +334,7 @@ Data sources:
    Programming Reference. September 2023. Document ID: 319433-050.
 
 
-CPUID v1.05.25 (September, 27, 2023)
+CPUID v1.05.25 (September, 27, 2023).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -325,7 +356,7 @@ Data sources:
    Document Number: 252046-073.
 
 
-CPUID v1.05.24 (July, 25, 2023)
+CPUID v1.05.24 (July, 25, 2023).
 Added XCR0 context bit.
 ------------------------------------------------------------
  Bit        Comments
@@ -337,7 +368,7 @@ Intel Advanced Performance Extensions (Intel APX) Software Enabling Introduction
 July 2023. Revision 1.0. Document Number: 356112-001US.
 
 
-CPUID v1.05.23 (July, 25, 2023)
+CPUID v1.05.23 (July, 25, 2023).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -355,16 +386,16 @@ Data sources:
    July 2023. Revision 1.0. Order Number: 356368-001US.
 
 
-CPUID v1.05.22 (July, 4, 2023)
-CPUID v1.05.21 (July, 4, 2023)
-CPUID v1.05.20 (July, 4, 2023)
+CPUID v1.05.22 (July, 4, 2023).
+CPUID v1.05.21 (July, 4, 2023).
+CPUID v1.05.20 (July, 4, 2023).
 Processors Type, Family, Model, Stepping (TFMS)
 some additions for INTEL and AMD.
 Special thanks to:
 https://github.com/InstLatx64/InstLatx64
 
 
-CPUID v1.05.19 (July, 3, 2023)
+CPUID v1.05.19 (July, 3, 2023).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -423,7 +454,7 @@ by document internal pages numeration), total 3336 pages at current document ver
     Page 1152, item 19.3.3.3. Assignable Bandwidth Monitoring (ABMC).
 
 
-CPUID v1.05.18 (July, 2, 2023)
+CPUID v1.05.18 (July, 2, 2023).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -467,7 +498,7 @@ by document internal pages numeration), total 188 pages at current document vers
     Page 29, CPUID bit.   
 
 
-CPUID v1.05.17 (March, 31, 2023)
+CPUID v1.05.17 (March, 31, 2023).
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -519,7 +550,7 @@ Some details.
    YET NO DATA ABOUT THIS FEATURE.
 
 
-CPUID v1.05.16 (March, 26, 2023)
+CPUID v1.05.16 (March, 26, 2023).
 Added new INTEL feature.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -539,7 +570,7 @@ March 2023.
 https://patchwork.kernel.org/project/intel-sgx/patch/20220421110326.856-9-cathy.zhang@intel.com/
 
 
-CPUID v1.05.15 (February, 15, 2023)
+CPUID v1.05.15 (February, 15, 2023).
 Added new features and updates.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -557,7 +588,7 @@ https://docs.kernel.org/admin-guide/acpi/cppc_sysfs.html
 https://docs.kernel.org/admin-guide/pm/amd-pstate.html
 
 
-CPUID v1.05.14 (December, 31, 2022)
+CPUID v1.05.14 (December, 31, 2022).
 Added new features.
 -------------------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -575,7 +606,7 @@ Data sources:
    Documentation Changes. December 2022. Document ID: 252046-070.
 
 
-CPUID v1.05.13 (December, 21, 2022)
+CPUID v1.05.13 (December, 21, 2022).
 Added new features and functions.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -592,7 +623,7 @@ https://www.intel.com/content/www/us/en/developer/articles/technical/software-se
 https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/branch-history-injection.html
 
 
-CPUID v1.05.12 (November, 12, 2022)
+CPUID v1.05.12 (November, 12, 2022).
 Added new features and functions.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -621,11 +652,11 @@ Volume 1 of 6.
 https://www.amd.com/en/support/tech-docs
 
 
-CPUID v1.05.11 (October, 24, 2022)
+CPUID v1.05.11 (October, 24, 2022).
 Updated data base for Intel Raptor Lake.
 
 
-CPUID v1.05.10 (October, 16, 2022)
+CPUID v1.05.10 (October, 16, 2022).
 1) Changed L2/L3 Cache and TLB associativity field encoding for functions 80000006h, 80000019h.
 2) Added new features and functions.
 -----------------------------------------------------------------------------------------------------
@@ -833,7 +864,7 @@ Known bug: yet no subfunctions support at binary level for CPUID 80000026h.
 
 
 
-CPUID v1.05.09 (October, 4, 2022)
+CPUID v1.05.09 (October, 4, 2022).
 Fixed bug at function 00000023h (Architectural Performance Monitoring Extended Leaf).
 
 CPUID v1.05.08 (October, 3, 2022)
@@ -938,7 +969,7 @@ https://github.com/InstLatx64/InstLatx64/blob/master/AuthenticAMD/AuthenticAMD0A
 
 
 
-CPUID v1.05.07 (September, 27, 2022)
+CPUID v1.05.07 (September, 27, 2022).
 Updated data base for AMD Zen4 processors:
 AMD Ryzen 5 7600X 6-Core Processor,
 AMD Ryzen 9 7900X 12-Core Processor,
@@ -946,7 +977,7 @@ AMD Ryzen 9 7950X 16-Core Processor.
 
 
 
-CPUID v1.05.06 (July, 1, 2022)
+CPUID v1.05.06 (July, 1, 2022).
 Added new feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -964,7 +995,7 @@ Data sources:
 
 
 
-CPUID v1.05.05 (June, 16, 2022)
+CPUID v1.05.05 (June, 16, 2022).
 Added more detail info about Intel Hybrid CPUs.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -980,7 +1011,7 @@ Order Number: 325462-077US. April 2022.
 
 
 
-CPUID v1.05.04 (June, 11, 2022)
+CPUID v1.05.04 (June, 11, 2022).
 Added new AMD QoS (Quality of Service Extensions) features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -994,7 +1025,7 @@ Publication# 56375. Revision 1.03. Issue Date: February 2022.
 
 
 
-CPUID v1.05.03 (April, 21, 2022)
+CPUID v1.05.03 (April, 21, 2022).
 Updates and corrections for Intel AMX (Advanced Matrix Extensions) technology.
 1) Fixed function 0000001Dh matrix rows count naming.
 2) Added report for results under Intel SDE Emulator.
@@ -1011,7 +1042,7 @@ https://github.com/manusov/Prototyping/tree/master/ConsoleDumpAmx64
 
 
 
-CPUID v1.05.02 (January, 5, 2022)
+CPUID v1.05.02 (January, 5, 2022).
 Added new INTEL features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1026,7 +1057,7 @@ December 2021. Document Number 252046-068.
 
 
 
-CPUID v1.05.01 (January, 4, 2022)
+CPUID v1.05.01 (January, 4, 2022).
 1) Updated data base for AMD processors.
 2) Added ACRN hypervisor signature to data base.
 Data sources:
@@ -1036,7 +1067,7 @@ http://www.etallen.com/
 
 
 
-CPUID v1.05.00 (January, 3, 2022)
+CPUID v1.05.00 (January, 3, 2022).
 ------------------------------------
 1) Detect Montage Jintide processor.
 2) Update data base for detection Intel Gen11 and Gen12 processors.
@@ -1056,7 +1087,7 @@ https://www.techradar.com/uk/news/intel-and-amd-shouldnt-panic-yet-but-this-chin
 
 
 
-CPUID v1.04.21 (November, 25, 2021)
+CPUID v1.04.21 (November, 25, 2021).
 Added new AMD features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1076,7 +1107,7 @@ Publication No. 24594. Revision 3.33. November 2021.
 
 
 
-CPUID v1.04.20 (June, 29, 2021)
+CPUID v1.04.20 (June, 29, 2021).
 Added new INTEL flags for disable TSX.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1093,7 +1124,7 @@ https://www.intel.com/content/www/us/en/support/articles/000059422/processors.ht
 
 
 
-CPUID v1.04.19 (May, 4, 2021)
+CPUID v1.04.19 (May, 4, 2021).
 Added new INTEL features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1110,7 +1141,7 @@ Document pages 121, 123.
 
 
 
-CPUID v1.04.18 (May, 4, 2021)
+CPUID v1.04.18 (May, 4, 2021).
 
 1) Added new INTEL function.
 Function 00000021h used by Intel TDX (Trust Domain Extensions) module
@@ -1132,7 +1163,7 @@ Document 344425-002US
 
 
 
-CPUID v1.04.17 (April, 4, 2021)
+CPUID v1.04.17 (April, 4, 2021).
 Added new INTEL feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1146,7 +1177,7 @@ Item 14.4.4.4  IA32_HWP_CTL MSR (Address 776H Logical Processor Scope).
 
 
 
-CPUID v1.04.16 (March, 27, 2021)
+CPUID v1.04.16 (March, 27, 2021).
 Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1159,7 +1190,7 @@ Publication # 56323  Revision: 0.78  March 2021.
 
 
 
-CPUID v1.04.15 (March, 17, 2021)
+CPUID v1.04.15 (March, 17, 2021).
 Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1174,7 +1205,7 @@ Doc# 55898 Rev 0.35 - Feb 5, 2021.
 
 
 
-CPUID v1.04.14 (March, 17, 2021)
+CPUID v1.04.14 (March, 17, 2021).
 Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1189,7 +1220,7 @@ Doc# 55898 Rev 0.35 - Feb 5, 2021.
 
 
 
-CPUID v1.04.13 (March, 13, 2021)
+CPUID v1.04.13 (March, 13, 2021).
 Added new Intel features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1204,7 +1235,7 @@ Document Number: 346446-001US.
 
 
 
-CPUID v1.04.12 (March, 10, 2021)
+CPUID v1.04.12 (March, 10, 2021).
 Added new AMD features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1224,14 +1255,14 @@ https://www.amd.com/en/support/tech-docs
 
 
 
-CPUID v1.04.11 (March, 10, 2021)
+CPUID v1.04.11 (March, 10, 2021).
 Added template visualization for new reserved undocumented AMD functions
 80000022h, 80000023h, if processor declares this functions exists, by
 maximum extended function number value.
 
 
 
-CPUID v1.04.10 (March, 9, 2021)
+CPUID v1.04.10 (March, 9, 2021).
 Added new AMD function and features.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1250,7 +1281,7 @@ https://www.amd.com/en/support/tech-docs
 
 
 
-CPUID v1.04.09 (March, 9, 2021)
+CPUID v1.04.09 (March, 9, 2021).
 Added new AMD feature.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1267,12 +1298,12 @@ https://www.amd.com/en/support/tech-docs
 
 
 
-CPUID v1.04.08 (January, 30, 2021)
+CPUID v1.04.08 (January, 30, 2021).
 AMD Cezanne added to data base. Signature = 00A50F00h.
 
 
 
-CPUID v1.04.07 (December, 29, 2020)
+CPUID v1.04.07 (December, 29, 2020).
 Added new features, update bitfields size.
 -----------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
@@ -1288,7 +1319,7 @@ https://software.intel.com/content/dam/develop/external/us/en/documents-tps/arch
 
 
 
-CPUID v1.04.06 (December, 27, 2020)
+CPUID v1.04.06 (December, 27, 2020).
 
 1) Removed duplicated spaces for CPU model string, which return by functions
    80000002h...80000004h.
@@ -1406,13 +1437,13 @@ https://fossies.org/linux/cpuid/ChangeLog
 
 
 
-CPUID v1.04.05 (December, 21, 2020)
+CPUID v1.04.05 (December, 21, 2020).
 1) Change Intel MP enumeration logic.
 2) Change AMD MP enumeration logic.
 
 
 
-CPUID v1.04.04 (December, 20, 2020)
+CPUID v1.04.04 (December, 20, 2020).
 1) Preparing for support vendor-specific and device-specific CPUID functions.
 ----------------------------------------------------------------------------------
  Function    Comment
@@ -1445,7 +1476,7 @@ Cpuid00000001.java, Line 137. get(1) vs get(0).
 
 
 
-CPUID v1.04.03 (December, 13, 2020)
+CPUID v1.04.03 (December, 13, 2020).
 
 1) Fixed CPUID subfunctions numeration bug for load InstLatx64 reports.
 2) Fixed CPUID functions visualization bugs: 
@@ -1483,7 +1514,7 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 
 
 
-CPUID v1.04.00 (December, 12, 2020)
+CPUID v1.04.00 (December, 12, 2020).
 
 1) Add feature bit for Virtual CPUID:
 ---------------------------------------------------------------------------------
@@ -1506,14 +1537,14 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 
 
 
-CPUID v1.03.06 (December, 8, 2020)
+CPUID v1.03.06 (December, 8, 2020).
 
 1) Correct data base. Detection Pentium III (Tualatin) with Brand Index=2.
 2) Correct data base. Detection Pentium II (Deschutes) with Family=6, Model=5, Stepping=2. 
 
 
 
-CPUID v1.03.05 (December, 7, 2020)
+CPUID v1.03.05 (December, 7, 2020).
 
 1) Update data base for AMD CPU Family=0Fh, Model=04h, Stepping=0Ah.
    Example: AMD Athlon(tm) 64 Processor 2800+.
@@ -1521,7 +1552,7 @@ CPUID v1.03.05 (December, 7, 2020)
 
 
 
-CPUID v1.03.04 (December, 05, 2020)
+CPUID v1.03.04 (December, 05, 2020).
 
 1) Add CPU family and model visualization by data base, summary screen.
 2) Add feature bit:
@@ -1541,7 +1572,7 @@ https://software.intel.com/security-software-guidance/deep-dives/deep-dive-speci
 
 
 
-CPUID v1.03.03 (December, 1, 2020)
+CPUID v1.03.03 (December, 1, 2020).
 
 1) Decode CPUID added: function 40000001h for KVM hypervisor.
 2) Decode CPU model by signature (Type, Family, Model, Stepping)
@@ -1555,7 +1586,7 @@ https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
 
 
 
-CPUID v1.03.02 (November, 29, 2020)
+CPUID v1.03.02 (November, 29, 2020).
 
 1) Add support virtual CPUID functions 40000007h-4000000Ah.
 2) Add data decoding for hypervisor vendor = Microsoft.
@@ -1566,7 +1597,7 @@ CPUID v1.03.02 (November, 29, 2020)
 
 
 
-CPUID v1.03.01 (November, 28, 2020)
+CPUID v1.03.01 (November, 28, 2020).
 
 1) Add support virtual CPUID functions 40000001h-40000006h,
    yet for Oracle VirtualBox under Windows, signature "VBoxVBoxVBox". 
@@ -1589,7 +1620,7 @@ Data sources:
 
 
 
-CPUID v1.03.00 (November, 26, 2020)
+CPUID v1.03.00 (November, 26, 2020).
 
 1) Binary interface updated for read virtual CPUID functions 40000001h-4000000Ah.
 2) Results of CPUID functions 40000001h-4000000Ah visualized yet as dump for
@@ -1599,7 +1630,7 @@ CPUID v1.03.00 (November, 26, 2020)
 
 
 
-CPUID v1.02.00 (November, 25, 2020)
+CPUID v1.02.00 (November, 25, 2020).
 
 Start implementing a database containing Vendor-Specific and Model-Specific
 information for x86 processors and virtualization hypervisors. Current version
@@ -1613,7 +1644,7 @@ https://fossies.org/linux/misc/cpuid-20201006.src.tar.gz/
 
 
 
-CPUID v1.01.09 (November, 18, 2020)
+CPUID v1.01.09 (November, 18, 2020).
 
 CPUID new bits list:
 ---------------------------------------------------------------------------------
@@ -1639,7 +1670,7 @@ ToPA is Table of Physical Addresses, see page 869 (25-14 Vol.3C)
 
 
 
-CPUID v1.01.08 (November, 16, 2020)
+CPUID v1.01.08 (November, 16, 2020).
 XSAVE bitmaps updated: add context component #15 = LBR (Last Branch Record),
 some corrections: differentiate XCR0 and XSS bitmaps.
 
@@ -1721,7 +1752,7 @@ E.3.8  Function Dh - Processor Extended State Enumeration, page 1787
 
 
 
-CPUID v1.01.07 (October, 28, 2020)
+CPUID v1.01.07 (October, 28, 2020).
 1) Bugs fixed for old processors that do not support extended CPUID
 (functions 80000000h and higher). Changes at binary level and java code.
 1.1) If function 80000000h not supported, invalid resuts of this function
@@ -1733,7 +1764,7 @@ CPUID v1.01.07 (October, 28, 2020)
 
 
 
-CPUID v1.01.06 (October, 21, 2020)
+CPUID v1.01.06 (October, 21, 2020).
 This version associated with AMD public documents update:
 https://www.amd.com/en/support/tech-docs
 
@@ -1837,7 +1868,7 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 
 
 
-CPUID v1.01.05 (October, 13, 2020)
+CPUID v1.01.05 (October, 13, 2020).
 
 1) For CPUID function = 00000002h (TLB, Cache, Prefetch information), 
    add descriptor byte value = 0FEh means:
@@ -1848,7 +1879,7 @@ CPUID v1.01.05 (October, 13, 2020)
 
 
 
-CPUID v1.01.04 (October, 4, 2020)
+CPUID v1.01.04 (October, 4, 2020).
 
 1) Support new Intel CPU features, declared at document:
 architecture-instruction-set-extensions-programming-reference.pdf
@@ -1900,7 +1931,7 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 
 
 
-CPUID v1.01.03 (September, 22, 2020)
+CPUID v1.01.03 (September, 22, 2020).
 Support context components, added to
 lists at XCR0 and IA32_XSS registers.
 Support Intel BUSLOCK debug feature.
@@ -2012,7 +2043,7 @@ Document [4] 11.5.2 XFEATURE_ENABLED_MASK
 
 
 
-CPUID v1.01.02 (September, 16, 2020)
+CPUID v1.01.02 (September, 16, 2020).
 Support advanced features listed at document:
 343965-intel-key-locker-specification.PDF
 
@@ -2041,7 +2072,7 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------------------
 
 
-CPUID v1.01.01 (September, 09, 2020)
+CPUID v1.01.01 (September, 09, 2020).
 Support advanced features listed at document:
 intel-tdx-cpu-architectural-specification.PDF.
 
@@ -2056,7 +2087,7 @@ Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------------------
 
 
-CPUID v1.01.00 (September, 09, 2020)
+CPUID v1.01.00 (September, 09, 2020).
 Support advanced features listed at document:
 architecture-instruction-set-extensions-programming-reference.PDF.
 
@@ -2096,7 +2127,7 @@ Add get subfunctions list procedure for function 0000001Dh, 0000001Fh.
 ---------------------------------------------------------------------------------------------------------------
 
 
-CPUID v1.00.08 (July, 09, 2020)
+CPUID v1.00.08 (July, 09, 2020).
 This version associated with AMD public document update:
 
 Processor Programming Reference (PPR) for AMD
@@ -2175,7 +2206,7 @@ See for more details:
 https://software.intel.com/content/www/us/en/develop/download/intel-architecture-instruction-set-extensions-programming-reference.html
 
 
-CPUID v1.00.06 (June, 21, 2020)
+CPUID v1.00.06 (June, 21, 2020).
 This version associated with Intel public document update:
 252046-sdm-change-document.PDF
 below referenced as [DOC1].
@@ -2215,7 +2246,7 @@ See for more details:
 https://www.intel.com/content/www/us/en/design/resource-design-center.html
 
 
-CPUID v1.00.05 (May, 24, 2020)
+CPUID v1.00.05 (May, 24, 2020).
 This version associated with Intel public document update:
 Architecture-instruction-set-extensions-programming-reference.PDF
 
@@ -2293,7 +2324,7 @@ https://software.intel.com/content/www/us/en/develop/download/intel-64-and-ia-32
 ---------------------------------------------------------------------------------------------------------------
 
 
-CPUID v1.00.04 (April, 29, 2020)
+CPUID v1.00.04 (April, 29, 2020).
 This version associated with big update of AMD public documents:
 update secure communication methods between Hypervisors and Guests,
 support SNP (Secure Nested Paging), plus AMD Secure Processor (AMD-SP) functionality.
@@ -2393,7 +2424,7 @@ https://www.amd.com/en/support/tech-docs
 
 
 
-CPUID v1.00.03 (February, 13, 2020)
+CPUID v1.00.03 (February, 13, 2020).
 Add new bit:
 Function=8000000Ah, register=EDX, bit=20. Guest Spec_ctl.
 Data sources:
@@ -2418,7 +2449,7 @@ October, 10, 2019.
 Add refactoring branch.
 
 
-CPUID v0.83 (October, 7, 2019)
+CPUID v0.83 (October, 7, 2019).
 Add new AMD virtualization options feature bits:
 1) Function=8000000Ah, register=EDX, bit=17.  GMET = Guest mode execute trap extension.
 2) Function=8000001Fh, register=EAX, bit=16.  VTE = Virtual transparent encryption.
@@ -2428,7 +2459,7 @@ Volume 2: System Programming.
 Publication 24593. Rev 3.32. October 2019.
 
 
-CPUID v0.82 (October, 5, 2019)
+CPUID v0.82 (October, 5, 2019).
 Bug fix for CPUID function 0000000Dh (context management),
 correct detect features:
 XSAVEOPT support,
@@ -2437,29 +2468,29 @@ XGETBV function 1 support,
 XSAVES/XRSTORS and IA32_XSS.
 
 
-CPUID v0.81 (September, 20, 2019)
+CPUID v0.81 (September, 20, 2019).
 Update method for write Region size = F ( Address width ).
 
 
-CPUID v0.80 (September, 20, 2019)
+CPUID v0.80 (September, 20, 2019).
 Update CPUID function 00000012h.
 
 
-CPUID v0.79 (September, 19, 2019)
+CPUID v0.79 (September, 19, 2019).
 1) Bug fix: 
 if LOAD BINARY function used but cancelled without load file, 
 next use SAVE BINARY function save CPUID.BIN file with size=0.
 2) Update CPUID function 00000012h.
 
 
-CPUID v0.78 (September, 18, 2019)
+CPUID v0.78 (September, 18, 2019).
 1) Internal changes, support reserved CPUID functions
 as child classes of parent class.
 2) Update function 00000006h.
 3) Update function 0000000Dh.
 
 
-CPUID v0.77 (September, 16, 2019)
+CPUID v0.77 (September, 16, 2019).
 Add new bits and bitfields for CPUID functions:
 00000006h, 00000007h, 00000015h.
 Data source:
@@ -2470,7 +2501,7 @@ Programming Reference
 MAY 2019.
 
 
-CPUID v0.76 (September, 16, 2019)
+CPUID v0.76 (September, 16, 2019).
 Add and modify java classes for CPUID functions:
 1) Function=00000010h , Intel Resource Director Technology (RDT).
 2) Function=0000001Bh , PCONFIG instruction.
@@ -2484,7 +2515,7 @@ Programming Reference
 MAY 2019.
 
 
-CPUID v0.75 (September, 14, 2019)
+CPUID v0.75 (September, 14, 2019).
 CPUID function=7, subfunction=0, register=edx, bit=8 = AVX512_VP2INTERSECT.
 CPUID function=7, subfunction=0, register=ecx, bit=29 = ENQCMD.
 CPUID function=7, subfunction=1, register=eax, bit=5 = AVX512_BF16.
@@ -2496,7 +2527,7 @@ Programming Reference
 MAY 2019.
 
 
-CPUID v0.74 (September, 08, 2019)
+CPUID v0.74 (September, 08, 2019).
 1) Add new bit CPUID function=80000008h, no subfunction, register=ebx,
 bit=8 = MCOMMIT instruction
 2) Modify associativity encoding for CPUID function=80000006h.
@@ -2508,7 +2539,7 @@ https://www.amd.com/en/support/tech-docs
 https://developer.amd.com/resources/developer-guides-manuals/
 
 
-CPUID v0.73 (August, 15, 2019)
+CPUID v0.73 (August, 15, 2019).
 Add new bit for AMD EPYC, EPYC2:
 CPUID function=80000001h, no subfunction, register=ecx, bit=30 = AdMskExtn
 Data source:
@@ -2518,13 +2549,13 @@ AMD Family 17h Model 71h, Revision B0 Processors
 https://www.amd.com/en/support/tech-docs
 
 
-CPUID v0.72 (August, 4, 2019)
+CPUID v0.72 (August, 4, 2019).
 CPUID function=80000008h, no subfunction, register=ecx, bits[7-0]:
 interpreted as: number of threads in the package - 1.
 Old interpreting: number of cores - 1.
 
 
-CPUID v0.71 (August, 3, 2019)
+CPUID v0.71 (August, 3, 2019).
 Add new bit for Intel security feature.
 CPUID function=7, subfunction=0, register=edx, bit=10 = MD_CLEAR.
 This bit means the processor is not affected by microarchitectural data sampling (MDS).
@@ -2532,11 +2563,11 @@ Data source:
 https://software.intel.com/security-software-guidance/insights/deep-dive-cpuid-enumeration-and-architectural-msrs
 
 
-CPUID v0.70 (July, 31, 2019)
+CPUID v0.70 (July, 31, 2019).
 Fix array size limit for decode RDPRU maximum read register value.
 
 
-CPUID v0.69 (July, 31, 2019)
+CPUID v0.69 (July, 31, 2019).
 Add new bits for AMD EPYC, EPYC2:
 1) CPUID function=80000008h, no subfunction, register=ebx, bit=4 = RDPRU
 2) CPUID function=80000008h, no subfunction, register=edx, bits=[31-16] = RDPRU register limit
@@ -2546,14 +2577,14 @@ Volume 3: General-Purpose and System Instructions.
 Publication No. 24594, Revision 3.27,  Date July 2019.
 
 
-CPUID v0.68 (February, 9, 2019)
+CPUID v0.68 (February, 9, 2019).
 Edit names strings for CPU feature bits:
 1) CPUID function=7, subfunction=0, register=ecx, bit=11 = AVX512_VNNI
 2) CPUID function=7, subfunction=0, register=edx, bit=2  = AVX512_4VNNIW
 3) CPUID function=7, subfunction=0, register=edx, bit=3  = AVX512_4FMAPS
 
 
-CPUID v0.67 (February, 2, 2019)
+CPUID v0.67 (February, 2, 2019).
 Add new bits for QoS (Quality of Service Extensions).
 1) CPUID function=80000008h, no subfunction, register=ebx, bit=6 = BE, 
 AMD Bandwidth Enforcement.
@@ -2569,7 +2600,7 @@ AMD64 Technology Platform Quality of Service Extensions.
 Publication # 56375 Revision 1.01. Issue date August 2018.
 
 
-CPUID v0.66 (October, 9, 2018)
+CPUID v0.66 (October, 9, 2018).
 Add INTEL variant of Speculative Store Bypass Disable (SSBD) feature.
 CPUID function=00000007h, subfunction=0, register=edx, bit=31 = SSBD
 Data sources:
@@ -2578,13 +2609,13 @@ https://github.com/tycho/cpuid/blob/master/feature.c
 https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00115.html
 
 
-CPUID v0.65 (October, 9, 2018)
+CPUID v0.65 (October, 9, 2018).
 fix bug: EDX instead EBX.
 1) CPUID function=80000007h, no subfunction, register=edx, bit=13 = Connected standby
 2) CPUID function=80000007h, no subfunction, register=edx, bit=14 = Running average power limit (RAPL)
 
 
-CPUID v0.64 (October, 9, 2018)
+CPUID v0.64 (October, 9, 2018).
 1)  CPUID function=00000007h, subfunction=0,  register=edx, bit=4  = Fast Short REP MOV
 2)  CPUID function=80000008h, no subfunction, register=ebx, bit=9  = WBNOINVD
 3)  CPUID function=00000007h, subfunction=0,  register=ecx, bit=5  = WaitPKG instructions
