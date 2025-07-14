@@ -96,7 +96,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_0 =
       { "SGX KEYS"     , "Attestation services for Intel SGX" } ,
       { "4VNNIW"       , "AVX512_4VNNIW 4-iteration VNNI, word mode" } ,
       { "4FMAPS"       , "AVX512_4FMAPS 4-iteration FMA, single precision" } ,
-      { "FS REP MOV"   , "Fast short REP MOV" } ,
+      { "FS R MOVSB"   , "Fast short REP MOVSB string operation" } ,
       { "UINTR"        , "User interrupts" } ,      // bit 5
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
@@ -163,8 +163,8 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_1 =
       { "x"            , "Reserved"                                       } ,
       { "NOCPLIM"      , "CPUID maximum function limit not supported"     } };  // bit 3
 private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
-    { { "x"            , "Reserved" } ,                                         // bit 0
-      { "x"            , "Reserved" } ,
+    { { "AS RDT-M"     , "Asymmetrical Intel RDT monitoring" } ,                // bit 0
+      { "AS RDT-A"     , "Asymmetrical Intel RDT allocation" } ,
       { "LEGACY-R"     , "Legacy reduced OS instruction set architecture" } ,   // bit 2
       { "x"            , "Reserved" } ,
       { "SIPI64"       , "64-bit startup interprocessor interrupt"        } ,   // bit 4
@@ -194,7 +194,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "APX"          , "Advanced performance extensions" } ,  // bit 21
       { "x"            , "Reserved" } ,
       { "MWAIT"        , "MWAIT is supported even if function 1 ECX.3=0" } ,
-      { "x"            , "Reserved" } ,  // bit 24
+      { "SLSM"         , "Static lockstep mode" } ,  // bit 24
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

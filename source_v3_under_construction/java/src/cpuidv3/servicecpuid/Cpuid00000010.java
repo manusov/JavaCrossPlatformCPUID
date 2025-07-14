@@ -7,6 +7,7 @@ No copyright. Information belongs to Universe.
 
 Class for support CPUID Standard Function 00000010h =
 Platform quality of service enforcement.
+This function also known as Intel Resource Director Technology (RDT) allocation.
 
 */
 

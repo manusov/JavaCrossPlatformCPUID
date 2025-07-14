@@ -34,8 +34,9 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_0 =
       { "ENCLU R2"   , "EVERIFYREPORT2 leaf of ENCLU instruction" } ,
       { "x"          , "Reserved" } ,
       { "x"          , "Reserved" } ,
-      { "EUPDATESVN" , "EUPDATESVN leaf of ENCLS instruction" } , // bit 10
-      { "EDECCSSA"   , "EDECCSSA leaf of ENCLU instruction" } };  // bit 11
+      { "EUPDATESVN" , "EUPDATESVN leaf of ENCLS instruction" } ,            // bit 10
+      { "EDECCSSA"   , "EDECCSSA leaf of ENCLU instruction" } ,              // bit 11
+      { "SGX 256"    , "Intel SGX leaf functions EGETKEY256, EREPORT2" } };  // bit 12
 private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "MISCSELECT extended features bit vector" , 31 , 0 } };
 private final static Object[][] DECODER_EDX_SUBFUNCTION_0 =

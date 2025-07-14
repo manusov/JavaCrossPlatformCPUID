@@ -27,7 +27,8 @@ private final static Object[][] DECODER_EAX_SUBFUNCTION_0 =
     { { "Intel architectural performance valid sub-leaves bitmap" , 31 , 0  } };
 private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
     { { "UNITMSK2"     , "UnitMask2 field in the IA32_PERFEVTSELx MSRs" } , // bit 0
-      { "ZBIT"         , "Zero-bit in the IA32_PERFEVTSELx MSRs" } };       // bit 1
+      { "ZBIT"         , "Zero-bit in the IA32_PERFEVTSELx MSRs" } ,        // bit 1
+      { "RDPMC UD"     , "RDPMC user mode disable functionality" } };       // bit 2
 private final static Object[][] DECODER_ECX_SUBFUNCTION_0 =
     { { "Number of TMA slots per cycle" , 7 , 0  } };
 

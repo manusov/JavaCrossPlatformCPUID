@@ -1,4 +1,5 @@
 CPUID v2.00.15 (July, 14, 2025).
+Same updates for engineering sample CPUID v3.03.17.
 
 Added new INTEL features.
 ---------------------------------------------------------------------------------------------------

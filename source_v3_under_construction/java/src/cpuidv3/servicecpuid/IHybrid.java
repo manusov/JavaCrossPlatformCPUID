@@ -8,7 +8,7 @@ No copyright. Information belongs to Universe.
 Interface for extract hybrid processor core type as text string.
 Interface used for make function selection flexible, but typically it is
 function 0000001Ah for INTEL and
-function 00000026h for AMD.
+function 80000026h for AMD.
 
 */
 

@@ -12,9 +12,10 @@ Class for support CPUID Extended Function
 
 package cpuidv3.servicecpuid;
 
+import cpuidv3.sal.EntryCpuidSubfunction;
 import java.util.ArrayList;
 
-class Cpuid80000026 extends ParameterFunctionCpuid
+class Cpuid80000026 extends ParameterFunctionCpuid implements IHybrid
 {
 Cpuid80000026()
     { setFunction( 0x80000026 ); }
@@ -92,5 +93,49 @@ private final static Object[][] DECODER_EDX =
         }
     return a.isEmpty() ? 
         super.getParametersList() : a.toArray( new String[a.size()][] );
+    }
+
+    @Override public HybridReturn getHybrid()
+    {
+        HYBRID_CPU resultType = HYBRID_CPU.DEFAULT;
+        String resultName = "n/a";
+        int smtThreads = 1;
+        
+        if (( entries != null )&&( entries.length > 0 ))
+        {
+            final int HETERO_MASK = 0x40000000;
+            final int LEVEL_SHIFT = 8;
+            final int LEVEL_MASK = 0xFF;
+            final int TYPE_SHIFT = 28;
+            final int TYPE_MASK = 0xF;
+            final int COUNT_MASK = 0xFFFF;
+            
+            for ( EntryCpuidSubfunction e : entries )
+            {
+                if ((( e.eax & HETERO_MASK ) != 0 ) &&
+                        ((( e.ecx >> LEVEL_SHIFT ) & LEVEL_MASK) == 1))
+                {
+                    int hybridType = ( e.ebx >> TYPE_SHIFT ) & TYPE_MASK;
+                    switch ( hybridType )
+                    {
+                        case 0:
+                            resultType = HYBRID_CPU.P_CORE;
+                            resultName = "P-Core";
+                            smtThreads = e.ebx & COUNT_MASK;
+                            break;
+                        case 1:
+                            resultType = HYBRID_CPU.E_CORE;
+                            resultName = "E-Core";
+                            smtThreads = e.ebx & COUNT_MASK;
+                            break;
+                        default:
+                            resultType = HYBRID_CPU.UNKNOWN;
+                            resultName = "Unknown";
+                            break;
+                    }
+                }
+            }
+        }
+        return new HybridReturn( resultType, resultName, smtThreads );
     }
 }

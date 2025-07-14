@@ -62,7 +62,11 @@ private final static ReservedFunctionCpuid[] STANDARD_FUNCTIONS =
     new Cpuid00000021(),
     new Cpuid00000022(),
     new Cpuid00000023(),
-    new Cpuid00000024()
+    new Cpuid00000024(),
+    new Cpuid00000025(),
+    new Cpuid00000026(),
+    new Cpuid00000027(),
+    new Cpuid00000028()
     };
     
 private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =

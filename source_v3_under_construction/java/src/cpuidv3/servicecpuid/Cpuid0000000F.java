@@ -7,6 +7,7 @@ No copyright. Information belongs to Universe.
 
 Class for support CPUID Standard Function 0000000Fh =
 Platform quality of service enumeration.
+This function also known as Intel Resource Director Technology (RDT) monitoring.
 
 */
 
