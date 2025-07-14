@@ -15,7 +15,7 @@ package cpuidv3.servicecpuid;
 import cpuidv3.sal.EntryCpuidSubfunction;
 import java.util.ArrayList;
 
-class Cpuid80000026 extends ParameterFunctionCpuid implements IHybrid
+class Cpuid80000026 extends ParameterFunctionCpuid // implements IHybrid
 {
 Cpuid80000026()
     { setFunction( 0x80000026 ); }
@@ -95,6 +95,7 @@ private final static Object[][] DECODER_EDX =
         super.getParametersList() : a.toArray( new String[a.size()][] );
     }
 
+/*
     @Override public HybridReturn getHybrid()
     {
         HYBRID_CPU resultType = HYBRID_CPU.DEFAULT;
@@ -138,4 +139,6 @@ private final static Object[][] DECODER_EDX =
         }
         return new HybridReturn( resultType, resultName, smtThreads );
     }
+*/
+
 }
