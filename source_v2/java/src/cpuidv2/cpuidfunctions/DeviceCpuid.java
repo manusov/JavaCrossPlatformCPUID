@@ -1,6 +1,13 @@
 /*
-CPUID Utility. (C)2023 IC Book Labs
-------------------------------------
+Java cross-platform CPUID Utility.
+This source (Java CPUID v2.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source_v2
+Previous source (Java CPUID v1.xx.xx) repository: 
+https://github.com/manusov/JavaCrossPlatformCPUID/tree/master/source
+All repositories: 
+https://github.com/manusov?tab=repositories
+(C) Manusov I.V. Refactoring at 2024.
+-------------------------------------------------------------------------------
 Driver class for interpreting CPUID information.
 Text arrays = F ( CPUID binary dump ).
 */
@@ -56,7 +63,11 @@ private final static ReservedFunctionCpuid[] STANDARD_FUNCTIONS =
     new Cpuid00000021(),
     new Cpuid00000022(),
     new Cpuid00000023(),
-    new Cpuid00000024()
+    new Cpuid00000024(),
+    new Cpuid00000025(),
+    new Cpuid00000026(),
+    new Cpuid00000027(),
+    new Cpuid00000028(),
     };
     
 private final static ReservedFunctionCpuid[] EXTENDED_FUNCTIONS =

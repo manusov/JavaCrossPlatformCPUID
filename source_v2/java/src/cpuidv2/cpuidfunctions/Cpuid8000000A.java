@@ -30,6 +30,14 @@ private final static Object[][] DECODER_EAX =
       { "Hypervisor present and intercepting this bit" , 8 , 8 } };
 private final static Object[][] DECODER_EBX =
     { { "NASID: number of address space identifiers (ASID)" , 31 , 0 } };
+private final static String[][] DECODER_ECX =
+    { { "x"        , "Reserved" } ,    // bit 0
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,                          // bit 5
+      { "AVIC EXT" , "x2AVIC extension for 4096 vCPU" } };   // bit 6
 private final static String[][] DECODER_EDX =
     { { "NP"       , "Nested paging" } ,
       { "LBR VIRT" , "Last branch record virtualization" } ,
@@ -81,6 +89,10 @@ private final static String[][] DECODER_EDX =
         dr = decodeBitfields( "EBX", DECODER_EBX, entries[0].ebx );
         a.addAll( dr.strings );
         dr.strings.get(0)[4] = "" + dr.values[0];
+        a.add( interval );
+        // ECX
+        strings = decodeBitmap( "ECX", DECODER_ECX, entries[0].ecx );
+        a.addAll( strings );
         a.add( interval );
         // EDX
         strings = decodeBitmap( "EDX", DECODER_EDX, entries[0].edx );

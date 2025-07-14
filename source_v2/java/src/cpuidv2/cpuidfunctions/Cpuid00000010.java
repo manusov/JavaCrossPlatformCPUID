@@ -10,6 +10,7 @@ https://github.com/manusov?tab=repositories
 -------------------------------------------------------------------------------
 Class for support CPUID Standard Function 00000010h =
 Platform quality of service enforcement.
+This function also known as Intel Resource Director Technology (RDT) allocation.
 */
 
 package cpuidv2.cpuidfunctions;

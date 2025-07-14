@@ -10,6 +10,7 @@ https://github.com/manusov?tab=repositories
 -------------------------------------------------------------------------------
 Class for support CPUID Standard Function 0000000Fh =
 Platform quality of service enumeration.
+This function also known as Intel Resource Director Technology (RDT) monitoring.
 */
 
 package cpuidv2.cpuidfunctions;
