@@ -1,3 +1,22 @@
+CPUID v2.00.16 (August, 12, 2025).
+Same updates for engineering sample CPUID v3.03.19.
+
+Added new INTEL feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000029h    0       EAX    31-0    Maximum supported sub-leaf.
+00000029h    0       EBX     0      APX NI, Intel APX controls for NCI, NDD, NF.
+---------------------------------------------------------------------------------------------------
+NCI = New Conditional Instructions.
+NDD = Explicit New Data Destination.
+NF = Explicit Flags Suppression.
+Data source:
+Intel Advanced Performance Extensions (Intel APX) Architecture Specification.
+July 2025. Revision 7.0. Document Number: 355828-007US.
+
+
+
 CPUID v2.00.15 (July, 14, 2025).
 Same updates for engineering sample CPUID v3.03.17.
 
