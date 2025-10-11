@@ -31,7 +31,7 @@ private final static String[][] DECODER_EAX =
       { "LAS"       , "LFENCE always serializing"                  } , // bit 2
       { "SPCL"      , "SMM page configuration lock"                } , // bit 3
       { "x"         , "Reserved"                                   } ,
-      { "x"         , "Reserved"                                   } ,
+      { "VERW CLR"  , "VERW is useable to mitigate TSA"            } ,
       { "NSCB"      , "Null selector clear base"                   } , // bit 6
       { "UAIGN"     , "Upper address ignore"                       } ,
       { "AIBRS"     , "Automatic IBRS"                             } , // bit 8
@@ -58,6 +58,11 @@ private final static String[][] DECODER_EAX =
       { "SRSO NO"   , "SRSO vulnerability absent"                } ,  // bit 29
       { "SRSO NK"   , "SRSO at user/kernel boundaries absent"    } ,  // bit 30
       { "SRSO MF"   , "Can use MSR BP_CFG to mitigate SRSO"      } }; // bit 31
+private final static String[][] DECODER_ECX =
+    { { "x"         , "Reserved"                                 } ,  // bit 0
+      { "TSA SQ N"  , "CPU is not vulnerable to TSA-SQ"          } ,  // bit 1
+      { "TSA L1 N"  , "CPU is not vulnerable to TSA-L1"          } ,  // bit 2
+      { "x"         , "Reserved"                                 } }; // bit 3
 private final static Object[][] DECODER_EBX =
     { { "Microcode patch size, 16-byte units" ,  15 ,   0 } ,
       { "Return address predictor size (x8)"  ,  23 ,  16 } };
@@ -72,6 +77,10 @@ private final static Object[][] DECODER_EBX =
         {
         // EAX
         strings = decodeBitmap( "EAX", DECODER_EAX, entries[0].eax );
+        a.addAll( strings );
+        a.add( interval );
+        // ECX
+        strings = decodeBitmap( "ECX", DECODER_ECX, entries[0].ecx );
         a.addAll( strings );
         a.add( interval );
         // EBX

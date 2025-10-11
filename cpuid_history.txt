@@ -1,3 +1,23 @@
+CPUID v2.00.17 (October, 11, 2025).
+Same updates for engineering sample CPUID v3.03.20.
+
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000021h    -       EAX     5       VERW_CLR  , VERW instruction is useable to mitigate TSA.
+80000021h    -       ECX     1       TSA_SQ_NO , CPU is not vulnerable to TSA-SQ
+80000021h    -       ECX     2       TSA_L1_NO , CPU is not vulnerable to TSA-L1
+---------------------------------------------------------------------------------------------------
+Note:
+TSA means Transient Scheduler Attacks.
+Data source:
+AMD WHITEPAPER.
+Technical guidance for mitigating transient scheduler attacks.
+Revision 2.0. July 2025.
+
+
+
 CPUID v2.00.16 (August, 12, 2025).
 Same updates for engineering sample CPUID v3.03.19.
 
