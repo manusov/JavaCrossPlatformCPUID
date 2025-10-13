@@ -298,7 +298,8 @@ End of vendor-specific initialization
             accumX2ApicId = ((IX2ApicId) function).getX2ApicId();
         }
         
-        if ( function instanceof IHybrid )
+        if (( function instanceof IHybrid )&&
+            ( accumHybridReturn.hybridCpu == HYBRID_CPU.DEFAULT ))
         {
             HybridReturn hybridReturn = ((IHybrid) function).getHybrid();
             accumHybrid = hybridReturn.hybridName;
