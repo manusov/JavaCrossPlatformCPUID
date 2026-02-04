@@ -1,0 +1,33 @@
+Java CPUID v3.06.14. Linux64 JRE64.
+https://github.com/manusov/JavaCrossPlatformCPUID
+https://github.com/manusov?tab=repositories
+No copyright. Information belongs to Universe.
+Current screen report.
+
+[ Summary ]
+
+[ Platform and CPUID instruction summary info. ]
+
+  Parameter                            Value                                                  
+-----------------------------------------------------------------------------------------------
+  CPU name string                      Intel(R) Core(TM) i7-4700HQ CPU @ 2.40GHz              
+  CPU vendor string                    GenuineIntel                                           
+  Virtual CPU vendor string            KVMKVMKVM                                              
+  Maximum standard CPUID level         0000000Dh                                              
+  Maximum extended CPUID level         80000008h                                              
+  Maximum virtual CPUID level          40000001h                                              
+                                                                                              
+  Processor vendor                     Intel                                                  
+  Hypervisor vendor                    KVM                                                    
+  Microarchitecture and physical       Haswell ( 22nm )                                       
+  Model                                Intel Core i*-4000 / Mobile Core i*-4000 (Haswell C0)  
+                                                                                              
+  MP enumeration method                Intel leaf 0Bh ( 4 cores, 4 threads )                  
+                                                                                              
+  Operating system and java runtime    Linux64 JRE64                                          
+  Platform enumeration method          /sysfs virtual file system + SYS_GETAFFINITY           
+  Cores and threads by OS API          4 cores, 4 threads                                     
+  NUMA domains                         1                                                      
+  Processor packages                   1                                                      
+-----------------------------------------------------------------------------------------------
+
