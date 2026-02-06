@@ -4,7 +4,7 @@ Engineering sample CPUID v3.06.14 (February, 4, 2026).
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------
-80000021     -       EAX     23      A512 BMM , AVX512 bit matrix multiply and bit reversal.
+80000021h    -       EAX     23      A512 BMM , AVX512 bit matrix multiply and bit reversal.
 ---------------------------------------------------------------------------------------------------
 Data source:
 AMD64 Bit Matrix Multiply and Bit Reversal Instructions.
