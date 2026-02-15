@@ -41,7 +41,6 @@ private final static Object[][] DECODER_EBX =
     {
     DecodeReturn dr;
     String[] interval = new String[] { "", "", "", "", "" };
-    ArrayList<String[]> strings;
     ArrayList<String[]> a = new ArrayList<>();
     if ( ( entries != null )&&( entries.length > 0 ) )
         {

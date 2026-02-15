@@ -47,13 +47,13 @@ private final static String[][] DECODER_EDX =
       { "x"       , "Reserved"                                  } ,
       { "x"       , "Reserved"                                  } ,
       { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
-      { "x"       , "Reserved"                                  } ,
+      { "XRN2"    , "REP XRNG2 instructions present"            } ,  // bit 22
+      { "XRN2 EN" , "REP XRNG2 instructions enabled"            } ,  // bit 23
+      { "x"       , "Reserved"                                  } ,  // bit 24
+      { "XSHA"    , "REP XSHA384 and REP XSHA512 instructions present"  } ,  // bit 25
+      { "XSHA EN" , "REP XSHA384 and REP XSHA512 instructions enabled"  } ,  // bit 26
+      { "XMOD"    , "REP XMODEXP and REP MONTMUL2 instructions present" } ,  // bit 27
+      { "XMOD EN" , "REP XMODEXP and REP MONTMUL2 instructions enabled" } ,  // bit 28
       { "x"       , "Reserved"                                  } ,
       { "x"       , "Reserved"                                  } ,
       { "x"       , "Reserved"                                  } }; // bit 31

@@ -165,7 +165,8 @@ public final class ServiceCpuid
         new CpuidC0000002(),
         new CpuidC0000003(),
         new CpuidC0000004(),
-        new CpuidC0000005()  };
+        new CpuidC0000005(),
+        new CpuidC0000006()  };
 
     private final static int REPLACE_BY_XEN = 1;
     private final static ReservedFunctionCpuid[] VIRTUAL_FUNCTIONS =

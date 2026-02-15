@@ -123,6 +123,7 @@ private final static String[]
         RESET_VECTOR =  { "FFFFFFF0h", "000FFFF0h" };
 
 // Helpers used by this class and some other classes ( CpuidC0000004.java ).
+// Helpers contains code exported from Todd Allen CPUID project.
 
 String voltageHelper( int x )
     {

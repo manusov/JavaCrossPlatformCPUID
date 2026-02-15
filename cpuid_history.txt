@@ -1,3 +1,28 @@
+Engineering sample CPUID v3.06.15 (February, 15, 2026).
+1) Added new features for Zhaoxin CPU.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+C0000001h    -       EDX     22      XRN2    , REP XRNG2 instructions present.
+C0000001h    -       EDX     23      XRN2 EN , REP XRNG2 instructions enabled.
+C0000001h    -       EDX     25      XSHA    , REP XSHA384 and REP XSHA512 instructions present.
+C0000001h    -       EDX     26      XSHA EN , REP XSHA384 and REP XSHA512 instructions enabled.
+C0000001h    -       EDX     27      XMOD    , REP XMODEXP and REP MONTMUL2 instructions present.
+C0000001h    -       EDX     28      XMOD EN , REP XMODEXP and REP MONTMUL2 instructions enabled.
+C0000006h    0       EAX     0       PSOPT   , PAUSEOPT instruction.
+---------------------------------------------------------------------------------------------------
+Data sources:
+Special thanks to:
+https://kib.kiev.ua/x86docs/Zhaoxin/
+1) Padlock Instruction Set Reference.
+   Shanghai Zhaoxin Semiconductor Co., Ltd.
+   File: padlock instruction set reference-3.pdf
+2) PAUSEOPT instruction description.
+   1.0.0.  2024.08.13.
+   File: PAUSEOPT-1.0.0.pdf
+
+
+
 Engineering sample CPUID v3.06.14 (February, 4, 2026).
 1) Java source refactoring.
 2) Added new AMD feature.
