@@ -31,16 +31,31 @@ Cpuid40000006() { setFunction( 0x40000006 ); }
 
 // Control tables for results decoding.
 private final static String[][] DECODER_EAX =
-    { { "APICOV" , "APIC overlay assist"                } ,  // bit 0
-      { "MSRBMP" , "MSR bitmaps"                        } ,
-      { "APCNT"  , "Architectural performance counters" } ,
-      { "SLVAT"  , "Second-level address translation"   } ,
-      { "DMAR"   , "DMA remapping"                      } ,
-      { "INTR"   , "Interrupt remapping"                } ,
-      { "MEMPS"  , "Memory patrol scrubber"             } ,
-      { "DMAPT"  , "DMA protection"                     } ,
-      { "HPETRQ" , "HPET requested"                     } ,
-      { "STMVOL" , "Synthetic timers are volatile"      } };  // bit 9
+    { { "APICOV" , "APIC overlay assist"                 } ,    // bit 0
+      { "MSRBMP" , "MSR bitmaps"                         } ,
+      { "APCNT"  , "Architectural performance counters"  } ,
+      { "SLVAT"  , "Second-level address translation"    } ,
+      { "DMAR"   , "DMA remapping"                       } ,
+      { "INTR"   , "Interrupt remapping"                 } ,
+      { "MEMPS"  , "Memory patrol scrubber"              } ,
+      { "DMAPT"  , "DMA protection"                      } ,
+      { "HPETRQ" , "HPET requested"                      } ,
+      { "STMVOL" , "Synthetic timers are volatile"       } ,   // bit 9
+      { "x"      , "Reserved"                            } ,   // bit 10
+      { "x"      , "Reserved"                            } ,
+      { "x"      , "Reserved"                            } ,
+      { "x"      , "Reserved"                            } ,   // bit 13
+      { "PDMRQ"  , "Physical destination mode required"  } ,   // bit 14
+      { "VMFUNC" , "Use VMFUNC for alias map switch"     } ,
+      { "HMZERO" , "Hardware memory zeroing"             } ,
+      { "UNRGST" , "Unrestricted Guest"                  } ,
+      { "RDT-A"  , "Resource allocation (RDT-A, PQOS-A)" } ,
+      { "RDT-M"  , "Resource monitoring (RDT-M, PQOS-M)" } ,
+      { "GVPMU"  , "Guest virtual PMU"                   } ,   // bit 20
+      { "GVLBR"  , "Guest virtual LBR"                   } ,
+      { "GVIPT"  , "Guest virtual IPT"                   } ,
+      { "APICEM" , "APIC emulation"                      } ,
+      { "WDAT"   , "ACPI WDAT is detected and in use"    } };  // bit 24
 
 @Override String[][] getParametersList()
     {

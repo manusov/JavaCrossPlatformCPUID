@@ -1,3 +1,36 @@
+Engineering sample CPUID v3.06.16 (February, 17, 2026).
+Added new features for Microsoft virtualization hypervisor.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+40000003h    -       EAX     13      AREEC   , Access reenlightenment controls.
+40000003h    -       ECX     5       IMPERF  , Invariant MPERF.
+40000003h    -       ECX     6       SHASTK  , Supervisor shadow stack.
+40000003h    -       ECX     7       APMU    , Architectural performance monitoring unit.
+40000003h    -       ECX     8       ETRAP   , Exception trap intercept.
+40000006h   -        EAX     14      PDMRQ   , Physical destination mode required.
+40000006h   -        EAX     15      VMFUNC  , Use VMFUNC for alias map switch.
+40000006h   -        EAX     16      HMZERO  , Hardware memory zeroing.
+40000006h   -        EAX     17      UNRGST  , Unrestricted Guest.
+40000006h   -        EAX     18      RDT-A   , Resource allocation (RDT-A, PQOS-A).
+40000006h   -        EAX     19      RDT-M   , Resource monitoring (RDT-M, PQOS-M).
+40000006h   -        EAX     20      GVPMU   , Guest virtual PMU.
+40000006h   -        EAX     21      GVLBR   , Guest virtual LBR.
+40000006h   -        EAX     22      GVIPT   , Guest virtual IPT.
+40000006h   -        EAX     23      APICEM  , APIC emulation.
+40000006h   -        EAX     24      WDAT    , ACPI WDAT table is detected and in use.
+4000000Ah   -        EAX     21      DBGCTL  , Non-zero value of the GuestIa32DebugCtl.
+4000000Ah   -        EAX     22      ENTLB   , Enlightened TLB on AMD platforms.
+4000000Ah   -        EBX     0       PERFGL  , GuestPerfGlobalCtrl and HostPerfGlobalCtrl.
+---------------------------------------------------------------------------------------------------
+Data sources:
+Hypervisor Top Level Functional Specification.
+Microsoft resources:
+https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/feature-discovery
+https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/tlfs/datatypes/hv_partition_privilege_mask
+
+
+
 Engineering sample CPUID v3.06.15 (February, 15, 2026).
 1) Added new features for Zhaoxin CPU.
 ---------------------------------------------------------------------------------------------------

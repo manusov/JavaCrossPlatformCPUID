@@ -31,9 +31,9 @@ Cpuid40000003() { setFunction( 0x40000003 ); }
 
 // Control tables for results decoding.
 private final static String[][] DECODER_EAX =
-    { { "VPRT"    , "VP run time"                        } ,
+    { { "VPRT"    , "VP run time"                        } ,  // bit 0
       { "PRCNT"   , "Partition reference counter"        } ,
-      { "BSMSR"   , "Basic synIC MSRs"                   } ,
+      { "BSMSR"   , "Basic SynIC MSRs"                   } ,
       { "STMSR"   , "Synthetic timer MSRs"               } ,
       { "APICMSR" , "APIC access MSRs"                   } ,
       { "HCMSR"   , "Hypercall MSRs"                     } ,
@@ -43,7 +43,8 @@ private final static String[][] DECODER_EAX =
       { "REFTSC"  , "Reference TSC access"               } ,
       { "GISMSR"  , "Guest idle state MSR"               } ,
       { "TAFMSR"  , "TSC/APIC frequency MSRs"            } ,
-      { "GDMSR"   , "Guest debugging MSRs"               } };
+      { "GDMSR"   , "Guest debugging MSRs"               } ,  // bit 12
+      { "AREEC"   , "Access reenlightenment controls"    } }; // bit 13
 private final static String[][] DECODER_EBX =
     { { "CRPART" , "CreatePartitions"                  } ,
       { "ACPART" , "AccessPartitionId"                 } ,
@@ -68,8 +69,12 @@ private final static String[][] DECODER_EBX =
       { "EXHYPC" , "EnableExtendedHypercalls"          } ,
       { "STVP"   , "StartVirtualProcessor"             } };
 private final static Object[][] DECODER_ECX =
-    { { "HPET is required to enter C3"  , 4 , 4 } ,
-      { "Maximum processor power state" , 3 , 0 } };
+    { { "Maximum processor power state"             , 3 , 0 } ,
+      { "HPET is required to enter C3"              , 4 , 4 } ,
+      { "Invariant MPERF"                           , 5 , 5 } ,
+      { "Supervisor shadow stack"                   , 6 , 6 } ,
+      { "Architectural performance monitoring unit" , 7 , 7 } ,
+      { "Exception trap intercept"                  , 8 , 8 } };
 private final static String[][] DECODER_EDX =
     { { "MWAIT"   , "MWAIT available"                             } ,  // bit 0
       { "GDBG"    , "Guest debugging support available"           } ,
@@ -120,11 +125,11 @@ private final static String[][] DECODER_EDX =
             a.add( interval );
             // ECX.
             dr = decodeBitfields( "ECX", DECODER_ECX, entries[0].ecx );
-            int x = dr.values[1];
+            int x = dr.values[0];
             String s;
             if ( x <= 3 ) s = String.format( "C%d", x );
             else          s = "?";
-            dr.strings.get(1)[4] = s;
+            dr.strings.get(0)[4] = s;
             a.addAll( dr.strings );
             a.add( interval );
             // EDX.

@@ -32,7 +32,7 @@ public class CPUIDv3
     private final static boolean BUILD_DECORATED = true;
     private final static boolean BUILD_LOADER = false;
     
-    private final static String VERSION_NAME  = "v3.06.15";
+    private final static String VERSION_NAME  = "v3.06.16";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
         "Information belongs to Universe.";

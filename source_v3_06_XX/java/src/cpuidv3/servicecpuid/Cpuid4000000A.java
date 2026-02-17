@@ -31,12 +31,20 @@ Cpuid4000000A() { setFunction( 0x4000000A ); }
 
 // Control tables for results decoding.
 private final static Object[][] DECODER_EAX =
-    { { "Combining virtualization exceptions in the PF class" , 20 , 20 } ,
-      { "Support enlightened MSR bitmap"                      , 19 , 19 } ,
-      { "Support HvFlushGuestPhysicalAddress hypercalls"      , 18 , 18 } ,
-      { "Support for direct virtual flush hypercalls"         , 17 , 17 } ,
+    { { "Enlightened VMCS version (low)"                      ,  7 ,  0 } ,
       { "Enlightened VMCS version (high)"                     , 15 ,  8 } ,
-      { "Enlightened VMCS version (low)"                      ,  7 ,  0 } };
+      { "Support for direct virtual flush hypercalls"         , 17 , 17 } ,  
+      { "Support HvFlushGuestPhysicalAddress hypercalls"      , 18 , 18 } ,  
+      { "Support enlightened MSR bitmap"                      , 19 , 19 } ,  
+      { "Combining virtualization exceptions in the PF class" , 20 , 20 } ,
+      { "Non-zero value of the GuestIa32DebugCtl"             , 21 , 21 } ,
+      { "Enlightened TLB on AMD platforms"                    , 22 , 22 } };
+
+private final static String[][] DECODER_EBX =
+    { { "PERFGL" , "GuestPerfGlobalCtrl and HostPerfGlobalCtrl" } ,  // bit 0
+      { "x"      , "Reserved"                                   } ,
+      { "x"      , "Reserved"                                   } ,
+      { "x"      , "Reserved"                                   } };
 
 @Override String[][] getParametersList()
     {
@@ -44,14 +52,20 @@ private final static Object[][] DECODER_EAX =
     if ( ( t == HYPERVISOR_ORACLE )||( t == HYPERVISOR_MICROSOFT ) )
         {
         DecodeReturn dr;
+        ArrayList<String[]> strings;
+        String[] interval = new String[] { "", "", "", "", "" };
         ArrayList<String[]> a = new ArrayList<>();
         if ( ( entries != null )&&( entries.length > 0 ) )
             {
             // EAX
             dr = decodeBitfields( "EAX", DECODER_EAX, entries[0].eax );
-            dr.strings.get(4)[4] = String.format( "Version %d.%d", 
-                                                  dr.values[4], dr.values[5] );
+            dr.strings.get(0)[4] = 
+                String.format( "Version %d.%d", dr.values[1], dr.values[0] );
             a.addAll( dr.strings );
+            a.add( interval );
+            // EBX
+            strings = decodeBitmap( "EBX", DECODER_EBX, entries[0].ebx );
+            a.addAll( strings );
             }
         return a.isEmpty() ? 
             super.getParametersList() : a.toArray( new String[a.size()][] );
