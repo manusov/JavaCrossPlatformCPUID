@@ -1,3 +1,18 @@
+Engineering sample CPUID v3.06.17 (March, 7, 2026).
+Added new AMD feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000025h    -       EDX     2       RMP DRT , RMP dirty feature and RMPCHKD instruction support.
+---------------------------------------------------------------------------------------------------
+Data source:
+AMD64 RMP Dirty.
+AMD Publication # 69203. Revision 1.00.
+Issue Date: February 2026.
+69203_1.00_AMD64_RMP_Dirty_PUB.pdf
+
+
+
 Engineering sample CPUID v3.06.16 (February, 17, 2026).
 Added new features for Microsoft virtualization hypervisor.
 ---------------------------------------------------------------------------------------------------
