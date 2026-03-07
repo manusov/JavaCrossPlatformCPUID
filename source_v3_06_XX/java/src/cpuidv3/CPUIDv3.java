@@ -8,7 +8,7 @@ No copyright. Information belongs to Universe.
 Refactoring in progress at 2026.
 
 Java CPUID application main class. Contains application description
-text strings and web links. Interconnects application secnarios
+text strings and web links. Interconnects application scenarios
 classes, service functions classes and application root menu class.
 After start, detects native platform ( Win32/Win64/Linux32/Linux64 ),
 initializes service classes, and runs application root menu.
@@ -32,7 +32,7 @@ public class CPUIDv3
     private final static boolean BUILD_DECORATED = true;
     private final static boolean BUILD_LOADER = false;
     
-    private final static String VERSION_NAME  = "v3.06.17";
+    private final static String VERSION_NAME  = "v3.06.18";
     private final static String VENDOR_NAME_1 = "No copyright.";
     private final static String VENDOR_NAME_2 = 
         "Information belongs to Universe.";

@@ -31,7 +31,7 @@ private final static Object[][] DECODER_EBX =
       { "Flag: number of cached segments is a hard limit" , 10 , 10 } };
 
 private final static String[][] DECODER_EDX =
-    { { "x"         , "Reserved"          } ,   // bit 0
+    { { "RMPOPT"    , "RMPOPT feature and RMPOPT instruction"      } , // bit 0
       { "x"         , "Reserved"          } ,   // bit 1
       { "RMP DRT"   , "RMP dirty feature and RMPCHKD instruction"  } , // bit 2
       { "x"         , "Reserved"          } };  // bit 3
