@@ -1,3 +1,18 @@
+Engineering sample CPUID v3.06.19 (March, 8, 2026).
+Added new AMD feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+8000000Ah    -       ECX     3       GPMCF , Guest PMC event filtering feature supported.
+---------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Guest PMC Event Filtering.
+AMD Publication # 69202. Revision 1.00.
+Issue Date: March 2026.
+69202_1.00_AMD64_PMC_PUB.pdf
+
+
+
 Engineering sample CPUID v3.06.18 (March, 7, 2026).
 Added new AMD feature.
 ---------------------------------------------------------------------------------------------------

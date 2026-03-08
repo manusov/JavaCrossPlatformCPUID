@@ -28,13 +28,13 @@ private final static Object[][] DECODER_EAX =
 private final static Object[][] DECODER_EBX =
     { { "NASID: number of address space identifiers (ASID)" , 31 , 0 } };
 private final static String[][] DECODER_ECX =
-    { { "x"        , "Reserved" } ,    // bit 0
+    { { "x"        , "Reserved" } ,                         // bit 0
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
+      { "GPMCF"    , "Guest PMC event filtering" } ,        // bit 3
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,                          // bit 5
-      { "AVIC EXT" , "x2AVIC extension for 4096 vCPU" } };   // bit 6
+      { "x"        , "Reserved" } ,                         // bit 5
+      { "AVIC EXT" , "x2AVIC extension for 4096 vCPU" } };  // bit 6
 private final static String[][] DECODER_EDX =
     { { "NP"       , "Nested paging" } ,
       { "LBR VIRT" , "Last branch record virtualization" } ,
