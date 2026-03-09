@@ -1,3 +1,19 @@
+Engineering sample CPUID v3.06.20 (March, 9, 2026).
+Added new AMD feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000007h    -       EDX     16       CPPC PP , CPPC performance priority feature supported.
+---------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Collaborative Processor Performance Control
+(CPPC) Performance Priority.
+AMD Publication # 69206. Revision 1.10.
+Issue Date: March 2026.
+69206_1.10_AMD64_CPPC_PUB.pdf
+
+
+
 Engineering sample CPUID v3.06.19 (March, 8, 2026).
 Added new AMD feature.
 ---------------------------------------------------------------------------------------------------

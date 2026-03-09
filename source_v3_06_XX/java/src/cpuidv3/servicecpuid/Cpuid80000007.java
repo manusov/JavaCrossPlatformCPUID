@@ -36,7 +36,7 @@ private final static String[][] DECODER_EBX =
 private final static Object[][] DECODER_ECX =
     { { "Ratio of power accumulator sample period to GTSC" , 31 , 0 } };
 private final static String[][] DECODER_EDX =
-    { { "TS"        , "Temperature sensor" } ,
+    { { "TS"        , "Temperature sensor" } ,                       // bit 0
       { "FID"       , "Frequency ID control" } ,
       { "VID"       , "Voltage ID control"   } ,
       { "TTP"       , "THERMTRIP"            } ,
@@ -44,14 +44,15 @@ private final static String[][] DECODER_EDX =
       { "STC"       , "Software thermal control" } ,
       { "100 MHz"   , "100 MHz steps for multiplier control" } ,
       { "HwPstate"  , "Hardware P-state control" } ,
-      { "INV TSC"   , "TSC invariant for P-States and C-States" } ,
+      { "INV TSC"   , "TSC invariant for P-States and C-States" } ,  // bit 8
       { "CPB"       , "Core performance boost" } ,
       { "EffFreqRO" , "Read only effective frequency interface" } ,
       { "PFI"       , "Processor feedback interface (deprecated)" } ,
       { "PPR"       , "Processor core power reporting interface" } ,
       { "CSB"       , "Connected standby" } ,
       { "RAPL"      , "Running average power limit" } ,
-      { "FastCPPC"  , "Fast collaborative processor performance control" } };
+      { "FastCPPC"  , "Fast collaborative processor performance control" } ,
+      { "CPPC PP"   , "CPPC performance priority" } };               // bit 16
 
 @Override String[][] getParametersList()
     {
