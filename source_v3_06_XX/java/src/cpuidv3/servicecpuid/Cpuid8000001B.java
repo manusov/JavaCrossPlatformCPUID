@@ -23,26 +23,26 @@ Cpuid8000001B() { setFunction( 0x8000001B ); }
 
 // Control tables for results decoding.
 private final static String[][] DECODER_EAX =
-    { { "IBS FFV"     , "Instruction based sampling feature flag valid" } ,       // bit 0
-      { "FETCH SAMP"  , "IBS fetch sampling" } , 
-      { "OP SAM"      , "IBS execution sampling supported" } , 
-      { "RW OP CNT"   , "Read write of OP counter" } , 
-      { "OP CNT"      , "OP counting mode" } , 
-      { "BRN TRG"     , "Branch target address reporting" } , 
-      { "OP CNT EXT"  , "IbsOpCurCnt, IbsOpMaxCnt extend by 7 bits" } , 
-      { "RIP INV"     , "Invalid RIP indication" } , 
-      { "OP BRN FUSE" , "Fused branch micro-op indication" } ,
-      { "IBS F MSR"   , "IBS fetch control extended MSR" } ,
-      { "IBS OP D"    , "IBS op data 4 MSR" } ,                                // bit 10
+    { { "IBS FFV"     , "Instruction based sampling feature flag valid"    } , // bit 0
+      { "FETCH SAMP"  , "IBS fetch sampling"                               } ,
+      { "OP SAM"      , "IBS execution sampling supported"                 } ,
+      { "RW OP CNT"   , "Read write of OP counter"                         } ,
+      { "OP CNT"      , "OP counting mode"                                 } ,
+      { "BRN TRG"     , "Branch target address reporting"                  } ,
+      { "OP CNT EXT"  , "IbsOpCurCnt, IbsOpMaxCnt extend by 7 bits"        } ,
+      { "RIP INV"     , "Invalid RIP indication"                           } ,
+      { "OP BRN FUSE" , "Fused branch micro-op indication"                 } ,
+      { "IBS F MSR"   , "IBS fetch control extended MSR"                   } ,
+      { "IBS OP D"    , "IBS op data 4 MSR"                                } , // bit 10
       { "IBS L3MF"    , "L3 miss filtering for instruction based sampling" } , // bit 11
-      { "IBS LATF"    , "Filtering of IBS samples based on load latency" },    // bit 12
-      { "x"           , "Reserved" },    // bit 13
-      { "x"           , "Reserved" },
-      { "x"           , "Reserved" },
-      { "x"           , "Reserved" },
-      { "x"           , "Reserved" },
-      { "x"           , "Reserved" },    // bit 18
-      { "SIMP DTLB"   , "Simplified DTLB page size and miss reporting" } , // bit 19
+      { "IBS LATF"    , "Filtering of IBS samples based on load latency"   },  // bit 12
+      { "IBS DIS"     , "Alternate fetch and execution IBS disable bits"   },  // bit 13
+      { "IBS FLF"     , "Fetch IBS filtering for fetch latency"            },
+      { "IBS A63F"    , "IBS address bit 63 filtering"                     },
+      { "IBS FSS"     , "IBS filtering for streaming stores"               },
+      { "IBS BV1"     , "IBS buffer version 1"                             },  // bit 17
+      { "IBS MPV1"    , "IBS memory profiler version 1"                    },  // bit 18
+      { "SIMP DTLB"   , "Simplified DTLB page size and miss reporting"     } , // bit 19
       { "x"           , "Reserved" } ,   // bit 20
       { "x"           , "Reserved" } ,
       { "x"           , "Reserved" } ,

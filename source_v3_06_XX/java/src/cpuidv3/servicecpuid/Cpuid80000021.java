@@ -46,11 +46,11 @@ private final static String[][] DECODER_EAX =
       { "ICPREF"    , "Instruction cache prefetch"                 } , // bit 20
       { "FP512D"    , "FP512 supports downgrading to FP256"        } ,
       { "WLHEUR"    , "Workload based heuristic to OS"             } , // bit 22
-      { "A512 BMM"  , "AVX512 bit matrix multiply and bit reversal"  } ,
-      { "ERAPS"     , "Enhanced return address predictor security" } , // bit 24
-      { "x"         , "Reserved"          } ,
-      { "x"         , "Reserved"          } ,
-      { "SBPB"      , "Selective branch predictor barrier"  } ,       // bit 27
+      { "A512 BMM"  , "AVX512 bit matrix multiply and bit reversal" } ,
+      { "ERAPS"     , "Enhanced return address predictor security"  } , // bit 24
+      { "x"         , "Reserved"                                 } ,
+      { "UAIGN V2"  , "Upper address ignore version 2"           } ,  // bit 26
+      { "SBPB"      , "Selective branch predictor barrier"       } ,  // bit 27
       { "BRTYPE"    , "IBPB flushes all branch type predictions" } ,  // bit 28
       { "SRSO NO"   , "SRSO vulnerability absent"                } ,  // bit 29
       { "SRSO NK"   , "SRSO at user/kernel boundaries absent"    } ,  // bit 30

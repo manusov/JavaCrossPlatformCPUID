@@ -1,9 +1,42 @@
+Engineering sample CPUID v3.06.21 (March, 13, 2026).
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+8000001Bh    -       EAX     13      IBS DIS  , Alternate fetch and execution IBS disable bits.
+8000001Bh    -       EAX     14      IBS FLF  , Fetch IBS filtering for fetch latency.
+8000001Bh    -       EAX     15      IBS A63F , IBS address bit 63 filtering.
+8000001Bh    -       EAX     16      IBS FSS  , IBS filtering for streaming stores.
+8000001Bh    -       EAX     17      IBS BV1  , IBS buffer version 1.
+8000001Bh    -       EAX     18      IBS MPV1 , IBS memory profiler version 1.
+80000021h    -       EAX     26      UAIGN V2 , Upper address ignore version 2.
+8000000Ah    -       ECX     4       PML      , Page modification logging.
+---------------------------------------------------------------------------------------------------
+Data sources:
+
+1) AMD64 Zen6 Instruction Based Sampling (IBS) Extensions and Features.
+   AMD Publication # 69205. Revision 1.00.
+   Issue Date: March 2026.
+   69205_1.00_AMD64_IBS_PUB.pdf
+
+2) AMD64 upper address ignore version 2.
+   AMD Publication # 69207. Revision 1.00.
+   Issue Date: March 2026.
+   69207_1.00_AMD64_UAIv2_PUB.pdf
+
+3) AMD64 Page Modification Logging.
+   AMD Publication # 69208. Revision 1.00.
+   Issue Date: March 2026.
+   69208_1.00_AMD64_PML_PUB.pdf
+
+
+
 Engineering sample CPUID v3.06.20 (March, 9, 2026).
 Added new AMD feature.
 ---------------------------------------------------------------------------------------------------
 Function  | Sub f. | Reg. | Bit(s) | Comment
 ---------------------------------------------------------------------------------------------------
-80000007h    -       EDX     16       CPPC PP , CPPC performance priority feature supported.
+80000007h    -       EDX     16      CPPC PP , CPPC performance priority feature supported.
 ---------------------------------------------------------------------------------------------------
 Data source:
 AMD64 Collaborative Processor Performance Control
