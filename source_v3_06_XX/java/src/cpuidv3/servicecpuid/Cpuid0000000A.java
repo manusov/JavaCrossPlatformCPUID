@@ -47,7 +47,7 @@ private final static Object[][] DECODER_EDX =
     { { "Number of fixed-function performance counters" , 4, 0 } ,
       { "Bit width of fixed-function performance counters" , 12, 5 } ,
       { "Any thread deprecation" , 15 , 15 } ,
-      { "TopDown" , 16 , 16 } ,
+      { "SLT_PER_CYC, slots per cycle" , 19 , 16 } ,
       { "Bit vector length" , 31 , 24 } };
 
 @Override String[][] getParametersList()

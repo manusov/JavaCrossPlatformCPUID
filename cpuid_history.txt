@@ -1,3 +1,23 @@
+Engineering sample CPUID v3.06.22 (March, 20, 2026).
+Added new INTEL features.
+------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+------------------------------------------------------------------------------------------------
+00000007h    1       EDX     22      SEC TEE AT   , Trusted execution environment attestation.
+0000000Ah    -       EDX    19-16    SLT_PER_CYC  , Slots per cycle.
+00000023h    4       EBX     4       CNTR_GP      , General purpose counters sub-group.
+00000023h    4       EBX     5       CNTR_FIXED   , Fixed function counters sub-group.
+00000023h    4       EBX     6       CNTR_METRICS , Performance metrics counters sub-group.
+------------------------------------------------------------------------------------------------
+Data source:
+Intel Architecture Instruction Set Extensions and Future Features.
+Programming Reference.
+March 2026.
+Document# 319433-061.
+319433-061-architecture-instruction-set-extensions-programming-reference.pdf
+
+
+
 Engineering sample CPUID v3.06.21 (March, 13, 2026).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------

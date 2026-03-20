@@ -68,12 +68,14 @@ private final static String[][] DECODER_EAX_SUBFUNCTION_3 =
 
 // Subfunction 4.
 private final static Object[][] DECODER_EBX_SUBFUNCTION_4 =
-    { { "Allow in record mode for performance counters"   , 3  , 3  } ,
-      { "CNTR, Counters group sub-groups bitmap"          , 7  , 4  } ,
-      { "LBR, Last branch records groups code"            , 9  , 8  } ,
-      { "XER, XSAVE enabled registers group bitmap"       , 23 , 16 } ,
-      { "GPR, GPR group in PEBS"                          , 29 , 29 } ,
-      { "AUX, AUX group in PEBS"                          , 30 , 30 } };
+    { { "Allow in record mode for performance counters"        , 3  , 3  } ,
+      { "CNTR_GP, general purpose counters sub-group"          , 4  , 4  } ,
+      { "CNTR_FIXED, fixed function counters sub-group"        , 5  , 5  } ,
+      { "CNTR_METRICS, performance metrics counters sub-group" , 6  , 6  } ,
+      { "LBR, Last branch records groups code"                 , 9  , 8  } ,
+      { "XER, XSAVE enabled registers group bitmap"            , 23 , 16 } ,
+      { "GPR, GPR group in PEBS"                               , 29 , 29 } ,
+      { "AUX, AUX group in PEBS"                               , 30 , 30 } };
 
 // Subfunction 5.
 private final static Object[][] DECODER_EAX_SUBFUNCTION_5 =

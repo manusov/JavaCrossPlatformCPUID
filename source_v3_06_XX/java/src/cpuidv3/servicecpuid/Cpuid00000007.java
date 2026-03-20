@@ -190,8 +190,8 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
       { "CET SSS"      , "Supervisor shadow stacks pushes PF condition" } ,
       { "AVX 10"       , "Advanced vector extensions 10.1" } ,  // bit 19
       { "x"            , "Reserved" } ,
-      { "APX"          , "Advanced performance extensions" } ,  // bit 21
-      { "x"            , "Reserved" } ,
+      { "APX"          , "Advanced performance extensions" } ,           // bit 21
+      { "SEC TEE AT"   , "Trusted execution environment attestation" } , // bit 22
       { "MWAIT"        , "MWAIT is supported even if function 1 ECX.3=0" } ,
       { "SLSM"         , "Static lockstep mode" } ,  // bit 24
       { "x"            , "Reserved" } ,
