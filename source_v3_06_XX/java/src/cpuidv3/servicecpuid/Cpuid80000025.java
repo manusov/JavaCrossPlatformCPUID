@@ -32,7 +32,7 @@ private final static Object[][] DECODER_EBX =
 
 private final static String[][] DECODER_EDX =
     { { "RMPOPT"    , "RMPOPT feature and RMPOPT instruction"      } , // bit 0
-      { "x"         , "Reserved"          } ,   // bit 1
+      { "ESMTP"     , "Enhanced SMT protection"                    } , // bit 1
       { "RMP DRT"   , "RMP dirty feature and RMPCHKD instruction"  } , // bit 2
       { "x"         , "Reserved"          } };  // bit 3
 

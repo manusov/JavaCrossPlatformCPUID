@@ -1,3 +1,18 @@
+Engineering sample CPUID v3.06.23 (March, 28, 2026).
+Added new AMD feature.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000025h    -       EDX     1       ESMTP , Enhanced SMT protection.
+---------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Enhanced SMT Protection
+AMD Publication # 69204. Revision 1.00.
+Issue Date: March 2026.
+69204_1.00_AMD64_SMT_PUB.pdf
+
+
+
 Engineering sample CPUID v3.06.22 (March, 20, 2026).
 Added new INTEL features.
 ------------------------------------------------------------------------------------------------
