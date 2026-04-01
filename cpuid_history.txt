@@ -1,3 +1,26 @@
+Engineering sample CPUID v3.06.24 (April, 1, 2026).
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000020h    0       EBX     7       GLBE    , Global bandwidth enforcement.
+80000020h    0       EBX     8       GLSBE   , Global slow bandwidth enforcement.
+80000020h    0       EBX     9       PLZA    , Privilege level zero association.
+80000020h    7       EAX    31-0     BW LEN  , Global bandwidth enforcement ceiling width.
+80000020h    7       EBX    15-0     BW MULT , Units of the bandwidth ceiling for GLBE.
+80000020h    7       EDX    31-0     COS MAX , Maximum class of service number for GLBE.
+80000020h    8       EAX    31-0     BW LEN  , Ceiling width for GLSBE.
+80000020h    8       EBX    15-0     BW MULT , Units of the bandwidth ceiling for GLSBE.
+80000020h    8       EDX    31-0     COS MAX , Maximum class of service number for GLSBE.
+---------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Zen6 Platform Quality of Service (PQOS) Extensions.
+AMD Publication # 69193. Revision 1.00.
+Issue Date: March 2026.
+69193_1.00_AMD64_PQOS_EXT_PUB.pdf
+
+
+
 Engineering sample CPUID v3.06.23 (March, 28, 2026).
 Added new AMD feature.
 ---------------------------------------------------------------------------------------------------

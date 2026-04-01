@@ -27,9 +27,12 @@ private final static String[][] DECODER_EBX_SUBFUNCTION_0 =
       { "L3BE"     , "L3 external read bandwidth enforcement" } ,
       { "L3SBE"    , "L3 external slow memory bandwidth enforcement" } ,
       { "BMEC"     , "Bandwidth monitoring event configuration" } ,
-      { "L3RR"     , "L3 cache range reservation"               } ,           // bit 4
-      { "ABMC"     , "Assignable bandwidth monitoring counters" } ,           // bit 5
-      { "SDCIAE"   , "Smart data cache injection allocation enforcement" } ,  // bit 6
+      { "L3RR"     , "L3 cache range reservation"               } ,          // bit 4
+      { "ABMC"     , "Assignable bandwidth monitoring counters" } ,          // bit 5
+      { "SDCIAE"   , "Smart data cache injection allocation enforcement" } , // bit 6
+      { "GLBE"     , "Global bandwidth enforcement"             } ,          // bit 7
+      { "GLSBE"    , "Global slow bandwidth enforcement"        } ,          // bit 8
+      { "PLZA"     , "Privilege level zero association"         } ,          // bit 9
     };
 private final static Object[][] DECODER_EAX_SUBFUNCTION_1 =
     { { "L3 external read bandwidth enforcement bit range length" , 31 , 0 } };
@@ -56,6 +59,19 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_5 =
     { { "MAX ABMC, Maximum supported ABMC counter ID"    , 15 , 0 } };
 private final static String[][] DECODER_ECX_SUBFUNCTION_5 =
     { { "SEL COS"  , "Bandwidth counter for COS instead RMID" } };   // bit 0
+// This added for AMD64 Zen6 Platform Quality of Service (PQOS) Extensions.
+private final static Object[][] DECODER_EAX_SUBFUNCTION_7 =
+    { { "BW LEN, global bandwidth enforcement ceiling width" , 31 , 0 } };
+private final static Object[][] DECODER_EBX_SUBFUNCTION_7 =
+    { { "BW MULT, units of the bandwidth ceiling for GLBE"   , 15 , 0 } };
+private final static Object[][] DECODER_EDX_SUBFUNCTION_7 =
+    { { "COS MAX, maximum class of service number for GLBE"  , 31 , 0 } };
+private final static Object[][] DECODER_EAX_SUBFUNCTION_8 =
+    { { "BW LEN, ceiling width for GLSBE"                    , 31 , 0 } };
+private final static Object[][] DECODER_EBX_SUBFUNCTION_8 =
+    { { "BW MULT, units of the bandwidth ceiling for GLSBE"  , 15 , 0 } };
+private final static Object[][] DECODER_EDX_SUBFUNCTION_8 =
+    { { "COS MAX, maximum class of service number for GLSBE" , 31 , 0 } };
 
 @Override String[][] getParametersList()
     {
@@ -126,6 +142,38 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_5 =
             strings = decodeBitmap
                 ( "ECX", DECODER_ECX_SUBFUNCTION_5, entries[5].ecx );
             a.addAll( strings );
+            }
+        if ( entries.length > 7 )  // Check subfunction 7 present.
+            {
+            a.add( interval );
+            // EAX, subfunction 7.
+            dr = decodeBitfields
+                ( "EAX", DECODER_EAX_SUBFUNCTION_7, entries[7].eax );
+            a.addAll( dr.strings );
+            // EBX, subfunction 7.
+            dr = decodeBitfields
+                ( "EBX", DECODER_EBX_SUBFUNCTION_7, entries[7].ebx );
+            a.addAll( dr.strings );
+            // EDX, subfunction 7.
+            dr = decodeBitfields
+                ( "EDX", DECODER_EDX_SUBFUNCTION_7, entries[7].edx );
+            a.addAll( dr.strings );
+            }
+        if ( entries.length > 8 )  // Check subfunction 8 present.
+            {
+            a.add( interval );
+            // EAX, subfunction 8.
+            dr = decodeBitfields
+                ( "EAX", DECODER_EAX_SUBFUNCTION_8, entries[8].eax );
+            a.addAll( dr.strings );
+            // EBX, subfunction 8.
+            dr = decodeBitfields
+                ( "EBX", DECODER_EBX_SUBFUNCTION_8, entries[8].ebx );
+            a.addAll( dr.strings );
+            // EDX, subfunction 8.
+            dr = decodeBitfields
+                ( "EDX", DECODER_EDX_SUBFUNCTION_8, entries[8].edx );
+            a.addAll( dr.strings );
             }
         }
     return a.isEmpty() ? 
