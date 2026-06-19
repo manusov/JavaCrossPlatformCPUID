@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/cpuid/java/src/cpuidv3/CPUIDv3.java</file>
-            <file>file:/E:/cpuid/java/src/cpuidv3/servicecpuid/Cpuid80000020.java</file>
+            <file>file:/E:/1/java/src/cpuidv3/CPUIDv3.java</file>
+            <file>file:/E:/1/java/src/cpuidv3/servicecpuid/Cpuid00000007.java</file>
+            <file>file:/E:/1/java/src/cpuidv3/servicecpuid/Cpuid00000024.java</file>
+            <file>file:/E:/1/java/src/cpuidv3/servicecpuid/Cpuid0000001D.java</file>
+            <file>file:/E:/1/java/src/cpuidv3/sal/ServiceContext.java</file>
         </group>
     </open-files>
 </project-private>

@@ -167,7 +167,13 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
       { "LEGACY-R"     , "Legacy reduced OS instruction set architecture" } ,   // bit 2
       { "x"            , "Reserved" } ,
       { "SIPI64"       , "64-bit startup interprocessor interrupt"        } ,   // bit 4
-      { "MSR-IMM"      , "Immediate form of RDMSR, WRMSRNS instructions"  } };  // bit 5
+      { "MSR-IMM"      , "Immediate form of RDMSR, WRMSRNS instructions"  } ,   // bit 5
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "x"            , "Reserved" } ,
+      { "ACE"          , "AI Compute Extensions" } };  // bit 11
 private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,  // bit 0
       { "x"            , "Reserved" } ,

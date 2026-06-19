@@ -51,7 +51,7 @@ class ServiceContext extends Service
         "Intel AMX tile configuration (XTILECFG)" ,                  // bit 17
         "Intel AMX tile data (XTILEDATA)" ,                          // bit 18
         "Intel APX EGPR state (R16-R31)" ,                           // bit 19
-        "Reserved" ,
+        "AI Compute Extensions (ACE) SCALEDATA" ,                    // bit 20
         "Reserved" ,
         "Reserved" ,
         "Reserved" ,

@@ -32,7 +32,8 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_0 =
 private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
     { { "VPMM"         , "Vector extension packed matrix multiplication" } ,   // bit 0
       { "x"            , "Reserved"    } ,
-      { "A10-VNNI"     , "AVX10_VNNI_INT neural network instructions"    } };  // bit 2
+      { "A10-VNNI"     , "AVX10_VNNI_INT neural network instructions"    } ,   // bit 2
+      { "OCPF"         , "Open Compute Project format conventions"       } };  // bit 3
 
 @Override String[][] getParametersList()
     {

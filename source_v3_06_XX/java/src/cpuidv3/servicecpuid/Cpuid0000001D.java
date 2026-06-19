@@ -32,6 +32,8 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
       { "Palette %d, bytes per row"                           , 15 , 0  } };
 private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =
     { { "Palette %d, maximum rows"                            , 15 , 0  } };
+private final static Object[][] DECODER_EAX_SUBFUNCTION_2 =
+    { { "ACE version" , 7 ,  0 } };
 
 @Override String[][] getParametersList()
     {
@@ -46,27 +48,39 @@ private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =
         a.addAll( dr.strings );
         // scan for subfunctions from 1.
         int index = 1;
-        while ( ( entries.length > index ) && 
+        int limit = dr.values[0];
+        while ( ( limit >= index ) &&
+                ( entries.length > index ) && 
                 ( entries[index].subfunction == index ) )
             {
             a.add( interval );
-            // EAX, subfunction [index].
-            Object[][] obj = buildStrings( DECODER_EAX_SUBFUNCTION_1, index);
-            dr = decodeBitfields( "EAX", obj, entries[index].eax );
-            dr.strings.get(0)[4] = String.format("%d Bytes", dr.values[0]);
-            dr.strings.get(1)[4] = String.format("%d Bytes", dr.values[1]);
-            a.addAll( dr.strings );
-            // EBX, subfunction [index].
-            obj = buildStrings( DECODER_EBX_SUBFUNCTION_1, index);
-            dr = decodeBitfields( "EBX", obj, entries[index].ebx );
-            dr.strings.get(0)[4] = String.format("%d Registers", dr.values[0]);
-            dr.strings.get(1)[4] = String.format("%d Bytes", dr.values[1]);
-            a.addAll( dr.strings );
-            // ECX, subfunction [index].
-            obj = buildStrings( DECODER_ECX_SUBFUNCTION_1, index);
-            dr = decodeBitfields( "ECX", obj, entries[index].ecx );
-            dr.strings.get(0)[4] = String.format("%d Rows", dr.values[0]);
-            a.addAll( dr.strings );
+            if(index != 2)
+                {
+                // EAX, subfunction [index].
+                Object[][] obj = buildStrings( DECODER_EAX_SUBFUNCTION_1, index);
+                dr = decodeBitfields( "EAX", obj, entries[index].eax );
+                dr.strings.get(0)[4] = String.format("%d Bytes", dr.values[0]);
+                dr.strings.get(1)[4] = String.format("%d Bytes", dr.values[1]);
+                a.addAll( dr.strings );
+                // EBX, subfunction [index].
+                obj = buildStrings( DECODER_EBX_SUBFUNCTION_1, index);
+                dr = decodeBitfields( "EBX", obj, entries[index].ebx );
+                dr.strings.get(0)[4] = String.format("%d Registers", dr.values[0]);
+                dr.strings.get(1)[4] = String.format("%d Bytes", dr.values[1]);
+                a.addAll( dr.strings );
+                // ECX, subfunction [index].
+                obj = buildStrings( DECODER_ECX_SUBFUNCTION_1, index);
+                dr = decodeBitfields( "ECX", obj, entries[index].ecx );
+                dr.strings.get(0)[4] = String.format("%d Rows", dr.values[0]);
+                a.addAll( dr.strings );
+                }
+            else
+                {  // Variant for ACE.
+                // EAX, subfunction 2.
+                dr = decodeBitfields
+                    ( "EAX", DECODER_EAX_SUBFUNCTION_2, entries[index].eax );
+                a.addAll( dr.strings );
+                }
             index++;
             }
         }

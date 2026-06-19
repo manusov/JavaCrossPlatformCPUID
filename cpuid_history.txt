@@ -1,3 +1,32 @@
+Engineering sample CPUID v3.06.25 (June, 19, 2026).
+Added AI Compute Extensions (ACE) features.
+
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+00000007h    1       ECX     11      ACE     , AI Compute Extensions.
+0000001Dh    2       EAX     7-0     ACE_VSN , AI Compute Extensions version.
+00000024h    1       ECX     3       OCPF    , OCP (Open Compute Project) format conventions.
+---------------------------------------------------------------------------------------------------
+
+Added XCR0 context bit.
+------------------------------------------------------------
+ Bit        Comments
+------------------------------------------------------------
+ XCR0.20    AI Compute Extensions (ACE) SCALEDATA state.
+------------------------------------------------------------
+
+Data source:
+AI Compute Extensions (ACE) Specification.
+x86 Ecosystem Advisory Group.
+Specification Release.
+Date 05/15/2026.
+Version 1.15.
+ACE_v1_Specification_public_1_15.pdf.
+https://x86ecosystem.org/wp-content/uploads/2026/06/ACE_v1_Specification_public_1_15.pdf
+
+
+
 Engineering sample CPUID v3.06.24 (April, 1, 2026).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
