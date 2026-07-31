@@ -1,3 +1,24 @@
+CPUID v3.06.26 (July, 31, 2026).
+Added new AMD features.
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+8000000Ah    -       ECX     5       ETLBI   , INVLPGB and TLBSYNC supports IOMMU invalidation.
+8000001Fh    -       EBX     31      COHSWNO , No SEV-SNP cache coherency vulnerability.
+80000021h    -       ECX     5       VERWCLR , VERW based TSA mitigation.
+80000021h    -       ECX     8       BCTXISL , Branch predictions privilege context isolation.
+---------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Architecture Programmer's Manual
+Volume 3:
+General-Purpose and System Instructions.
+Publication No. 24594.
+Revision 3.38. July 2026.
+Part of all-in-one document:
+40332_4.10_APM_Vol1-5.pdf.
+
+
+
 Engineering sample CPUID v3.06.25 (June, 19, 2026).
 Added AI Compute Extensions (ACE) features.
 

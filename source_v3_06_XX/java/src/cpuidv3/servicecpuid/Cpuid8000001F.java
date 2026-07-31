@@ -58,7 +58,8 @@ private final static String[][] DECODER_EAX =
 private final static Object[][] DECODER_EBX =
     { { "Page table bit used to enable protection"    ,   5 ,  0 } ,
       { "Reduction of physical address space"         ,  11 ,  6 } ,
-      { "Number of Virtual Machine Permission Levels" ,  15 , 12 } };
+      { "Number of Virtual Machine Permission Levels" ,  15 , 12 } ,
+      { "No SEV-SNP cache coherency vulnerability"    ,  31 , 31 } };
 private final static Object[][] DECODER_ECX =
     { { "Number of encrypted guests supported simultaneously" ,  31 ,  0 } };
 private final static Object[][] DECODER_EDX =

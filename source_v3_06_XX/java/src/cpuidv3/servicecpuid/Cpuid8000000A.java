@@ -33,7 +33,7 @@ private final static String[][] DECODER_ECX =
       { "x"        , "Reserved" } ,
       { "GPMCF"    , "Guest PMC event filtering" } ,        // bit 3
       { "PML"      , "Page modification logging" } ,        // bit 4
-      { "x"        , "Reserved" } ,                         // bit 5
+      { "ETLBI"    , "INVLPGB and TLBSYNC supports IOMMU invalidation" } , // bit 5
       { "AVIC EXT" , "x2AVIC extension for 4096 vCPU" } };  // bit 6
 private final static String[][] DECODER_EDX =
     { { "NP"       , "Nested paging" } ,
