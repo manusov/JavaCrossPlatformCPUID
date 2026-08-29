@@ -1,3 +1,71 @@
+CPUID v3.06.27 (August, 29, 2026 ).
+Added new AMD secure virtualization features,
+provided by Platform Security Processor (PSP).
+---------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------------------
+80000024h    0       EAX    31-0     MAXIND   , Virtual sub-function maximum index.
+
+80000024h    0       EBX      0      SEVLEG   , SEV legacy commands (CPU-oriented).
+80000024h    0       EBX      1      SEVTIO   , SEV TIO commands (bus-master IO-oriented).
+80000024h    0       EBX      2      VIOMMU   , Secure virtual IOMMU.
+80000024h    0       EBX      3      TIODKU   , SEV-TIO IDE key update host command.
+
+80000024h    0       ECX      0      VLEK     , Versioned loaded endorsement key.
+80000024h    0       ECX      1      X86SNSH  , X86 SNP shutdown allowed.
+80000024h    0       ECX      2      RAPLDIS  , RAPL disable function.
+80000024h    0       ECX      3      CIPHIDN  , Cipher text hiding for DRAM.
+80000024h    0       ECX      4      AES256X  , AES 256 XTS guest policy requirement.
+80000024h    0       ECX      5      CXLGPOL  , CXL guest policy requirement.
+80000024h    0       ECX      6      ECCMEMAT , ECC memory attestation.
+80000024h    0       ECX      7      PINSGRMP , Pre-init non-segmented RMP.
+80000024h    0       ECX      8      PISEGRMP , Pre-init segmented RMP.
+80000024h    0       ECX      9      VALSCHK  , Validating alias check mitigation.
+80000024h    0       ECX      11     HGATT    , Host request to obtain guest attestation.
+80000024h    0       ECX      12     SECTSC   , Secure time stamp counter info command.
+80000024h    0       ECX      13     VERMIT   , Verify mitigation command.
+80000024h    0       ECX      15     CSVCEK   , Chip-secret VCEK derivation.
+80000024h    0       ECX      16     PGSWAP   , Guest page swap commands.
+80000024h    0       ECX      17     SEVESSNP , SEV-ES and SNP at the same time.
+80000024h    0       ECX      18     PKITR    , Public key infrastructure transfer.
+80000024h    0       ECX      19     ETCB     , Extended trusted computing base.
+80000024h    0       ECX      20     GETINFO  , Get TPM info host command.
+80000024h    0       ECX      22     PGSWAP   , Page swap disable guest policy.
+
+80000024h    1       EAX      0      CPUIDRQ  , CPUID request guest SNP message.
+80000024h    1       EAX      1      KEYREQ   , Key request guest SNP message.
+80000024h    1       EAX      2      REPREQ   , Report request guest SNP message.
+80000024h    1       EAX      3      EXPREQ   , Export request guest SNP message.
+80000024h    1       EAX      4      IMPREQ   , Import request (reserved).
+80000024h    1       EAX      5      ABSREQ   , Absorb request (reserved).
+80000024h    1       EAX      6      VMRKREQ  , VMRK request guest SNP message.
+80000024h    1       EAX      7      ABSNREQ  , Absorb NOMA request guest SNP message.
+80000024h    1       EAX      8      TSCIREQ  , TSC info request guest SNP message.
+80000024h    1       EAX      9      TDIIREQ  , TDI info request guest TIO message.
+80000024h    1       EAX      10     MMIOVREQ , MMIO validate request guest TIO message.
+80000024h    1       EAX      11     MMIOCREQ , MMIO config request guest TIO message.
+80000024h    1       EAX      12     SDTEWREQ , SDTE write request guest TIO message.
+80000024h    1       EAX      13     CVIOMREQ , Config VIOMMU request guest SNP message.
+80000024h    1       EAX      14     SETMPREQ , Setup mapping request guest TIO message.
+80000024h    1       EAX      15     GETCSREQ , Get CSR request guest SNP message.
+80000024h    1       EAX      18     TPMIREQ  , TPM info request guest SNP message.
+---------------------------------------------------------------------------------------------------
+AMD SEV TIO means Secure Encrypted Virtualization Trusted I/O.
+IDE at this context means Integrity and Data Encryption.
+Data sources:
+
+1) SEV Secure Nested Paging Firmware ABI Specification
+   Publication # 56860. Revision 1.59.
+   Issue Date: August 2026.
+   56860_PUB_1.59_SEV_SNP.pdf
+
+2) SEV-TIO Firmware Interface Specification.
+   Publication # 58271. Revision 0.92.
+   Issue Date: August 2026.
+   58271_PUB_0.92_SEV-TIO.pdf
+
+
+
 CPUID v3.06.26 (July, 31, 2026).
 Added new AMD features.
 ---------------------------------------------------------------------------------------------------
