@@ -32,7 +32,17 @@ private final static String[][] DECODER_EBX =
       { "HWA"      , "Hardware assert MSR C001_10[DF...C0]h" } ,
       { "SCMCA"    , "Scalable MCA" } ,
       { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } };
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,  // bit 8
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,
+      { "x"        , "Reserved" } ,   // bit 14
+      { "MCAQMSR"  , "MCA query MSR, quickly identify MCA errors" } };  // bit 15
 private final static Object[][] DECODER_ECX =
     { { "Ratio of power accumulator sample period to GTSC" , 31 , 0 } };
 private final static String[][] DECODER_EDX =

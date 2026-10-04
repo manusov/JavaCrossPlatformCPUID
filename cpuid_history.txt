@@ -1,3 +1,21 @@
+CPUID v3.06.28 (October, 4, 2026).
+Added new AMD feature.
+------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+------------------------------------------------------------------------------------------------------
+80000007h    -       EBX     15      MCAQMSR , MCA query MSR, quickly identify MCA banks with errors.
+------------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Architecture Programmer's Manual
+Volume 3:
+General-Purpose and System Instructions.
+Publication No. 24594.
+Revision 3.38. July 2026.
+Part of all-in-one document:
+40332_4.10_APM_Vol1-5.pdf.
+
+
+
 CPUID v3.06.27 (August, 29, 2026 ).
 Added new AMD secure virtualization features,
 provided by Platform Security Processor (PSP).
