@@ -28,9 +28,9 @@ private final static Object[][] DECODER_EAX =
 private final static Object[][] DECODER_EBX =
     { { "NASID: number of address space identifiers (ASID)" , 31 , 0 } };
 private final static String[][] DECODER_ECX =
-    { { "x"        , "Reserved" } ,                         // bit 0
-      { "x"        , "Reserved" } ,
-      { "x"        , "Reserved" } ,
+    { { "GAAT"     , "Guest alternate address translation" } ,   // bit 0
+      { "PW"       , "Paging-Write" } ,                     // bit 1
+      { "VPW"      , "Verify Paging-Write" } ,              // bit 2
       { "GPMCF"    , "Guest PMC event filtering" } ,        // bit 3
       { "PML"      , "Page modification logging" } ,        // bit 4
       { "ETLBI"    , "INVLPGB and TLBSYNC supports IOMMU invalidation" } , // bit 5

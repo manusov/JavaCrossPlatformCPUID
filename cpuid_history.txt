@@ -1,3 +1,26 @@
+CPUID v3.06.29 (October, 29, 2026).
+Added new AMD features.
+------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+------------------------------------------------------------------------------------------------------
+8000000Ah    -       ECX     0       GAAT , Guest alternate address translation.
+8000000Ah    -       ECX     1       PW   , Paging-Write.
+8000000Ah    -       ECX     2       VPW  , Verify Paging-Write.
+------------------------------------------------------------------------------------------------------
+Data sources:
+1) AMD64 Architecture Programmer's Manual
+   Volume 2:
+   System Programming.
+   Publication No. 24593.
+   Revision 3.46. October 2026.
+2) AMD64 Architecture Programmer's Manual
+   Volume 3:
+   General-Purpose and System Instructions.
+   Publication No. 24594.
+   Revision 3.39. October 2026.
+
+
+
 CPUID v3.06.28 (October, 4, 2026).
 Added new AMD feature.
 ------------------------------------------------------------------------------------------------------
