@@ -1,3 +1,22 @@
+CPUID v3.06.30 (October, 31, 2026).
+Added new AMD features.
+------------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+------------------------------------------------------------------------------------------------------
+80000021h    -       ECX     4       ASPPTH , Microcode patches are authenticated by the ASP.
+80000021h    -       ECX     5       SFSPTH , Microcode patches are loaded through SFS (corrected).
+80000021h    -       ECX     10      SAMFPW , Report same FP width control.
+------------------------------------------------------------------------------------------------------
+Data source:
+AMD64 Architecture Programmer's Manual
+Volumes 1-5.
+Publication No. 40332.
+Revision 4.11. October 2026.
+All-in-one document:
+40332_4.11_APM_Vol1-5.pdf.
+
+
+
 CPUID v3.06.29 (October, 29, 2026).
 Added new AMD features.
 ------------------------------------------------------------------------------------------------------

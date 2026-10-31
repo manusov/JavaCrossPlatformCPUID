@@ -60,11 +60,13 @@ private final static String[][] DECODER_ECX =
       { "TSA SQ N"  , "CPU is not vulnerable to TSA-SQ"          } ,  // bit 1
       { "TSA L1 N"  , "CPU is not vulnerable to TSA-L1"          } ,  // bit 2
       { "x"         , "Reserved"                                 } ,  // bit 3
-      { "x"         , "Reserved"                                 } ,  // bit 4
-      { "VERWCLR"   , "VERW based TSA mitigation"                } ,  // bit 5
+      { "ASPPTH"    , "Microcode patches are authenticated by the ASP" } ,  // bit 4
+      { "SFSPTH"    , "Microcode patches are loaded through SFS"       } ,  // bit 5
       { "x"         , "Reserved"                                 } ,  // bit 6
       { "x"         , "Reserved"                                 } ,  // bit 7
-      { "BCTXISL"   , "Branch predictions privilege context isolation" } }; // bit 8
+      { "BCTXISL"   , "Branch predictions privilege context isolation" } , // bit 8
+      { "x"         , "Reserved"                                 } ,   // bit 9
+      { "SAMFPW"    , "Report same FP width control"             } };  // bit 10
 private final static Object[][] DECODER_EBX =
     { { "Microcode patch size, 16-byte units" ,  15 ,   0 } ,
       { "Return address predictor size (x8)"  ,  23 ,  16 } };
