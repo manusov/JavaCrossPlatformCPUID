@@ -1,3 +1,24 @@
+CPUID v3.06.31 (November, 8, 2026).
+Added AI Compute Extensions (ACE) features.
+--------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+--------------------------------------------------------------------------------------
+0000001Dh    2       EAX     16      ACE_OP_FP16 , ACE FP16 outer product.
+0000001Dh    2       EAX     17      ACE_OP_FP32 , ACE FP32 outer product.
+0000001Dh    2       EAX     18      ACE_OP_FP64 , ACE FP64 outer product.
+00000024h    1       ECX     1       A10-BMM     , Bit matrix multiply instructions.
+--------------------------------------------------------------------------------------
+Data source:
+ACE v2/AVX10.3 Architecture Specification.
+x86 Ecosystem Advisory Group.
+Specification Release.
+Date 10/22/2026.
+Version 0.9.2.4.
+ACE_v2_AVX10_3_Specification_public.pdf
+https://x86ecosystem.org/wp-content/uploads/2026/11/ACE_v2_AVX10_3_Specification_public.pdf
+
+
+
 CPUID v3.06.30 (October, 31, 2026).
 Added new AMD features.
 ------------------------------------------------------------------------------------------------------

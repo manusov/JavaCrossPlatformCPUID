@@ -33,8 +33,11 @@ private final static Object[][] DECODER_EBX_SUBFUNCTION_1 =
 private final static Object[][] DECODER_ECX_SUBFUNCTION_1 =
     { { "Palette %d, maximum rows"                            , 15 , 0  } };
 private final static Object[][] DECODER_EAX_SUBFUNCTION_2 =
-    { { "ACE version" , 7 ,  0 } };
-
+    { { "ACE version"                         ,  7 ,  0 } ,
+      { "Reserved"                            , 15 ,  8 } ,
+      { "ACE-OP-FP16: ACE FP16 outer product" , 16 , 16 } ,
+      { "ACE-OP-FP32: ACE FP32 outer product" , 17 , 17 } ,
+      { "ACE-OP-FP64: ACE FP64 outer product" , 18 , 18 } };
 @Override String[][] getParametersList()
     {
     DecodeReturn dr;
