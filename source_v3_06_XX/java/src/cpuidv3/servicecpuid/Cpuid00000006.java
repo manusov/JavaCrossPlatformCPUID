@@ -41,14 +41,14 @@ private final static String[][] DECODER_EAX =
       { "HWP"      , "Highest performance change" } ,  // bit 15
       { "HWP PECI" , "HWP PECI override" } ,
       { "FLEX HWP" , "Flexible HWP" } ,  // bit 17
-      { "FAST HWP" , "Fast access mode for the IA32_HWP_REQUEST MSR" } ,
-      { "HW FB"    , "HW Feedback with thermal status" } ,  // bit 18
-      { "IGN HWP"  , "Ignoring idle logical processor HWP request" } ,
+      { "FAST HWP" , "Fast access mode for the IA32_HWP_REQUEST MSR" } , // bit 18
+      { "HW FB"    , "HW Feedback with thermal status" } ,               // bit 19
+      { "IGN HWP"  , "Ignoring idle logical processor HWP request" } ,   // bit 20
       { "x"        , "Reserved" } ,  // bit 21
       { "HWP MSR"  , "IA32_HWP_CTL MSR available" } ,            // bit 22
       { "EHFI"     , "Enhanced hardware feedback interface" } ,  // bit 23
       { "HFN"      , "Hardware feedback notification" } ,        // bit 24
-      { "x"        , "Reserved" } ,
+      { "HFI INIT" , "HFI initialization table" } ,              // bit 25
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
       { "x"        , "Reserved" } ,
