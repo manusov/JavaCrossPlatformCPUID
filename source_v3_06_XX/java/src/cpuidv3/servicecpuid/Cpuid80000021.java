@@ -27,7 +27,7 @@ private final static String[][] DECODER_EAX =
       { "FSGSNS"    , "FS,GS bases MSR writes are non serializing" } ,
       { "LAS"       , "LFENCE always serializing"                  } , // bit 2
       { "SPCL"      , "SMM page configuration lock"                } , // bit 3
-      { "x"         , "Reserved"                                   } ,
+      { "TLBS VAL"  , "TLBSYNC validation for Erratum #1718"       } , // bit 4
       { "VERW CLR"  , "VERW is useable to mitigate TSA"            } ,
       { "NSCB"      , "Null selector clear base"                   } , // bit 6
       { "UAIGN"     , "Upper address ignore"                       } ,

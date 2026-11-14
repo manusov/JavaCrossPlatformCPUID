@@ -1,3 +1,19 @@
+CPUID v3.06.33 (November, 14, 2026).
+Added new AMD feature.
+---------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+---------------------------------------------------------------------------------------
+80000021h    -       EAX     4       TLBS VAL , TLBSYNC validation for Erratum #1718.
+---------------------------------------------------------------------------------------
+Data source:
+Processor Programming Reference (PPR) for AMD
+Family 1Ah, Model C0h, Revision A0 Processors.
+Volume 1 of 6.
+Document # 58655 Rev 0.47 - Nov 6, 2026.
+58655_A0_pub_1.pdf
+
+
+
 CPUID v3.06.32 (November, 13, 2026).
 Added new INTEL features.
 ------------------------------------------------------------------------------------------------
