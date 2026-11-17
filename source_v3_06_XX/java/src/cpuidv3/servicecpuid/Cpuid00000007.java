@@ -172,7 +172,7 @@ private final static String[][] DECODER_ECX_SUBFUNCTION_1 =
       { "x"            , "Reserved" } ,
       { "SOC CAP"      , "SOC capabilities MSR" } ,  // bit 8
       { "x"            , "Reserved" } ,
-      { "x"            , "Reserved" } ,
+      { "USR DOITM"    , "User mode DOITM" } ,         // bit 10
       { "ACE"          , "AI Compute Extensions" } };  // bit 11
 private final static String[][] DECODER_EDX_SUBFUNCTION_1 =
     { { "x"            , "Reserved" } ,  // bit 0
@@ -216,7 +216,7 @@ private final static String[][] DECODER_EDX_SUBFUNCTION_2 =
       { "MCDT"         , "Not exhibit MXCSR configuration dependent timing" } ,
       { "UCLOCKDIS"    , "Uncacheable lock disable" } ,  // bit 6
       { "MONMITGNO"    , "MONITOR, UMONITOR are not affected by tracking issue" } ,
-      { "x"            , "Reserved" } ,
+      { "SUP DOITM"    , "Supervisor mode DOITM" } ,                    // bit 8
       { "SPEC US"      , "SSBD_U, SSBD_S, PSFD_U, PSFD_S controls" } ,  // bit 9
       { "x"            , "Reserved" } ,
       { "x"            , "Reserved" } ,

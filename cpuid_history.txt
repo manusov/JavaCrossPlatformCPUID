@@ -1,3 +1,22 @@
+CPUID v3.06.34 (November, 17, 2026).
+Added new INTEL features.
+------------------------------------------------------------------------------------------------
+Function  | Sub f. | Reg. | Bit(s) | Comment
+------------------------------------------------------------------------------------------------
+00000007h    1       ECX     10      USR DOITM , User mode DOITM.
+00000007h    2       EDX     8       SUP DOITM , Supervisor mode DOITM.
+------------------------------------------------------------------------------------------------
+Data source:
+USER_DOITM and SUP_DOITM Extensions
+Architecture Specification.
+November 2026.
+Revision 1.0.
+Document Number: 370550-001.
+spec-user-doitm-sup-doitm-x86-intel1-932747-0001-20261112.pdf
+(DOITM is Data Operand Independent Timing Mode).
+
+
+
 CPUID v3.06.33 (November, 14, 2026).
 Added new AMD feature.
 ---------------------------------------------------------------------------------------
